@@ -1,0 +1,260 @@
+export type BlogPost = {
+  slug: string;
+  title: string;
+  date: string;
+  excerpt: string;
+  readTime: string;
+  category: string;
+  content: BlogSection[];
+};
+
+export type BlogSection = {
+  type: "intro" | "h2" | "p" | "ul" | "quote" | "cta";
+  text?: string;
+  items?: string[];
+};
+
+export const BLOG_POSTS: BlogPost[] = [
+  {
+    slug: "meer-bezichtigingen-met-video-2025",
+    title: "Waarom jouw concurrenten meer bezichtigingen krijgen dan jij",
+    date: "2025-02-12",
+    excerpt: "Kopers scrollen razendsnel door Funda. In 3 seconden bepalen ze of ze klikken of scrollen. Video wint altijd. Hier is waarom.",
+    readTime: "4 min",
+    category: "Vastgoed",
+    content: [
+      { type: "intro", text: "Je hebt een mooie woning. Nette foto's. Een goede beschrijving. Maar het aantal bezichtigingen valt tegen. Waarom? Omdat je concurrent naast zijn foto ook een video heeft staan — en jij niet." },
+      { type: "h2", text: "De realiteit van Funda in 2025" },
+      { type: "p", text: "De gemiddelde koper bekijkt tientallen woningen per sessie. De beslissing om te klikken of niet neemt hij in minder dan 3 seconden. Foto's vertellen wat er is. Video toont hoe het voelt om er te staan." },
+      { type: "p", text: "Sfeer, ruimte, licht — een video legt dat vast op een manier die een foto letterlijk niet kan. En voor makelaars betekent dat: meer kliks, meer aanvragen, meer bezichtigingen." },
+      { type: "h2", text: "Wat de cijfers zeggen" },
+      { type: "ul", items: ["Woningen met video krijgen gemiddeld 40% meer kliks op Funda", "Kopers die een video bekeken zijn beter voorbereid op de bezichtiging", "Verkopers ervaren makelaars met video als professioneler — en kiezen hen eerder"] },
+      { type: "h2", text: "Maar ik heb al een fotograaf..." },
+      { type: "p", text: "Foto en video zijn niet inwisselbaar — ze zijn complementair. De fotograaf legt het overzicht vast. De video legt de ervaring vast. Een koper die door beide heen is gegaan, belt met vertrouwen voor een bezichtiging. En dat spaart iedereen tijd." },
+      { type: "quote", text: "Iedere keer weer verrast hoe mooi het resultaat is. Hij denkt ontzettend goed mee en echt niets is voor hem te veel." },
+      { type: "cta", text: "Wil je weten wat een walkthrough video kost voor jouw volgende object?" },
+    ],
+  },
+  {
+    slug: "shoot-dag-maanden-content",
+    title: "Eén shoot dag, drie maanden content — hoe dat echt werkt",
+    date: "2025-03-05",
+    excerpt: "Veel ondernemers denken dat je elke week moet filmen voor social media. Dat klopt niet. Met slimme content batching pak je één dag in de maand en heb je de rest van de tijd vrij.",
+    readTime: "5 min",
+    category: "Social Media",
+    content: [
+      { type: "intro", text: "Elke week een video maken. Ideeën verzinnen. Filmen. Editen. Posten. Reageren. En dan weer opnieuw. Het klinkt als een parttime baan — en voor veel ondernemers is het dat ook. Maar dat hoeft niet zo." },
+      { type: "h2", text: "Content batching: slimmer, niet harder" },
+      { type: "p", text: "Content batching is het idee dat je alles in één keer opneemt. Geen wekelijkse stress, geen 'wat moet ik vandaag posten?' — maar één dag per maand volledig gericht op opnemen, en daarna de rest van de tijd vrij." },
+      { type: "p", text: "In een shoot dag van 3–4 uur kun je makkelijk 6 tot 9 video-onderwerpen opnemen. Dat is genoeg content voor een heel kwartaal, als je slim plant." },
+      { type: "h2", text: "Hoe ziet zo'n dag eruit?" },
+      { type: "ul", items: ["Voorbereiding: onderwerpen, scripts en opnamevolgorde voorbereid", "Shoot: meerdere locaties en setups op jouw eigen locatie", "Variatie: talking head, product in beeld, behind-the-scenes, klantreactie", "Resultaat: 3–9 afgewerkte video's klaar voor publicatie"] },
+      { type: "h2", text: "Waarom dit werkt voor lokale bedrijven" },
+      { type: "p", text: "Jij bent expert in wat jij doet — niet in videoproductie. Door die productie uit te besteden en samen te pakken in één dag, houd jij focus op je vak. En toch blijf je consistent zichtbaar op social media." },
+      { type: "p", text: "Consistentie is het sleutelwoord. Het algoritme van Instagram en TikTok beloont accounts die regelmatig posten. Niet accounts die de ene week vijf video's posten en de andere week niks." },
+      { type: "cta", text: "Benieuwd hoe dit werkt voor jouw bedrijf? Stuur een WhatsApp." },
+    ],
+  },
+  {
+    slug: "eerste-3-seconden-bepalen-alles",
+    title: "De eerste 3 seconden bepalen alles — zo maak je een sterke hook",
+    date: "2025-04-08",
+    excerpt: "Je hebt precies 3 seconden om iemand te stoppen met scrollen. Daarna haken ze af. Dit zijn de hooks die wél werken.",
+    readTime: "4 min",
+    category: "Social Media",
+    content: [
+      { type: "intro", text: "De gemiddelde kijker beslist in 1 tot 3 seconden of hij doorscrolt of blijft hangen. Dat betekent dat jouw video in die eerste drie seconden iets moet doen wat zijn duim stopt. Dat noemen we de hook." },
+      { type: "h2", text: "Wat is een hook?" },
+      { type: "p", text: "Een hook is de opening van je video. Het kan een uitspraak zijn, een vraag, een verrassend beeld of een onverwacht geluid. Het doel is altijd hetzelfde: de kijker nieuwsgierig maken naar de rest." },
+      { type: "h2", text: "Hooks die werken voor lokale ondernemers" },
+      { type: "ul", items: ['"Dit wist ik niet toen ik startte met mijn bedrijf..."', '"De #1 fout die klanten maken bij [jouw vakgebied]"', '"Kijk wat er achter de schermen gebeurt bij een dag als videograaf"', '"Zo ziet onze werkdag eruit — niet wat je verwacht"', '"Dit is waarom ik altijd zeg: [sterke claim]"'] },
+      { type: "h2", text: "Wat je nooit moet doen in de eerste seconden" },
+      { type: "ul", items: ["Logo tonen (niemand wacht op je huisstijl)", "Bedrijfsnaam noemen (te generiek, geen prikkel)", "Stilstaan of traag inlopen (beweging trekt de aandacht)", "Beginnen met 'Hallo iedereen!' (geeft nul reden om te blijven)"] },
+      { type: "p", text: "Het goede nieuws: een sterke hook hoeft niet ingewikkeld te zijn. Een pakkende eerste zin, uitgesproken met overtuiging, gecombineerd met een relevante visual — dat is alles wat je nodig hebt." },
+      { type: "cta", text: "Wil je video's die meteen de aandacht grijpen? Zo werk ik." },
+    ],
+  },
+  {
+    slug: "ai-content-wie-staat-voor-de-camera",
+    title: "AI gaat content maken — maar wie staat er voor de camera?",
+    date: "2025-05-14",
+    excerpt: "AI kan teksten schrijven, beelden genereren en video's editen. Maar het éne wat AI niet kan: jouw gezicht, jouw stem, jouw verhaal. En dat is precies wat converteert.",
+    readTime: "6 min",
+    category: "AI & Content",
+    content: [
+      { type: "intro", text: "Er gaat geen week voorbij zonder een nieuw AI-tool dat belooft dat het al je content voor je maakt. Tekst, beeld, zelfs video. En ja — sommige tools zijn indrukwekkend. Maar er is één ding dat AI nog altijd niet kan repliceren: jij." },
+      { type: "h2", text: "Waarom authentieke video nog nooit zo waardevol was" },
+      { type: "p", text: "Naarmate AI meer generieke content produceert, wordt menselijke, authentieke video juist schaarser en waardevoller. Mensen kopen van mensen. Vertrouwen ontstaat niet door een gegenereerde avatar — het ontstaat door herkenning, consistentie en oprechtheid." },
+      { type: "p", text: "De makers die nu beginnen met video — en dat consequent volhouden — bouwen een archief op dat later de basis vormt voor AI-tools die op hun specifieke stijl getraind kunnen worden. Die combinatie is de toekomst." },
+      { type: "h2", text: "Wat AI wél kan doen (en jou ontlasten)" },
+      { type: "ul", items: ["Automatisch captions genereren", "Ondertitels vertalen voor internationaal bereik", "Video's automatisch knippen op rytme of geluid", "Clipformaten aanpassen voor verschillende platforms", "Content plannen en posten via automatiseringstools"] },
+      { type: "h2", text: "Begin nu, profiteer later" },
+      { type: "p", text: "Hoe meer video je nu opneemt, hoe rijker jouw content-bibliotheek wordt. Niet alleen voor social media vandaag — maar als dataset voor morgen. AI die getraind is op jouw specifieke stem, stijl en verhaal, is een machine die 24/7 voor jou werkt." },
+      { type: "quote", text: "De ondernemers die nu beginnen met video, zijn de ondernemers die over 3 jaar onzichtbaar concurreren. De rest haalt ze nooit meer in." },
+      { type: "cta", text: "Klaar om je content-bibliotheek op te bouwen?" },
+    ],
+  },
+  {
+    slug: "video-vs-advertenties-wat-werkt-beter",
+    title: "Video of advertenties — wat levert meer op voor lokale bedrijven?",
+    date: "2025-06-10",
+    excerpt: "Veel MKB'ers geven maandelijks honderden euro's uit aan Meta-advertenties. Maar organische video doet iets wat advertenties nooit kunnen: vertrouwen opbouwen.",
+    readTime: "5 min",
+    category: "Social Media",
+    content: [
+      { type: "intro", text: "Je hebt het zelf waarschijnlijk wel gedaan: €200 in een Facebook-advertentie stoppen, wat bereik kopen en hopen op resultaat. Soms werkt het. Vaker valt het tegen. En zodra je stopt met betalen, stopt het bereik." },
+      { type: "h2", text: "Het fundamentele verschil" },
+      { type: "p", text: "Advertenties kopen je aandacht. Video verdient je aandacht. Dat klinkt als een cliché, maar het verschil in effect is enorm. Een advertentie onderbreekt iemand. Een goede video trekt iemand aan." },
+      { type: "p", text: "En vertrouwen — de basis van elke aankoop — bouw je niet op met een betaalde banner. Dat doe je door consistent zichtbaar te zijn, herkenbaar te zijn en waarde te leveren vóórdat iemand klant is." },
+      { type: "h2", text: "Wat organische video oplevert" },
+      { type: "ul", items: ["Bereik dat niet stopt als je budget stopt", "Volgers die jou al kennen voor ze contact opnemen", "Hogere conversie op je contactpagina (warm verkeer vs koud)", "Lagere kosten per lead over tijd", "Reputatie en autoriteit in jouw vakgebied"] },
+      { type: "h2", text: "Wanneer advertenties wél zin hebben" },
+      { type: "p", text: "Advertenties zijn krachtig als je al organische content hebt die werkt. Dan boost je bestaande video's die al engagement genereren — en betaal je voor bereik bij mensen die al iets van je hebben gezien. Dat is een combinatie die werkt." },
+      { type: "p", text: "Maar beginnen met advertenties zonder organische fundering is als water uit een emmer gieten met een gat erin." },
+      { type: "cta", text: "Bouw eerst je organische fundament. Begin met video." },
+    ],
+  },
+  {
+    slug: "content-batching-slimste-manier",
+    title: "Content batching: de slimste manier om nooit meer na te denken over wat je post",
+    date: "2025-07-09",
+    excerpt: "Stop met elke dag nadenken over content. Eén dag per maand is genoeg — als je het slim aanpakt. Dit is hoe.",
+    readTime: "4 min",
+    category: "Social Media",
+    content: [
+      { type: "intro", text: "De meest gehoorde klacht van ondernemers die zelf social media doen: 'Ik weet nooit wat ik moet posten.' Het resultaat is grillig posten — een week enthousiast, drie weken niks. En dat ziet het algoritme." },
+      { type: "h2", text: "Hoe content batching werkt" },
+      { type: "p", text: "Content batching is simpel: je plant één moment per maand voor alle opnames, en de rest van de maand hoef je er niet meer aan te denken. Het werkt omdat je in de creatieve flow zit — en daarin produceer je meer en beter." },
+      { type: "ul", items: ["Week 1: ideeën verzamelen (5 minuten per dag, gewoon opschrijven wat je tegenkomt)", "Week 2: voorbereiding + shoot dag (1 dag samen)", "Week 3-4: video's worden geedited en opgeleverd", "Jij: post gewoon op de momenten die jij kiest"] },
+      { type: "h2", text: "Wat zorgt voor de beste batch?" },
+      { type: "p", text: "Variatie is key. Een goede content batch heeft: informatieve video's (jouw expertise), persoonlijke video's (wie ben jij?), product of dienst video's (wat doe je?) en achter-de-schermen shots (hoe werkt jouw bedrijf?). Samen bouwen die een compleet beeld van jou als ondernemer." },
+      { type: "h2", text: "Hoe lang duurt zo'n shoot dag?" },
+      { type: "p", text: "Afhankelijk van het pakket: gemiddeld 2 tot 4 uur. We nemen alles op op jouw locatie. Geen studio, geen gedoe met vervoer — ik kom naar jou toe." },
+      { type: "cta", text: "Eén dag per maand. Maanden aan content. Dat is het model." },
+    ],
+  },
+  {
+    slug: "van-nul-naar-viral-anatomie",
+    title: "Van 0 naar viral: de anatomie van een video die gedeeld wordt",
+    date: "2025-08-06",
+    excerpt: "Wat maakt een video viraal? Spoiler: het is niet het toeval. Er zijn duidelijke ingrediënten — en die kun je repliceren.",
+    readTime: "5 min",
+    category: "Social Media",
+    content: [
+      { type: "intro", text: "Viral gaan klinkt als loterij. Soms post je iets en het explodeert. Soms post je iets vergelijkbaars en het ziet niemand. Maar als je tientallen video's analyseert, zie je patronen. En die patronen zijn te repliceren." },
+      { type: "h2", text: "De drie ingrediënten van een gedeelde video" },
+      { type: "ul", items: ["Herkenning: de kijker denkt 'dit is precies hoe ik het ook voel' — en stuurt het door naar een vriend", "Verrassing: iets onverwachts, een plot twist, een feit dat je niet wist", "Waarde: praktische info die de kijker direct kan gebruiken"] },
+      { type: "h2", text: "Format dat werkt voor lokale bedrijven" },
+      { type: "p", text: "Voor kleine en middelgrote bedrijven werkt het 'achter-de-schermen' format ongelooflijk goed. Mensen zijn nieuwsgierig naar hoe dingen werken — en als jij laat zien hoe jij je vak uitoefent, bouw je vertrouwen en expertise tegelijk op." },
+      { type: "p", text: "Combineer dat met een sterke hook en een call to action aan het einde ('volg voor meer tips' of 'stuur een DM als je dit wil voor jouw bedrijf'), en je hebt een video die niet alleen bekeken wordt — maar die ook iets doet." },
+      { type: "h2", text: "Wat viral gaan niet is" },
+      { type: "p", text: "Viral gaan is geen doel op zich. Een video met 500 weergaven die leidt tot drie nieuwe klanten, is waardevoller dan een video met 50.000 weergaven die niemand converteert. Focus op de juiste doelgroep, niet op het grootste bereik." },
+      { type: "cta", text: "Wil je video's die niet alleen bereik genereren, maar ook klanten?" },
+    ],
+  },
+  {
+    slug: "vastgoedvideo-funda-proof",
+    title: "Wat maakt een vastgoedvideo Funda-proof?",
+    date: "2025-09-03",
+    excerpt: "Niet elke video is geschikt voor Funda. Dit zijn de technische en inhoudelijke eisen waar een goede vastgoedvideo aan moet voldoen.",
+    readTime: "4 min",
+    category: "Vastgoed",
+    content: [
+      { type: "intro", text: "Je hebt een video laten maken. Hij ziet er goed uit. Maar dan blijkt dat hij niet correct kan worden toegevoegd aan Funda, of dat hij er op mobiel raar uitziet. Dat is zonde — en volledig te voorkomen." },
+      { type: "h2", text: "De technische eisen van Funda" },
+      { type: "ul", items: ["Formaat: 16:9 horizontaal (breedbeeldfoto)", "Bestandsformaat: MP4 (H.264 codec)", "Maximale bestandsgrootte: afhankelijk van uploadmethode", "Aanbevolen resolutie: 1080p (1920×1080)", "Geen watermerken of tekst-overlays die het beeld blokkeren"] },
+      { type: "h2", text: "Inhoudelijk: wat maakt een walkthrough effectief?" },
+      { type: "p", text: "Een goede vastgoedvideo is geen diashow van foto's met muziek. Het is een vloeiende doorloop van de woning — van voordeur naar achterkamer, waarbij elk vertrek logisch in elkaar overloopt. De kijker moet het gevoel krijgen dat hij er al doorheen loopt." },
+      { type: "ul", items: ["Begin buiten: de gevel en tuin (context)", "Hal, woonkamer, keuken: in logische volgorde", "Slaapkamers en badkamer: netjes en opgeruimd", "Tuin, bijgebouwen, terras: afsluiten met buiten"] },
+      { type: "h2", text: "Wat Future Content standaard levert" },
+      { type: "p", text: "Elke video die ik oplevert is standaard Funda-proof: correct formaat, goede resolutie, vloeiende montage. Je krijgt het bestand klaar voor upload. Je hoeft er zelf niks voor te doen." },
+      { type: "cta", text: "Wil je een Funda-ready video voor jouw volgende object? Vanaf €199." },
+    ],
+  },
+  {
+    slug: "verticale-video-nieuw-standaard",
+    title: "Verticale video is het nieuwe standaard — ben jij al klaar?",
+    date: "2025-10-08",
+    excerpt: "9:16 is niet meer een optie — het is de verwachting. Instagram Reels, TikTok, YouTube Shorts: alle grote platforms prioriteren verticaal. Dit is wat je moet weten.",
+    readTime: "4 min",
+    category: "Social Media",
+    content: [
+      { type: "intro", text: "Herinner je je nog dat YouTube het domante videoplatform was en alles horizontaal was? Die tijd is voorbij. Meer dan 70% van alle video content wordt nu bekeken op een telefoon, in portretmodus. En dat betekent: verticaal of onzichtbaar." },
+      { type: "h2", text: "Wat de grote platforms doen" },
+      { type: "ul", items: ["Instagram: Reels (9:16) krijgen 30–40% meer bereik dan vierkante of horizontale posts", "TikTok: uitsluitend verticaal — anders past je content letterlijk niet", "YouTube Shorts: de snelst groeiende feature van YouTube, volledig verticaal", "LinkedIn: video posts gaan verticaal — ook voor B2B bereik"] },
+      { type: "h2", text: "Wat dit betekent voor jouw bedrijf" },
+      { type: "p", text: "Als jij nu nog uitsluitend horizontale content maakt (of helemaal geen video), loop je bereik mis dat je concurrenten wél pakken. Verticale video is niet ingewikkelder dan horizontaal — het vraagt alleen een andere manier van filmen." },
+      { type: "p", text: "Bij Future Content film ik standaard in 9:16 voor social media content. Dat betekent dat elke video direct klaar is voor Instagram, TikTok en LinkedIn — zonder nabewerking of bijsnijden." },
+      { type: "h2", text: "En voor vastgoed?" },
+      { type: "p", text: "Voor Funda gebruik ik nog altijd het horizontale 16:9 formaat. Maar in het Compleet pakket lever ik naast de horizontale walkthrough ook een verticale social teaser op — zodat je de woning ook op Instagram kunt promoten." },
+      { type: "cta", text: "Klaar om verticaal te gaan? Zo werkt het bij Future Content." },
+    ],
+  },
+  {
+    slug: "lokale-zichtbaarheid-via-video",
+    title: "Hoe lokale zichtbaarheid via video leads oplevert zonder advertentiebudget",
+    date: "2025-11-05",
+    excerpt: "Je hoeft niet €500 per maand aan ads te besteden om leads te genereren. Organische video in jouw regio kan net zo effectief zijn — en het effect blijft.",
+    readTime: "5 min",
+    category: "Social Media",
+    content: [
+      { type: "intro", text: "Veel kleine bedrijven denken dat ze niet mee kunnen doen op social media zonder advertentiebudget. Maar het algoritme van Instagram en TikTok beloont relevante, consistente content — niet wie het meeste betaalt." },
+      { type: "h2", text: "Lokale content werkt anders dan nationaal bereik" },
+      { type: "p", text: "Als je een restaurant runt in Eindhoven, heb je geen 100.000 volgers nodig. Je hebt 1.000 betrokken volgers nodig in Eindhoven. Die 1.000 mensen kennen jou, vertrouwen jou en sturen hun vrienden naar jou toe. Dat is waardevoller dan een grote maar irrelevante schare." },
+      { type: "p", text: "Instagram en TikTok tonen content aan mensen in de buurt van waar het gefilmd is — zeker als je locatietags gebruikt. Een video gemaakt in Bladel of Veldhoven bereikt precies de mensen die ook in die regio wonen." },
+      { type: "h2", text: "Praktische tips voor lokale zichtbaarheid" },
+      { type: "ul", items: ["Tag altijd de locatie van je video (stad, buurt, straat)", "Gebruik lokale hashtags: #eindhoven #veldhoven #dekempen", "Mention lokale samenwerkingen of leveranciers", "Film op herkenbare locaties in de regio", "Post op tijdstippen dat jouw doelgroep actief is (17:00–20:00 en 21:00–23:00)"] },
+      { type: "h2", text: "Van zichtbaarheid naar leads" },
+      { type: "p", text: "Zichtbaarheid is stap één. De vertaling naar leads maak je door consistent waarde te leveren en vertrouwen op te bouwen. Op het moment dat iemand jouw dienst nodig heeft, ben jij de eerste die in gedachten komt. Dat is de kracht van consistente, lokale video." },
+      { type: "cta", text: "Wil je lokaal zichtbaar worden zonder advertentiebudget?" },
+    ],
+  },
+  {
+    slug: "2025-terugblik-wat-werkte",
+    title: "2025 in content: wat werkte, wat niet — en wat verandert in 2026",
+    date: "2025-12-10",
+    excerpt: "Een eerlijke terugblik op een jaar video content voor lokale bedrijven en makelaars in De Kempen en Eindhoven. Dit leerden we.",
+    readTime: "6 min",
+    category: "Inzichten",
+    content: [
+      { type: "intro", text: "2025 was het jaar dat video echt mainstream werd voor lokale MKB'ers. Niet meer 'nice to have' — maar een verwachting. Hier is wat ik dit jaar leerde uit tientallen shoots en honderden video's." },
+      { type: "h2", text: "Wat wél werkte" },
+      { type: "ul", items: ["Behind-the-scenes content: altijd het beste bereik en de meeste reacties", "Persoonlijke video's (de ondernemer in beeld): hoogste engagement", "Korte how-to video's (30–45 sec): meest gedeeld", "Vastgoedvideo's met drone: significant meer bezichtigingsaanvragen", "Consistente posters: accounts die wekelijks posten groeiden sneller dan accounts die sporadisch postten"] },
+      { type: "h2", text: "Wat minder goed werkte" },
+      { type: "ul", items: ["Saaie productfilmpjes zonder verhaal: lage kijktijd", "Video's zonder hook: 70% haakt af in de eerste seconde", "Generieke content zonder lokale context: minder bereik dan content met specifieke locatie", "Te lang (meer dan 90 seconden): dramatische daling in kijktijd"] },
+      { type: "h2", text: "Wat verandert in 2026" },
+      { type: "p", text: "AI-tools worden beter en goedkoper. Dat betekent dat generieke content nog meer de massa ingaat — en authentieke, menselijke video nóg schaarser en waardevoller wordt. De lat voor 'goed genoeg' gaat omhoog." },
+      { type: "p", text: "Tegelijkertijd: ondernemers die nu een content-bibliotheek opbouwen, kunnen straks AI-tools trainen op hun specifieke stijl. De investering van vandaag is de automatisering van morgen." },
+      { type: "cta", text: "Klaar voor 2026? Begin nu met je content-bibliotheek." },
+    ],
+  },
+  {
+    slug: "ai-content-laten-maken-dit-eerst",
+    title: "Je content laten maken door AI? Dit moet je eerst doen.",
+    date: "2026-01-14",
+    excerpt: "AI-videotools zijn indrukwekkend. Maar de ondernemers die er het meeste uithalen, zijn degenen die eerst hun eigen materiaal hebben. Hier is waarom — en hoe je dat opbouwt.",
+    readTime: "5 min",
+    category: "AI & Content",
+    content: [
+      { type: "intro", text: "Er zijn nu tools die AI-video's genereren op basis van een tekst. Tools die een avatar maken die op jou lijkt. Tools die jouw stem klonen. Het klinkt als science fiction — maar het bestaat en werkt al redelijk." },
+      { type: "h2", text: "Het probleem met AI-first" },
+      { type: "p", text: "Het probleem is: als je geen echte video's hebt, heeft AI niets om van te leren. Een AI-avatar die jou imiteert zonder dat er echte opnames van jou zijn, klinkt generiek, ziet er nep uit en converteert niet." },
+      { type: "p", text: "De tools die het beste werken, zijn de tools die getraind zijn op jouw specifieke stem, jouw specifieke stijl en jouw specifieke gezicht. En dat vereist dat je eerst echt hebt opgenomen." },
+      { type: "h2", text: "Wat je nu moet doen" },
+      { type: "ul", items: ["Begin met echte video's — laat ze consistent maken, maand na maand", "Bouw een bibliotheek van honderden minuten footage op", "Documenteer jouw stijl: welke onderwerpen, welke toon, welke structuur werkt voor jou?", "Sla alle footage op in hoge kwaliteit — dit wordt straks je trainingsdata"] },
+      { type: "h2", text: "De ondernemer die het slimst is" },
+      { type: "p", text: "De slimste ondernemer van 2026 is niet degene die nu al AI-video's laat genereren. Het is degene die nu zijn menselijke video-bibliotheek opbouwt — zodat hij over twee jaar een AI heeft die 24/7 voor hem werkt, in zijn eigen stem en stijl." },
+      { type: "quote", text: "Begin nu. Schaal later. De basis die je vandaag legt, is de automatisering van morgen." },
+      { type: "cta", text: "Wil je beginnen met jouw content-bibliotheek? Dat is precies wat wij doen." },
+    ],
+  },
+];
+
+export function getBlogPost(slug: string): BlogPost | undefined {
+  return BLOG_POSTS.find((p) => p.slug === slug);
+}
+
+export function formatDate(dateStr: string): string {
+  const d = new Date(dateStr);
+  return d.toLocaleDateString("nl-NL", { day: "numeric", month: "long", year: "numeric" });
+}

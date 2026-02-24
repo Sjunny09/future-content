@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# video's zijn te groot voor GitHub (150–307 MB per bestand)
+# upload ze handmatig naar de server of gebruik een CDN
+/public/videos/

@@ -1,0 +1,3 @@
+# Video's zijn te groot voor Vercel (max 100MB per bestand)
+# Ze staan lokaal in public/videos/ maar worden niet geüpload
+public/videos/

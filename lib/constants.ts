@@ -218,7 +218,7 @@ export const SELLER_QUOTES = [
   },
 ];
 
-// Lokale vastgoedvideo's — 9 objecten
+// Lokale vastgoedvideo's — 9 objecten (allemaal Premium/Compleet pakket)
 // Let op: bestanden zijn groot (150–307MB). Voor productie comprimeren naar WebM (<50MB).
 // Posters: exterieur-foto's rechtstreeks van pitmakelaars.com (verkochte objecten).
 export const STACK_VIDEOS = [
@@ -228,7 +228,7 @@ export const STACK_VIDEOS = [
     location: "Wintelre",
     src: "/videos/wintelre-koemeerskuil-20.mp4",
     poster: "/photos/properties/koemeerskuil-20-wintelre.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "2",
@@ -236,7 +236,7 @@ export const STACK_VIDEOS = [
     location: "Reusel",
     src: "/videos/reusel-de-rijt-3.mp4",
     poster: "/photos/properties/de-rijt-3-reusel.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "3",
@@ -244,7 +244,7 @@ export const STACK_VIDEOS = [
     location: "Riethoven",
     src: "/videos/riethoven-hasselt-5.mp4",
     poster: "/photos/properties/hasselt-5-riethoven.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "4",
@@ -252,7 +252,7 @@ export const STACK_VIDEOS = [
     location: "Eindhoven",
     src: "/videos/eindhoven-welschapsedijk-103.mp4",
     poster: "/photos/PhotoSessions-757307-pww_6383-vy-1.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "5",
@@ -260,7 +260,7 @@ export const STACK_VIDEOS = [
     location: "Eindhoven",
     src: "/videos/eindhoven-vlokhovenseweg-62.mp4",
     poster: "/photos/properties/vlokhovenseweg-62-eindhoven.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "6",
@@ -268,7 +268,7 @@ export const STACK_VIDEOS = [
     location: "Reusel",
     src: "/videos/reusel-vijverveld-13.mp4",
     poster: "/photos/properties/vijverveld-13-reusel.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "7",
@@ -276,7 +276,7 @@ export const STACK_VIDEOS = [
     location: "Eersel",
     src: "/videos/eersel-hollandse-hoeve-19.mp4",
     poster: "/photos/properties/hollandse-hoeve-19-eersel.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "8",
@@ -284,7 +284,7 @@ export const STACK_VIDEOS = [
     location: "Veldhoven",
     src: "/videos/veldhoven-vlasacker-3.mp4",
     poster: "/photos/properties/vlasacker-3-veldhoven.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
   {
     id: "9",
@@ -292,7 +292,7 @@ export const STACK_VIDEOS = [
     location: "Lage Mierde",
     src: "/videos/lage-mierde-hooge-mierdseweg-15.mp4",
     poster: "/photos/properties/hooge-mierdseweg-15-lage-mierde.jpg",
-    description: "Walkthrough video — Pit Makelaars",
+    description: "Premium video — Pit Makelaars",
   },
 ];
 

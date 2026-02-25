@@ -9,6 +9,11 @@ import { STACK_VIDEOS } from "@/lib/constants";
 // ─── Hover-to-play card ──────────────────────────────────────────────────────
 // On desktop hover: card scales up, video starts from 3 s (skips any intro).
 // On mobile: tap shows play controls.
+//
+// Why preload="metadata" instead of preload="none"?
+// We need to seek to currentTime=3 before playing. The browser can only seek
+// if it has loaded at least the duration/keyframe data (metadata). Without it,
+// the currentTime assignment is silently ignored and the intro plays anyway.
 function VideoHoverCard({
   video,
   index,
@@ -23,7 +28,9 @@ function VideoHoverCard({
     const vid = videoRef.current;
     if (!vid) return;
     setHovered(true);
-    vid.currentTime = 3; // skip Pit Makelaars intro
+    vid.currentTime = 3; // skip Pit Makelaars intro (first 3 s is branding)
+    // .play() returns a Promise; .catch() suppresses "user didn't interact" errors
+    // that browsers throw when autoplay is blocked without a user gesture.
     vid.play().catch(() => {});
   };
 
@@ -32,7 +39,7 @@ function VideoHoverCard({
     if (!vid) return;
     setHovered(false);
     vid.pause();
-    vid.currentTime = 3; // reset so next hover is clean
+    vid.currentTime = 3; // reset to 3 s so the next hover starts clean
   };
 
   return (
@@ -102,7 +109,7 @@ export default function PortfolioPage() {
               Vastgoedvideo&apos;s.
             </h1>
             <p className="text-[#6B7280] text-lg max-w-xl">
-              Walkthrough video&apos;s gemaakt voor Pit Makelaars — in De Kempen, Eindhoven en omgeving.
+              Premium vastgoedvideo&apos;s gemaakt voor Pit Makelaars — in De Kempen, Eindhoven en omgeving.
             </p>
             <p className="text-[#C9A96E] text-sm mt-3">
               Beweeg over een woning om de video te bekijken.

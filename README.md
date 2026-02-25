@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Future Content — Website
 
-## Getting Started
+Marketing site for Future Content (Bladel, NL). Built with Next.js 15 + Tailwind CSS.
 
-First, run the development server:
+Live: **[future-content.nl](https://future-content.nl)**
+
+---
+
+## Run locally
+
+**Requirements:** Node 20+, npm
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Copy environment file and fill in your keys
+cp .env.local.example .env.local
+
+# 3. Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# → http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site works without any env keys in dev mode. The contact form logs submissions
+to the console instead of sending email.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment variables
 
-## Learn More
+| Variable | Required | Description |
+|---|---|---|
+| `RESEND_API_KEY` | Production only | Email delivery via resend.com |
+| `CONTACT_EMAIL` | Optional | Where form emails go (default: info@future-content.nl) |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy to Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+# Deploy to production
+npx vercel --prod --force
+# --force skips build cache (use when routes return 404 unexpectedly)
+```
 
-## Deploy on Vercel
+After every deploy, check that domain aliases are correct:
+```bash
+npx vercel alias ls
+# Should show: future-content.nl + www.future-content.nl → latest deployment
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If the root domain isn't automatically aliased after deploy:
+```bash
+npx vercel alias set <deployment-url> future-content.nl
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Project structure
+
+```
+app/                    # Next.js App Router pages
+├── page.tsx            # Home
+├── makelaars/          # Real estate videography page
+├── social-media/       # Social media subscription page
+├── portfolio/          # Video portfolio (hover-to-play grid)
+├── werkwijze/          # How it works
+├── over/               # About
+├── contact/            # Contact form page
+├── blog/               # Blog (placeholder)
+└── api/contact/        # POST endpoint → email via Resend
+
+components/
+├── layout/
+│   ├── Navbar.tsx      # Responsive nav with mobile menu
+│   └── Footer.tsx
+├── sections/           # Large reusable page sections
+└── common/
+    ├── VideoPlayer.tsx      # Click-to-play video with poster overlay
+    ├── VideoCarousel.tsx    # Scroll-snap carousel (built, not currently used)
+    └── CtaButton.tsx
+
+lib/
+├── constants.ts        # All site data: packages, videos, reviews, regions
+└── metadata.ts         # SEO metadata helpers per page
+
+public/
+├── photos/             # Property + photoshoot images
+│   └── properties/     # Exterior shots from pitmakelaars.com
+└── videos/             # MP4 files — gitignored (150–307 MB each)
+```
+
+---
+
+## Key decisions
+
+**All content in `constants.ts`** — prices, videos, reviews, and regions live in
+one file. No database, no CMS. To update a price, edit one line.
+
+**Videos are not on GitHub or Vercel** — MP4 files are too large (150–307 MB).
+They're excluded via `.gitignore` and `.vercelignore`. For production, upload
+videos to a CDN (Cloudflare R2, Bunny CDN, etc.) and update `src` in `STACK_VIDEOS`.
+
+**Vercel framework setting** — The project was created via CLI which didn't
+auto-detect Next.js. If you ever recreate the Vercel project, set the framework
+to "Next.js" in Project Settings, or the routing will silently return 404.
+
+---
+
+## Adding content
+
+**New portfolio video:**
+1. Drop MP4 into `public/videos/`
+2. Add entry to `STACK_VIDEOS` in `lib/constants.ts`
+3. Add poster photo to `public/photos/properties/`
+
+**Update prices:** edit `VASTGOED_PACKAGES` or `SOCIAL_PACKAGES` in `lib/constants.ts`
+
+**Update reviews:** edit `REVIEWS` in `lib/constants.ts`
+
+---
+
+## DNS (Vimexx)
+
+| Record | Type | Value |
+|---|---|---|
+| `@` | A | `76.76.21.21` |
+| `www` | CNAME | `cname.vercel-dns.com` |

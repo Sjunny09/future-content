@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+// Zod schema validates and types the request body in one step.
+// If a required field is missing or wrong type, schema.parse() throws a
+// ZodError which we catch below and return as a 400 with field-level errors.
 const schema = z.object({
   naam: z.string().min(2, "Naam is verplicht"),
   bedrijf: z.string().optional(),
@@ -15,9 +18,10 @@ const schema = z.object({
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const data = schema.parse(body);
+    const data = schema.parse(body); // throws ZodError on invalid input
 
-    // --- Email via Resend (add RESEND_API_KEY to .env.local) ---
+    // If RESEND_API_KEY is missing (local dev), log and pretend success.
+    // In production, add RESEND_API_KEY to Vercel environment variables.
     const apiKey = process.env.RESEND_API_KEY;
     const toEmail = process.env.CONTACT_EMAIL ?? "info@future-content.nl";
 

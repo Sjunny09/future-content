@@ -19,7 +19,9 @@ export default function VideoCarousel({ videos }: { videos: VideoItem[] }) {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const scrollTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  // Find which card is closest to the horizontal center of the scroll container
+  // Find which card is closest to the horizontal center of the scroll container.
+  // We compare the viewport's pixel center against each card's midpoint
+  // (offsetLeft + halfWidth). Smallest distance wins → becomes active/playing.
   const findCenter = useCallback(() => {
     const el = containerRef.current;
     if (!el) return 0;
@@ -50,7 +52,9 @@ export default function VideoCarousel({ videos }: { videos: VideoItem[] }) {
     });
   }, []);
 
-  // Debounced scroll handler — fires after scroll settles
+  // Debounced scroll handler — fires only after scrolling stops for 80 ms.
+  // Without debouncing, findCenter would run on every scroll event (dozens/sec)
+  // and trigger video play/pause mid-swipe, causing audio glitches.
   const onScroll = useCallback(() => {
     clearTimeout(scrollTimer.current);
     scrollTimer.current = setTimeout(() => {

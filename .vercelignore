@@ -1,3 +1,2 @@
-# Video's zijn te groot voor Vercel (max 100MB per bestand)
-# Ze staan lokaal in public/videos/ maar worden niet geüpload
-public/videos/
+# Video's zijn verkleind naar <100MB per bestand en worden nu geüpload naar Vercel.
+# Vercel Pro: max 100MB per bestand. GitHub (zie .gitignore): nog steeds uitgesloten.

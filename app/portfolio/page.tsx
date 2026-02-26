@@ -7,13 +7,17 @@ import { ArrowRight, Video } from "lucide-react";
 import { STACK_VIDEOS } from "@/lib/constants";
 
 // ─── Hover-to-play card ──────────────────────────────────────────────────────
-// On desktop hover: card scales up, video starts from 3 s (skips any intro).
-// On mobile: tap shows play controls.
+// On desktop hover: card scales up, video plays from 3 s (skips Pit Makelaars intro).
+// On click: navigates to the individual portfolio page (/portfolio/[slug]).
 //
 // Why preload="metadata" instead of preload="none"?
 // We need to seek to currentTime=3 before playing. The browser can only seek
 // if it has loaded at least the duration/keyframe data (metadata). Without it,
 // the currentTime assignment is silently ignored and the intro plays anyway.
+//
+// Hover thumbnail fix: we render an <img> poster overlay on top of the <video>.
+// On hover the overlay fades out, revealing the playing video underneath.
+// On leave the overlay fades back in — no need to call vid.load() or reset src.
 function VideoHoverCard({
   video,
   index,
@@ -39,51 +43,72 @@ function VideoHoverCard({
     if (!vid) return;
     setHovered(false);
     vid.pause();
-    vid.currentTime = 3; // reset to 3 s so the next hover starts clean
+    // We don't reset currentTime here — the img overlay covers the video anyway.
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06 }}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      className={[
-        "relative rounded-2xl overflow-hidden bg-[#0F0F0D] cursor-pointer",
-        "transition-all duration-300 ease-out",
-        hovered
-          ? "scale-[1.07] shadow-[0_20px_60px_rgba(0,0,0,0.4)] z-10"
-          : "scale-100 z-0",
-      ].join(" ")}
-    >
-      <video
-        ref={videoRef}
-        src={video.src}
-        poster={video.poster}
-        preload="metadata"
-        playsInline
-        muted
-        loop
-        className="w-full aspect-video object-cover"
-      />
+    // Link wraps the card so it's keyboard-accessible and crawlable by search engines.
+    // The href points to the individual portfolio page for this property.
+    <Link href={`/portfolio/${video.slug}`} className="block">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.06 }}
+        onMouseEnter={handleEnter}
+        onMouseLeave={handleLeave}
+        className={[
+          "relative rounded-2xl overflow-hidden bg-[#0F0F0D]",
+          "transition-all duration-300 ease-out",
+          hovered
+            ? "scale-[1.07] shadow-[0_20px_60px_rgba(0,0,0,0.4)] z-10"
+            : "scale-100 z-0",
+        ].join(" ")}
+      >
+        {/* Video element — always mounted so seek on hover is instant */}
+        <video
+          ref={videoRef}
+          src={video.src}
+          poster={video.poster}
+          preload="metadata"
+          playsInline
+          muted
+          loop
+          className="w-full aspect-video object-cover"
+        />
 
-      {/* Caption bar */}
-      <div className="px-5 py-4">
-        <div className="flex items-start justify-between gap-3 mb-1">
-          <h3 className="font-semibold text-[#FAFAF8] text-sm leading-snug">
-            {video.title}
-          </h3>
-          <span className="shrink-0 px-2 py-0.5 rounded-full bg-[#C9A96E]/20 text-[#C9A96E] text-[10px] font-semibold uppercase tracking-wider">
-            Vastgoed
-          </span>
+        {/* Poster overlay — covers the video when not hovered.
+            Fades out on hover to reveal the playing video.
+            This avoids the "last frame stuck on screen" bug: instead of trying
+            to reset the video element we simply hide it behind the poster image. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={video.poster}
+          alt={video.title}
+          aria-hidden="true"
+          className={[
+            "absolute inset-0 w-full aspect-video object-cover",
+            "transition-opacity duration-300",
+            hovered ? "opacity-0 pointer-events-none" : "opacity-100",
+          ].join(" ")}
+        />
+
+        {/* Caption bar */}
+        <div className="px-5 py-4">
+          <div className="flex items-start justify-between gap-3 mb-1">
+            <h3 className="font-semibold text-[#FAFAF8] text-sm leading-snug">
+              {video.title}
+            </h3>
+            <span className="shrink-0 px-2 py-0.5 rounded-full bg-[#C9A96E]/20 text-[#C9A96E] text-[10px] font-semibold uppercase tracking-wider">
+              Vastgoed
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5 text-xs text-[#FAFAF8]/40 mt-1">
+            <Video size={11} />
+            {video.description}
+          </div>
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-[#FAFAF8]/40 mt-1">
-          <Video size={11} />
-          {video.description}
-        </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -112,7 +137,7 @@ export default function PortfolioPage() {
               Premium vastgoedvideo&apos;s gemaakt voor Pit Makelaars — in De Kempen, Eindhoven en omgeving.
             </p>
             <p className="text-[#C9A96E] text-sm mt-3">
-              Beweeg over een woning om de video te bekijken.
+              Beweeg over een woning om de video te bekijken. Klik voor meer info.
             </p>
           </motion.div>
         </div>
@@ -141,11 +166,11 @@ export default function PortfolioPage() {
             className="text-2xl font-bold text-[#1A1A18] mb-3"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Social media & zakelijk portfolio — binnenkort
+            Social media & bruiloften portfolio — binnenkort
           </h2>
           <p className="text-[#6B7280] text-sm max-w-lg">
-            We werken aan een uitbreiding van ons portfolio met social media content en zakelijke video&apos;s.
-            Benieuwd wat we voor jouw bedrijf kunnen doen? Plan een vrijblijvend gesprek.
+            We werken aan een uitbreiding van ons portfolio met social media content en bruiloftsvideo&apos;s.
+            Benieuwd wat we voor jou kunnen doen? Plan een vrijblijvend gesprek.
           </p>
         </div>
       </section>

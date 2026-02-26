@@ -219,11 +219,12 @@ export const SELLER_QUOTES = [
 ];
 
 // Lokale vastgoedvideo's — 9 objecten (allemaal Premium/Compleet pakket)
-// Let op: bestanden zijn groot (150–307MB). Voor productie comprimeren naar WebM (<50MB).
 // Posters: exterieur-foto's rechtstreeks van pitmakelaars.com (verkochte objecten).
+// slug wordt gebruikt als URL: /portfolio/[slug]
 export const STACK_VIDEOS = [
   {
     id: "1",
+    slug: "wintelre-koemeerskuil-20",
     title: "Wintelre, Koemeerskuil 20",
     location: "Wintelre",
     src: "/videos/wintelre-koemeerskuil-20.mp4",
@@ -232,6 +233,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "2",
+    slug: "reusel-de-rijt-3",
     title: "Reusel, De Rijt 3",
     location: "Reusel",
     src: "/videos/reusel-de-rijt-3.mp4",
@@ -240,6 +242,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "3",
+    slug: "riethoven-hasselt-5",
     title: "Riethoven, Hasselt 5",
     location: "Riethoven",
     src: "/videos/riethoven-hasselt-5.mp4",
@@ -248,6 +251,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "4",
+    slug: "eindhoven-welschapsedijk-103",
     title: "Eindhoven, Welschapsedijk 103",
     location: "Eindhoven",
     src: "/videos/eindhoven-welschapsedijk-103.mp4",
@@ -256,6 +260,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "5",
+    slug: "eindhoven-vlokhovenseweg-62",
     title: "Eindhoven, Vlokhovenseweg 62",
     location: "Eindhoven",
     src: "/videos/eindhoven-vlokhovenseweg-62.mp4",
@@ -264,6 +269,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "6",
+    slug: "reusel-vijverveld-13",
     title: "Reusel, Vijverveld 13",
     location: "Reusel",
     src: "/videos/reusel-vijverveld-13.mp4",
@@ -272,6 +278,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "7",
+    slug: "eersel-hollandse-hoeve-19",
     title: "Eersel, Hollandse Hoeve 19",
     location: "Eersel",
     src: "/videos/eersel-hollandse-hoeve-19.mp4",
@@ -280,6 +287,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "8",
+    slug: "veldhoven-vlasacker-3",
     title: "Veldhoven, Vlasacker 3",
     location: "Veldhoven",
     src: "/videos/veldhoven-vlasacker-3.mp4",
@@ -288,6 +296,7 @@ export const STACK_VIDEOS = [
   },
   {
     id: "9",
+    slug: "lage-mierde-hooge-mierdseweg-15",
     title: "Lage Mierde, Hooge Mierdseweg 15",
     location: "Lage Mierde",
     src: "/videos/lage-mierde-hooge-mierdseweg-15.mp4",
@@ -297,8 +306,9 @@ export const STACK_VIDEOS = [
 ];
 
 export const NAV_LINKS = [
-  { href: "/makelaars", label: "Makelaars" },
   { href: "/social-media", label: "Social Media" },
+  { href: "/makelaars", label: "Makelaars" },
+  { href: "/trouwen", label: "Trouwen" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/werkwijze", label: "Werkwijze" },
   { href: "/blog", label: "Blog" },

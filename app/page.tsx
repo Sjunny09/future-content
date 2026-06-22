@@ -19,6 +19,32 @@ const WAARDE = [
   },
 ];
 
+// John's AI-logo als schone transparante SVG (nagebouwd uit zijn ontwerp).
+function FutureContentLogo({ className }: { className?: string }) {
+  const blauw = "oklch(0.76 0.15 232)"
+  return (
+    <svg
+      viewBox="180 240 980 430"
+      className={className}
+      role="img"
+      aria-label="Future Content, think now build tomorrow"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <text x="200" y="370" fontFamily="Helvetica, Arial, sans-serif" fontWeight={900} fontSize={150} letterSpacing={-4} fill="#FAFAF8">
+        FUTURE
+      </text>
+      <text x="200" y="520" fontFamily="Helvetica, Arial, sans-serif" fontWeight={300} fontSize={150} letterSpacing={-2} fill="#FAFAF8">
+        CONTENT
+      </text>
+      <rect x="930" y="408" width="60" height="22" fill={blauw} />
+      <rect x="200" y="560" width="640" height="4" fill={blauw} />
+      <text x="200" y="630" fontFamily="Helvetica, Arial, sans-serif" fontWeight={400} fontSize={40} letterSpacing={12} fill="#B9B9C0">
+        THINK NOW, BUILD TOMORROW
+      </text>
+    </svg>
+  )
+}
+
 export default function HomeAI() {
   return (
     <>
@@ -30,17 +56,10 @@ export default function HomeAI() {
           style={{ background: "radial-gradient(circle, #C9A96E55 0%, transparent 70%)" }}
         />
         <div className="relative max-w-5xl mx-auto px-6 pt-40 pb-28 md:pt-48 md:pb-36">
-          <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.25em]">
-            Future Content · AI
-          </span>
-          <h1
-            className="mt-6 text-5xl md:text-7xl font-semibold leading-[1.02] tracking-[-0.02em]"
-            style={{ fontFamily: "var(--font-playfair)" }}
-          >
-            Think now,
-            <br />
-            <span className="text-[#C9A96E]">build tomorrow.</span>
+          <h1 className="sr-only">
+            Future Content, AI en automatisering. Think now, build tomorrow.
           </h1>
+          <FutureContentLogo className="h-auto w-full max-w-[300px] sm:max-w-[400px] md:max-w-[460px]" />
           <p className="mt-7 text-lg md:text-xl text-[#FAFAF8]/70 max-w-2xl leading-relaxed">
             Wat je vandaag verzint, kan morgen al staan. Ik bouw AI en automatisering voor
             MKB-bedrijven, op je eigen processen. Geen hype, wel werk dat tijd bespaart.

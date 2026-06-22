@@ -25,7 +25,7 @@ export default function FilmPage() {
             muted
             loop
             playsInline
-            className="w-24 h-24 object-contain mb-8 rounded-xl"
+            className="w-44 sm:w-56 md:w-72 aspect-square object-contain mb-8 rounded-2xl"
           />
           <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.25em]">
             Future Content · Film
@@ -105,6 +105,10 @@ export default function FilmPage() {
           >
             Trouwfilms en aftermovies
           </h2>
+          <p className="mt-3 text-[#6B7280] max-w-2xl leading-relaxed">
+            Bij elke bruiloft krijg je altijd twee films: een korte met de hoogtepunten om te delen,
+            en een langere die de hele dag vertelt.
+          </p>
 
           <div className="mt-10 flex flex-col items-center">
             <figure className="w-full max-w-[520px] rounded-2xl overflow-hidden border border-[#E5E0D8] bg-white">
@@ -118,6 +122,7 @@ export default function FilmPage() {
               <figcaption className="px-4 py-3 flex items-center justify-center gap-2">
                 <Heart size={15} className="text-[#C9A96E]" />
                 <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
+                <span className="text-xs text-[#6B7280]">· korte film</span>
               </figcaption>
             </figure>
             <Link

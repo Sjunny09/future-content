@@ -1,7 +1,7 @@
 import { db } from "@/lib/scan/db"
 import { haalSiteDataOp } from "@/lib/scan/scraper"
 import { analyseerSite, genereerObservaties } from "@/lib/scan/claude"
-import { selecteerVragen } from "@/lib/scan/vragen/selecteer"
+import { kiesEersteVraag } from "@/lib/scan/vragen/selecteer"
 import { reportError } from "@/lib/scan/observability/logger"
 
 // Minimum-duur uit 03_ceo_synthese.md §4.3: "Wachttijd 35-45s — als Claude
@@ -60,8 +60,9 @@ export async function analyseStarten(jobId: string): Promise<void> {
           analysedAt: new Date(),
         },
       })
-      // Keten: zodra analyse binnen is, kiest Haiku de 5 vragen (+ email als slot 6).
-      const vragen = await selecteerVragen(analyse)
+      // Adaptief: alleen de gepersonaliseerde openingsvraag (B1) staat vooraf
+      // klaar. De rest kiest de AI per antwoord (zie /antwoord-route).
+      const vragen = await kiesEersteVraag(analyse)
       await db.scanJob.update({
         where: { id: jobId },
         data: { vragenJson: vragen as unknown as object },

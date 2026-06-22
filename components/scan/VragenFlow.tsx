@@ -10,30 +10,23 @@ type Antwoord = string | string[] | { naam: string; email: string }
 
 type Props = {
   jobId: string
-  vragen: Vraag[]
+  eersteVraag: Vraag
+  startSlot?: number
 }
 
-export function VragenFlow({ jobId, vragen }: Props) {
+export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
   const router = useRouter()
-  const [index, setIndex] = useState(0)
-  const [antwoorden, setAntwoorden] = useState<Record<number, Antwoord>>({})
+  const [huidig, setHuidig] = useState<Vraag>(eersteVraag)
+  const [slot, setSlot] = useState(startSlot)
+  const [antwoord, setAntwoord] = useState<Antwoord | undefined>(undefined)
   const [bezig, setBezig] = useState(false)
   const [fout, setFout] = useState<string | null>(null)
 
-  const huidig = vragen[index]
-  const totaal = vragen.length
-  const laatste = index === totaal - 1
-  const huidigAntwoord = antwoorden[index]
-  const mag = heeftGeldigAntwoord(huidig, huidigAntwoord)
+  const isEmail = huidig.type === "email-naam"
+  const mag = heeftGeldigAntwoord(huidig, antwoord)
 
   function zetAntwoord(waarde: Antwoord) {
-    setAntwoorden((h) => ({ ...h, [index]: waarde }))
-  }
-
-  async function terug() {
-    if (index === 0 || bezig) return
-    setFout(null)
-    setIndex(index - 1)
+    setAntwoord(waarde)
   }
 
   async function volgende() {
@@ -42,18 +35,16 @@ export function VragenFlow({ jobId, vragen }: Props) {
     setBezig(true)
 
     try {
-      const waarde = antwoorden[index]
-
-      if (laatste) {
+      if (isEmail) {
         // Laatste vraag: email+naam → /compleet
-        const contact = waarde as { naam: string; email: string }
+        const contact = antwoord as { naam: string; email: string }
         const res = await fetch(`/api/scan/${jobId}/compleet`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             naam: contact.naam,
             email: contact.email,
-            vraagIndex: index,
+            vraagIndex: slot - 1,
             vraagId: huidig.id,
             vraagTitel: huidig.titel,
           }),
@@ -68,15 +59,20 @@ export function VragenFlow({ jobId, vragen }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          vraagIndex: index,
+          vraagIndex: slot - 1,
           vraagId: huidig.id,
           vraagTitel: huidig.titel,
-          waarde,
+          waarde: antwoord,
         }),
       })
       if (!res.ok) throw new Error("antwoord-fout")
-      if (index === 0) track("vraag_1_klaar")
-      setIndex(index + 1)
+      const data = (await res.json()) as { volgende?: Vraag }
+      if (!data.volgende) throw new Error("geen-volgende")
+
+      if (slot === 1) track("vraag_1_klaar")
+      setHuidig(data.volgende)
+      setSlot(slot + 1)
+      setAntwoord(undefined)
     } catch {
       setFout("Ik kom er even niet door. Probeer het nog eens.")
     } finally {
@@ -86,12 +82,12 @@ export function VragenFlow({ jobId, vragen }: Props) {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 py-10">
-      <Kop index={index} totaal={totaal} opTerug={terug} />
+      <Kop slot={slot} />
 
       <div className="mt-10 flex flex-1 flex-col">
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${index}-${huidig.id}`}
+            key={huidig.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -120,7 +116,7 @@ export function VragenFlow({ jobId, vragen }: Props) {
 
             <VraagVeld
               vraag={huidig}
-              waarde={huidigAntwoord}
+              waarde={antwoord}
               opWijzig={zetAntwoord}
               opEnter={volgende}
               uitgeschakeld={bezig}
@@ -129,17 +125,7 @@ export function VragenFlow({ jobId, vragen }: Props) {
         </AnimatePresence>
       </div>
 
-      <div className="mt-10 flex items-center justify-between">
-        <button
-          type="button"
-          onClick={terug}
-          disabled={index === 0 || bezig}
-          className="text-sm underline underline-offset-4 disabled:opacity-30"
-          style={{ color: "var(--color-scan-muted)" }}
-        >
-          ← Terug
-        </button>
-
+      <div className="mt-10 flex items-center justify-end">
         <button
           type="button"
           onClick={volgende}
@@ -147,7 +133,7 @@ export function VragenFlow({ jobId, vragen }: Props) {
           className="rounded-md px-6 py-3 text-base font-medium text-white transition disabled:opacity-40"
           style={{ backgroundColor: "var(--color-scan-terracotta)" }}
         >
-          {bezig ? "Even…" : laatste ? "Klaar, stuur de video" : "Volgende"}
+          {bezig ? "Even…" : isEmail ? "Klaar, stuur de video" : "Volgende"}
         </button>
       </div>
 
@@ -163,29 +149,12 @@ export function VragenFlow({ jobId, vragen }: Props) {
   )
 }
 
-function Kop({
-  index,
-  totaal,
-  opTerug,
-}: {
-  index: number
-  totaal: number
-  opTerug: () => void
-}) {
+function Kop({ slot }: { slot: number }) {
   return (
     <div className="flex items-center justify-between">
-      <button
-        type="button"
-        onClick={opTerug}
-        disabled={index === 0}
-        className="text-sm disabled:opacity-30"
-        style={{ color: "var(--color-scan-muted)" }}
-        aria-label="Terug"
-      >
-        ←
-      </button>
+      <span className="w-4" aria-hidden />
       <p className="text-sm" style={{ color: "var(--color-scan-muted)" }}>
-        {index + 1} van {totaal}
+        Vraag {Math.min(slot, 6)} van 6
       </p>
       <span className="w-4" aria-hidden />
     </div>

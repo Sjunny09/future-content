@@ -112,26 +112,48 @@ export default function FilmPage() {
             en een langere die de hele dag vertelt.
           </p>
 
-          <div className="mt-10 flex flex-col items-center">
-            <figure className="w-full max-w-[520px] rounded-2xl overflow-hidden border border-[#E5E0D8] bg-white">
-              <video
-                src="/videos/Bruiloft%20luuk%20en%20Mandy%20instagram%20v4%20website.mp4"
-                controls
-                preload="metadata"
-                playsInline
-                className="w-full aspect-square object-cover bg-[#1A1A18]"
-              />
-              <figcaption className="px-4 py-3 flex items-center justify-center gap-2">
-                <Heart size={15} className="text-[#C9A96E]" />
-                <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
-                <span className="text-xs text-[#6B7280]">· korte film</span>
-              </figcaption>
-            </figure>
+          <div className="mt-10 flex flex-col items-center gap-8">
+            <div className="flex flex-wrap items-start justify-center gap-6">
+              {/* Korte film (zelf-gehost, vierkant) */}
+              <figure className="rounded-2xl overflow-hidden border border-[#E5E0D8] bg-white">
+                <video
+                  src="/videos/Bruiloft%20luuk%20en%20Mandy%20instagram%20v4%20website.mp4"
+                  controls
+                  preload="metadata"
+                  playsInline
+                  className="block h-[300px] aspect-square object-cover bg-[#1A1A18]"
+                />
+                <figcaption className="flex items-center justify-center gap-2 px-4 py-3">
+                  <Heart size={14} className="text-[#C9A96E]" />
+                  <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
+                  <span className="text-xs text-[#6B7280]">· korte film</span>
+                </figcaption>
+              </figure>
+
+              {/* De hele dag (Vimeo, breedbeeld) */}
+              <figure className="rounded-2xl overflow-hidden border border-[#E5E0D8] bg-black">
+                <div className="relative h-[300px] aspect-video">
+                  <iframe
+                    src="https://player.vimeo.com/video/1203439014?app_id=122963"
+                    className="absolute inset-0 h-full w-full"
+                    style={{ border: 0 }}
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                    allowFullScreen
+                    title="Bruiloft Luuk en Mandy"
+                  />
+                </div>
+                <figcaption className="flex items-center justify-center gap-2 bg-white px-4 py-3">
+                  <Heart size={14} className="text-[#C9A96E]" />
+                  <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
+                  <span className="text-xs text-[#6B7280]">· de hele dag</span>
+                </figcaption>
+              </figure>
+            </div>
             <Link
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] text-white font-semibold hover:bg-[#1dbd5a] transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] text-white font-semibold hover:bg-[#1dbd5a] transition-colors"
             >
               <MessageCircle size={17} /> Vraag naar trouwfilms
             </Link>

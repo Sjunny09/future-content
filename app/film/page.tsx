@@ -106,19 +106,25 @@ export default function FilmPage() {
             Trouwfilms en aftermovies
           </h2>
 
-          {/* PLAATSHOUDER bruiloftvideo: John levert het bestand/link aan, dan
-              vervang ik dit blok door een <video src=... poster=... />. */}
-          <div className="mt-10 rounded-2xl border border-dashed border-[#C9A96E]/50 bg-white/60 p-10 flex flex-col items-center text-center">
-            <Heart size={28} className="text-[#C9A96E] mb-4" />
-            <p className="text-[#1A1A18] max-w-xl leading-relaxed">
-              De trouwvideo komt hier te staan zodra John het beeld aanlevert. Een film die de dag
-              vangt zoals je hem voelde, met meerdere aftermovies om te delen.
-            </p>
+          <div className="mt-10 flex flex-col items-center">
+            <figure className="w-full max-w-[520px] rounded-2xl overflow-hidden border border-[#E5E0D8] bg-white">
+              <video
+                src="/videos/Bruiloft%20luuk%20en%20Mandy%20instagram%20v4%20website.mp4"
+                controls
+                preload="metadata"
+                playsInline
+                className="w-full aspect-square object-cover bg-[#1A1A18]"
+              />
+              <figcaption className="px-4 py-3 flex items-center justify-center gap-2">
+                <Heart size={15} className="text-[#C9A96E]" />
+                <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
+              </figcaption>
+            </figure>
             <Link
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-7 inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] text-white font-semibold hover:bg-[#1dbd5a] transition-colors"
+              className="mt-8 inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] text-white font-semibold hover:bg-[#1dbd5a] transition-colors"
             >
               <MessageCircle size={17} /> Vraag naar trouwfilms
             </Link>

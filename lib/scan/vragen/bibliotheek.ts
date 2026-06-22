@@ -29,7 +29,7 @@ export const EMAIL_NAAM_VRAAG: Vraag = {
   type: "email-naam",
   titel: "Waar stuur ik de video naartoe?",
   helptekst:
-    "Binnen 24 uur stuur ik je een korte video met wat ik zag. Geen nieuwsbrief, geen salesfuik.",
+    "Binnen 24 uur stuur ik je een korte video met wat ik zag. Geen nieuwsbrief.",
 }
 
 export const VRAGEN_BIBLIOTHEEK: Vraag[] = [

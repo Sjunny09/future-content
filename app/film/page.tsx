@@ -137,6 +137,38 @@ export default function FilmPage() {
         </div>
       </section>
 
+      {/* ─── Festivals & evenementen ───────────────────────────────── */}
+      <section className="bg-[#FAFAF8] border-t border-[#E5E0D8]">
+        <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
+          <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.2em]">
+            Festivals &amp; evenementen
+          </span>
+          <h2
+            className="mt-3 text-3xl md:text-4xl font-semibold text-[#1A1A18]"
+            style={{ fontFamily: "var(--font-playfair)" }}
+          >
+            Aftermovies die de sfeer vangen
+          </h2>
+          <div className="mt-10 flex justify-center">
+            <figure className="w-full max-w-3xl rounded-2xl overflow-hidden border border-[#E5E0D8] bg-black">
+              <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
+                <iframe
+                  src="https://player.vimeo.com/video/843642501?app_id=122963"
+                  className="absolute inset-0 h-full w-full"
+                  style={{ border: 0 }}
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                  title="Köningsdag aftermovie 3.0"
+                />
+              </div>
+              <figcaption className="px-4 py-3 text-center">
+                <span className="text-sm font-semibold text-[#1A1A18]">Köningsdag aftermovie</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       {/* ─── Slot-CTA ──────────────────────────────────────────────── */}
       <section className="bg-[#0F0F0D] text-[#FAFAF8]">
         <div className="max-w-5xl mx-auto px-6 py-16 flex flex-col sm:flex-row items-center justify-between gap-6">

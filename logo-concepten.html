@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Future Content — logo-concepten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF8; --text:#1A1A18; --gold:#C9A96E; --gold-light:#F0E6D0;
+    --dark:#0F0F0D; --muted:#6B7280; --border:#E5E0D8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.5;padding:48px 24px}
+  .wrap{max-width:1000px;margin:0 auto}
+  h1{font-family:'Playfair Display',serif;font-weight:600;font-size:34px;margin-bottom:6px}
+  .sub{color:var(--muted);margin-bottom:40px;font-size:15px}
+  .concept{margin-bottom:56px;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+  .concept h2{font-family:'Playfair Display',serif;font-weight:600;font-size:20px;padding:18px 24px 4px}
+  .concept .desc{color:var(--muted);font-size:14px;padding:0 24px 18px}
+  .panes{display:grid;grid-template-columns:1fr 1fr;min-height:200px}
+  .pane{display:flex;align-items:center;justify-content:center;padding:48px 24px}
+  .pane.light{background:var(--bg);border-top:1px solid var(--border)}
+  .pane.dark{background:var(--dark);border-top:1px solid var(--border)}
+  .dark .wordmark,.dark .mono-text,.dark .stack-name{color:var(--bg)}
+  .dark .sub-caps{color:var(--gold)}
+
+  /* Direction 1: elegant wordmark */
+  .wordmark{font-family:'Playfair Display',serif;font-weight:600;font-size:38px;letter-spacing:-0.5px;color:var(--text)}
+  .wordmark .dot{color:var(--gold)}
+
+  /* Direction 2: monogram + caps */
+  .mono{display:flex;align-items:center;gap:18px}
+  .mono-badge{width:62px;height:62px;border:2px solid var(--gold);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:28px;color:var(--gold)}
+  .mono-text{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;letter-spacing:4px;text-transform:uppercase;color:var(--text);line-height:1.4}
+  .mono-text small{display:block;font-weight:400;font-size:11px;letter-spacing:2px;color:var(--muted)}
+
+  /* Direction 3: node mark + lowercase */
+  .node{display:flex;align-items:center;gap:14px}
+  .node-name{font-family:'Inter',sans-serif;font-weight:600;font-size:30px;letter-spacing:-0.5px;color:var(--text)}
+
+  /* Direction 4 (stacked badge) */
+  .stack{text-align:center}
+  .stack-mono{font-family:'Playfair Display',serif;font-weight:700;font-size:46px;color:var(--gold);line-height:1}
+  .stack-name{font-family:'Inter',sans-serif;font-weight:600;font-size:13px;letter-spacing:5px;text-transform:uppercase;margin-top:8px}
+  .sub-caps{font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Future Content — logo-concepten</h1>
+  <p class="sub">Drie richtingen, elk op licht en donker. Zelfde huisstijl: goud #C9A96E, donker #1A1A18, fonts Playfair Display + Inter. Kies een nummer, dan werk ik die uit als echt SVG-logo.</p>
+
+  <!-- Richting 1 -->
+  <div class="concept">
+    <h2>Richting 1 — Elegant woordmerk</h2>
+    <p class="desc">Premium en rustig. Playfair-letter met een gouden punt als accent. Tijdloos, past bij "eerlijk en nuchter, geen hype". Werkt overal, simpel.</p>
+    <div class="panes">
+      <div class="pane light"><span class="wordmark">Future Content<span class="dot">.</span></span></div>
+      <div class="pane dark"><span class="wordmark">Future Content<span class="dot">.</span></span></div>
+    </div>
+  </div>
+
+  <!-- Richting 2 -->
+  <div class="concept">
+    <h2>Richting 2 — Monogram + kapitalen</h2>
+    <p class="desc">Een gouden FC-merkteken naast de naam in strakke kapitalen. Herkenbaar als losse icoon (app, favicon, profielfoto). Zakelijk en solide.</p>
+    <div class="panes">
+      <div class="pane light">
+        <div class="mono">
+          <div class="mono-badge">FC</div>
+          <div class="mono-text">Future Content<small>AI &amp; automation</small></div>
+        </div>
+      </div>
+      <div class="pane dark">
+        <div class="mono">
+          <div class="mono-badge">FC</div>
+          <div class="mono-text">Future Content<small>AI &amp; automation</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Richting 3 -->
+  <div class="concept">
+    <h2>Richting 3 — Node-merkteken + kleine letter</h2>
+    <p class="desc">Een geometrisch "flow"-icoon (verbonden punten = automatisering) naast de naam in kleine letters. Modern en techy, signaleert meteen AI/automation. Onderscheidend.</p>
+    <div class="panes">
+      <div class="pane light">
+        <div class="node">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+            <circle cx="10" cy="10" r="6" stroke="#C9A96E" stroke-width="2.5"/>
+            <circle cx="42" cy="10" r="6" stroke="#C9A96E" stroke-width="2.5"/>
+            <circle cx="26" cy="42" r="6" fill="#C9A96E"/>
+            <path d="M14 13 L24 38 M38 13 L28 38" stroke="#C9A96E" stroke-width="2.5"/>
+          </svg>
+          <span class="node-name">future&nbsp;content</span>
+        </div>
+      </div>
+      <div class="pane dark">
+        <div class="node">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+            <circle cx="10" cy="10" r="6" stroke="#C9A96E" stroke-width="2.5"/>
+            <circle cx="42" cy="10" r="6" stroke="#C9A96E" stroke-width="2.5"/>
+            <circle cx="26" cy="42" r="6" fill="#C9A96E"/>
+            <path d="M14 13 L24 38 M38 13 L28 38" stroke="#C9A96E" stroke-width="2.5"/>
+          </svg>
+          <span class="node-name">future&nbsp;content</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Richting 4 (bonus) -->
+  <div class="concept">
+    <h2>Richting 4 (bonus) — Gestapeld badge</h2>
+    <p class="desc">Compact FC-merk met naam en tagline eronder. Sterk als stempel of profielfoto. Wat klassieker.</p>
+    <div class="panes">
+      <div class="pane light">
+        <div class="stack">
+          <div class="stack-mono">FC</div>
+          <div class="stack-name">Future Content</div>
+          <div class="sub-caps">AI die werkt</div>
+        </div>
+      </div>
+      <div class="pane dark">
+        <div class="stack">
+          <div class="stack-mono">FC</div>
+          <div class="stack-name">Future Content</div>
+          <div class="sub-caps">AI die werkt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

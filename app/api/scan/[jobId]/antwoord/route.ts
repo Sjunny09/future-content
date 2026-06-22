@@ -8,9 +8,13 @@ import type { SiteAnalyse } from "@/lib/scan/claude"
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
-// Aantal inhoudelijke vragen voordat de email-vraag komt. De server is de enige
-// autoriteit hierover (telt de Answer-rows), nooit de client.
-const MAX_INHOUDELIJK = 5
+// Harde bovengrens aan inhoudelijke vragen (basisvragen + doorvragen) voordat de
+// email-vraag komt. De server is de enige autoriteit hierover (telt de
+// Answer-rows), nooit de client.
+const MAX_TOTAAL = 8
+// Aantal basisvragen (niet-doorvragen) waarna we alleen nog een doorvraag
+// toestaan als het laatste antwoord vaag was, anders direct de email-vraag.
+const BASIS_VRAGEN = 5
 
 const Payload = z
   .object({
@@ -110,23 +114,30 @@ export async function POST(
   const alGekozen = [...gesteldeVragen]
     .reverse()
     .find((v) => !beantwoordeIds.has(v.id))
+  const aantalBasis = antwoorden.filter(
+    (a) => !a.vraagId.startsWith("DOOR"),
+  ).length
 
-  if (aantalBeantwoord >= MAX_INHOUDELIJK) {
-    // Stop: na 5 inhoudelijke vragen komt altijd de email-vraag.
+  if (aantalBeantwoord >= MAX_TOTAAL) {
+    // Harde stop: de email-vraag komt altijd na het maximum.
     volgende = EMAIL_NAAM_VRAAG
   } else if (alGekozen) {
     // Replay/dedup: er staat al een gekozen-maar-onbeantwoorde vraag klaar.
     volgende = alGekozen
   } else {
     const analyse = (job.analyseJson ?? null) as SiteAnalyse | null
-    volgende = analyse
+    // Vanaf BASIS_VRAGEN basisvragen mag de AI alleen nog doorvragen (als vaag),
+    // anders sluiten we af met de email-vraag.
+    const gekozen = analyse
       ? await kiesVolgendeVraag({
           analyse,
           gesteldeIds,
           antwoorden,
           slot: aantalBeantwoord + 1,
+          alleenDoorvraag: aantalBasis >= BASIS_VRAGEN,
         })
-      : EMAIL_NAAM_VRAAG
+      : null
+    volgende = gekozen ?? EMAIL_NAAM_VRAAG
 
     if (volgende.id !== "EMAIL" && !gesteldeIds.includes(volgende.id)) {
       await db.scanJob.update({

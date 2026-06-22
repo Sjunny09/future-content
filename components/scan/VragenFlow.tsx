@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
 import { track } from "@/lib/scan/analytics/plausible"
 
-type Antwoord = string | string[] | { naam: string; email: string }
+type Antwoord = string | string[] | { naam: string; email: string; telefoon: string }
 
 type Props = {
   jobId: string
@@ -37,13 +37,14 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
     try {
       if (isEmail) {
         // Laatste vraag: email+naam → /compleet
-        const contact = antwoord as { naam: string; email: string }
+        const contact = antwoord as { naam: string; email: string; telefoon: string }
         const res = await fetch(`/api/scan/${jobId}/compleet`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             naam: contact.naam,
             email: contact.email,
+            telefoon: contact.telefoon,
             vraagIndex: slot - 1,
             vraagId: huidig.id,
             vraagTitel: huidig.titel,
@@ -154,7 +155,7 @@ function Kop({ slot }: { slot: number }) {
     <div className="flex items-center justify-between">
       <span className="w-4" aria-hidden />
       <p className="text-sm" style={{ color: "var(--color-scan-muted)" }}>
-        Vraag {Math.min(slot, 6)} van 6
+        Vraag {slot}
       </p>
       <span className="w-4" aria-hidden />
     </div>
@@ -213,7 +214,7 @@ function VraagVeld({
       waarde={
         waarde && typeof waarde === "object" && "email" in waarde
           ? waarde
-          : { naam: "", email: "" }
+          : { naam: "", email: "", telefoon: "" }
       }
       opWijzig={opWijzig}
       opEnter={opEnter}
@@ -362,11 +363,16 @@ function EmailNaam({
   opEnter,
   uitgeschakeld,
 }: {
-  waarde: { naam: string; email: string }
-  opWijzig: (waarde: { naam: string; email: string }) => void
+  waarde: { naam: string; email: string; telefoon: string }
+  opWijzig: (waarde: { naam: string; email: string; telefoon: string }) => void
   opEnter: () => void
   uitgeschakeld: boolean
 }) {
+  const veldStyle = {
+    borderColor: "var(--color-scan-border)",
+    backgroundColor: "var(--color-scan-linnen)",
+    color: "var(--color-scan-drukinkt)",
+  }
   return (
     <div className="flex flex-col gap-4">
       <input
@@ -377,16 +383,21 @@ function EmailNaam({
         disabled={uitgeschakeld}
         placeholder="Je voornaam"
         className="w-full rounded-md border px-4 py-3 text-base focus:outline-none"
-        style={{
-          borderColor: "var(--color-scan-border)",
-          backgroundColor: "var(--color-scan-linnen)",
-          color: "var(--color-scan-drukinkt)",
-        }}
+        style={veldStyle}
       />
       <input
         type="email"
         value={waarde.email}
         onChange={(e) => opWijzig({ ...waarde, email: e.target.value })}
+        disabled={uitgeschakeld}
+        placeholder="je@bedrijf.nl"
+        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none"
+        style={veldStyle}
+      />
+      <input
+        type="tel"
+        value={waarde.telefoon}
+        onChange={(e) => opWijzig({ ...waarde, telefoon: e.target.value })}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             e.preventDefault()
@@ -394,13 +405,9 @@ function EmailNaam({
           }
         }}
         disabled={uitgeschakeld}
-        placeholder="je@bedrijf.nl"
+        placeholder="Telefoonnummer, zodat ik je kan bellen"
         className="w-full rounded-md border px-4 py-3 text-base focus:outline-none"
-        style={{
-          borderColor: "var(--color-scan-border)",
-          backgroundColor: "var(--color-scan-linnen)",
-          color: "var(--color-scan-drukinkt)",
-        }}
+        style={veldStyle}
       />
     </div>
   )

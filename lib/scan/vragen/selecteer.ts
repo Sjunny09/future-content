@@ -115,7 +115,7 @@ Harde regels:
   * administratie-zwaar (offertes, facturen, boekhouding prominent) -> richting F4, O4.
   * klantcontact-zwaar (service, support, veel inkomende vragen) -> richting K3, K6.
   * merk, webshop of product (geen 1-op-1 dienstverlening) -> VERMIJD service-vragen zoals "waar komen klantvragen binnen"; kies eerder operatie, tools of wens.
-- Slot 5 (de laatste inhoudelijke): kies een voorbereiding-vraag (V1, V3 of V4) als die er nog niet is.
+- Richting het einde van de scan (vanaf de vierde of vijfde vraag): neem een voorbereiding-vraag (V1, V3 of V4) mee als die er nog niet is.
 - Doorvragen: als het laatste antwoord vaag of partieel is ("deels, zit nog meer aan vast", "iets anders", "anders", "wisselt te veel"), stel dan EENMALIG een korte concrete doorvraag via het veld doorvraag (open vraag, max 14 woorden, John's tone, geen jargon) in plaats van een id te kiezen. Bijvoorbeeld na "deels, zit nog meer aan vast": "Wat zit er nog meer aan vast?". Stel nooit twee doorvragen achter elkaar.
 - Geen jargon, geen verkoperige of defensieve toon.
 
@@ -162,8 +162,9 @@ export async function kiesVolgendeVraag(args: {
   gesteldeIds: string[]
   antwoorden: AntwoordKort[]
   slot: number
-}): Promise<Vraag> {
-  const { analyse, gesteldeIds, antwoorden, slot } = args
+  alleenDoorvraag?: boolean
+}): Promise<Vraag | null> {
+  const { analyse, gesteldeIds, antwoorden, slot, alleenDoorvraag = false } = args
   const beschikbaar = beschikbareVragen(gesteldeIds)
 
   try {
@@ -177,7 +178,7 @@ export async function kiesVolgendeVraag(args: {
         {
           role: "user",
           content: [
-            `Slot dat je nu kiest: ${slot} (5 = laatste inhoudelijke vraag)`,
+            `Slot dat je nu kiest: ${slot}`,
             "",
             "SiteAnalyse:",
             `- branche: ${analyse.branche}`,
@@ -198,6 +199,12 @@ export async function kiesVolgendeVraag(args: {
             "",
             "Beschikbare vragen (kies hier één id uit):",
             ...beschikbaar.map((v) => `- ${v.id} [${v.thema}] ${v.titel}`),
+            ...(alleenDoorvraag
+              ? [
+                  "",
+                  "LET OP: er zijn al genoeg basisvragen gesteld. Stel ALLEEN nog een doorvraag als het laatste antwoord echt vaag of partieel is. Is dat niet zo, laat dan zowel id als doorvraag leeg, dan ronden we de scan af.",
+                ]
+              : []),
           ].join("\n"),
         },
       ],
@@ -207,27 +214,29 @@ export async function kiesVolgendeVraag(args: {
     )
     const input = (blok?.input ?? {}) as { id?: string; doorvraag?: string }
 
-    // Doorvraag: alleen als het laatste antwoord vaag was, max 2 per scan,
-    // nooit twee achter elkaar.
+    // Doorvraag mag onbeperkt (binnen de harde scan-max), maar nooit twee
+    // achter elkaar.
     const laatsteWasDoor =
       gesteldeIds[gesteldeIds.length - 1]?.startsWith("DOOR") ?? false
-    const aantalDoor = gesteldeIds.filter((i) => i.startsWith("DOOR")).length
     const doorvraag = input.doorvraag?.trim()
     if (
       doorvraag &&
       doorvraag.length >= 6 &&
       doorvraag.length <= 160 &&
-      !laatsteWasDoor &&
-      aantalDoor < 2
+      !laatsteWasDoor
     ) {
       return { id: `DOOR${slot}`, thema: "frustratie", type: "open", titel: doorvraag }
     }
+
+    // Basis klaar en geen doorvraag nodig -> afronden (de route stuurt email).
+    if (alleenDoorvraag) return null
 
     const gekozen = valideerKeuze(input.id ?? "", gesteldeIds)
     if (gekozen) return gekozen
   } catch {
     // val terug op de deterministische keuze
   }
+  if (alleenDoorvraag) return null
   return kiesFallback(gesteldeIds, slot)
 }
 

@@ -12,6 +12,7 @@ const Payload = z
   .object({
     naam: z.string().min(2).max(80),
     email: z.string().email().max(200),
+    telefoon: z.string().max(40).optional(),
     vraagIndex: z.number().int().min(0).max(10),
     vraagId: z.string().min(1).max(16),
     vraagTitel: z.string().min(1).max(500),
@@ -43,6 +44,7 @@ export async function POST(
 
   const naam = parsed.data.naam.trim()
   const email = parsed.data.email.trim().toLowerCase()
+  const telefoon = parsed.data.telefoon?.trim() || undefined
 
   const job = await db.scanJob.findUnique({
     where: { id: jobId },
@@ -66,8 +68,8 @@ export async function POST(
   // netjes gekoppeld zonder duplicaten.
   const lead = await db.lead.upsert({
     where: { email },
-    update: { naam },
-    create: { email, naam },
+    update: { naam, ...(telefoon ? { telefoon } : {}) },
+    create: { email, naam, telefoon },
     select: { id: true },
   })
 

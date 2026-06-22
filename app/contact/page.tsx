@@ -156,11 +156,11 @@ export default function ContactPage() {
                         className={inputClass}
                       >
                         <option value="">Selecteer type</option>
-                        <option value="vastgoed-walkthrough">Vastgoed — Walkthrough</option>
-                        <option value="vastgoed-premium">Vastgoed — Premium + Drone</option>
-                        <option value="social-starter">Social Media — Starter</option>
-                        <option value="social-pro">Social Media — Pro</option>
-                        <option value="social-premium">Social Media — Premium</option>
+                        <option value="vastgoed-walkthrough">Vastgoed: Walkthrough</option>
+                        <option value="vastgoed-premium">Vastgoed: Premium + Drone</option>
+                        <option value="social-starter">Social Media: Starter</option>
+                        <option value="social-pro">Social Media: Pro</option>
+                        <option value="social-premium">Social Media: Premium</option>
                         <option value="zakelijk">Zakelijke video</option>
                         <option value="bruiloft">Bruiloftsvideo</option>
                         <option value="events">Events / After movie</option>

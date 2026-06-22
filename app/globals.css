@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Brand Colors */
+  /* Brand Colors — Videografie site */
   --color-fc-bg: #FAFAF8;
   --color-fc-text: #1A1A18;
   --color-fc-gold: #C9A96E;
@@ -13,6 +13,18 @@
   --color-fc-dark: #0F0F0D;
   --color-fc-muted: #6B7280;
   --color-fc-border: #E5E0D8;
+
+  /* Brand Colors — Quickscan (docs/quickscan/03_ceo_synthese.md §1.9) */
+  --color-scan-linnen: #F4F1EA;      /* hoofdachtergrond */
+  --color-scan-drukinkt: #1C1B17;    /* body + headlines */
+  --color-scan-terracotta: #B8472A;  /* enige accent — knoppen, progress */
+  --color-scan-terracotta-hover: #9E3D24;
+  --color-scan-muted: #6B655A;       /* secundaire tekst op linnen */
+  --color-scan-border: #E4DFD3;      /* subtiele lijnen */
+  --color-scan-error: #8B2C1C;
+
+  --font-serif-scan: var(--font-fraunces);
+  --font-sans-scan: var(--font-plex);
 
   /* Shadcn overrides */
   --color-background: var(--background);

@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     }
 
     const html = `
-      <h2>Nieuw contactformulier — Future Content</h2>
+      <h2>Nieuw contactformulier | Future Content</h2>
       <table style="border-collapse:collapse;width:100%">
         <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Naam</td><td style="padding:8px;border:1px solid #eee">${data.naam}</td></tr>
         <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Bedrijf</td><td style="padding:8px;border:1px solid #eee">${data.bedrijf ?? "—"}</td></tr>

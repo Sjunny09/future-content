@@ -90,7 +90,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-[#6B7280]">
-          <span>© {new Date().getFullYear()} Future Content — {SITE.address}</span>
+          <span>© {new Date().getFullYear()} Future Content, {SITE.address}</span>
           <span>KvK: {SITE.kvk}</span>
         </div>
       </div>

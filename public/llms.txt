@@ -1,0 +1,122 @@
+# Future Content — llms.txt
+# AI-bouwer en videoproductiebedrijf in Bladel, Noord-Brabant, Nederland
+# Eigenaar: John Lavrijsen
+# Website: https://future-content.nl
+
+## Wat Future Content doet
+
+Future Content is in 2026 omgevormd van pure videoproductie naar een lokale AI-studio
+voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB-bedrijven
+(5-50 medewerkers). Videografie blijft een dienst, maar is niet meer de hoofdmoot.
+
+### Hoofdaanbod (AI en automatisering)
+
+1. **Workshop op locatie** — Halve dag (4 uur), vanaf €750 ex BTW.
+   60% terug via SLIM-subsidie (Future Content levert het scholingsplan-document mee).
+   Doel: drie concrete AI-kansen op papier, ook als klant niet verder gaat.
+
+2. **Implementatietrajecten** — Eenmalige bouw €5.000-€15.000 + maandelijks beheer €300-€750.
+   Modulair platform met 8 core-modules en 7 branche-skins.
+   Alles overdraagbaar gedocumenteerd, geen vendor-lock.
+
+3. **AI-Quickscan** — Gratis online scan op website. Bedrijf vult URL in, AI analyseert
+   branche en benoemt drie concrete AI-kansen. Lead-magnet en proof-of-work tegelijk.
+
+### Modulair platform — 8 cross-branche core-modules
+
+1. Mail-triage en classificatie
+2. Tweede brein voor je bedrijf (RAG-laag met bedrijfskennis)
+3. AI-chatbot op je site
+4. Persoonlijke assistent voor de ondernemer
+5. Formulier-naar-CRM
+6. Afspraak-herinneringen
+7. Offerte-opvolg-agent
+8. Bon- en factuur-verwerking
+
+### Zeven branche-skins
+
+1. Transport en logistiek — AI-laag bovenop bestaand TMS (Plan&Go, Transplan)
+2. Makelaardij — Content-engine: video naar Funda-tekst + social + brochure
+3. Evenementen en festivals — Custom ticketshop op Mollie + AI-FAQ-bot
+4. Glazenwasser en schoonmaak — Klant-WhatsApp-assistent met planning-mutatie
+5. Bouw, installatie en afbouw — WhatsApp-uren-bot + voicememo-naar-offerte
+6. Autobedrijf en garages — AI-receptionist gekoppeld aan DMS-agenda
+7. Horeca: cafe en restaurant — Multi-channel reservering-merger
+
+### Secundair aanbod (videografie)
+
+Future Content blijft video maken, vooral voor klanten waar dit ooit begon.
+
+1. **Vastgoed** — Walkthrough vanaf €199 / Compleet €349 per object (ex BTW).
+2. **Social media** — Maandelijkse Reels voor bedrijven. €275-€650/mnd ex BTW, min. 3 maanden.
+3. **Bruiloften** — Bruiloftsvideo met social-edit + lange versie. Prijs op aanvraag.
+
+## Achtergrond John Lavrijsen
+
+- 4 jaar als business engineer in de transportsector: procesoptimalisatie,
+  boordcomputers voor 150 chauffeurs, Delivery Management Systeem uitgerold,
+  interim operationeel manager voor 40 collega's.
+- 6 jaar videograaf met ~200 vastgoedklussen voor makelaars in Brabant.
+- Opleiding: Bedrijfsmanagement MKB richting Automotive Management (Fontys).
+- Sinds januari 2026 fulltime ondernemer als AI-bouwer.
+- Partner voor grotere opdrachten en continuïteit: Bram van der Sande.
+
+## Werkgebied
+
+Primair: Kempen (Bladel, Eersel, Reusel, Bergeijk, Valkenswaard, Waalre).
+Secundair: Eindhoven, Veldhoven, Best, Son en Breugel, Nuenen, Tilburg, Breda.
+Tertiair: heel Noord-Brabant op aanvraag.
+
+## Apparatuur (videografie)
+
+- Camera: Sony A6400
+- Stabilisatie: DJI RS Mini Ronin (gimbal)
+- Drone: DJI Mini 3 Pro
+- Audio: Rode Wireless GO
+- Editing: Final Cut Pro
+
+## Pagina's
+
+- Home: https://future-content.nl/
+- Voor wie (branche-overzicht): https://future-content.nl/voor
+- Werkwijze: https://future-content.nl/werkwijze
+- Trainingen: https://future-content.nl/trainingen
+- AI-Quickscan: https://future-content.nl/scan
+- Boek een gesprek: https://future-content.nl/boek
+- Videografie: https://future-content.nl/videografie
+- Makelaars (video): https://future-content.nl/makelaars
+- Social Media (video): https://future-content.nl/social-media
+- Trouwen (video): https://future-content.nl/trouwen
+- Portfolio: https://future-content.nl/portfolio
+- Blog: https://future-content.nl/blog
+- Over: https://future-content.nl/over
+- Contact: https://future-content.nl/contact
+
+## Branchepagina's per skin
+
+- Transport en logistiek: https://future-content.nl/voor/transport-en-logistiek
+- Makelaardij: https://future-content.nl/voor/makelaardij
+- Evenementen en festivals: https://future-content.nl/voor/evenementen-en-festivals
+- Glazenwasser en schoonmaak: https://future-content.nl/voor/glazenwasser-en-schoonmaak
+- Bouw, installatie en afbouw: https://future-content.nl/voor/bouw-installatie-afbouw
+- Autobedrijf en garages: https://future-content.nl/voor/autobedrijf-en-garages
+- Horeca cafe en restaurant: https://future-content.nl/voor/horeca
+
+## Portfolio (vastgoedvideo's)
+
+- https://future-content.nl/portfolio/wintelre-koemeerskuil-20
+- https://future-content.nl/portfolio/reusel-de-rijt-3
+- https://future-content.nl/portfolio/riethoven-hasselt-5
+- https://future-content.nl/portfolio/eindhoven-welschapsedijk-103
+- https://future-content.nl/portfolio/eindhoven-vlokhovenseweg-62
+- https://future-content.nl/portfolio/reusel-vijverveld-13
+- https://future-content.nl/portfolio/eersel-hollandse-hoeve-19
+- https://future-content.nl/portfolio/veldhoven-vlasacker-3
+- https://future-content.nl/portfolio/lage-mierde-hooge-mierdseweg-15
+
+## Contact
+
+- WhatsApp: +31 6 50 91 99 60
+- E-mail: hello@future-content.nl
+- KvK: 86880675
+- Vestigingsplaats: Bladel, Noord-Brabant, Nederland

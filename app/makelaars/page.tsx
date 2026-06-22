@@ -12,8 +12,27 @@ import VideoPlayer from "@/components/common/VideoPlayer";
 export default function MakelaarsPage() {
   const waLink = `https://wa.me/${SITE.whatsapp}?text=Hallo%20John%2C%20ik%20wil%20een%20vastgoedvideo%20plannen.`;
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Vastgoedvideografie",
+    "name": "Vastgoedvideo voor makelaars",
+    "provider": { "@type": "LocalBusiness", "name": SITE.name, "url": SITE.url },
+    "areaServed": ["De Kempen", "Eindhoven", "Tilburg"],
+    "description": "Professionele vastgoedvideo's voor makelaars in De Kempen, Eindhoven en omgeving. Funda-ready walkthroughs opgeleverd binnen 1 week.",
+    "offers": [
+      { "@type": "Offer", "name": "Walkthrough", "price": "199", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Compleet", "price": "349", "priceCurrency": "EUR" },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#0F0F0D] pb-16">
         <div className="absolute inset-0">
@@ -46,7 +65,7 @@ export default function MakelaarsPage() {
             </h1>
             <p className="text-[#FAFAF8]/70 text-lg mb-8 leading-relaxed">
               Future Content is jouw vaste vastgoedvideograaf. Funda-ready walkthroughs,
-              sociale teasers en drone shots — opgeleverd binnen 1 week, klaar voor publicatie.
+              sociale teasers en drone shots, opgeleverd binnen 1 week, klaar voor publicatie.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -85,7 +104,7 @@ export default function MakelaarsPage() {
               Waarom video bij elke woning?
             </h2>
             <p className="text-[#6B7280] text-lg max-w-xl mx-auto">
-              Kopers beslissen op gevoel. Een video wekt dat gevoel op — een foto niet.
+              Kopers beslissen op gevoel. Een video wekt dat gevoel op. Een foto niet.
             </p>
           </motion.div>
 
@@ -145,16 +164,16 @@ export default function MakelaarsPage() {
                   {
                     icon: <Video size={18} />,
                     title: "Walkthrough video (16:9 of 9:16)",
-                    desc: "Horizontaal voor Funda & website óf verticaal voor Instagram — jij kiest het formaat.",
+                    desc: "Horizontaal voor Funda & website óf verticaal voor Instagram. Jij kiest het formaat.",
                   },
                   {
                     icon: <Smartphone size={18} />,
-                    title: "Sociale teaser (9:16) — in Compleet pakket",
+                    title: "Sociale teaser (9:16), inbegrepen in Compleet pakket",
                     desc: "Verticale snijversie voor Instagram Reels en TikTok. Maximale aandacht in de feed.",
                   },
                   {
                     icon: <Airplay size={18} />,
-                    title: "Drone luchtopnames — op aanvraag",
+                    title: "Drone luchtopnames op aanvraag",
                     desc: "Omgeving, tuin en ligging vanuit de lucht. Afhankelijk van locatie en vliegzone.",
                   },
                   {
@@ -198,7 +217,7 @@ export default function MakelaarsPage() {
             <h3 className="text-2xl font-bold text-[#0F0F0D]" style={{ fontFamily: "var(--font-playfair)" }}>
               Klaar voor jouw eerste shoot?
             </h3>
-            <p className="text-[#0F0F0D]/70 mt-1">Stuur een WhatsApp — ik reageer dezelfde dag.</p>
+            <p className="text-[#0F0F0D]/70 mt-1">Stuur een WhatsApp. Ik reageer dezelfde dag.</p>
           </div>
           <Link
             href={waLink}
@@ -351,7 +370,7 @@ export default function MakelaarsPage() {
                     <td className="px-5 py-4 text-[#6B7280] hidden sm:table-cell">{row.turnaround}</td>
                     <td className="px-5 py-4 hidden md:table-cell">
                       {row.personal ? (
-                        <span className="text-[#25D366] font-semibold">Ja — altijd dezelfde persoon</span>
+                        <span className="text-[#25D366] font-semibold">Ja, altijd dezelfde persoon</span>
                       ) : (
                         <span className="text-[#6B7280]">Wisselend team</span>
                       )}
@@ -372,7 +391,7 @@ export default function MakelaarsPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
             <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
-              Portfolio — Pit Makelaars
+              Portfolio Pit Makelaars
             </span>
             <h2
               className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
@@ -413,7 +432,7 @@ export default function MakelaarsPage() {
             >
               Wat verkopers zeggen.
             </h3>
-            <p className="text-[#6B7280] text-sm">Reacties van huiseigenaren na oplevering — via WhatsApp.</p>
+            <p className="text-[#6B7280] text-sm">Reacties van huiseigenaren na oplevering, via WhatsApp.</p>
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
             {SELLER_QUOTES.map((item, i) => (
@@ -459,7 +478,7 @@ export default function MakelaarsPage() {
                 {
                   num: "2",
                   title: "Shoot dag",
-                  desc: "Ik kom op het afgesproken tijdstip. Sleutels en toegang — dat is alles wat ik nodig heb. Shoot duurt 1–2 uur.",
+                  desc: "Ik kom op het afgesproken tijdstip. Sleutels en toegang: dat is alles wat ik nodig heb. Shoot duurt 1–2 uur.",
                 },
                 {
                   num: "3",
@@ -508,7 +527,7 @@ export default function MakelaarsPage() {
                 a: "Standaard binnen 1 week na de shootdag. Bij spoed is snellere levering in overleg mogelijk.",
               },
               {
-                q: "Ik werk al met een fotograaf — waarom ook video?",
+                q: "Ik werk al met een fotograaf. Waarom ook video?",
                 a: "Foto's tonen wat er is. Video toont hoe het voelt. Kopers die een video zien gaan met meer zekerheid op bezichtiging. Dat scheelt jou tijd en verhoogt de kans op een bod. Foto en video zijn complementair, niet inwisselbaar.",
               },
               {
@@ -517,7 +536,7 @@ export default function MakelaarsPage() {
               },
               {
                 q: "Filmen jullie ook met drone?",
-                a: "Ja, beschikbaar in het Compleet pakket. Met de DJI Mini 3 Pro maak ik luchtopnames van de omgeving, tuin en ligging. Of het mogelijk is hangt af van de locatie en vliegzone — dat check ik vooraf.",
+                a: "Ja, beschikbaar in het Compleet pakket. Met de DJI Mini 3 Pro maak ik luchtopnames van de omgeving, tuin en ligging. Of het mogelijk is hangt af van de locatie en vliegzone, dat check ik vooraf.",
               },
               {
                 q: "Wat als de woning al verkocht is voor de video live gaat?",
@@ -529,7 +548,7 @@ export default function MakelaarsPage() {
               },
               {
                 q: "Kan ik meerdere objecten per maand boeken?",
-                a: "Absoluut. Bij vaste samenwerking maak ik afspraken over volume en planning — neem contact op voor de mogelijkheden.",
+                a: "Absoluut. Bij vaste samenwerking maak ik afspraken over volume en planning. Neem contact op voor de mogelijkheden.",
               },
             ].map((faq, i) => (
               <details
@@ -568,7 +587,7 @@ export default function MakelaarsPage() {
             </div>
             <div className="text-left">
               <p className="font-semibold text-[#1A1A18] text-sm">Anita Fiers</p>
-              <p className="text-xs text-[#6B7280]">Your Veldhoven Broker — Pit Makelaars · Google Review</p>
+              <p className="text-xs text-[#6B7280]">Your Veldhoven Broker · Pit Makelaars · Google Review</p>
             </div>
           </div>
         </div>
@@ -584,7 +603,7 @@ export default function MakelaarsPage() {
             Jouw vaste videograaf. Plan een shoot.
           </h2>
           <p className="text-[#FAFAF8]/60 mb-8">
-            Stuur een WhatsApp — ik reageer dezelfde dag en we plannen direct een shoot in.
+            Stuur een WhatsApp. Ik reageer dezelfde dag en plannen we direct een shoot in.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

@@ -4,15 +4,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowRight, Check, Calendar, TrendingUp, Repeat, Sparkles, MessageCircle, Users,
+  ArrowRight, Check, X, Calendar, TrendingUp, Repeat, Sparkles, MessageCircle, Users,
 } from "lucide-react";
 import { SOCIAL_PACKAGES, PHOTOS, SITE } from "@/lib/constants";
 
 export default function SocialMediaPage() {
   const waLink = `https://wa.me/${SITE.whatsapp}?text=Hallo%20John%2C%20ik%20wil%20meer%20weten%20over%20het%20social%20media%20abonnement.`;
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Social media videoproductie",
+    "name": "Social media video abonnement",
+    "provider": { "@type": "LocalBusiness", "name": SITE.name, "url": SITE.url },
+    "areaServed": ["De Kempen", "Eindhoven", "Tilburg"],
+    "description": "Maandelijkse social media video's voor bedrijven in De Kempen en omgeving. Eén shoot dag, meerdere video's, klaar voor Instagram en TikTok.",
+    "offers": [
+      { "@type": "Offer", "name": "Start", "price": "275", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Instagram Reels", "price": "450", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Premium", "price": "650", "priceCurrency": "EUR" },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#0F0F0D] pb-16">
         <div className="absolute inset-0">
@@ -41,11 +61,11 @@ export default function SocialMediaPage() {
               className="text-4xl md:text-6xl font-bold text-[#FAFAF8] leading-[1.1] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Eén shoot dag. Maanden aan content.
+              Eén shoot. Maanden aan Instagram Reels.
             </h1>
             <p className="text-[#FAFAF8]/70 text-lg mb-8 leading-relaxed">
-              Ik neem op, snij en lever korte staande video&apos;s die elke maand klaarstaan.
-              Jij hoeft niks te doen — gewoon zichtbaar zijn en groeien.
+              Ik kom eens per kwartaal langs, film alles wat nodig is en zorg dat elke maand verse Reels klaarstaan.
+              Jij hoeft niks te doen. Gewoon zichtbaar zijn op Instagram.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
@@ -87,12 +107,12 @@ export default function SocialMediaPage() {
                 Meer klanten. Minder advertentiekosten.
               </h2>
               <p className="text-[#6B7280] leading-relaxed mb-5">
-                Veel ondernemers geven honderden euro&apos;s per maand uit aan advertenties —
+                Veel ondernemers geven honderden euro&apos;s per maand uit aan advertenties,
                 terwijl organische video op Instagram, TikTok en LinkedIn gratis bereik genereert.
                 Het enige wat je nodig hebt is <strong className="text-[#1A1A18]">consistente, goede content.</strong>
               </p>
               <p className="text-[#6B7280] leading-relaxed mb-8">
-                Het probleem: filmen, editen, captions schrijven, posten — dat kost uren per week.
+                Het probleem: filmen, editen, captions schrijven, posten: dat kost uren per week.
                 Uren die jij liever in je bedrijf steekt. Precies daarom bestaat dit abonnement.
               </p>
               <div className="flex flex-col gap-3">
@@ -139,7 +159,7 @@ export default function SocialMediaPage() {
               Geschikt voor elk lokaal bedrijf.
             </h3>
             <p className="text-[#6B7280] text-sm">
-              Iedereen die zichtbaar wil zijn — en er zelf geen tijd voor heeft.
+              Iedereen die zichtbaar wil zijn en er zelf geen tijd voor heeft.
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
@@ -220,13 +240,18 @@ export default function SocialMediaPage() {
                     {pkg.period}
                   </span>
                 </div>
-                <span className={`text-xs mb-4 ${pkg.highlight ? "text-[#FAFAF8]/40" : "text-[#6B7280]"}`}>
+                <span className={`text-xs ${pkg.highlight ? "text-[#FAFAF8]/40" : "text-[#6B7280]"}`}>
                   {pkg.note}
                 </span>
+                {"inclPrice" in pkg && (
+                  <span className={`text-xs mb-4 block ${pkg.highlight ? "text-[#FAFAF8]/30" : "text-[#9CA3AF]"}`}>
+                    {pkg.inclPrice}
+                  </span>
+                )}
                 <p className={`text-sm mb-6 ${pkg.highlight ? "text-[#FAFAF8]/60" : "text-[#6B7280]"}`}>
                   {pkg.description}
                 </p>
-                <ul className="space-y-3 mb-5 flex-1">
+                <ul className="space-y-3 mb-4 flex-1">
                   {pkg.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-2.5 text-sm">
                       <Check size={14} className="text-[#C9A96E] mt-0.5 shrink-0" />
@@ -234,6 +259,21 @@ export default function SocialMediaPage() {
                     </li>
                   ))}
                 </ul>
+                {"notIncluded" in pkg && pkg.notIncluded && (
+                  <div className={`mb-5 pt-4 border-t ${pkg.highlight ? "border-white/10" : "border-[#E5E0D8]"}`}>
+                    <p className={`text-xs font-semibold uppercase tracking-wide mb-2 ${pkg.highlight ? "text-[#FAFAF8]/30" : "text-[#9CA3AF]"}`}>
+                      Niet inbegrepen
+                    </p>
+                    <ul className="space-y-2">
+                      {(pkg.notIncluded as string[]).map((f, j) => (
+                        <li key={j} className="flex items-start gap-2 text-xs">
+                          <X size={12} className={`mt-0.5 shrink-0 ${pkg.highlight ? "text-[#FAFAF8]/25" : "text-[#D1D5DB]"}`} />
+                          <span className={pkg.highlight ? "text-[#FAFAF8]/40" : "text-[#9CA3AF]"}>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 {/* Content voorbeeld */}
                 <div className={`text-xs rounded-lg p-3 mb-6 italic leading-relaxed ${
                   pkg.highlight ? "bg-white/5 text-[#FAFAF8]/50" : "bg-[#F5F1EB] text-[#6B7280]"
@@ -257,7 +297,7 @@ export default function SocialMediaPage() {
           </div>
 
           <p className="text-center text-sm text-[#6B7280] mt-8">
-            Twijfel je welk pakket past? Stuur een WhatsApp — dan denk ik met je mee.
+            Twijfel je welk pakket past? Stuur een WhatsApp, dan denk ik met je mee.
           </p>
         </div>
       </section>
@@ -270,10 +310,10 @@ export default function SocialMediaPage() {
               className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Zo ziet een shoot dag eruit.
+              Zo ziet een shootmoment eruit.
             </h2>
             <p className="text-[#6B7280] max-w-lg mx-auto">
-              Geen gedoe, geen stress — ik regel alles.
+              Geen gedoe, geen stress. Ik regel alles.
             </p>
           </div>
 
@@ -297,7 +337,7 @@ export default function SocialMediaPage() {
               {
                 icon: <Sparkles size={22} />,
                 title: "Oplevering",
-                desc: "Video's in je inbox binnen 5 werkdagen. Klaar om te posten — meteen of wanneer jij wilt.",
+                desc: "Video's in je inbox binnen 5 werkdagen. Klaar om te posten, meteen of wanneer jij wilt.",
               },
             ].map((item, i) => (
               <motion.div
@@ -339,7 +379,7 @@ export default function SocialMediaPage() {
               },
               {
                 q: "Waarom minimaal 3 maanden?",
-                a: "Consistentie is het geheim van social media groei. Eén video doet weinig — tien video's over drie maanden bouwen zichtbaarheid, bereik en vertrouwen op. Na 3 maanden zie je het verschil. Daarna is het abonnement maandelijks opzegbaar.",
+                a: "Consistentie is het geheim van social media groei. Eén video doet weinig. Tien video's over drie maanden bouwen zichtbaarheid, bereik en vertrouwen op. Na 3 maanden zie je het verschil. Daarna is het abonnement maandelijks opzegbaar.",
               },
               {
                 q: "Moet ik zelf iets doen?",
@@ -355,7 +395,7 @@ export default function SocialMediaPage() {
               },
               {
                 q: "Hoeveel kost een video per stuk?",
-                a: "In het Start pakket betaal je €66/video, Groei €58/video, Premium €55/video. Ter vergelijking: een freelance video-editor vraagt al snel €100–150 per video — dan zit editing alleen al. Mijn pakket omvat shoot, edit, captions en oplevering.",
+                a: "In het Start pakket betaal je €275 voor 1 Reel per maand. Instagram Reels pakket: €225 per Reel (2 per maand). Premium: €162,50 per Reel (4 per maand). Ter vergelijking: een freelance video-editor vraagt al snel €100 tot 150 per video voor editing alleen. Mijn pakket omvat shoot, edit, captions, posten en analyse.",
               },
             ].map((faq, i) => (
               <details
@@ -404,7 +444,7 @@ export default function SocialMediaPage() {
             Klaar voor maandelijkse content?
           </h2>
           <p className="text-[#FAFAF8]/60 mb-8">
-            Stuur een WhatsApp — ik kijk samen met je welk abonnement het beste past.
+            Stuur een WhatsApp, dan kijk ik samen met je welk abonnement het beste past.
           </p>
           <Link
             href={waLink}

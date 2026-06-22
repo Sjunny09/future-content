@@ -22,10 +22,10 @@ export async function generateMetadata({
   if (!video) return {};
 
   return {
-    title: `${video.title} — Vastgoedvideo · Future Content`,
+    title: `${video.title} | Vastgoedvideo | Future Content`,
     description: `Bekijk de premium vastgoedvideo van ${video.title}, gemaakt door Future Content voor Pit Makelaars. Professionele walkthrough video voor Funda en social media.`,
     openGraph: {
-      title: `${video.title} — Vastgoedvideo · Future Content`,
+      title: `${video.title} | Vastgoedvideo | Future Content`,
       description: `Premium vastgoedvideo voor ${video.location}. Gemaakt door Future Content voor Pit Makelaars.`,
       images: [{ url: video.poster, width: 1200, height: 630, alt: video.title }],
     },
@@ -104,7 +104,7 @@ export default async function PortfolioDetailPage({
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
               <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-2">
-                Portfolio — Pit Makelaars
+                Portfolio Pit Makelaars
               </span>
               <h1
                 className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-2"
@@ -159,6 +159,51 @@ export default async function PortfolioDetailPage({
                 Vaste samenwerking voor vastgoedvideo&apos;s in de regio Eindhoven,
                 Veldhoven en De Kempen. Alle video&apos;s zijn opgeleverd als Premium pakket.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CASE DETAILS ─────────────────────────────────────────────── */}
+      <section className="bg-[#FAFAF8] border-t border-[#E5E0D8] py-12">
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Context */}
+            <div>
+              <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+                Over dit object
+              </span>
+              <p className="text-xs font-semibold text-[#1A1A18] uppercase tracking-wider mb-3">
+                {video.details.propertyType}
+              </p>
+              <p className="text-[#6B7280] text-sm leading-relaxed">
+                {video.details.context}
+              </p>
+            </div>
+
+            {/* Challenges + Result */}
+            <div className="space-y-6">
+              <div>
+                <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+                  Uitdagingen tijdens de shoot
+                </span>
+                <ul className="space-y-2">
+                  {video.details.challenges.map((c, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-[#1A1A18]">
+                      <span className="text-[#C9A96E] mt-0.5 shrink-0 font-bold">→</span>
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="p-4 rounded-xl bg-[#F5F1EB] border border-[#E5E0D8]">
+                <span className="block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-2">
+                  Resultaat
+                </span>
+                <p className="text-sm text-[#1A1A18] leading-relaxed">
+                  {video.details.result}
+                </p>
+              </div>
             </div>
           </div>
         </div>

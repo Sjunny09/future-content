@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
-import { ArrowLeft, Clock, MessageCircle, ArrowRight } from "lucide-react";
+import { ArrowLeft, Clock, ArrowRight } from "lucide-react";
 import { BLOG_POSTS, getBlogPost, formatDate } from "@/lib/blog";
-import { SITE } from "@/lib/constants";
+import Infographic from "@/components/common/Infographic";
 import { use } from "react";
 
 export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -13,8 +14,6 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
   const post = getBlogPost(slug);
 
   if (!post) notFound();
-
-  const waLink = `https://wa.me/${SITE.whatsapp}?text=Hallo%20John%2C%20ik%20las%20je%20blog%20over%20${encodeURIComponent(post.title)}%20en%20wil%20meer%20informatie.`;
 
   // Related posts (same category, excluding current)
   const related = BLOG_POSTS.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 2);
@@ -56,6 +55,22 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
               {post.excerpt}
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* ─── FEATURED IMAGE ───────────────────────────────────────────── */}
+      <section className="bg-[#FAFAF8] pb-8">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden shadow-md">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
@@ -124,16 +139,17 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                   >
                     <p className="font-semibold text-[#1A1A18] text-sm">{section.text}</p>
                     <Link
-                      href={waLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#25D366] text-white text-sm font-semibold hover:bg-[#1dbd5a] transition-colors"
+                      href="/boek"
+                      className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#C9A96E] text-[#1A1A18] text-sm font-semibold hover:bg-[#d8bd87] transition-colors"
                     >
-                      <MessageCircle size={14} />
-                      App mij op WhatsApp
+                      Plan een gesprek
+                      <ArrowRight size={14} />
                     </Link>
                   </div>
                 );
+              }
+              if (section.type === "infographic") {
+                return <Infographic key={i} name={section.infographic} />;
               }
               return null;
             })}
@@ -184,19 +200,17 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
             className="text-2xl md:text-3xl font-bold mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Klaar om aan de slag te gaan?
+            Benieuwd wat dit voor jouw bedrijf betekent?
           </h2>
           <p className="text-[#FAFAF8]/60 mb-6 text-sm">
-            Stuur een WhatsApp en we kijken samen wat video voor jouw bedrijf of woning kan doen.
+            Plan een gesprek van 30 minuten. We kijken samen waar AI jou tijd of geld bespaart.
           </p>
           <Link
-            href={waLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#25D366] text-white font-semibold hover:bg-[#1dbd5a] transition-colors"
+            href="/boek"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#C9A96E] text-[#1A1A18] font-semibold hover:bg-[#d8bd87] transition-colors"
           >
-            <MessageCircle size={16} />
-            App mij op WhatsApp
+            Plan een gesprek
+            <ArrowRight size={16} />
           </Link>
         </div>
       </section>

@@ -11,8 +11,29 @@ import { PHOTOS, SITE } from "@/lib/constants";
 export default function TrouwenPage() {
   const waLink = `https://wa.me/${SITE.whatsapp}?text=Hallo%20John%2C%20ik%20wil%20graag%20meer%20informatie%20over%20een%20bruiloftsvideo.`;
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Bruiloftsvideografie",
+    "name": "Bruiloftsvideo",
+    "provider": { "@type": "LocalBusiness", "name": SITE.name, "url": SITE.url },
+    "areaServed": ["De Kempen", "Eindhoven", "Tilburg"],
+    "description": "Professionele bruiloftsvideo's in De Kempen en omgeving. Social edit (60–90 sec) én lange versie voor privégebruik, opgeleverd binnen 4 weken.",
+    "review": {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Mandy Daniels" },
+      "reviewBody": "John heeft onze trouwvideo gemaakt, waar wij super tevreden over waren! Hij heeft hele mooie beelden gemaakt, waarvan hij meerdere gave aftermovies van heeft gemaakt.",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#0F0F0D] pb-16">
         <div className="absolute inset-0">
@@ -44,7 +65,7 @@ export default function TrouwenPage() {
               Jouw mooiste dag. Voor altijd vastgelegd.
             </h1>
             <p className="text-[#FAFAF8]/70 text-lg mb-8 leading-relaxed">
-              Een bruiloftsvideo is meer dan beelden. Het is het gevoel van die dag —
+              Een bruiloftsvideo is meer dan beelden. Het is het gevoel van die dag:
               de spanning, de lach, de tranen. Voor jullie, voor later, voor altijd.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -91,13 +112,13 @@ export default function TrouwenPage() {
                 {[
                   {
                     icon: <Film size={18} />,
-                    title: "Social edit — kort & krachtig",
+                    title: "Social edit: kort & krachtig",
                     desc: "Een emotionele samenvatting van 60–90 seconden. Klaar voor Instagram, TikTok en WhatsApp. Deel de mooiste momenten direct met vrienden en familie.",
                   },
                   {
                     icon: <Heart size={18} />,
-                    title: "Lange versie — voor privégebruik",
-                    desc: "De volledige film van jullie dag. Ceremonie, dansen, speeches, details — alles erin. Om later samen terug te kijken, samen met kinderen of kleinkinderen.",
+                    title: "Lange versie: voor privégebruik",
+                    desc: "De volledige film van jullie dag. Ceremonie, dansen, speeches, details, alles erin. Om later samen terug te kijken, samen met kinderen of kleinkinderen.",
                   },
                   {
                     icon: <Camera size={18} />,
@@ -132,6 +153,33 @@ export default function TrouwenPage() {
         </div>
       </section>
 
+      {/* ─── VIDEO VOORBEELD ──────────────────────────────────────────── */}
+      <section className="bg-[#0F0F0D] py-20 md:py-28">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+            Bekijk een voorbeeld
+          </span>
+          <h2
+            className="text-3xl md:text-4xl font-bold text-[#FAFAF8] mb-4"
+            style={{ fontFamily: "var(--font-playfair)" }}
+          >
+            Zo ziet jullie dag eruit.
+          </h2>
+          <p className="text-[#FAFAF8]/60 mb-10 max-w-xl mx-auto">
+            Een echte bruiloftsvideo, gefilmd en bewerkt door Future Content.
+          </p>
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
+            <iframe
+              src="https://www.youtube.com/embed/16VDboUDpps"
+              title="Bruiloftsvideo Future Content"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ─── TARIEF ───────────────────────────────────────────────────── */}
       <section className="bg-[#F5F1EB] py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 text-center">
@@ -145,7 +193,7 @@ export default function TrouwenPage() {
             Prijs op aanvraag.
           </h2>
           <p className="text-[#6B7280] text-lg mb-10 max-w-xl mx-auto">
-            Elke bruiloft is anders — in locatie, tijdsduur, wensen en stijl.
+            Elke bruiloft is anders. De locatie, tijdsduur, wensen en stijl verschillen elke keer.
             Daarom bespreek ik de prijs altijd persoonlijk, zodat het past bij
             jullie dag én budget.
           </p>
@@ -160,7 +208,7 @@ export default function TrouwenPage() {
                 "Lange versie voor privégebruik",
                 "Professionele audio (ruimtegeluid + muziek naar keuze)",
                 "Oplevering binnen 4 weken",
-                "Bestanden via WeTransfer — direct downloadbaar",
+                "Bestanden via WeTransfer, direct downloadbaar",
               ].map((f, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-sm">
                   <Check size={15} className="text-[#C9A96E] mt-0.5 shrink-0" />
@@ -204,7 +252,7 @@ export default function TrouwenPage() {
                 {
                   num: "2",
                   title: "Shoot dag",
-                  desc: "Ik ben er van begin tot eind. Van de voorbereidingen tot de receptie — ik vang alles op zonder opdringerig te zijn.",
+                  desc: "Ik ben er van begin tot eind. Van de voorbereidingen tot de receptie. Ik vang alles op zonder opdringerig te zijn.",
                 },
                 {
                   num: "3",
@@ -265,7 +313,7 @@ export default function TrouwenPage() {
             Jullie dag verdient het beste.
           </h2>
           <p className="text-[#FAFAF8]/60 mb-8">
-            Stuur een WhatsApp — ik reageer dezelfde dag en we plannen een vrijblijvend gesprek.
+            Stuur een WhatsApp. Ik reageer dezelfde dag en we plannen een vrijblijvend gesprek.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

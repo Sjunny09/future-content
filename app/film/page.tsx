@@ -18,15 +18,17 @@ export default function FilmPage() {
     <>
       {/* ─── Hero (donker) ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#0F0F0D] text-[#FAFAF8]">
+        {/* Logo-animatie als sfeer-achtergrond (zoals op de live site) */}
+        <video
+          src="/logo/logo.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-luminosity"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0D]/70 via-[#0F0F0D]/40 to-[#0F0F0D]" />
         <div className="relative max-w-5xl mx-auto px-6 pt-40 pb-24 md:pt-48 md:pb-32">
-          <video
-            src="/logo/logo.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-44 sm:w-56 md:w-72 aspect-square object-contain mb-8 rounded-2xl"
-          />
           <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.25em]">
             Future Content · Film
           </span>

@@ -40,21 +40,29 @@ export async function POST(req: NextRequest) {
   const ip = haalIpOp(req)
   const ipH = hashIp(ip)
 
-  const ipCheck = await ipLimiet.limit(ipH)
-  if (!ipCheck.success) {
-    return NextResponse.json(
-      { fout: "Teveel scans vanaf deze plek. Probeer het over een uurtje nog eens." },
-      { status: 429 }
-    )
-  }
+  // Test-bypass: ben je ingelogd in /os (fc_os-cookie), dan ben jij het die test
+  // en gelden de rate-limits niet. Echte bezoekers krijgen de limieten wel.
+  const isTest = Boolean(
+    process.env.ADMIN_TOKEN && req.cookies.get("fc_os")?.value === process.env.ADMIN_TOKEN,
+  )
 
-  const urlKey = canoniekeUrl(validatie.url)
-  const urlCheck = await urlLimiet.limit(urlKey)
-  if (!urlCheck.success) {
-    return NextResponse.json(
-      { fout: "Deze website is net gescand. Probeer het over 10 minuten nog eens." },
-      { status: 429 }
-    )
+  if (!isTest) {
+    const ipCheck = await ipLimiet.limit(ipH)
+    if (!ipCheck.success) {
+      return NextResponse.json(
+        { fout: "Teveel scans vanaf deze plek. Probeer het over een uurtje nog eens." },
+        { status: 429 },
+      )
+    }
+
+    const urlKey = canoniekeUrl(validatie.url)
+    const urlCheck = await urlLimiet.limit(urlKey)
+    if (!urlCheck.success) {
+      return NextResponse.json(
+        { fout: "Deze website is net gescand. Probeer het over 10 minuten nog eens." },
+        { status: 429 },
+      )
+    }
   }
 
   const job = await db.scanJob.create({

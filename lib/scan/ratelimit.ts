@@ -3,8 +3,8 @@ import { Redis } from "@upstash/redis"
 import { createHash } from "node:crypto"
 
 // Rate-limit-strategie (docs/quickscan/03_ceo_synthese.md §4.2):
-//   - 10 scan-starts per IP per uur
-//   - 1 scan per URL per 10 minuten (anti-probe)
+//   - 20 scan-starts per IP per uur
+//   - 2 scans per URL per 10 minuten (anti-probe)
 //
 // Als Upstash niet is geconfigureerd (dev zonder .env) gebruiken we een
 // in-memory fallback die per process-instance werkt — ruim voldoende voor
@@ -25,24 +25,24 @@ const devBypass = !heeftUpstash && !inProductie
 export const ipLimiet = redis
   ? new Ratelimit({
       redis,
-      limiter: Ratelimit.slidingWindow(10, "1 h"),
+      limiter: Ratelimit.slidingWindow(20, "1 h"),
       analytics: true,
       prefix: "scan:ip",
     })
   : devBypass
     ? geenLimiet()
-    : maakGeheugenLimiet(10, 60 * 60 * 1000)
+    : maakGeheugenLimiet(20, 60 * 60 * 1000)
 
 export const urlLimiet = redis
   ? new Ratelimit({
       redis,
-      limiter: Ratelimit.slidingWindow(1, "10 m"),
+      limiter: Ratelimit.slidingWindow(2, "10 m"),
       analytics: true,
       prefix: "scan:url",
     })
   : devBypass
     ? geenLimiet()
-    : maakGeheugenLimiet(1, 10 * 60 * 1000)
+    : maakGeheugenLimiet(2, 10 * 60 * 1000)
 
 function geenLimiet(): GeheugenLimiet {
   return {

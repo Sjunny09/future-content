@@ -113,10 +113,10 @@ export default function FilmPage() {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-8">
-            <div className="grid w-full gap-6 sm:grid-cols-2">
+            <div className="flex flex-wrap items-start justify-center gap-6">
               {/* Werner & Manon */}
               <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-black">
-                <div className="relative aspect-video">
+                <div className="relative h-[260px] aspect-video">
                   <iframe
                     src="https://player.vimeo.com/video/1203460952?app_id=122963"
                     className="absolute inset-0 h-full w-full"
@@ -132,9 +132,9 @@ export default function FilmPage() {
                 </figcaption>
               </figure>
 
-              {/* Luuk & Mandy */}
+              {/* Luuk & Mandy, de hele dag */}
               <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-black">
-                <div className="relative aspect-video">
+                <div className="relative h-[260px] aspect-video">
                   <iframe
                     src="https://player.vimeo.com/video/1203439014?app_id=122963"
                     className="absolute inset-0 h-full w-full"
@@ -147,6 +147,22 @@ export default function FilmPage() {
                 <figcaption className="flex items-center justify-center gap-2 bg-white px-4 py-3">
                   <Heart size={14} className="text-[#C9A96E]" />
                   <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
+                </figcaption>
+              </figure>
+
+              {/* Luuk & Mandy, korte film (zelf-gehost, vierkant) */}
+              <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-white">
+                <video
+                  src="/videos/Bruiloft%20luuk%20en%20Mandy%20instagram%20v4%20website.mp4"
+                  controls
+                  preload="metadata"
+                  playsInline
+                  className="block h-[260px] aspect-square object-cover bg-[#1A1A18]"
+                />
+                <figcaption className="flex items-center justify-center gap-2 px-4 py-3">
+                  <Heart size={14} className="text-[#C9A96E]" />
+                  <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
+                  <span className="text-xs text-[#6B7280]">· korte film</span>
                 </figcaption>
               </figure>
             </div>

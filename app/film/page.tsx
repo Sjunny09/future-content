@@ -113,26 +113,26 @@ export default function FilmPage() {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-8">
-            <div className="flex flex-wrap items-start justify-center gap-6">
-              {/* Werner & Manon */}
-              <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-black">
-                <div className="relative h-[260px] aspect-video">
-                  <iframe
-                    src="https://player.vimeo.com/video/1203460952?app_id=122963"
-                    className="absolute inset-0 h-full w-full"
-                    style={{ border: 0 }}
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                    allowFullScreen
-                    title="Bruiloft Werner en Manon"
-                  />
-                </div>
-                <figcaption className="flex items-center justify-center gap-2 bg-white px-4 py-3">
-                  <Heart size={14} className="text-[#C9A96E]" />
-                  <span className="text-sm font-semibold text-[#1A1A18]">Werner &amp; Manon</span>
-                </figcaption>
-              </figure>
+            {/* Werner & Manon */}
+            <figure className="w-full max-w-2xl overflow-hidden rounded-2xl border border-[#E5E0D8] bg-black">
+              <div className="relative aspect-video">
+                <iframe
+                  src="https://player.vimeo.com/video/1203460952?app_id=122963"
+                  className="absolute inset-0 h-full w-full"
+                  style={{ border: 0 }}
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+                  allowFullScreen
+                  title="Bruiloft Werner en Manon"
+                />
+              </div>
+              <figcaption className="flex items-center justify-center gap-2 bg-white px-4 py-3">
+                <Heart size={14} className="text-[#C9A96E]" />
+                <span className="text-sm font-semibold text-[#1A1A18]">Werner &amp; Manon</span>
+              </figcaption>
+            </figure>
 
-              {/* Luuk & Mandy, de hele dag */}
+            {/* Luuk & Mandy: de hele dag + de korte film */}
+            <div className="flex flex-wrap items-start justify-center gap-6">
               <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-black">
                 <div className="relative h-[260px] aspect-video">
                   <iframe
@@ -150,7 +150,6 @@ export default function FilmPage() {
                 </figcaption>
               </figure>
 
-              {/* Luuk & Mandy, korte film (zelf-gehost, vierkant) */}
               <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-white">
                 <video
                   src="/videos/Bruiloft%20luuk%20en%20Mandy%20instagram%20v4%20website.mp4"

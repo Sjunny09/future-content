@@ -416,13 +416,8 @@ export const STACK_VIDEOS = [
 ];
 
 export const NAV_LINKS = [
-  { href: "/werkwijze", label: "Werkwijze" },
-  { href: "/voor", label: "Voor wie" },
-  { href: "/scan", label: "AI-Quickscan" },
-  { href: "/trainingen", label: "Trainingen" },
-  { href: "/videografie", label: "Videografie" },
-  { href: "/blog", label: "Blog" },
-  { href: "/over", label: "Over" },
+  { href: "/", label: "AI" },
+  { href: "/film", label: "Film" },
 ];
 
 // Videografie-sectie: de bestaande video-diensten, ondergebracht onder 1 ingang

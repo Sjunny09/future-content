@@ -19,52 +19,21 @@ const WAARDE = [
   },
 ];
 
-// John's AI-logo als schone transparante SVG (nagebouwd uit zijn ontwerp).
-function FutureContentLogo({ className }: { className?: string }) {
-  const goud = "#C9A96E"
-  return (
-    <svg
-      viewBox="180 240 980 430"
-      className={className}
-      role="img"
-      aria-label="Future Content, think now build tomorrow"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <style>{`
-        @keyframes fcFade { from { opacity: 0 } to { opacity: 1 } }
-        @keyframes fcLine { from { transform: scaleX(0) } to { transform: scaleX(1) } }
-        .fc-a { animation: fcFade .7s ease-out both }
-        .fc-b { animation: fcFade .7s ease-out .15s both }
-        .fc-c { animation: fcFade .7s ease-out .35s both }
-        .fc-d { transform-box: fill-box; transform-origin: left center; animation: fcLine .8s cubic-bezier(.2,.8,.2,1) .25s both }
-        .fc-e { animation: fcFade .9s ease-out .5s both }
-        @media (prefers-reduced-motion: reduce) {
-          .fc-a,.fc-b,.fc-c,.fc-d,.fc-e { animation: none; opacity: 1; transform: none }
-        }
-      `}</style>
-      <text className="fc-a" x="200" y="370" fontFamily="Helvetica, Arial, sans-serif" fontWeight={900} fontSize={150} letterSpacing={-4} fill="#FAFAF8">
-        FUTURE
-      </text>
-      <text className="fc-b" x="200" y="520" fontFamily="Helvetica, Arial, sans-serif" fontWeight={300} fontSize={150} letterSpacing={-2} fill="#FAFAF8">
-        CONTENT
-      </text>
-      <rect className="fc-c" x="930" y="408" width="60" height="22" fill={goud} />
-      <rect className="fc-d" x="200" y="560" width="640" height="4" fill={goud} />
-      <text className="fc-e" x="200" y="630" fontFamily="Helvetica, Arial, sans-serif" fontWeight={400} fontSize={40} letterSpacing={12} fill="#B9B9C0">
-        THINK NOW, BUILD TOMORROW
-      </text>
-    </svg>
-  )
-}
-
 export default function HomeAI() {
   return (
     <>
       {/* ─── Hero (donker) ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#14140F] text-[#FAFAF8]">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A18] via-[#14140F] to-[#0F0F0D]" />
-        {/* AI-logo als subtiele transparante achtergrond (zoals de Film-hero) */}
-        <FutureContentLogo className="pointer-events-none absolute left-1/2 top-[40%] w-[min(820px,90%)] -translate-x-1/2 -translate-y-1/2 opacity-[0.28]" />
+        {/* AI-logo-animatie als transparante achtergrond (zoals de Film-hero) */}
+        <video
+          src="/logo/Logo%20AI.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="pointer-events-none absolute left-1/2 top-[40%] w-[min(900px,92%)] -translate-x-1/2 -translate-y-1/2 opacity-[0.32]"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0D] via-[#0F0F0D]/40 to-transparent" />
         <div className="relative mx-auto flex min-h-[72vh] max-w-5xl flex-col justify-end px-6 pb-24 pt-48 md:min-h-[80vh] md:pb-32">
           <h1 className="sr-only">

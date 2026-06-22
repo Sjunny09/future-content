@@ -21,7 +21,7 @@ const WAARDE = [
 
 // John's AI-logo als schone transparante SVG (nagebouwd uit zijn ontwerp).
 function FutureContentLogo({ className }: { className?: string }) {
-  const blauw = "oklch(0.76 0.15 232)"
+  const goud = "#C9A96E"
   return (
     <svg
       viewBox="180 240 980 430"
@@ -30,15 +30,27 @@ function FutureContentLogo({ className }: { className?: string }) {
       aria-label="Future Content, think now build tomorrow"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <text x="200" y="370" fontFamily="Helvetica, Arial, sans-serif" fontWeight={900} fontSize={150} letterSpacing={-4} fill="#FAFAF8">
+      <style>{`
+        @keyframes fcFade { from { opacity: 0 } to { opacity: 1 } }
+        @keyframes fcLine { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+        .fc-a { animation: fcFade .7s ease-out both }
+        .fc-b { animation: fcFade .7s ease-out .15s both }
+        .fc-c { animation: fcFade .7s ease-out .35s both }
+        .fc-d { transform-box: fill-box; transform-origin: left center; animation: fcLine .8s cubic-bezier(.2,.8,.2,1) .25s both }
+        .fc-e { animation: fcFade .9s ease-out .5s both }
+        @media (prefers-reduced-motion: reduce) {
+          .fc-a,.fc-b,.fc-c,.fc-d,.fc-e { animation: none; opacity: 1; transform: none }
+        }
+      `}</style>
+      <text className="fc-a" x="200" y="370" fontFamily="Helvetica, Arial, sans-serif" fontWeight={900} fontSize={150} letterSpacing={-4} fill="#FAFAF8">
         FUTURE
       </text>
-      <text x="200" y="520" fontFamily="Helvetica, Arial, sans-serif" fontWeight={300} fontSize={150} letterSpacing={-2} fill="#FAFAF8">
+      <text className="fc-b" x="200" y="520" fontFamily="Helvetica, Arial, sans-serif" fontWeight={300} fontSize={150} letterSpacing={-2} fill="#FAFAF8">
         CONTENT
       </text>
-      <rect x="930" y="408" width="60" height="22" fill={blauw} />
-      <rect x="200" y="560" width="640" height="4" fill={blauw} />
-      <text x="200" y="630" fontFamily="Helvetica, Arial, sans-serif" fontWeight={400} fontSize={40} letterSpacing={12} fill="#B9B9C0">
+      <rect className="fc-c" x="930" y="408" width="60" height="22" fill={goud} />
+      <rect className="fc-d" x="200" y="560" width="640" height="4" fill={goud} />
+      <text className="fc-e" x="200" y="630" fontFamily="Helvetica, Arial, sans-serif" fontWeight={400} fontSize={40} letterSpacing={12} fill="#B9B9C0">
         THINK NOW, BUILD TOMORROW
       </text>
     </svg>
@@ -51,16 +63,14 @@ export default function HomeAI() {
       {/* ─── Hero (donker) ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-[#14140F] text-[#FAFAF8]">
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A18] via-[#14140F] to-[#0F0F0D]" />
-        <div
-          className="absolute -top-40 right-0 h-[420px] w-[420px] rounded-full opacity-40 blur-3xl"
-          style={{ background: "radial-gradient(circle, #C9A96E55 0%, transparent 70%)" }}
-        />
-        <div className="relative max-w-5xl mx-auto px-6 pt-40 pb-28 md:pt-48 md:pb-36">
+        {/* AI-logo als subtiele transparante achtergrond (zoals de Film-hero) */}
+        <FutureContentLogo className="pointer-events-none absolute left-1/2 top-[40%] w-[min(820px,90%)] -translate-x-1/2 -translate-y-1/2 opacity-[0.28]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0D] via-[#0F0F0D]/40 to-transparent" />
+        <div className="relative mx-auto flex min-h-[72vh] max-w-5xl flex-col justify-end px-6 pb-24 pt-48 md:min-h-[80vh] md:pb-32">
           <h1 className="sr-only">
             Future Content, AI en automatisering. Think now, build tomorrow.
           </h1>
-          <FutureContentLogo className="h-auto w-full max-w-[300px] sm:max-w-[400px] md:max-w-[460px]" />
-          <p className="mt-7 text-lg md:text-xl text-[#FAFAF8]/70 max-w-2xl leading-relaxed">
+          <p className="max-w-2xl text-lg leading-relaxed text-[#FAFAF8]/70 md:text-xl">
             Wat je vandaag verzint, kan morgen al staan. Ik bouw AI en automatisering voor
             MKB-bedrijven, op je eigen processen. Geen hype, wel werk dat tijd bespaart.
           </p>

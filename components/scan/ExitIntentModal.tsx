@@ -134,8 +134,8 @@ export function ExitIntentModal({ calUrl }: Props) {
                 className="mt-3 text-base"
                 style={{ color: "var(--color-scan-drukinkt)" }}
               >
-                Geen verkooppraatje. 20 minuten waarin ik kort vertel wat ik
-                zag, en jij vertelt waar jullie nu staan.
+                20 minuten waarin ik kort vertel wat ik zag, en jij vertelt
+                waar jullie nu staan.
               </p>
             </div>
 

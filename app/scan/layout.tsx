@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Laat me even naar je bedrijf kijken — Future Content",
+  title: "Laat me even naar je bedrijf kijken · Future Content",
   description:
-    "Eerlijke kijk van buiten op jouw bedrijf. Geen verkooppraatje, geen rapport. Binnen 24 uur een korte video terug.",
+    "Eerlijke kijk van buiten op jouw bedrijf. Binnen 24 uur een korte video terug.",
   robots: { index: true, follow: true },
 }
 

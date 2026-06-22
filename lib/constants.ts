@@ -476,7 +476,7 @@ export const AI_SERVICES = [
 // De werkwijze in 6 stappen, op basis van John's geleefde process (uit interview 28 mei)
 export const METHOD_STEPS = [
   { n: "01", title: "Workshop op locatie", desc: "Een halve dag bij jullie. Interactief, samen aan de slag op jullie eigen taken. Vanaf €750 ex BTW (60% terug via SLIM-subsidie)." },
-  { n: "02", title: "Online kennismaking", desc: "30 minuten, vrijblijvend. Ik kom met een korte analyse van je bedrijf en concrete ideeën, geen verkooppraat." },
+  { n: "02", title: "Online kennismaking", desc: "30 minuten, vrijblijvend. Ik kom met een korte analyse van je bedrijf en concrete ideeën." },
   { n: "03", title: "Intake-sessie", desc: "Diep in je bedrijf. Welk werk komt elke week terug, welk werk kost het meest tijd, en wat hoort thuis bij wie." },
   { n: "04", title: "Tweede brein", desc: "Een gestructureerde kennislaag over je processen, klanten en toon. Hierdoor is AI niet generiek meer." },
   { n: "05", title: "Plannen kiezen", desc: "Smart mailbox, route-optimalisatie, orderintake vanuit mail, content-generatie, chatbot. Wat past, wat verdient zich terug." },

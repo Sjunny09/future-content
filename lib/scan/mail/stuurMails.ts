@@ -130,7 +130,7 @@ function bouwKlantMail(ctx: { naam: string | null }): string {
     ``,
     `Dankjewel dat je de scan hebt gedaan. Ik ga er nu rustig mee zitten.`,
     ``,
-    `Binnen 24 uur krijg je van mij een korte video (max 2 minuten) waarin ik doorneem wat ik op de site zag, en wat ik zou doen als ik bij jullie aan tafel zat. Geen verkooppraatje, geen rapport — gewoon mijn eerlijke eerste indruk.`,
+    `Binnen 24 uur krijg je van mij een korte video (max 2 minuten) waarin ik doorneem wat ik op de site zag, en wat ik zou doen als ik bij jullie aan tafel zat. Gewoon mijn eerlijke eerste indruk.`,
     ``,
     `Als ik er langer dan 24 uur over doe, hoor je dat ook van me. Nooit stilte.`,
     ``,

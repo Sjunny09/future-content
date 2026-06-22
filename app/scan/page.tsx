@@ -36,7 +36,7 @@ export default function ScanLandingPagina() {
         >
           Vul je website in. Ik blader er rustig doorheen en stel je daarna een
           paar vragen die er echt toe doen. Je krijgt binnen 24 uur mijn
-          eerlijke kijk terug — in een korte video, geen verkooppraatje.
+          eerlijke kijk terug, in een korte video.
         </p>
 
         <div className="mt-12">

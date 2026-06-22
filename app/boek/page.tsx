@@ -31,7 +31,7 @@ const OPBOUW = [
 const VALUE = [
   "Een eerlijk beeld van wat AI in jouw bedrijf wel en niet doet",
   "Drie concrete kansen op papier, ongeacht of je verder gaat",
-  "Geen verkooppraat, geen verplichtingen, geen huiswerk vooraf",
+  "Geen verplichtingen, geen huiswerk vooraf",
 ];
 
 export default function BoekPage() {

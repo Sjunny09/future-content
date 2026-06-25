@@ -206,6 +206,18 @@ export default function FilmPage() {
               </figcaption>
             </figure>
           </div>
+          <p className="mt-8 text-center text-base text-[#1A1A18]">
+            Neem contact op met mij via{" "}
+            <a
+              href={WA}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-[#25D366] underline underline-offset-2"
+            >
+              WhatsApp
+            </a>{" "}
+            voor een prijsopgave.
+          </p>
         </div>
       </section>
 

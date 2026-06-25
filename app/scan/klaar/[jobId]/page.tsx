@@ -43,7 +43,7 @@ export default async function KlaarPagina({ params }: { params: Params }) {
         className="mt-6 text-lg leading-relaxed md:text-xl"
         style={{ color: "var(--color-scan-drukinkt)" }}
       >
-        Binnen 24 uur stuur ik je een korte video (max 2 minuten) waarin ik
+        Binnen 24 uur stuur ik je een korte video waarin ik
         doorneem wat ik op je site zag, en wat ik zou doen als ik bij jullie aan
         tafel zat. Gewoon mijn eerlijke eerste indruk.
       </p>

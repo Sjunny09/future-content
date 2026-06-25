@@ -4,7 +4,7 @@ import type { SiteAnalyse } from "@/lib/scan/claude"
 
 // Mail-adressen in één punt — makkelijker te veranderen later.
 const VAN = "Future Content <scan@futurecontent.nl>"
-const JOHN = "john@futurecontent.nl"
+const JOHN = process.env.SCAN_NOTIFY_EMAIL ?? "john@futurecontent.nl"
 
 let clientSingleton: Resend | null = null
 function client(): Resend | null {
@@ -48,10 +48,11 @@ export async function stuurMails(jobId: string): Promise<void> {
       .send({
         from: VAN,
         to: JOHN,
-        subject: `Nieuwe scan: ${job.lead.naam ?? "onbekend"} — ${job.url}`,
+        subject: `Nieuwe scan: ${job.lead.naam ?? "onbekend"} · ${job.url}`,
         text: bouwJohnMail({
           naam: job.lead.naam,
           email: job.lead.email,
+          telefoon: job.lead.telefoon,
           url: job.url,
           jobId: job.id,
           analyse,
@@ -82,6 +83,7 @@ export async function stuurMails(jobId: string): Promise<void> {
 function bouwJohnMail(ctx: {
   naam: string | null
   email: string
+  telefoon: string | null
   url: string
   jobId: string
   analyse: SiteAnalyse | null
@@ -92,6 +94,7 @@ function bouwJohnMail(ctx: {
   regels.push(``)
   regels.push(`Naam: ${ctx.naam ?? "onbekend"}`)
   regels.push(`Email: ${ctx.email}`)
+  regels.push(`Telefoon: ${ctx.telefoon ?? "-"}`)
   regels.push(`Site: ${ctx.url}`)
   regels.push(`Job: ${ctx.jobId}`)
   regels.push(``)
@@ -130,14 +133,13 @@ function bouwKlantMail(ctx: { naam: string | null }): string {
     ``,
     `Dankjewel dat je de scan hebt gedaan. Ik ga er nu rustig mee zitten.`,
     ``,
-    `Binnen 24 uur krijg je van mij een korte video (max 2 minuten) waarin ik doorneem wat ik op de site zag, en wat ik zou doen als ik bij jullie aan tafel zat. Gewoon mijn eerlijke eerste indruk.`,
+    `Binnen 24 uur krijg je van mij een korte video waarin ik doorneem wat ik op de site zag, en wat ik zou doen als ik bij jullie aan tafel zat. Gewoon mijn eerlijke eerste indruk.`,
     ``,
     `Als ik er langer dan 24 uur over doe, hoor je dat ook van me. Nooit stilte.`,
     ``,
     `Tot straks,`,
     `John`,
     ``,
-    `—`,
     `Future Content · futurecontent.nl`,
   ].join("\n")
 }

@@ -378,6 +378,7 @@ function EmailNaam({
       <input
         type="text"
         autoFocus
+        autoComplete="given-name"
         value={waarde.naam}
         onChange={(e) => opWijzig({ ...waarde, naam: e.target.value })}
         disabled={uitgeschakeld}
@@ -387,6 +388,8 @@ function EmailNaam({
       />
       <input
         type="email"
+        inputMode="email"
+        autoComplete="email"
         value={waarde.email}
         onChange={(e) => opWijzig({ ...waarde, email: e.target.value })}
         disabled={uitgeschakeld}
@@ -396,6 +399,8 @@ function EmailNaam({
       />
       <input
         type="tel"
+        inputMode="tel"
+        autoComplete="tel"
         value={waarde.telefoon}
         onChange={(e) => opWijzig({ ...waarde, telefoon: e.target.value })}
         onKeyDown={(e) => {
@@ -434,8 +439,15 @@ function heeftGeldigAntwoord(
   if (vraag.type === "email-naam") {
     if (typeof waarde !== "object" || Array.isArray(waarde)) return false
     const naamOk = waarde.naam.trim().length >= 2
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(waarde.email.trim())
-    return naamOk && emailOk
+    const email = waarde.email.trim()
+    const emailOk =
+      email.length >= 5 &&
+      email.length <= 254 &&
+      /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(email)
+    // Telefoon is optioneel, maar als 't ingevuld is moet 't kloppen (>= 8 cijfers).
+    const tel = waarde.telefoon.trim()
+    const telOk = tel.length === 0 || tel.replace(/\D/g, "").length >= 8
+    return naamOk && emailOk && telOk
   }
   return false
 }

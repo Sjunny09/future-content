@@ -5,22 +5,47 @@ import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 import { track } from "@/lib/scan/analytics/plausible"
 
+type Kans = { titel: string; beschrijving?: string }
+type Analyse = { branche?: string; niche?: string; kansen?: Kans[] } | null
+
 type StatusRespons = {
   jobId: string
   status: string
   observaties: string[]
   klaar: boolean
   gefaald: boolean
+  analyse?: Analyse
+  url?: string
 }
 
 const SLIDE_DUUR_MS = 7_000
+
+function domeinUit(url?: string): string | null {
+  if (!url) return null
+  try {
+    const u = new URL(url.startsWith("http") ? url : `https://${url}`)
+    return u.hostname.replace(/^www\./, "")
+  } catch {
+    return null
+  }
+}
 
 export function ScanInProgress({ jobId }: { jobId: string }) {
   const router = useRouter()
   const [observaties, setObservaties] = useState<string[]>([])
   const [index, setIndex] = useState(0)
   const [fout, setFout] = useState<string | null>(null)
+  const [analyse, setAnalyse] = useState<Analyse>(null)
+  const [domein, setDomein] = useState<string | null>(null)
+  const [seconden, setSeconden] = useState(0)
   const klaarRef = useRef(false)
+
+  // Seconden-teller voor de "duurt langer"-melding, zodat het scherm nooit
+  // bevroren lijkt als de scrape traag is.
+  useEffect(() => {
+    const id = setInterval(() => setSeconden((s) => s + 1), 1000)
+    return () => clearInterval(id)
+  }, [])
 
   // Polling
   useEffect(() => {
@@ -37,7 +62,7 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         if (!actief) return
 
         // Houd referentie stabiel als inhoud gelijk is, anders reset de
-        // 7s-slide-timer elke 1.5s-poll en loopt de index nooit door.
+        // 7s-slide-timer elke poll en loopt de index nooit door.
         setObservaties((vorige) => {
           const nieuw = data.observaties ?? []
           if (
@@ -48,6 +73,9 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
           }
           return nieuw
         })
+
+        if (data.analyse) setAnalyse(data.analyse)
+        if (data.url) setDomein(domeinUit(data.url))
 
         if (data.gefaald) {
           setFout("Ik kom niet door je site heen. Probeer het zo nog eens.")
@@ -96,9 +124,26 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
   }, [observaties, jobId, router])
 
   const huidige = observaties[index] ?? "Een moment…"
+  const kansen = (analyse?.kansen ?? []).slice(0, 3)
+  const traag = seconden >= 30 && !klaarRef.current
+  const heelTraag = seconden >= 60 && !klaarRef.current
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6">
+    <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 py-16">
+      {/* Bedrijfsspecifiek: domein + branche, zodra de analyse er is */}
+      <AnimatePresence>
+        {(domein || analyse?.branche) && (
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 flex flex-wrap items-center justify-center gap-2"
+          >
+            {domein && <Pill>{domein}</Pill>}
+            {analyse?.branche && <Pill>{analyse.branche}</Pill>}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div
         className="mb-10 h-1 w-32 overflow-hidden rounded-full"
         style={{ backgroundColor: "var(--color-scan-border)" }}
@@ -132,6 +177,57 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         </AnimatePresence>
       </div>
 
+      {/* De 3 kansen bouwen zich op (titels), als teaser voor het rapport */}
+      {kansen.length > 0 && (
+        <div className="mt-12 w-full">
+          <p
+            className="mb-4 text-center text-xs uppercase tracking-[0.2em]"
+            style={{ color: "var(--color-scan-muted)" }}
+          >
+            Wat ik alvast zie
+          </p>
+          <div className="flex flex-col gap-3">
+            {kansen.map((k, i) => (
+              <motion.div
+                key={k.titel}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.5 }}
+                className="flex items-center gap-3 rounded-xl border px-4 py-3"
+                style={{
+                  borderColor: "var(--color-scan-border)",
+                  backgroundColor: "var(--color-scan-linnen)",
+                }}
+              >
+                <span
+                  className="text-sm font-bold"
+                  style={{ color: "var(--color-scan-terracotta)" }}
+                >
+                  0{i + 1}
+                </span>
+                <span
+                  className="text-sm font-medium"
+                  style={{ color: "var(--color-scan-drukinkt)" }}
+                >
+                  {k.titel}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {traag && !fout && (
+        <p
+          className="mt-8 text-center text-sm"
+          style={{ color: "var(--color-scan-muted)" }}
+        >
+          {heelTraag
+            ? "Het duurt wat langer dan normaal, een grote site kost me meer tijd. Blijf nog heel even."
+            : "Ik lees je site grondig, dit kan tot een halve minuut duren."}
+        </p>
+      )}
+
       {fout && (
         <p
           className="mt-8 text-center text-sm"
@@ -141,5 +237,20 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         </p>
       )}
     </main>
+  )
+}
+
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="rounded-full border px-3 py-1 text-xs font-medium"
+      style={{
+        borderColor: "var(--color-scan-border)",
+        color: "var(--color-scan-drukinkt)",
+        backgroundColor: "var(--color-scan-linnen)",
+      }}
+    >
+      {children}
+    </span>
   )
 }

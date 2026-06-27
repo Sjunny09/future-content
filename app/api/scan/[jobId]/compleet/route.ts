@@ -12,7 +12,13 @@ const Payload = z
   .object({
     naam: z.string().min(2).max(80),
     email: z.string().email().max(200),
-    telefoon: z.string().max(40).optional(),
+    telefoon: z
+      .string()
+      .max(40)
+      .optional()
+      .refine((v) => !v || v.replace(/\D/g, "").length >= 8, {
+        message: "telefoon-ongeldig",
+      }),
     vraagIndex: z.number().int().min(0).max(10),
     vraagId: z.string().min(1).max(16),
     vraagTitel: z.string().min(1).max(500),

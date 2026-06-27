@@ -20,7 +20,9 @@ export async function GET(
     select: {
       id: true,
       status: true,
+      url: true,
       observatiesJson: true,
+      analyseJson: true,
       readyAt: true,
     },
   })
@@ -33,7 +35,13 @@ export async function GET(
     {
       jobId: job.id,
       status: job.status,
+      url: job.url,
       observaties: Array.isArray(job.observatiesJson) ? job.observatiesJson : [],
+      // Pas gevuld zodra Sonnet klaar is; daarvoor null (wachtscherm toont dan niets).
+      analyse:
+        job.analyseJson && typeof job.analyseJson === "object"
+          ? job.analyseJson
+          : null,
       klaar: job.status === "ready" || job.status === "completed",
       gefaald: job.status === "failed",
     },

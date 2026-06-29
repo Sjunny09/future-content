@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Archivo } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -15,6 +15,13 @@ const inter = Inter({
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
+  display: "swap",
+});
+
+// Huisstijl body-font, gebruikt door de /scan-flow (via --font-archivo).
+const archivo = Archivo({
+  subsets: ["latin"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -131,7 +138,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="nl" className={`${inter.variable} ${playfair.variable} ${archivo.variable}`}>
       <head>
         <script
           type="application/ld+json"

@@ -102,14 +102,19 @@
   }
 }
 
-/* Scan-flow design tokens (linnen/terracotta print-stijl). Alleen gebruikt
+/* Scan-flow design tokens, afgestemd op de Future Content huisstijl
+   (warm aards palet, Playfair koppen + Archivo body). Alleen gebruikt
    door de /scan-pagina's; raakt de rest van de site niet. */
 :root {
-  --color-scan-linnen: #F4F1EA;
-  --color-scan-drukinkt: #1C1B17;
-  --color-scan-terracotta: #B8472A;
-  --color-scan-terracotta-hover: #9E3D24;
-  --color-scan-muted: #6B655A;
-  --color-scan-border: #E4DFD3;
+  --color-scan-linnen: #F3ECE0;
+  --color-scan-drukinkt: #2A2218;
+  --color-scan-terracotta: #B45F38;
+  --color-scan-terracotta-hover: #964A2C;
+  --color-scan-muted: #6E6151;
+  --color-scan-border: #E4D8C6;
   --color-scan-error: #8B2C1C;
+  /* De scan-pagina's verwijzen naar deze font-vars; we koppelen ze aan de
+     huisstijl-fonts uit de root-layout (Playfair koppen, Archivo body). */
+  --font-fraunces: var(--font-playfair);
+  --font-plex: var(--font-archivo);
 }

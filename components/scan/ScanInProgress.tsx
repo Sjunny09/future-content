@@ -129,7 +129,24 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
   const heelTraag = seconden >= 60 && !klaarRef.current
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 py-16">
+    <main className="relative mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center overflow-hidden px-6 py-16">
+      {/* Subtiele scan-sweep over het scherm, in de scan-stijl (één terracotta-accent) */}
+      {!fout && (
+        <motion.div
+          aria-hidden
+          className="pointer-events-none absolute left-0 right-0 h-[2px]"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, var(--color-scan-terracotta), transparent)",
+            opacity: 0.18,
+            filter: "blur(1px)",
+          }}
+          initial={{ top: "0%" }}
+          animate={{ top: ["0%", "100%"] }}
+          transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      )}
+
       {/* Bedrijfsspecifiek: domein + branche, zodra de analyse er is */}
       <AnimatePresence>
         {(domein || analyse?.branche) && (
@@ -145,15 +162,14 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
       </AnimatePresence>
 
       <div
-        className="mb-10 h-1 w-32 overflow-hidden rounded-full"
+        className="relative mb-10 h-1 w-32 overflow-hidden rounded-full"
         style={{ backgroundColor: "var(--color-scan-border)" }}
       >
-        <div
-          className="h-full animate-pulse"
-          style={{
-            backgroundColor: "var(--color-scan-terracotta)",
-            width: "60%",
-          }}
+        <motion.div
+          className="absolute inset-y-0 w-1/3 rounded-full"
+          style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+          animate={{ x: ["-40%", "260%"] }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FloatingCTA from "@/components/layout/FloatingCTA";
+import { HideOnScan } from "@/components/layout/HideOnScan";
 import { SITE } from "@/lib/constants";
 
 const inter = Inter({
@@ -146,10 +147,14 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <Navbar />
+        <HideOnScan>
+          <Navbar />
+        </HideOnScan>
         <main>{children}</main>
-        <Footer />
-        <FloatingCTA />
+        <HideOnScan>
+          <Footer />
+          <FloatingCTA />
+        </HideOnScan>
       </body>
     </html>
   );

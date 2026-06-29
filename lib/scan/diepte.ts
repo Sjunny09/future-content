@@ -160,6 +160,25 @@ export async function kiesDiepteVraag(args: {
   return null
 }
 
+// Vast vangnet: branche-neutrale, kwalificerende diepe vragen. Worden gebruikt
+// als het AI-model (tijdelijk) niks bruikbaars teruggeeft, zodat de uitgebreide
+// scan NOOIT vroegtijdig na één vraag stopt. Acht stuks: genoeg om de ondergrens
+// te halen, ook als de AI helemaal niets levert.
+const DIEPTE_VANGNET: Vraag[] = [
+  { id: "DVF1", thema: "operatie", type: "enkelkeuze", titel: "Hoeveel tijd gaat er per week ongeveer zitten in het werk dat we net bespraken?", opties: ["Minder dan 2 uur", "2 tot 5 uur", "5 tot 10 uur", "Meer dan 10 uur"] },
+  { id: "DVF2", thema: "tools", type: "open", titel: "Met welke systemen of tools doen jullie dit nu?" },
+  { id: "DVF3", thema: "operatie", type: "enkelkeuze", titel: "Hoe vaak komt dit werk terug?", opties: ["Elke dag", "Een paar keer per week", "Een paar keer per maand", "Wisselt sterk"] },
+  { id: "DVF4", thema: "operatie", type: "enkelkeuze", titel: "Hoeveel mensen binnen je bedrijf raakt dit werk?", opties: ["Alleen ik", "Een paar collega's", "Het hele team", "Ook onze klanten"] },
+  { id: "DVF5", thema: "voorbereiding", type: "open", titel: "Wat heb je tot nu toe al geprobeerd om dit makkelijker te maken?" },
+  { id: "DVF6", thema: "voorbereiding", type: "enkelkeuze", titel: "Wie beslist er mee over zoiets aanpakken?", opties: ["Ik beslis zelf", "Samen met collega's", "Een leidinggevende of eigenaar", "Weet ik nog niet"] },
+  { id: "DVF7", thema: "voorbereiding", type: "enkelkeuze", titel: "Hoe snel zouden jullie hier iets aan willen veranderen?", opties: ["Zo snel mogelijk", "Binnen een paar maanden", "Ergens dit jaar", "Geen haast"] },
+  { id: "DVF8", thema: "wens", type: "open", titel: "Wat zou het je opleveren als dit grotendeels vanzelf zou gaan?" },
+]
+
+function kiesDiepteVangnet(gesteldeIds: string[]): Vraag | null {
+  return DIEPTE_VANGNET.find((v) => !gesteldeIds.includes(v.id)) ?? null
+}
+
 // Bepaalt de volgende diepe vraag gegeven de huidige staat. Persisteert NIET; de
 // caller schrijft diepteVragenJson. Geeft null als de diepe scan klaar is.
 export async function volgendeDiepteVraag(args: {
@@ -177,15 +196,24 @@ export async function volgendeDiepteVraag(args: {
 
   const aantalDiep = diepAntwoordIds.size
   if (aantalDiep >= MAX_DIEPTE) return null
-  if (!analyse) return null
 
-  return kiesDiepteVraag({
-    analyse,
-    antwoorden,
-    gesteldeIds: gesteldeVragen.map((v) => v.id),
-    slot: aantalDiep + 1,
-    bijnaKlaar: aantalDiep >= MIN_DIEPTE,
-  })
+  const gesteldeIds = gesteldeVragen.map((v) => v.id)
+
+  if (analyse) {
+    const aiVraag = await kiesDiepteVraag({
+      analyse,
+      antwoorden,
+      gesteldeIds,
+      slot: aantalDiep + 1,
+      bijnaKlaar: aantalDiep >= MIN_DIEPTE,
+    })
+    if (aiVraag) return aiVraag
+  }
+
+  // AI gaf niks bruikbaars (of geen analyse). Onder de ondergrens stoppen we
+  // NOOIT: een vaste vangnet-vraag houdt de scan op gang tot minstens MIN_DIEPTE.
+  if (aantalDiep < MIN_DIEPTE) return kiesDiepteVangnet(gesteldeIds)
+  return null
 }
 
 // ─────────────────────────────────────────

@@ -346,8 +346,8 @@ function OpenTekst({
       }}
       disabled={uitgeschakeld}
       rows={4}
-      placeholder="Typ hier rustig — 1 à 2 zinnen is genoeg."
-      className="w-full resize-none rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2"
+      placeholder="Typ hier rustig. 1 à 2 zinnen is genoeg."
+      className="w-full resize-none rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
       style={{
         borderColor: "var(--color-scan-border)",
         backgroundColor: "var(--color-scan-linnen)",
@@ -383,7 +383,7 @@ function EmailNaam({
         onChange={(e) => opWijzig({ ...waarde, naam: e.target.value })}
         disabled={uitgeschakeld}
         placeholder="Je voornaam"
-        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none"
+        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
         style={veldStyle}
       />
       <input
@@ -394,7 +394,7 @@ function EmailNaam({
         onChange={(e) => opWijzig({ ...waarde, email: e.target.value })}
         disabled={uitgeschakeld}
         placeholder="je@bedrijf.nl"
-        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none"
+        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
         style={veldStyle}
       />
       <input
@@ -411,7 +411,7 @@ function EmailNaam({
         }}
         disabled={uitgeschakeld}
         placeholder="Telefoonnummer, zodat ik je kan bellen"
-        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none"
+        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
         style={veldStyle}
       />
     </div>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 import { track } from "@/lib/scan/analytics/plausible"
@@ -245,12 +246,21 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
       )}
 
       {fout && (
-        <p
-          className="mt-8 text-center text-sm"
-          style={{ color: "var(--color-scan-error)" }}
-        >
-          {fout}
-        </p>
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <p
+            className="text-center text-sm"
+            style={{ color: "var(--color-scan-error)" }}
+          >
+            {fout}
+          </p>
+          <Link
+            href="/scan"
+            className="rounded-md px-6 py-2.5 text-base font-medium text-white transition hover:opacity-90"
+            style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+          >
+            Opnieuw proberen
+          </Link>
+        </div>
       )}
     </main>
   )

@@ -2,6 +2,7 @@ import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
 import { db } from "@/lib/scan/db"
 import { ExitIntentModal } from "@/components/scan/ExitIntentModal"
+import { BOOKING } from "@/lib/constants"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
 type Params = Promise<{ jobId: string }>
@@ -37,7 +38,7 @@ export default async function KlaarPagina({ params }: { params: Params }) {
   }
 
   const voornaam = job.lead?.naam?.split(" ")[0] ?? null
-  const calUrl = process.env.NEXT_PUBLIC_CAL_KENNISMAKING_URL ?? null
+  const calUrl = `https://${BOOKING.calHost}/${BOOKING.calUser}/${BOOKING.calEvent}?embed=true&theme=light`
   const analyse = (job.analyseJson ?? null) as SiteAnalyse | null
   const domein = domeinUit(job.url)
   const kansen = Array.isArray(analyse?.kansen) ? analyse.kansen.slice(0, 3) : []

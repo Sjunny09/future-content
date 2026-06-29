@@ -55,7 +55,7 @@ export default async function DiepteKlaarPagina({ params }: { params: Params }) 
           <iframe
             src={calSrc}
             title="Plan een afspraak"
-            className="h-[640px] w-full"
+            className="h-[560px] w-full sm:h-[600px] md:h-[640px]"
             style={{ border: "none" }}
           />
         </div>

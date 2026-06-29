@@ -56,8 +56,12 @@ export default async function DieptePagina({ params }: { params: Params }) {
       diepAntwoordIds,
     })
     if (!nieuw) {
-      // Niks meer te vragen -> naar de afspraak (afronden gebeurt via de flow,
-      // maar voor de zekerheid sturen we door naar de klaar-pagina).
+      // Niks meer te vragen -> markeer voltooid en door naar de afspraak.
+      // Voorkomt een redirect-lus met de klaar-pagina (die "voltooid" eist).
+      await db.scanJob.update({
+        where: { id: jobId },
+        data: { diepteStatus: "voltooid" },
+      })
       redirect(`/scan/diepte/klaar/${jobId}`)
     }
     await db.scanJob.update({

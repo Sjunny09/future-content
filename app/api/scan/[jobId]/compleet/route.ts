@@ -16,6 +16,7 @@ const Payload = z
       .string()
       .max(40)
       .optional()
+      .transform((v) => v?.trim() || undefined)
       .refine((v) => !v || v.replace(/\D/g, "").length >= 8, {
         message: "telefoon-ongeldig",
       }),

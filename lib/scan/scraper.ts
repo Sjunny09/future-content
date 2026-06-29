@@ -122,6 +122,11 @@ async function scrapeMetCheerio(url: string): Promise<SiteData> {
     const body = $("main").text() || $("body").text()
     const platteTekst = body.replace(/\s+/g, " ").trim()
     const hoofdtekst = stripPII(platteTekst).slice(0, MAX_TEKST)
+    // Zelfde drempel als Jina: een lege/JS-only site (HTTP 200 maar geen
+    // leesbare tekst) moet falen, niet een rapport uit het niets opleveren.
+    if (hoofdtekst.trim().length < 80) {
+      throw new Error("cheerio-te-leeg")
+    }
     const quotes = kiesQuotes(hoofdtekst)
 
     return {

@@ -43,6 +43,11 @@ model ScanJob {
   analyseJson     Json?  // { branche, niche, tone, kansen: [...] }
   vragenJson      Json?  // Array van 6 vraag-ids uit bibliotheek, Haiku-gekozen
 
+  // Uitgebreide (diepte) scan — optionele tweede ronde, dieper dan de quickscan
+  diepteStatus     String?  // null = niet gestart, "bezig", "voltooid"
+  diepteVragenJson Json?    // Logboek van de diepe vragen (zoals vragenJson)
+  diagnoseJson     Json?    // { advies: "bouw"|"training"|"zelf", onderbouwing, ... }
+
   // Lead-koppeling
   leadId       String?
   lead         Lead?   @relation(fields: [leadId], references: [id])

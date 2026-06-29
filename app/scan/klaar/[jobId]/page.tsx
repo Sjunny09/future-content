@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
 import { db } from "@/lib/scan/db"
 import { ExitIntentModal } from "@/components/scan/ExitIntentModal"
@@ -24,6 +25,7 @@ export default async function KlaarPagina({ params }: { params: Params }) {
       status: true,
       url: true,
       analyseJson: true,
+      diepteStatus: true,
       lead: { select: { naam: true } },
     },
   })
@@ -39,6 +41,7 @@ export default async function KlaarPagina({ params }: { params: Params }) {
   const analyse = (job.analyseJson ?? null) as SiteAnalyse | null
   const domein = domeinUit(job.url)
   const kansen = Array.isArray(analyse?.kansen) ? analyse.kansen.slice(0, 3) : []
+  const diepteVoltooid = job.diepteStatus === "voltooid"
 
   return (
     <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 py-20">
@@ -129,6 +132,56 @@ export default async function KlaarPagina({ params }: { params: Params }) {
             </div>
           )}
         </section>
+      )}
+
+      {/* Opt-in voor de uitgebreide scan (gratis, eindigt in een afspraak) */}
+      {diepteVoltooid ? (
+        <div
+          className="mt-10 rounded-2xl border p-6"
+          style={{
+            borderColor: "var(--color-scan-border)",
+            backgroundColor: "var(--color-scan-linnen)",
+          }}
+        >
+          <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+            Je deed de uitgebreide scan, top.
+          </p>
+          <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
+            Plan gerust een half uur met me om het live te bespreken.
+          </p>
+          <Link
+            href={`/scan/diepte/klaar/${jobId}`}
+            className="mt-4 inline-flex items-center gap-2 rounded-md px-5 py-3 text-base font-medium text-white"
+            style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+          >
+            Plan een afspraak
+          </Link>
+        </div>
+      ) : (
+        <div
+          className="mt-10 rounded-2xl border p-6"
+          style={{
+            borderColor: "var(--color-scan-border)",
+            backgroundColor: "var(--color-scan-linnen)",
+          }}
+        >
+          <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+            Wil je dat ik dieper kijk?
+          </p>
+          <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
+            De uitgebreide scan duurt 10 tot 15 minuten en gaat veel dieper op je
+            bedrijf in. Daarna weet je of er iets te bouwen valt of dat een training
+            genoeg is, en plan je direct een half uur met me in om het live te
+            bespreken. Gratis en vrijblijvend.
+          </p>
+          <Link
+            href={`/scan/diepte/${jobId}`}
+            className="mt-4 inline-flex items-center gap-2 rounded-md px-5 py-3 text-base font-medium text-white"
+            style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+          >
+            Start de uitgebreide scan
+          </Link>
+        </div>
       )}
 
       <p

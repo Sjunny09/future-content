@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
 import { track } from "@/lib/scan/analytics/plausible"
 
-type Antwoord = string | string[] | { naam: string; email: string; telefoon: string }
+export type Antwoord = string | string[] | { naam: string; email: string; telefoon: string }
 
 type Props = {
   jobId: string
@@ -166,7 +166,7 @@ function Kop({ slot }: { slot: number }) {
 // Per-type velden
 // ─────────────────────────────────────────
 
-function VraagVeld({
+export function VraagVeld({
   vraag,
   waarde,
   opWijzig,
@@ -422,7 +422,7 @@ function EmailNaam({
 // Validatie per vraag-type
 // ─────────────────────────────────────────
 
-function heeftGeldigAntwoord(
+export function heeftGeldigAntwoord(
   vraag: Vraag,
   waarde: Antwoord | undefined,
 ): boolean {

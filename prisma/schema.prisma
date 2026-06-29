@@ -1,0 +1,157 @@
+// Future Content — Quickscan database schema
+// Zie docs/quickscan/ voor volledige context
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────
+// SCAN / LEAD FUNNEL
+// ─────────────────────────────────────────
+
+enum ScanStatus {
+  queued       // Aangemaakt, nog niet gestart
+  scraping     // Site wordt gelezen
+  analysing    // Claude analyseert
+  ready        // Analyse klaar, vragen-flow kan starten
+  answering    // Klant beantwoordt vragen
+  completed    // Volledig afgerond
+  failed       // Fout — fallback naar handmatige flow
+}
+
+// ScanJob = één sessie van begin (URL ingevoerd) tot eind (6e vraag beantwoord).
+// Bevat alles: gescrapede data, Claude-analyse, observaties voor slides, gekozen vragen.
+model ScanJob {
+  id          String     @id @default(cuid())
+  status      ScanStatus @default(queued)
+  url         String     // De ingevulde website-URL
+  ipHash      String     // Gehashed IP voor rate-limiting (geen rauwe IP-opslag)
+
+  // Scrape-resultaat
+  siteDataJson   Json?   // { title, description, paginas: [...] }
+  scrapeBron     String? // "jina" | "cheerio"
+  scrapeFaaldeOp String? // Foutmelding als scrape mislukte
+
+  // Claude-output
+  observatiesJson Json?  // ["Ik lees je homepage…", "Ik kijk naar je toon…", ...]
+  analyseJson     Json?  // { branche, niche, tone, kansen: [...] }
+  vragenJson      Json?  // Array van 6 vraag-ids uit bibliotheek, Haiku-gekozen
+
+  // Uitgebreide (diepte) scan — optionele tweede ronde, dieper dan de quickscan
+  diepteStatus     String?  // null = niet gestart, "bezig", "voltooid"
+  diepteVragenJson Json?    // Logboek van de diepe vragen (zoals vragenJson)
+  diagnoseJson     Json?    // { advies: "bouw"|"training"|"zelf", onderbouwing, ... }
+
+  // Lead-koppeling
+  leadId       String?
+  lead         Lead?   @relation(fields: [leadId], references: [id])
+
+  // Timings (voor performance-observability)
+  startedAt    DateTime  @default(now())
+  scrapedAt    DateTime?
+  analysedAt   DateTime?
+  readyAt      DateTime?
+  completedAt  DateTime?
+
+  antwoorden   Answer[]
+
+  @@index([status])
+  @@index([startedAt])
+}
+
+// Lead = de contactgegevens die pas bij vraag 6 worden opgehaald.
+// Apart van ScanJob zodat we later makkelijk "alle leads" kunnen filteren
+// zonder door scan-metadata te moeten spitten.
+model Lead {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  naam         String?
+  telefoon     String?
+  bedrijfsnaam String?
+
+  // Anonimisering na 18 maanden (zie docs/quickscan/03_ceo_synthese.md §4.1)
+  geanonimiseerd Boolean @default(false)
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  scans        ScanJob[]
+  loomVideos   LoomVideo[]
+  payments     Payment[]
+
+  @@index([email])
+  @@index([createdAt])
+}
+
+// Antwoorden op de 6 vragen — één row per vraag
+model Answer {
+  id         String   @id @default(cuid())
+  vraagId    String   // Bijv. "B1", "F3" uit bibliotheek
+  vraagTitel String   // Snapshot (vragen-bibliotheek kan evolueren)
+  waarde     Json     // string | string[] afhankelijk van vraag-type
+  createdAt  DateTime @default(now())
+
+  scanJobId  String
+  scanJob    ScanJob  @relation(fields: [scanJobId], references: [id], onDelete: Cascade)
+
+  @@index([scanJobId])
+}
+
+// Follow-up tracking voor de 24u Loom-belofte
+model LoomVideo {
+  id            String    @id @default(cuid())
+  leadId        String
+  lead          Lead      @relation(fields: [leadId], references: [id])
+
+  verstuurdOp   DateTime? // Nog niet verstuurd = null
+  loomUrl       String?
+  herinneringVerstuurd Boolean @default(false) // 20u-trigger mail "morgen stuur ik"
+  deadline      DateTime  // 24u na scan-completion; 48u als herinnering uit
+
+  createdAt     DateTime  @default(now())
+
+  @@index([leadId])
+  @@index([deadline])
+  @@index([verstuurdOp])
+}
+
+// ─────────────────────────────────────────
+// BETALING (Sprint 4)
+// ─────────────────────────────────────────
+
+enum PaymentStatus {
+  pending
+  paid
+  failed
+  refunded
+}
+
+enum PaymentProvider {
+  mollie
+  stripe
+}
+
+model Payment {
+  id           String          @id @default(cuid())
+  provider     PaymentProvider
+  providerId   String          // Mollie/Stripe payment ID
+  bedragCent   Int             // €495 = 49500
+  status       PaymentStatus   @default(pending)
+  omschrijving String          // "Pilotweek Future Content"
+
+  leadId       String
+  lead         Lead            @relation(fields: [leadId], references: [id])
+
+  createdAt    DateTime        @default(now())
+  paidAt       DateTime?
+
+  @@unique([provider, providerId])
+  @@index([leadId])
+  @@index([status])
+}

@@ -101,3 +101,15 @@
     text-underline-offset: 4px;
   }
 }
+
+/* Scan-flow design tokens (linnen/terracotta print-stijl). Alleen gebruikt
+   door de /scan-pagina's; raakt de rest van de site niet. */
+:root {
+  --color-scan-linnen: #F4F1EA;
+  --color-scan-drukinkt: #1C1B17;
+  --color-scan-terracotta: #B8472A;
+  --color-scan-terracotta-hover: #9E3D24;
+  --color-scan-muted: #6B655A;
+  --color-scan-border: #E4DFD3;
+  --color-scan-error: #8B2C1C;
+}

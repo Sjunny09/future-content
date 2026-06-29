@@ -314,3 +314,11 @@ export const NAV_LINKS = [
   { href: "/blog", label: "Blog" },
   { href: "/over", label: "Over" },
 ];
+
+// ─── BOOKING (Cal.com kennismaking, gebruikt door de /scan-flow) ─────
+export const BOOKING = {
+  calUser: "futurecontent",
+  calEvent: "30min",
+  calHost: "cal.eu", // John's Cal.com-account staat op de EU-regio (cal.eu)
+  duration: "30 minuten",
+};

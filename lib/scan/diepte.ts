@@ -51,7 +51,7 @@ Harde regels:
 - Type: meestal "enkelkeuze" of "meerkeuze" met 3 tot 6 concrete, branche-relevante opties. Af en toe "open" voor iets dat echt tekst nodig heeft. De laatste optie van een keuzevraag mag "Iets anders" zijn.
 - Bouw voort op het laatste antwoord. Stel nooit een vraag die al gesteld is (quickscan of diepte).
 - Nederlands, tutoyeren, geen jargon, geen verkooppraat, geen em-dashes.
-- Als je genoeg hebt om de bouw/training/zelf-inschatting te maken: zet genoeg=true.
+- Zet genoeg ALLEEN op true als je in het bericht expliciet leest dat afronden mag. Zolang die instructie er niet staat, bedenk je altijd een volgende vraag (nooit genoeg=true).
 
 Output uitsluitend via de tool diepte_vraag.`
 
@@ -109,51 +109,53 @@ export async function kiesDiepteVraag(args: {
   bijnaKlaar?: boolean
 }): Promise<Vraag | null> {
   const { analyse, antwoorden, slot, bijnaKlaar = false } = args
-  try {
-    const response = await client().messages.create({
-      model: MODEL_VRAGEN,
-      max_tokens: 400,
-      system: [{ type: "text", text: DIEPTE_SYSTEEM, cache_control: { type: "ephemeral" } }],
-      tools: [DIEPTE_TOOL],
-      tool_choice: { type: "tool", name: "diepte_vraag" },
-      messages: [
-        {
-          role: "user",
-          content: [
-            `Diepe vraag die je nu bedenkt: nummer ${slot}`,
-            "",
-            "SiteAnalyse:",
-            `- branche: ${analyse.branche}`,
-            `- niche: ${analyse.niche}`,
-            "- kansen:",
-            ...analyse.kansen.map((k) => `  • ${k.titel}: ${k.beschrijving}`),
-            "",
-            "Antwoorden tot nu toe (quickscan + diepte):",
-            ...formatteerAntwoorden(antwoorden),
-            ...(bijnaKlaar
-              ? [
-                  "",
-                  "LET OP: er is al genoeg basis. Stel alleen nog een vraag als die echt iets toevoegt voor de bouw/training-inschatting, anders genoeg=true.",
-                ]
-              : []),
-          ].join("\n"),
-        },
-      ],
-    })
-    const blok = response.content.find(
-      (b): b is Anthropic.ToolUseBlock => b.type === "tool_use",
-    )
-    const input = (blok?.input ?? {}) as {
-      genoeg?: boolean
-      titel?: string
-      type?: string
-      opties?: string[]
+
+  const content = [
+    `Diepe vraag die je nu bedenkt: nummer ${slot}`,
+    "",
+    "SiteAnalyse:",
+    `- branche: ${analyse.branche}`,
+    `- niche: ${analyse.niche}`,
+    "- kansen:",
+    ...analyse.kansen.map((k) => `  • ${k.titel}: ${k.beschrijving}`),
+    "",
+    "Antwoorden tot nu toe (quickscan + diepte):",
+    ...formatteerAntwoorden(antwoorden),
+    "",
+    bijnaKlaar
+      ? "Er is nu genoeg basis. Je mag afronden: zet genoeg=true als een volgende vraag echt niks meer toevoegt voor de bouw/training-inschatting. Anders nog een gerichte vraag."
+      : "Er zijn nog te weinig vragen gesteld. Stel sowieso een volgende, diepere vraag en zet genoeg NIET op true.",
+  ].join("\n")
+
+  // Onder de ondergrens (bijnaKlaar=false) negeren we 'genoeg' en proberen we
+  // desnoods een tweede keer, zodat de diepe scan nooit na één vraag stopt.
+  const maxPogingen = bijnaKlaar ? 1 : 2
+  for (let poging = 0; poging < maxPogingen; poging++) {
+    try {
+      const response = await client().messages.create({
+        model: MODEL_VRAGEN,
+        max_tokens: 400,
+        system: [{ type: "text", text: DIEPTE_SYSTEEM, cache_control: { type: "ephemeral" } }],
+        tools: [DIEPTE_TOOL],
+        tool_choice: { type: "tool", name: "diepte_vraag" },
+        messages: [{ role: "user", content }],
+      })
+      const blok = response.content.find(
+        (b): b is Anthropic.ToolUseBlock => b.type === "tool_use",
+      )
+      const input = (blok?.input ?? {}) as {
+        genoeg?: boolean
+        titel?: string
+        type?: string
+        opties?: string[]
+      }
+      // 'genoeg' telt alleen als afronden expliciet mag.
+      if (bijnaKlaar && input.genoeg) return null
+      const v = bouwDiepteVraag(input, slot)
+      if (v) return v
+    } catch {
+      // probeer het eventueel nog een keer
     }
-    if (input.genoeg) return null
-    const v = bouwDiepteVraag(input, slot)
-    if (v) return v
-  } catch {
-    // generatie faalde -> behandel als klaar (geen vangnet-pool voor de diepe scan)
   }
   return null
 }

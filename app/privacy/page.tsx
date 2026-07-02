@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { SITE } from "@/lib/constants"
 
 export const metadata = {
   title: "Privacy",
@@ -89,10 +90,10 @@ export default function PrivacyPagina() {
           naar{" "}
           <a
             className="underline underline-offset-4"
-            href="mailto:privacy@future-content.nl"
+            href={`mailto:${SITE.email}`}
             style={{ color: "var(--color-scan-terracotta)" }}
           >
-            privacy@future-content.nl
+            {SITE.email}
           </a>{" "}
           en binnen 72 uur is alles weg. Je krijgt een bevestiging.
         </p>
@@ -100,13 +101,13 @@ export default function PrivacyPagina() {
 
       <Sectie titel="Verantwoordelijke">
         <p>
-          Future Content (eenmanszaak), Bladel, KvK 86880675. Contact:{" "}
+          Future Content (eenmanszaak), Bladel, KvK {SITE.kvk}. Contact:{" "}
           <a
             className="underline underline-offset-4"
-            href="mailto:john@future-content.nl"
+            href={`mailto:${SITE.email}`}
             style={{ color: "var(--color-scan-terracotta)" }}
           >
-            john@future-content.nl
+            {SITE.email}
           </a>
           .
         </p>

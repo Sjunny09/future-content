@@ -2,7 +2,7 @@ export const SITE = {
   name: "Future Content",
   tagline: "Eerst zien welk werk repeterend is. Dan pas bouwen.",
   description:
-    "Future Content bouwt en beheert AI en automatiseringen voor MKB-bedrijven in de Kempen, Eindhoven, Tilburg en Breda. John komt langs, brengt je proces in kaart en bouwt daar AI op die jouw bedrijf snapt. Modulair platform met branche-skin. Gebouwd én beheerd.",
+    "Future Content bouwt en beheert AI en automatiseringen voor MKB-bedrijven in heel Brabant, vanuit Bladel. John komt langs, brengt je proces in kaart en bouwt daar AI op die jouw bedrijf snapt. Modulair platform met branche-skin. Gebouwd én beheerd.",
   url: "https://future-content.nl",
   address: "Bladel, Noord-Brabant",
   city: "Bladel",
@@ -20,8 +20,8 @@ export const SITE = {
 export const SOCIALS = {
   instagram: {
     label: "Instagram",
-    handle: "@future.cntnt.nl",
-    url: "https://www.instagram.com/future.cntnt.nl",
+    handle: "@future.cntnt",
+    url: "https://www.instagram.com/future.cntnt",
   },
 };
 
@@ -483,14 +483,12 @@ export const AI_SERVICES = [
   },
 ];
 
-// De werkwijze in 6 stappen, op basis van John's geleefde process (uit interview 28 mei)
+// De werkwijze in 4 stappen, op basis van John's geleefde process (uit interview 28 mei)
 export const METHOD_STEPS = [
-  { n: "01", title: "Workshop op locatie", desc: "Een halve dag bij jullie. Interactief, samen aan de slag op jullie eigen taken. Vanaf €750 ex BTW (60% terug via SLIM-subsidie)." },
-  { n: "02", title: "Online kennismaking", desc: "30 minuten, vrijblijvend. Ik kom met een korte analyse van je bedrijf en concrete ideeën." },
-  { n: "03", title: "Intake-sessie", desc: "Diep in je bedrijf. Welk werk komt elke week terug, welk werk kost het meest tijd, en wat hoort thuis bij wie." },
-  { n: "04", title: "Tweede brein", desc: "Een gestructureerde kennislaag over je processen, klanten en toon. Hierdoor is AI niet generiek meer." },
-  { n: "05", title: "Plannen kiezen", desc: "Smart mailbox, route-optimalisatie, orderintake vanuit mail, content-generatie, chatbot. Wat past, wat verdient zich terug." },
-  { n: "06", title: "Bouwen en beheren", desc: "Ik bouw het, jij gebruikt het. Maandelijks dashboard waarop je ziet wat het kost en wat het oplevert." },
+  { n: "01", title: "Kennismaking", desc: "Bel me, app me of nodig me uit voor een vrijblijvend gesprek. Even kijken of het klikt." },
+  { n: "02", title: "Workshop op locatie", desc: "Interactief, met jullie eigen taken erbij. We gaan samen je bedrijf in: welk werk komt elke week terug, wat kost de meeste tijd. Aan het eind lever ik een werkend proof of concept op met jullie eigen data." },
+  { n: "03", title: "Vervolg, je tweede brein", desc: "Na de workshop kiezen we samen de plannen die de meeste tijd opleveren: slimme mailbox, route-optimalisatie, order-intake. Dat wordt meteen de basis voor je tweede brein." },
+  { n: "04", title: "Offerte, bouwen en beheren", desc: "Je krijgt een heldere offerte. Zeg je ja, dan bouw ik het én houd ik het draaiend." },
 ];
 
 // Bewijs: Koningsdag eerst als sterkste verhaal met concrete getallen (uit interview).
@@ -531,14 +529,14 @@ export const PROOF_POINTS = [
 export const TRAINING = {
   title: "De training is voor de meeste bedrijven de eerste stap",
   lead: "Een halve dag bij jullie op kantoor waarin we niet naar een scherm staren maar samen iets gaan bouwen op jullie eigen taken. Geen droge theorie. Aan het einde van de middag weten jullie of het zinvol is om er samen iets concreets van te maken, of dat jullie het zelf kunnen voortzetten.",
-  price: "vanaf €750 ex BTW",
-  period: "per dagdeel, op locatie (60% terug via SLIM-subsidie)",
+  price: "op aanvraag",
+  period: "prijs per klant, op locatie",
   features: [
     "Halve dag (4 uur) bij jullie op kantoor",
     "Hands-on met jullie eigen taken en tools",
     "Heldere AI-richtlijnen, veilig en AVG-bewust",
-    "Afsluiting met drie concrete kansen, op papier, ook als je daarna niks met mij doet",
-    "Scholingsplan-document SLIM-ready, voor 60% subsidie aanvraag",
+    "Afsluiting met een werkend proof of concept op jullie eigen data, ook als je daarna niks met mij doet",
+    "Mogelijk (deels) te financieren via de SLIM-subsidie voor scholing, zie /blog/slim-subsidie-aanvragen",
   ],
 };
 
@@ -726,7 +724,7 @@ export const BRANCHES: Branche[] = [
     skinSummary: "Content-engine die video omzet naar Funda + social + brochure. Plus leadopvolging na bezichtiging.",
     casusStand: "Pit Makelaars in Veldhoven werkt al met mij voor video. AI-content-engine is in voorbereiding.",
     casusBewijs:
-      "Zes jaar videograaf voor makelaars met ~200 vastgoedklussen. Vaste partner Pit Makelaars in Veldhoven (5,0 op Google). De content-engine die ik bouw voor dude.whereismycamper is dezelfde architectuur die op een rondleiding-video gaat draaien.",
+      "Jarenlang videograaf voor makelaars, met vastgoedvideo's als vaste stroom werk. Vaste partner Pit Makelaars in Veldhoven (5,0 op Google). De content-engine die ik bouw voor dude.whereismycamper is dezelfde architectuur die op een rondleiding-video gaat draaien.",
     casusAanbod:
       "Mijn eerste paying klant voor de content-engine-skin krijgt de workshop terug als korting op de bouwfase. Ideaal als je al met mij voor video werkt en de stap naar AI wil maken.",
     featuredOnHomepage: true,

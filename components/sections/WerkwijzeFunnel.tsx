@@ -4,10 +4,11 @@ import { motion } from "framer-motion";
 import { METHOD_STEPS } from "@/lib/constants";
 
 /**
- * Editorial SVG-illustratie van de 6-stappen-werkwijze van Future Content.
- * Verticale trechter: workshop bovenaan (breed instappen) tot bouwen+beheren
+ * Editorial SVG-illustratie van de stappen-werkwijze van Future Content.
+ * Verticale trechter: kennismaking bovenaan (breed instappen) tot bouwen+beheren
  * onderaan (concreet leveren). Conform DESIGN.md: één accent (gold), warm
- * off-white, near-black, geen gradients of glassmorphism.
+ * off-white, near-black, geen gradients of glassmorphism. Aantal stappen en
+ * de trechterbreedtes volgen automatisch METHOD_STEPS uit lib/constants.ts.
  */
 export const WerkwijzeFunnel: React.FC = () => {
   const totalWidth = 480;
@@ -15,9 +16,11 @@ export const WerkwijzeFunnel: React.FC = () => {
   const stepGap = 6;
   const padding = 24;
 
-  // Trechter-effect: elke stap iets smaller dan de vorige
-  const widths = [380, 360, 340, 320, 300, 280];
-  const totalHeight = padding * 2 + stepHeight * 6 + stepGap * 5;
+  // Trechter-effect: elke stap iets smaller dan de vorige, schaalt mee met
+  // het aantal stappen in METHOD_STEPS (nu 4, was 6).
+  const widths = METHOD_STEPS.map((_, i) => 380 - i * 20);
+  const totalHeight =
+    padding * 2 + stepHeight * METHOD_STEPS.length + stepGap * (METHOD_STEPS.length - 1);
 
   return (
     <div className="relative w-full max-w-[560px] mx-auto">
@@ -27,7 +30,7 @@ export const WerkwijzeFunnel: React.FC = () => {
         height="auto"
         className="block"
         role="img"
-        aria-label="Future Content werkwijze in zes stappen, van workshop bovenaan naar bouwen en beheren onderaan."
+        aria-label={`Future Content werkwijze in ${METHOD_STEPS.length} stappen, van kennismaking bovenaan naar bouwen en beheren onderaan.`}
       >
         {/* Achtergrond */}
         <rect width={totalWidth} height={totalHeight} fill="#F3ECE0" />

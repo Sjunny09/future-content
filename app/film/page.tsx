@@ -5,9 +5,9 @@ import { SITE, STACK_VIDEOS } from "@/lib/constants";
 import Reviews from "@/components/sections/Reviews";
 
 export const metadata: Metadata = {
-  title: "Film & video in De Kempen",
+  title: "Film & video in Brabant",
   description:
-    "Video voor makelaars, bedrijven en bruidsparen in De Kempen en omstreken. Shoot now, content later. App John voor een boeking of prijs.",
+    "Video voor makelaars, bedrijven en bruidsparen in heel Brabant. Shoot now, content later. App John voor een boeking of prijs.",
   alternates: { canonical: "/film" },
 };
 
@@ -116,8 +116,8 @@ export default function FilmPage() {
             Trouwfilms en aftermovies
           </h2>
           <p className="mt-3 text-[#6E6151] max-w-2xl leading-relaxed">
-            Bij elke bruiloft krijg je altijd twee films: een korte met de hoogtepunten om te delen,
-            en een langere die de hele dag vertelt.
+            Vaak levert dat twee films op: een korte met de hoogtepunten om te delen, en een
+            langere die de hele dag vertelt.
           </p>
           <Link
             href="/trouwen"

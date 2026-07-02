@@ -39,7 +39,7 @@ const STAPPEN = [
     n: "03",
     icon: <Ticket size={18} />,
     t: "Bevestiging en registratie",
-    d: "Zodra de betaling binnen is, is de plek geregeld en krijgt de bezoeker een bevestiging. Het systeem hield de verkoop bij, inclusief de broodjeskeuzes voor de catering.",
+    d: "Zodra de betaling binnen was, was de plek geregeld en kreeg de bezoeker een bevestiging. Het systeem hield de verkoop bij, inclusief de broodjeskeuzes voor de catering.",
   },
   {
     n: "04",
@@ -88,32 +88,8 @@ export default function TicketsysteemKoningsdagCasePage() {
         </div>
       </section>
 
-      {/* ── Sfeercollage van het echte evenement (weergave, John's keuze) ── */}
-      <section className="mx-auto max-w-4xl px-6 pt-14 md:pt-16">
-        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2px] border border-[#E4D8C6]">
-          <Image
-            src="/images/cases/koningsdag-sfeer-collage.jpg"
-            alt="Sfeercollage van het Vorstelijk Verwenfestijn in Reusel"
-            fill
-            sizes="(max-width: 896px) 100vw, 896px"
-            className="object-cover"
-            priority
-          />
-        </div>
-        <p className="fc-mono mt-3 text-[10px] uppercase tracking-[0.2em] text-[#6E6151]">
-          Het Vorstelijk Verwenfestijn, Köningsdag Reusel
-        </p>
-      </section>
-
-      {/* ── Video-embed-slot (placeholder, John neemt dit nog op) ── */}
-      <section className="mx-auto max-w-4xl px-6 py-14 md:py-16">
-        <div className="flex aspect-video w-full items-center justify-center rounded-[2px] border border-[#E4D8C6] bg-[#FBF8F2] text-sm text-[#6E6151]">
-          Video volgt. Deze opname staat nog gepland.
-        </div>
-      </section>
-
       {/* ── Werking stapsgewijs ── */}
-      <section className="mx-auto max-w-4xl px-6 pb-16 md:pb-20">
+      <section className="mx-auto max-w-4xl px-6 pt-14 pb-16 md:pt-16 md:pb-20">
         <p className="fc-mono mb-3 text-[11px] uppercase tracking-[0.3em] text-[#B45F38]">
           Hoe het werkte
         </p>
@@ -148,6 +124,22 @@ export default function TicketsysteemKoningsdagCasePage() {
             bezoekersgroep. Geen proefopstelling, gewoon in gebruik op de dag zelf.
           </p>
         </div>
+      </section>
+
+      {/* ── Sfeercollage van het echte evenement (weergave, John's keuze) ── */}
+      <section className="mx-auto max-w-4xl px-6 pb-16 md:pb-20">
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2px] border border-[#E4D8C6]">
+          <Image
+            src="/images/cases/koningsdag-sfeer-collage.jpg"
+            alt="Sfeercollage van het Vorstelijk Verwenfestijn in Reusel"
+            fill
+            sizes="(max-width: 896px) 100vw, 896px"
+            className="object-cover"
+          />
+        </div>
+        <p className="fc-mono mt-3 text-[10px] uppercase tracking-[0.2em] text-[#6E6151]">
+          Het Vorstelijk Verwenfestijn, Köningsdag Reusel
+        </p>
       </section>
 
       {/* ── Quickscan-CTA ── */}

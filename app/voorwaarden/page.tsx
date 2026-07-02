@@ -303,9 +303,7 @@ export default function VoorwaardenPagina() {
           9.3 Voor zover Future Content bij een AI-bouwproject of
           doorlopend beheer optreedt als verwerker van persoonsgegevens
           namens Opdrachtgever (verwerkingsverantwoordelijke), sluiten
-          partijen desgewenst een aparte verwerkersovereenkomst af{" "}
-          <em>[INVULLEN: template verwerkersovereenkomst nog opstellen/koppelen
-          zodra dit voor een concrete klant relevant wordt]</em>.
+          partijen desgewenst een aparte verwerkersovereenkomst af.
         </p>
       </Artikel>
 
@@ -336,11 +334,7 @@ export default function VoorwaardenPagina() {
           opdracht (bij doorlopende diensten: de vergoeding over de laatste
           drie maanden), met een absoluut maximum van{" "}
           <strong>€10.000 per gebeurtenis</strong>, met een maximum van{" "}
-          <strong>€25.000 per kalenderjaar</strong>
-          {" "}
-          <em>[INVULLEN: John, controleer of deze bedragen passen bij je
-          beroepsaansprakelijkheidsverzekering, voor zover je die hebt
-          afgesloten, en stem het maximum daarop af]</em>.
+          <strong>€25.000 per kalenderjaar</strong>.
         </p>
         <p className="mt-3">
           11.2 Future Content is nooit aansprakelijk voor indirecte schade,

@@ -7,7 +7,6 @@ import {
   ScanLine,
   CalendarCheck,
   Clapperboard,
-  ShieldCheck,
 } from "lucide-react";
 import Wordmark from "@/components/common/Wordmark";
 // OUDE HERO — bewaard voor rollback, zie rapport 07-website-review-en-herofix.md.
@@ -18,7 +17,7 @@ import Wordmark from "@/components/common/Wordmark";
 // import ScrollStory, { type Beat } from "@/components/ai/ScrollStory";
 import HeroSplit from "@/components/ai/HeroSplit";
 import Cases from "@/components/sections/Cases";
-import { SITE, METHOD_STEPS, TRAINING, BELOFTES } from "@/lib/constants";
+import { SITE, METHOD_STEPS, BELOFTES } from "@/lib/constants";
 
 // De drie waardepunten (WAARDE) zijn verplaatst naar de landingspagina
 // (components/entry/LandingPage.tsx), die is nu AI-first en toont ze meteen
@@ -30,8 +29,13 @@ import { SITE, METHOD_STEPS, TRAINING, BELOFTES } from "@/lib/constants";
 // naar de echte verdiepingspagina. HeroSplit toont nu een compacte
 // tekst-header (geen video meer, zie components/ai/HeroSplit.tsx voor de
 // volledige afweging). Daaronder: aanpak (METHOD_STEPS, al bestaande copy uit
-// lib/constants.ts, ongewijzigd), prijzen-anker (TRAINING) en verwachtingen
-// (BELOFTES). Alle drie hergebruiken bestaande site-copy, niets nieuws bedacht.
+// lib/constants.ts, ongewijzigd), workshop-prijsanker (geen vast bedrag, prijs
+// per klant, zie sectie hieronder) en verwachtingen (BELOFTES).
+//
+// Update 2 juli: geen vaste prijs meer tonen, en geen SLIM-percentage-claim.
+// "De training" heet consequent "workshop" en verwijst naar de nieuwe
+// 4-staps-werkwijze (kennismaking -> workshop met proof of concept -> tweede
+// brein -> offerte/bouwen/beheren, zie lib/constants.ts METHOD_STEPS).
 
 // OUDE HERO — bewaard voor rollback, zie rapport 07-website-review-en-herofix.md.
 // De drie beats die over de scroll-video faden: intro -> idee -> uitvoeren.
@@ -88,7 +92,7 @@ export default function AiPage() {
       */}
       <HeroSplit />
 
-      {/* ── Aanpak: de zes stappen (hergebruikt METHOD_STEPS uit lib/constants,
+      {/* ── Aanpak: de stappen (hergebruikt METHOD_STEPS uit lib/constants,
           zelfde bron als /werkwijze, hier compact zonder die pagina te dupliceren) ── */}
       <section className="border-t border-[#F3ECE0]/8 px-6 py-20 md:py-24">
         <div className="mx-auto max-w-5xl">
@@ -117,28 +121,34 @@ export default function AiPage() {
       {/* ── Cases: compacte variant, twee voorbeelden (routeplanner + ticketsysteem Koningsdag Reusel) ── */}
       <Cases compact />
 
-      {/* ── Prijzen-anker: de training als laagdrempelige eerste stap (TRAINING uit lib/constants) ── */}
+      {/* ── Prijs-anker: workshop met proof of concept, geen vast bedrag ── */}
       <section className="bg-[#F3ECE0] px-6 py-20 text-[#2A2218] md:py-24">
         <div className="mx-auto max-w-4xl rounded-3xl border border-[#E4D8C6] bg-[#FBF8F2] p-10 md:p-14">
           <p className="fc-mono mb-4 text-[11px] uppercase tracking-[0.35em] text-[#B45F38]">
             Prijs
           </p>
           <h2 className="text-2xl leading-tight sm:text-3xl" style={{ fontFamily: "var(--font-playfair)", fontWeight: 600 }}>
-            {TRAINING.title}
+            Workshop met proof of concept
           </h2>
-          <p className="mt-4 max-w-2xl leading-relaxed text-[#6E6151]">{TRAINING.lead}</p>
+          <p className="mt-4 max-w-2xl leading-relaxed text-[#6E6151]">
+            Na de kennismaking volgt de workshop: een dagdeel bij jullie op
+            locatie waarin we niet praten maar bouwen, op jullie eigen
+            taken. De prijs bepaal ik per klant, afhankelijk van jullie
+            situatie.
+          </p>
           <div className="mt-6 flex flex-wrap items-baseline gap-2">
-            <span className="text-3xl font-semibold text-[#2A2218]">{TRAINING.price}</span>
-            <span className="text-sm text-[#6E6151]">{TRAINING.period}</span>
+            <span className="text-2xl font-semibold text-[#2A2218]">Op aanvraag</span>
           </div>
-          <ul className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {TRAINING.features.map((f) => (
-              <li key={f} className="flex items-start gap-2 text-sm leading-relaxed text-[#6E6151]">
-                <ShieldCheck size={15} className="mt-0.5 shrink-0 text-[#B45F38]" />
-                {f}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#6E6151]">
+            Mogelijk (deels) via de SLIM-subsidie te financieren.{" "}
+            <Link
+              href="/blog/slim-subsidie-aanvragen"
+              className="underline decoration-[#B45F38]/40 underline-offset-2 transition-colors hover:text-[#B45F38]"
+            >
+              Lees hoe de SLIM-subsidie werkt
+            </Link>
+            .
+          </p>
         </div>
       </section>
 

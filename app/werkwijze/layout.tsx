@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Werkwijze | Van aanvraag tot oplevering",
+  title: "Werkwijze | Van kennismaking tot AI die draait",
   description:
-    "Zo werkt Future Content: aanvraag, voorbereiding, shoot dag en oplevering binnen 1 week. Helder, snel en zonder verrassingen.",
+    "Zo werk ik: eerst een vrijblijvende kennismaking, dan een workshop met een proof of concept, een tweede brein voor je bedrijf, en een offerte voor bouwen en beheren. Helder, stap voor stap.",
   openGraph: {
     title: "Werkwijze | Future Content",
-    description: "Van aanvraag tot afgeleverde video's in 5 duidelijke stappen.",
-    images: ["/photos/PhotoSessions-757307-pww_6404-vy-1.jpg"],
+    description:
+      "Van kennismaking tot werkende AI: workshop met proof of concept, tweede brein, bouwen en beheren.",
   },
   alternates: {
     canonical: `${SITE.url}/werkwijze`,

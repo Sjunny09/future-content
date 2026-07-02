@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Video, Heart, Film, Clock } from "lucide-react";
-import { STACK_VIDEOS } from "@/lib/constants";
+import { STACK_VIDEOS, SITE } from "@/lib/constants";
 
 // ─── Hover-to-play card (vastgoed) ───────────────────────────────────────────
 function VideoHoverCard({
@@ -169,7 +169,7 @@ export default function PortfolioPage() {
               Ons werk.
             </h1>
             <p className="text-[#6E6151] text-lg max-w-xl mb-8">
-              Social media content, vastgoedvideo&apos;s en bruiloftsfilms, gemaakt in De Kempen, Eindhoven en omgeving.
+              Social media content, vastgoedvideo&apos;s en bruiloftsfilms, gemaakt in heel Brabant.
             </p>
             <CategoryNav active={activeSection} />
           </motion.div>
@@ -210,7 +210,7 @@ export default function PortfolioPage() {
               Stuur een berichtje, we laten het je graag zien.
             </p>
             <Link
-              href="https://wa.me/31650919960?text=Hallo%20John%2C%20ik%20wil%20graag%20voorbeelden%20zien%20van%20social%20media%20content."
+              href={`https://wa.me/${SITE.whatsapp}?text=Hallo%20John%2C%20ik%20wil%20graag%20voorbeelden%20zien%20van%20social%20media%20content.`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#B45F38] text-[#F3ECE0] text-sm font-semibold hover:bg-[#9E3D24] transition-colors"
@@ -234,10 +234,10 @@ export default function PortfolioPage() {
             Vastgoedvideo&apos;s.
           </h2>
           <p className="text-[#6E6151] text-lg mb-4 max-w-xl">
-            Premium vastgoedvideo&apos;s gemaakt voor Pit Makelaars, in De Kempen, Eindhoven en omgeving.
+            Premium vastgoedvideo&apos;s gemaakt voor Pit Makelaars, in heel Brabant.
           </p>
           <p className="text-[#B45F38] text-sm mb-10">
-            Beweeg over een woning om de video te bekijken. Klik voor meer info.
+            Tik of beweeg over een woning om de video te bekijken. Klik voor meer info.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 [&>*]:relative">
@@ -247,7 +247,7 @@ export default function PortfolioPage() {
           </div>
 
           <p className="text-center text-sm text-[#6E6151] mt-10">
-            * Gemiddelde verkooptijd woningen met Future Content video: binnen 2 maanden na publicatie.
+            Gemiddelde verkooptijd woningen met Future Content video: binnen 2 maanden na publicatie.
           </p>
         </div>
       </section>
@@ -302,7 +302,7 @@ export default function PortfolioPage() {
             Stuur een WhatsApp. Ik reageer dezelfde dag en we plannen een vrijblijvend gesprek.
           </p>
           <Link
-            href="https://wa.me/31650919960?text=Hallo%20John%2C%20ik%20ben%20geïnteresseerd%20in%20een%20video."
+            href={`https://wa.me/${SITE.whatsapp}?text=Hallo%20John%2C%20ik%20ben%20geïnteresseerd%20in%20een%20video.`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#25D366] text-white font-semibold hover:bg-[#1dbd5a] transition-colors"

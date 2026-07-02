@@ -6,7 +6,7 @@ import { TRAINING } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "AI-training op locatie",
   description:
-    "Een halve dag bij jullie op kantoor waarin we samen iets bouwen op jullie eigen taken. Vanaf €750 ex BTW, 60% terug via SLIM-subsidie. Scholingsplan-document inclusief.",
+    "Een halve dag bij jullie op kantoor waarin we samen iets bouwen op jullie eigen taken. Prijs op aanvraag, mogelijk deels te financieren via de SLIM-subsidie.",
   alternates: { canonical: "/trainingen" },
 };
 
@@ -42,8 +42,8 @@ const AGENDA = [
 const PAKKETTEN = [
   {
     naam: "Workshop alleen",
-    price: "€750",
-    netto: "€300 netto na SLIM-subsidie",
+    price: "Op aanvraag",
+    netto: "Prijs per klant",
     inhoud: [
       "Halve dag (4 uur) bij jullie op kantoor",
       "Hands-on met jullie eigen taken en tools",
@@ -51,13 +51,13 @@ const PAKKETTEN = [
       "Drie kansen op papier, ook als je daarna niks met mij doet",
       "Scholingsplan-document voor SLIM-aanvraag",
     ],
-    cta: "Boek deze workshop",
+    cta: "Plan een gesprek over deze workshop",
     highlight: false,
   },
   {
     naam: "Workshop + Intake",
-    price: "€1.200",
-    netto: "€480 netto na SLIM",
+    price: "Op aanvraag",
+    netto: "Prijs per klant",
     inhoud: [
       "Alles uit de workshop alleen",
       "Plus intake-sessie van 2 uur op jullie locatie",
@@ -65,13 +65,13 @@ const PAKKETTEN = [
       "Concrete bouw-roadmap op papier",
       "Geen verplichting tot vervolg",
     ],
-    cta: "Start hier",
+    cta: "Plan een gesprek over deze workshop",
     highlight: true,
   },
   {
     naam: "Workshop + Bouw + 3 mnd beheer",
-    price: "€8.500",
-    netto: "€3.400 netto na SLIM",
+    price: "Op aanvraag",
+    netto: "Prijs per klant",
     inhoud: [
       "Workshop + intake + tweede brein",
       "Bouw van 1-2 modules uit het platform",
@@ -158,22 +158,26 @@ export default function TrainingenPage() {
               className="text-2xl md:text-3xl font-bold text-[#2A2218] mt-3 mb-4 leading-tight"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              60% van de workshop-kosten terug van de overheid.
+              Het scholingsdeel kan mogelijk via SLIM.
             </h2>
             <p className="text-[#2A2218] leading-relaxed mb-3">
-              SLIM is de subsidieregeling voor scholing in het MKB. Tot €25.000 per bedrijf,
-              uitgekeerd in twee aanvraagrondes per jaar. AI-training valt eronder mits ingebed in
-              een leerinterventie.
+              SLIM is de subsidieregeling voor scholing in het MKB, uitgekeerd in twee
+              aanvraagrondes per jaar. Het scholings- en workshopdeel van een traject kan hieronder
+              vallen, mits ingebed in een leerinterventie. Bouw en beheer vallen daar buiten.
             </p>
             <p className="text-[#2A2218] leading-relaxed mb-3">
               Praktisch: ik lever het scholingsplan-document SLIM-ready mee bij de workshop. Jouw
-              boekhouder of HR-medewerker dient het in tijdens de aanvraagrondes (7 april-4 mei en
-              10 augustus-7 september 2026). Workshop van €750 ex BTW = netto €300 voor jullie.
+              boekhouder of HR-medewerker dient het in tijdens de eerstvolgende aanvraagronde
+              (10 augustus-7 september 2026). Hoe je die aanvraag doet, lees je in{" "}
+              <Link href="/blog/slim-subsidie-aanvragen" className="underline underline-offset-4">
+                deze uitleg
+              </Link>
+              .
             </p>
             <p className="text-[#6E6151] text-sm leading-relaxed">
-              SLIM-subsidie wordt door de overheid uitgekeerd, niet door Future Content. Aanvraag en
-              uitbetaling lopen via jullie eigen accountant. Ik kan helpen met de inhoudelijke
-              onderbouwing.
+              SLIM-subsidie wordt door de overheid uitgekeerd, niet door Future Content. Toekenning
+              is niet gegarandeerd. Aanvraag en uitbetaling lopen via jullie eigen accountant. Ik kan
+              helpen met de inhoudelijke onderbouwing.
             </p>
           </div>
         </div>
@@ -251,13 +255,6 @@ export default function TrainingenPage() {
                     style={{ fontFamily: "var(--font-playfair)" }}
                   >
                     {p.price}
-                  </span>
-                  <span
-                    className={`ml-2 text-sm ${
-                      p.highlight ? "text-[#F3ECE0]/55" : "text-[#6E6151]"
-                    }`}
-                  >
-                    ex BTW
                   </span>
                 </div>
                 <p

@@ -41,12 +41,13 @@ export default function WerkwijzePage() {
               className="text-4xl md:text-[3.4rem] font-bold text-[#F3ECE0] mt-4 leading-[1.05] tracking-[-0.01em]"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              In zes stappen van vraag naar werkende oplossing.
+              In vier stappen van vraag naar werkende oplossing.
             </h1>
             <p className="text-[#F3ECE0]/70 text-lg mt-5 max-w-xl leading-relaxed">
               Geen black box, geen losse trucjes. Een vast pad dat ik bij elke klant volg, met
-              ruimte voor jouw branche en jouw proces. Workshop als voordeur, tweede brein als
-              fundament, modulair platform als basis voor wat we bouwen.
+              ruimte voor jouw branche en jouw proces. Een kennismaking als voordeur, een workshop
+              met proof of concept als tweede stap, tweede brein als fundament, en pas daarna een
+              offerte voor bouwen en beheren.
             </p>
           </motion.div>
         </div>
@@ -63,10 +64,10 @@ export default function WerkwijzePage() {
               className="text-2xl md:text-[2rem] font-bold text-[#2A2218] mt-4 mb-5 leading-tight"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Van workshop bovenaan naar werkende oplossing onderaan.
+              Van kennismaking bovenaan naar werkende oplossing onderaan.
             </h2>
             <p className="text-[#6E6151] leading-relaxed">
-              Zes stappen, elke stap concreter dan de vorige. Hieronder per stap de uitleg en wat
+              Vier stappen, elke stap concreter dan de vorige. Hieronder per stap de uitleg en wat
               je kunt verwachten.
             </p>
           </motion.div>
@@ -76,7 +77,7 @@ export default function WerkwijzePage() {
         </div>
       </section>
 
-      {/* 6 stappen */}
+      {/* 4 stappen */}
       <section className="max-w-5xl mx-auto px-6 py-24 md:py-28">
         <div className="relative">
           <div className="absolute left-[19px] top-3 bottom-3 w-px bg-[#E4D8C6] hidden sm:block" />
@@ -112,7 +113,7 @@ export default function WerkwijzePage() {
         <div className="max-w-3xl mx-auto px-6">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <span className="text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
-              Stap 4 toegelicht
+              Stap 3 toegelicht
             </span>
             <h2
               className="text-3xl md:text-[2.4rem] font-bold text-[#2A2218] mt-4 mb-6 leading-[1.1]"
@@ -247,8 +248,8 @@ export default function WerkwijzePage() {
             Een half uur, gratis. Daarna weet je een van drie dingen.
           </h2>
           <p className="text-[#6E6151] text-lg mb-9 leading-relaxed">
-            Of je kunt zelf verder en ik wijs je de juiste richting. Of een workshop is voor jullie
-            team de beste eerste stap. Of we gaan samen iets bouwen.
+            Of je kunt zelf verder en ik wijs je de juiste richting. Of een workshop met proof of
+            concept is voor jullie team de logische vervolgstap. Of we gaan samen iets bouwen.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link

@@ -157,8 +157,8 @@ export default async function PortfolioDetailPage({
               </p>
               <p className="text-sm text-[#2A2218] font-medium mb-1">Pit Makelaars</p>
               <p className="text-xs text-[#6E6151] leading-relaxed">
-                Vaste samenwerking voor vastgoedvideo&apos;s in de regio Eindhoven,
-                Veldhoven en De Kempen. Alle video&apos;s zijn opgeleverd als Premium pakket.
+                Vaste samenwerking voor vastgoedvideo&apos;s in heel Brabant. Alle
+                video&apos;s zijn opgeleverd als Compleet pakket.
               </p>
             </div>
           </div>

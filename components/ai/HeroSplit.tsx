@@ -53,9 +53,9 @@ export default function HeroSplit() {
           Zo pak ik het aan.
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#F3ECE0]/70 md:text-lg">
-          Geen podium, geen hype. Iemand uit de Kempen die het gewoon voor je
-          bouwt. Hieronder de aanpak stap voor stap, wat het kost, en wat je
-          van mij kunt verwachten.
+          Ik bouw AI en automatisering die het routinewerk overneemt, en ik
+          houd het draaiend. Hieronder de aanpak stap voor stap, wat het
+          kost, en wat je van mij kunt verwachten.
         </p>
 
         <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">

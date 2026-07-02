@@ -4,7 +4,7 @@ import { SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Over John Lavrijsen | AI-bouwer uit Bladel",
   description:
-    "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant. Voorheen business engineer in de transportsector, zes jaar vastgoedvideograaf. Gevestigd in Bladel, actief in de Kempen, Eindhoven en Tilburg.",
+    "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant. Voorheen business engineer in de transportsector, zes jaar vastgoedvideograaf. Gevestigd in Bladel, actief in heel Brabant.",
   openGraph: {
     title: "Over John Lavrijsen | Future Content",
     description:

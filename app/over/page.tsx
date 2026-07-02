@@ -21,7 +21,7 @@ const PRINCIPLES = [
   {
     icon: <MapPin size={20} />,
     t: "Lokaal, ik kom langs vanaf de intake",
-    d: "Ik zit in Bladel, midden in de Kempen. Eerste gesprek 30 minuten online. Vanaf de intake of de workshop kom ik langs in de Kempen, Eindhoven, Tilburg, Breda.",
+    d: "Ik zit in Bladel, midden in de Kempen. Eerste gesprek 30 minuten online. Vanaf de intake of de workshop kom ik langs in heel Brabant.",
   },
   {
     icon: <Eye size={20} />,
@@ -58,7 +58,7 @@ export default function OverPage() {
             </p>
             <p className="text-[#6E6151] text-lg leading-relaxed">
               Sinds januari 2026 werk ik voor mezelf. Ik bouw AI en automatiseringen voor
-              MKB-bedrijven in de Kempen en Eindhoven en alles daar tussenin. Niet omdat het een
+              MKB-bedrijven in heel Brabant, vanuit Bladel. Niet omdat het een
               hype is, maar omdat ik zie dat ondernemers veel tijd kunnen winnen als je het goed en
               veilig aanpakt.
             </p>

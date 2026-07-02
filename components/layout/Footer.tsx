@@ -17,7 +17,7 @@ export default function Footer() {
             className="h-8 w-auto object-contain brightness-0 invert mb-4"
           />
           <p className="text-sm text-[#6E6151] leading-relaxed">
-            AI, automatisering en video voor MKB-bedrijven in De Kempen en omstreken. Gebouwd én beheerd.
+            AI, automatisering en video voor MKB-bedrijven in heel Brabant, vanuit Bladel. Gebouwd én beheerd.
           </p>
           <div className="mt-6 flex flex-col gap-1 text-sm text-[#6E6151]">
             <span>{SITE.address}</span>
@@ -74,6 +74,7 @@ export default function Footer() {
           </h3>
           <ul className="flex flex-col gap-3 text-sm">
             {[
+              { href: "/ai", label: "AI & automatisering" },
               { href: "/makelaars", label: "Vastgoedvideo's" },
               { href: "/social-media", label: "Social media abonnement" },
               { href: "/videografie", label: "Zakelijke video's" },

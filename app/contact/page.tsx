@@ -67,7 +67,7 @@ export default function ContactPage() {
               Plan een belafspraak.
             </h1>
             <p className="text-[#6E6151] text-lg max-w-xl leading-relaxed">
-              Vul het formulier in of neem direct contact op. We reageren altijd binnen één werkdag.
+              Vul het formulier in of neem direct contact op. We reageren doorgaans binnen één werkdag.
             </p>
           </motion.div>
         </div>
@@ -90,7 +90,7 @@ export default function ContactPage() {
                     Bericht ontvangen!
                   </h2>
                   <p className="text-[#6E6151]">
-                    Bedankt voor je bericht. We nemen binnen één werkdag contact met je op.
+                    Bedankt voor je bericht. We nemen doorgaans binnen één werkdag contact met je op.
                   </p>
                 </motion.div>
               ) : (
@@ -147,7 +147,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Type shoot *</label>
+                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Waar gaat het over *</label>
                       <select
                         name="type"
                         value={form.type}
@@ -156,6 +156,7 @@ export default function ContactPage() {
                         className={inputClass}
                       >
                         <option value="">Selecteer type</option>
+                        <option value="ai-automatisering">AI / automatisering</option>
                         <option value="vastgoed-walkthrough">Vastgoed: Walkthrough</option>
                         <option value="vastgoed-premium">Vastgoed: Premium + Drone</option>
                         <option value="social-starter">Social Media: Starter</option>
@@ -216,7 +217,7 @@ export default function ContactPage() {
                   </button>
 
                   <p className="text-xs text-[#A89A85] text-center">
-                    We reageren binnen één werkdag. Geen spam, geen verplichtingen.
+                    We reageren doorgaans binnen één werkdag. Geen spam, geen verplichtingen.
                   </p>
                 </form>
               )}
@@ -280,7 +281,7 @@ export default function ContactPage() {
               {/* Response time */}
               <div className="flex items-start gap-3 text-sm text-[#6E6151]">
                 <Clock size={15} className="text-[#B45F38] mt-0.5 shrink-0" />
-                <span>We reageren doorgaans binnen <strong className="text-[#2A2218]">4–8 uur</strong> op werkdagen.</span>
+                <span>We reageren <strong className="text-[#2A2218]">doorgaans binnen één werkdag</strong> op werkdagen.</span>
               </div>
 
               {/* Service area */}

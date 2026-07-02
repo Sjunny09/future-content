@@ -125,7 +125,7 @@ export default function RouteplannerCasePage() {
           className="mb-6 max-w-xl text-2xl leading-[1.1] text-[#2A2218] sm:text-3xl"
           style={{ fontFamily: "var(--font-playfair)", fontWeight: 600 }}
         >
-          Zie het werken in een minuut.
+          Zie het werken in de praktijk.
         </h2>
         <div className="relative aspect-video w-full overflow-hidden rounded-[2px] border border-[#E4D8C6]">
           <iframe

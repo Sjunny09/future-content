@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AI voor MKB in Brabant | Future Content",
     description:
-      "Done-for-you AI-automatisering voor het MKB in de Kempen, Eindhoven en Tilburg. Geen hype, gewoon iets dat werkt.",
+      "Done-for-you AI-automatisering voor het MKB in heel Brabant, vanuit Bladel. Geen hype, gewoon iets dat werkt.",
   },
   alternates: {
     canonical: `${SITE.url}/ai`,

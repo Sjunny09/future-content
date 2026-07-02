@@ -60,7 +60,7 @@ const CASES: CaseItem[] = [
   },
   {
     icon: <Ticket size={20} />,
-    title: "Ticketsysteem Köningsdag Reusel",
+    title: "Ticketsysteem Koningsdag Reusel",
     body: "Voor het Vorstelijk Verwenfestijn in Reusel bouwde ik een online ticketsysteem op maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun tickets rechtstreeks online, betaalden meteen, en het systeem verwerkte de verkoop op de dag zelf.",
     result: "Live gedraaid voor een echt evenement, van ticketverkoop tot betaling.",
     tags: ["TICKETSYSTEEM OP MAAT", "ONLINE BETALEN", "VOOR EEN ECHT EVENEMENT"],
@@ -74,7 +74,7 @@ const CASES: CaseItem[] = [
     },
     logoBadge: {
       src: "/images/cases/koningsdag-logo.png",
-      alt: "Logo Vorstelijk Verwenfestijn Köningsdag Reusel",
+      alt: "Logo Vorstelijk Verwenfestijn Koningsdag Reusel",
     },
   },
 ];

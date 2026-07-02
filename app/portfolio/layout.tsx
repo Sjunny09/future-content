@@ -4,7 +4,7 @@ import { SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Portfolio | Vastgoedvideo & Social Media",
   description:
-    "Bekijk het portfolio van Future Content. Vastgoedvideo's, social media content, zakelijke video's en events in De Kempen, Eindhoven en Tilburg.",
+    "Bekijk het portfolio van Future Content. Vastgoedvideo's, social media content, zakelijke video's en events, in heel Brabant.",
   openGraph: {
     title: "Portfolio | Future Content Videografie",
     description: "Bekijk onze vastgoedvideo's, social content en meer.",

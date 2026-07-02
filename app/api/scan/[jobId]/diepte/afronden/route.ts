@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse, after } from "next/server"
 import { db } from "@/lib/scan/db"
 import { genereerDiagnose } from "@/lib/scan/diepte"
+import { notifyOs } from "@/lib/scan/notifyOs"
+import { notifyTelegram } from "@/lib/scan/notifyTelegram"
 import { reportError } from "@/lib/scan/observability/logger"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
@@ -59,6 +61,20 @@ export async function POST(
       }
     } catch (err) {
       reportError(err, { waar: "diepte/afronden/diagnose", jobId })
+    }
+    // Telegram-ping ná de diagnose, zodat het bouw/training/zelf-advies mee
+    // kan in het bericht. Faalt de diagnose, dan pingt 'ie alsnog zonder advies.
+    try {
+      await notifyTelegram(jobId, "diepte")
+    } catch (err) {
+      reportError(err, { waar: "diepte/afronden/notifyTelegram", jobId })
+    }
+    // Leads-bridge: diepte-scan is meteen een hetere lead (afspraak staat al
+    // qua OS-status), dus ook hier doorduwen naar de OS-leads-lijst.
+    try {
+      await notifyOs(jobId, "diepte")
+    } catch (err) {
+      reportError(err, { waar: "diepte/afronden/notifyOs", jobId })
     }
   })
 

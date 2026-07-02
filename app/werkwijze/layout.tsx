@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Werkwijze | Van aanvraag tot oplevering",
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
     title: "Werkwijze | Future Content",
     description: "Van aanvraag tot afgeleverde video's in 5 duidelijke stappen.",
     images: ["/photos/PhotoSessions-757307-pww_6404-vy-1.jpg"],
+  },
+  alternates: {
+    canonical: `${SITE.url}/werkwijze`,
   },
 };
 

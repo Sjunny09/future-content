@@ -30,7 +30,7 @@ export const WerkwijzeFunnel: React.FC = () => {
         aria-label="Future Content werkwijze in zes stappen, van workshop bovenaan naar bouwen en beheren onderaan."
       >
         {/* Achtergrond */}
-        <rect width={totalWidth} height={totalHeight} fill="#FAFAF8" />
+        <rect width={totalWidth} height={totalHeight} fill="#F3ECE0" />
 
         {/* Verticale lijn die alle stappen verbindt */}
         <motion.line
@@ -38,7 +38,7 @@ export const WerkwijzeFunnel: React.FC = () => {
           y1={padding}
           x2={totalWidth / 2}
           y2={totalHeight - padding}
-          stroke="#C9A96E"
+          stroke="#B45F38"
           strokeOpacity={0.35}
           strokeWidth={1}
           initial={{ pathLength: 0 }}
@@ -79,19 +79,19 @@ export const WerkwijzeFunnel: React.FC = () => {
                   width={width}
                   height={stepHeight}
                   rx={6}
-                  fill="#F5F1EB"
-                  stroke="#E5E0D8"
+                  fill="#ECE2D2"
+                  stroke="#E4D8C6"
                   strokeWidth={1}
                 />
                 {/* Cirkel met stapnummer in het midden */}
-                <circle cx={cx} cy={cy} r={14} fill="#FAFAF8" stroke="#C9A96E" strokeWidth={1.5} />
+                <circle cx={cx} cy={cy} r={14} fill="#F3ECE0" stroke="#B45F38" strokeWidth={1.5} />
                 <text
                   x={cx}
                   y={cy + 4}
                   textAnchor="middle"
                   fontSize={11}
                   fontWeight={700}
-                  fill="#C9A96E"
+                  fill="#B45F38"
                   fontFamily="ui-monospace, monospace"
                 >
                   {step.n}
@@ -102,7 +102,7 @@ export const WerkwijzeFunnel: React.FC = () => {
                   y={cy + 5}
                   fontSize={13}
                   fontWeight={600}
-                  fill="#1A1A18"
+                  fill="#2A2218"
                   fontFamily="ui-sans-serif, system-ui, sans-serif"
                 >
                   {step.title}

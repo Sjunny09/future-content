@@ -1,9 +1,10 @@
 import Link from "next/link"
 
 export const metadata = {
-  title: "Privacy — Future Content",
+  title: "Privacy",
   description:
     "Hoe Future Content omgaat met scan-data, contactgegevens en je recht op verwijdering.",
+  alternates: { canonical: "/privacy" },
 }
 
 export default function PrivacyPagina() {
@@ -31,7 +32,7 @@ export default function PrivacyPagina() {
       <Sectie titel="Wat ik bewaar">
         <p>
           Per scan: de URL die je invulde, de antwoorden op de 6 vragen, je
-          naam, je e-mailadres, en een gehashed IP-adres (niet het rauwe — puur
+          naam, je e-mailadres, en een gehashed IP-adres (niet het rauwe, puur
           om herhaalde aanvragen vanaf dezelfde plek te kunnen tellen).
         </p>
         <p className="mt-3">
@@ -60,10 +61,24 @@ export default function PrivacyPagina() {
         </p>
       </Sectie>
 
+      <Sectie titel="Cookies en meten">
+        <p>
+          Voor bezoekersstatistieken gebruik ik Plausible. Dat werkt zonder
+          cookies en zonder persoonsgegevens vast te leggen, dus daar hoef ik
+          geen toestemming voor te vragen.
+        </p>
+        <p className="mt-3">
+          Daarnaast kun je Google Analytics aanzetten via de melding onderin
+          beeld. Die staat standaard uit. Zonder jouw akkoord laadt Google
+          Analytics niet en wordt er geen cookie gezet. Kies je "Liever
+          niet", dan verandert er niets aan je bezoek.
+        </p>
+      </Sectie>
+
       <Sectie titel="Anthropic (Claude)">
         <p>
           Ik gebruik Claude van Anthropic voor de analyse. Op de productie-key
-          staat <em>Zero Data Retention</em> aan — Anthropic bewaart je
+          staat <em>Zero Data Retention</em> aan: Anthropic bewaart je
           prompts dus niet. Er is een DPA getekend.
         </p>
       </Sectie>
@@ -74,24 +89,24 @@ export default function PrivacyPagina() {
           naar{" "}
           <a
             className="underline underline-offset-4"
-            href="mailto:privacy@futurecontent.nl"
+            href="mailto:privacy@future-content.nl"
             style={{ color: "var(--color-scan-terracotta)" }}
           >
-            privacy@futurecontent.nl
+            privacy@future-content.nl
           </a>{" "}
-          — binnen 72 uur is alles weg en krijg je een bevestiging.
+          en binnen 72 uur is alles weg. Je krijgt een bevestiging.
         </p>
       </Sectie>
 
       <Sectie titel="Verantwoordelijke">
         <p>
-          Future Content (eenmanszaak), Bladel, KvK 93482641. Contact:{" "}
+          Future Content (eenmanszaak), Bladel, KvK 86880675. Contact:{" "}
           <a
             className="underline underline-offset-4"
-            href="mailto:john@futurecontent.nl"
+            href="mailto:john@future-content.nl"
             style={{ color: "var(--color-scan-terracotta)" }}
           >
-            john@futurecontent.nl
+            john@future-content.nl
           </a>
           .
         </p>
@@ -101,7 +116,7 @@ export default function PrivacyPagina() {
         className="mt-12 text-sm"
         style={{ color: "var(--color-scan-muted)" }}
       >
-        Laatste update: 21 april 2026.{" "}
+        Laatste update: 2 juli 2026.{" "}
         <Link href="/scan" className="underline underline-offset-4">
           Terug naar de scan
         </Link>

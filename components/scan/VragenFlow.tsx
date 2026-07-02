@@ -23,6 +23,10 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
   const [fout, setFout] = useState<string | null>(null)
 
   const isEmail = huidig.type === "email-naam"
+  // De email-vraag staat altijd op slot 6 (zie bibliotheek.ts). Op slot 5
+  // maakt de knoptekst alvast nieuwsgierig naar de persoonlijke resultaten,
+  // in plaats van dat de vraag om gegevens als drempel voelt.
+  const isLaatsteVoorEmail = !isEmail && slot === 5
   const mag = heeftGeldigAntwoord(huidig, antwoord)
 
   function zetAntwoord(waarde: Antwoord) {
@@ -134,7 +138,13 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
           className="rounded-md px-6 py-3 text-base font-medium text-white transition disabled:opacity-40"
           style={{ backgroundColor: "var(--color-scan-terracotta)" }}
         >
-          {bezig ? "Even…" : isEmail ? "Klaar, stuur de video" : "Volgende"}
+          {bezig
+            ? "Even…"
+            : isEmail
+              ? "Laat mijn resultaten zien"
+              : isLaatsteVoorEmail
+                ? "Klik door: wil je de persoonlijke resultaten zien?"
+                : "Volgende"}
         </button>
       </div>
 
@@ -347,7 +357,7 @@ function OpenTekst({
       disabled={uitgeschakeld}
       rows={4}
       placeholder="Typ hier rustig. 1 à 2 zinnen is genoeg."
-      className="w-full resize-none rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
+      className="w-full resize-none rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B45F38]/30"
       style={{
         borderColor: "var(--color-scan-border)",
         backgroundColor: "var(--color-scan-linnen)",
@@ -383,7 +393,7 @@ function EmailNaam({
         onChange={(e) => opWijzig({ ...waarde, naam: e.target.value })}
         disabled={uitgeschakeld}
         placeholder="Je voornaam"
-        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
+        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B45F38]/30"
         style={veldStyle}
       />
       <input
@@ -394,7 +404,7 @@ function EmailNaam({
         onChange={(e) => opWijzig({ ...waarde, email: e.target.value })}
         disabled={uitgeschakeld}
         placeholder="je@bedrijf.nl"
-        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
+        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B45F38]/30"
         style={veldStyle}
       />
       <input
@@ -411,7 +421,7 @@ function EmailNaam({
         }}
         disabled={uitgeschakeld}
         placeholder="Telefoonnummer, zodat ik je kan bellen"
-        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B8472A]/30"
+        className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B45F38]/30"
         style={veldStyle}
       />
     </div>

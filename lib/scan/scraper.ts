@@ -96,7 +96,7 @@ async function scrapeMetCheerio(url: string): Promise<SiteData> {
       redirect: "follow",
       headers: {
         "User-Agent":
-          "Mozilla/5.0 (compatible; FutureContentScan/1.0; +https://futurecontent.nl/scan)",
+          "Mozilla/5.0 (compatible; FutureContentScan/1.0; +https://future-content.nl/scan)",
         Accept: "text/html,application/xhtml+xml",
         "Accept-Language": "nl,en;q=0.8",
       },

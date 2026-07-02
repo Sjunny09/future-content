@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, MessageCircle, Clock, ArrowRight, CheckCircle } from "lucide-react";
-import { SITE, REGIONS } from "@/lib/constants";
+import { Phone, Mail, MapPin, MessageCircle, Clock, ArrowRight, CheckCircle, Instagram } from "lucide-react";
+import { SITE, REGIONS, SOCIALS } from "@/lib/constants";
 
 type FormData = {
   naam: string;
@@ -45,28 +45,28 @@ export default function ContactPage() {
   };
 
   const inputClass =
-    "w-full px-4 py-3 rounded-xl border border-[#E5E0D8] bg-[#FAFAF8] text-[#1A1A18] text-sm placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#C9A96E] focus:ring-2 focus:ring-[#C9A96E]/20 transition-all";
+    "w-full px-4 py-3 rounded-xl border border-[#E4D8C6] bg-[#F3ECE0] text-[#2A2218] text-sm placeholder:text-[#A89A85] focus:outline-none focus:border-[#B45F38] focus:ring-2 focus:ring-[#B45F38]/20 transition-all";
 
   return (
     <>
       {/* ─── HEADER ───────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] pt-32 pb-16">
+      <section className="bg-[#F3ECE0] pt-32 pb-16">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
               Contact
             </span>
             <h1
-              className="text-4xl md:text-5xl font-bold text-[#1A1A18] mb-5"
+              className="text-4xl md:text-5xl font-bold text-[#2A2218] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Plan een belafspraak.
             </h1>
-            <p className="text-[#6B7280] text-lg max-w-xl leading-relaxed">
+            <p className="text-[#6E6151] text-lg max-w-xl leading-relaxed">
               Vul het formulier in of neem direct contact op. We reageren altijd binnen één werkdag.
             </p>
           </motion.div>
@@ -74,7 +74,7 @@ export default function ContactPage() {
       </section>
 
       {/* ─── FORM + INFO ──────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] pb-20 md:pb-28">
+      <section className="bg-[#F3ECE0] pb-20 md:pb-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
             {/* Form */}
@@ -83,13 +83,13 @@ export default function ContactPage() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-[#F0E6D0] rounded-2xl p-10 text-center"
+                  className="bg-[#ECE2D2] rounded-2xl p-10 text-center"
                 >
-                  <CheckCircle size={40} className="text-[#C9A96E] mx-auto mb-4" />
-                  <h2 className="text-2xl font-bold text-[#1A1A18] mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
+                  <CheckCircle size={40} className="text-[#B45F38] mx-auto mb-4" />
+                  <h2 className="text-2xl font-bold text-[#2A2218] mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
                     Bericht ontvangen!
                   </h2>
-                  <p className="text-[#6B7280]">
+                  <p className="text-[#6E6151]">
                     Bedankt voor je bericht. We nemen binnen één werkdag contact met je op.
                   </p>
                 </motion.div>
@@ -97,7 +97,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">Naam *</label>
+                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Naam *</label>
                       <input
                         name="naam"
                         value={form.naam}
@@ -108,7 +108,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">Bedrijf</label>
+                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Bedrijf</label>
                       <input
                         name="bedrijf"
                         value={form.bedrijf}
@@ -121,7 +121,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">E-mailadres *</label>
+                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">E-mailadres *</label>
                       <input
                         name="email"
                         type="email"
@@ -133,7 +133,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">Telefoon</label>
+                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Telefoon</label>
                       <input
                         name="telefoon"
                         type="tel"
@@ -147,7 +147,7 @@ export default function ContactPage() {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">Type shoot *</label>
+                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Type shoot *</label>
                       <select
                         name="type"
                         value={form.type}
@@ -168,7 +168,7 @@ export default function ContactPage() {
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">Locatie / Stad</label>
+                      <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Locatie / Stad</label>
                       <input
                         name="locatie"
                         value={form.locatie}
@@ -180,7 +180,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">Voorkeursdatum / Periode</label>
+                    <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Voorkeursdatum / Periode</label>
                     <input
                       name="datum"
                       value={form.datum}
@@ -191,7 +191,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-[#1A1A18] mb-1.5">Bericht</label>
+                    <label className="block text-xs font-semibold text-[#2A2218] mb-1.5">Bericht</label>
                     <textarea
                       name="bericht"
                       value={form.bericht}
@@ -209,13 +209,13 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="w-full py-4 rounded-full bg-[#1A1A18] text-[#FAFAF8] font-semibold hover:bg-[#C9A96E] hover:text-[#0F0F0D] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full py-4 rounded-full bg-[#2A2218] text-[#F3ECE0] font-semibold hover:bg-[#B45F38] hover:text-[#F3ECE0] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {status === "loading" ? "Versturen..." : "Verstuur bericht"}
                     {status !== "loading" && <ArrowRight size={16} />}
                   </button>
 
-                  <p className="text-xs text-[#9CA3AF] text-center">
+                  <p className="text-xs text-[#A89A85] text-center">
                     We reageren binnen één werkdag. Geen spam, geen verplichtingen.
                   </p>
                 </form>
@@ -225,33 +225,44 @@ export default function ContactPage() {
             {/* Contact info sidebar */}
             <div className="lg:col-span-2 space-y-8">
               {/* Direct contact */}
-              <div className="bg-[#F5F1EB] rounded-2xl p-7">
-                <h3 className="font-bold text-[#1A1A18] mb-5">Direct contact</h3>
+              <div className="bg-[#ECE2D2] rounded-2xl p-7">
+                <h3 className="font-bold text-[#2A2218] mb-5">Direct contact</h3>
                 <div className="space-y-4">
                   <a
                     href={`tel:${SITE.phone}`}
-                    className="flex items-center gap-3 text-sm text-[#1A1A18] hover:text-[#C9A96E] transition-colors"
+                    className="flex items-center gap-3 text-sm text-[#2A2218] hover:text-[#B45F38] transition-colors"
                   >
-                    <div className="w-9 h-9 rounded-full bg-[#FAFAF8] flex items-center justify-center shrink-0">
-                      <Phone size={15} className="text-[#C9A96E]" />
+                    <div className="w-9 h-9 rounded-full bg-[#F3ECE0] flex items-center justify-center shrink-0">
+                      <Phone size={15} className="text-[#B45F38]" />
                     </div>
                     {SITE.phone}
                   </a>
                   <a
                     href={`mailto:${SITE.email}`}
-                    className="flex items-center gap-3 text-sm text-[#1A1A18] hover:text-[#C9A96E] transition-colors"
+                    className="flex items-center gap-3 text-sm text-[#2A2218] hover:text-[#B45F38] transition-colors"
                   >
-                    <div className="w-9 h-9 rounded-full bg-[#FAFAF8] flex items-center justify-center shrink-0">
-                      <Mail size={15} className="text-[#C9A96E]" />
+                    <div className="w-9 h-9 rounded-full bg-[#F3ECE0] flex items-center justify-center shrink-0">
+                      <Mail size={15} className="text-[#B45F38]" />
                     </div>
                     {SITE.email}
                   </a>
-                  <div className="flex items-center gap-3 text-sm text-[#6B7280]">
-                    <div className="w-9 h-9 rounded-full bg-[#FAFAF8] flex items-center justify-center shrink-0">
-                      <MapPin size={15} className="text-[#C9A96E]" />
+                  <div className="flex items-center gap-3 text-sm text-[#6E6151]">
+                    <div className="w-9 h-9 rounded-full bg-[#F3ECE0] flex items-center justify-center shrink-0">
+                      <MapPin size={15} className="text-[#B45F38]" />
                     </div>
                     {SITE.address}
                   </div>
+                  <a
+                    href={SOCIALS.instagram.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-sm text-[#2A2218] hover:text-[#B45F38] transition-colors"
+                  >
+                    <div className="w-9 h-9 rounded-full bg-[#F3ECE0] flex items-center justify-center shrink-0">
+                      <Instagram size={15} className="text-[#B45F38]" />
+                    </div>
+                    {SOCIALS.instagram.handle}
+                  </a>
                 </div>
 
                 {/* WhatsApp */}
@@ -267,19 +278,19 @@ export default function ContactPage() {
               </div>
 
               {/* Response time */}
-              <div className="flex items-start gap-3 text-sm text-[#6B7280]">
-                <Clock size={15} className="text-[#C9A96E] mt-0.5 shrink-0" />
-                <span>We reageren doorgaans binnen <strong className="text-[#1A1A18]">4–8 uur</strong> op werkdagen.</span>
+              <div className="flex items-start gap-3 text-sm text-[#6E6151]">
+                <Clock size={15} className="text-[#B45F38] mt-0.5 shrink-0" />
+                <span>We reageren doorgaans binnen <strong className="text-[#2A2218]">4–8 uur</strong> op werkdagen.</span>
               </div>
 
               {/* Service area */}
               <div>
-                <h3 className="font-bold text-[#1A1A18] mb-4">Werkgebied</h3>
+                <h3 className="font-bold text-[#2A2218] mb-4">Werkgebied</h3>
                 <div className="space-y-4">
                   {REGIONS.map((region) => (
                     <div key={region.name}>
-                      <p className="text-sm font-semibold text-[#C9A96E] mb-1">{region.name}</p>
-                      <p className="text-xs text-[#6B7280]">{region.cities.join(" · ")}</p>
+                      <p className="text-sm font-semibold text-[#B45F38] mb-1">{region.name}</p>
+                      <p className="text-xs text-[#6E6151]">{region.cities.join(" · ")}</p>
                     </div>
                   ))}
                 </div>

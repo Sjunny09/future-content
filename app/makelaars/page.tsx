@@ -34,7 +34,7 @@ export default function MakelaarsPage() {
       />
 
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#0F0F0D] pb-16">
+      <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#221C14] pb-16">
         <div className="absolute inset-0">
           <Image
             src={PHOTOS[3]}
@@ -44,7 +44,7 @@ export default function MakelaarsPage() {
             className="object-cover object-center opacity-45"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0D] via-[#0F0F0D]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#221C14] via-[#221C14]/40 to-transparent" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 pt-28 w-full">
@@ -54,16 +54,16 @@ export default function MakelaarsPage() {
             transition={{ duration: 0.7 }}
             className="max-w-2xl"
           >
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
               Voor makelaars
             </span>
             <h1
-              className="text-4xl md:text-6xl font-bold text-[#FAFAF8] leading-[1.1] mb-5"
+              className="text-4xl md:text-6xl font-bold text-[#F3ECE0] leading-[1.1] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Meer bezichtigingen. Één video. Vanaf €199.
             </h1>
-            <p className="text-[#FAFAF8]/70 text-lg mb-8 leading-relaxed">
+            <p className="text-[#F3ECE0]/70 text-lg mb-8 leading-relaxed">
               Future Content is jouw vaste vastgoedvideograaf. Funda-ready walkthroughs,
               sociale teasers en drone shots, opgeleverd binnen 1 week, klaar voor publicatie.
             </p>
@@ -79,7 +79,7 @@ export default function MakelaarsPage() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-[#FAFAF8]/30 text-[#FAFAF8] font-semibold hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-[#F3ECE0]/30 text-[#F3ECE0] font-semibold hover:border-[#B45F38] hover:text-[#B45F38] transition-colors"
               >
                 Plan een shoot <ArrowRight size={16} />
               </Link>
@@ -89,7 +89,7 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── VALUE PROPS ──────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -98,12 +98,12 @@ export default function MakelaarsPage() {
             className="text-center mb-14"
           >
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Waarom video bij elke woning?
             </h2>
-            <p className="text-[#6B7280] text-lg max-w-xl mx-auto">
+            <p className="text-[#6E6151] text-lg max-w-xl mx-auto">
               Kopers beslissen op gevoel. Een video wekt dat gevoel op. Een foto niet.
             </p>
           </motion.div>
@@ -132,13 +132,13 @@ export default function MakelaarsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="p-8 rounded-2xl border border-[#E5E0D8] bg-[#FAFAF8]"
+                className="p-8 rounded-2xl border border-[#E4D8C6] bg-[#F3ECE0]"
               >
-                <div className="w-12 h-12 rounded-xl bg-[#F0E6D0] flex items-center justify-center text-[#C9A96E] mb-5">
+                <div className="w-12 h-12 rounded-xl bg-[#ECE2D2] flex items-center justify-center text-[#B45F38] mb-5">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-[#1A1A18] mb-3">{item.title}</h3>
-                <p className="text-[#6B7280] text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-semibold text-[#2A2218] mb-3">{item.title}</h3>
+                <p className="text-[#6E6151] text-sm leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -146,15 +146,15 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── WAT JE KRIJGT ────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-20 md:py-28">
+      <section className="bg-[#ECE2D2] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+              <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
                 Deliverables
               </span>
               <h2
-                className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-6"
+                className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-6"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Wat je van mij krijgt.
@@ -182,16 +182,16 @@ export default function MakelaarsPage() {
                     desc: "Klaar voor upload op Funda, website, social media of e-mail. Binnen 1 week na shoot.",
                   },
                 ].map((item, i) => (
-                  <div key={i} className="flex gap-4 p-4 rounded-xl bg-[#FAFAF8] border border-[#E5E0D8]">
-                    <div className="text-[#C9A96E] mt-0.5 shrink-0">{item.icon}</div>
+                  <div key={i} className="flex gap-4 p-4 rounded-xl bg-[#F3ECE0] border border-[#E4D8C6]">
+                    <div className="text-[#B45F38] mt-0.5 shrink-0">{item.icon}</div>
                     <div>
-                      <p className="font-semibold text-[#1A1A18] text-sm">{item.title}</p>
-                      <p className="text-xs text-[#6B7280] mt-0.5">{item.desc}</p>
+                      <p className="font-semibold text-[#2A2218] text-sm">{item.title}</p>
+                      <p className="text-xs text-[#6E6151] mt-0.5">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="mt-6 flex items-center gap-2 text-sm text-[#6B7280]">
+              <div className="mt-6 flex items-center gap-2 text-sm text-[#6E6151]">
                 <Clock size={14} />
                 <span>Oplevering binnen 1 week na de shoot</span>
               </div>
@@ -211,19 +211,19 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── CTA MIDDEN ───────────────────────────────────────────────── */}
-      <section className="bg-[#C9A96E] py-12">
+      <section className="bg-[#B45F38] py-12">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="text-2xl font-bold text-[#0F0F0D]" style={{ fontFamily: "var(--font-playfair)" }}>
+            <h3 className="text-2xl font-bold text-[#221C14]" style={{ fontFamily: "var(--font-playfair)" }}>
               Klaar voor jouw eerste shoot?
             </h3>
-            <p className="text-[#0F0F0D]/70 mt-1">Stuur een WhatsApp. Ik reageer dezelfde dag.</p>
+            <p className="text-[#221C14]/70 mt-1">Stuur een WhatsApp. Ik reageer dezelfde dag.</p>
           </div>
           <Link
             href={waLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0F0F0D] text-[#FAFAF8] font-semibold hover:bg-[#1A1A18] transition-colors"
+            className="shrink-0 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#221C14] text-[#F3ECE0] font-semibold hover:bg-[#2A2218] transition-colors"
           >
             <MessageCircle size={15} />
             App mij op WhatsApp
@@ -232,7 +232,7 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── PAKKETTEN ────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -241,12 +241,12 @@ export default function MakelaarsPage() {
             className="text-center mb-14"
           >
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Transparante tarieven.
             </h2>
-            <p className="text-[#6B7280]">Geen verrassingen. Wat je ziet is wat je krijgt.</p>
+            <p className="text-[#6E6151]">Geen verrassingen. Wat je ziet is wat je krijgt.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -259,42 +259,42 @@ export default function MakelaarsPage() {
                 transition={{ delay: i * 0.1 }}
                 className={`rounded-2xl p-8 border-2 flex flex-col ${
                   pkg.highlight
-                    ? "border-[#C9A96E] bg-[#0F0F0D] text-[#FAFAF8]"
-                    : "border-[#E5E0D8] bg-[#FAFAF8]"
+                    ? "border-[#B45F38] bg-[#221C14] text-[#F3ECE0]"
+                    : "border-[#E4D8C6] bg-[#F3ECE0]"
                 }`}
               >
                 {pkg.highlight && (
-                  <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#C9A96E] mb-3">
+                  <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#B45F38] mb-3">
                     Meest gekozen
                   </span>
                 )}
                 <h3
-                  className={`text-2xl font-bold mb-1 ${pkg.highlight ? "text-[#FAFAF8]" : "text-[#1A1A18]"}`}
+                  className={`text-2xl font-bold mb-1 ${pkg.highlight ? "text-[#F3ECE0]" : "text-[#2A2218]"}`}
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
                   {pkg.name}
                 </h3>
                 <div className="flex items-baseline gap-1 mb-1">
-                  <span className={`text-4xl font-bold ${pkg.highlight ? "text-[#C9A96E]" : "text-[#1A1A18]"}`}>
+                  <span className={`text-4xl font-bold ${pkg.highlight ? "text-[#B45F38]" : "text-[#2A2218]"}`}>
                     {pkg.price}
                   </span>
                 </div>
-                <p className={`text-xs mb-2 ${pkg.highlight ? "text-[#FAFAF8]/40" : "text-[#6B7280]"}`}>
+                <p className={`text-xs mb-2 ${pkg.highlight ? "text-[#F3ECE0]/40" : "text-[#6E6151]"}`}>
                   {pkg.note}
                 </p>
-                <p className={`text-sm mb-6 ${pkg.highlight ? "text-[#FAFAF8]/60" : "text-[#6B7280]"}`}>
+                <p className={`text-sm mb-6 ${pkg.highlight ? "text-[#F3ECE0]/60" : "text-[#6E6151]"}`}>
                   {pkg.description}
                 </p>
                 <ul className="space-y-3 mb-6 flex-1">
                   {pkg.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-2.5 text-sm">
-                      <Check size={15} className="text-[#C9A96E] mt-0.5 shrink-0" />
-                      <span className={pkg.highlight ? "text-[#FAFAF8]/80" : "text-[#1A1A18]"}>{f}</span>
+                      <Check size={15} className="text-[#B45F38] mt-0.5 shrink-0" />
+                      <span className={pkg.highlight ? "text-[#F3ECE0]/80" : "text-[#2A2218]"}>{f}</span>
                     </li>
                   ))}
                 </ul>
                 {pkg.note2 && (
-                  <p className={`text-xs mb-6 italic ${pkg.highlight ? "text-[#FAFAF8]/40" : "text-[#6B7280]"}`}>
+                  <p className={`text-xs mb-6 italic ${pkg.highlight ? "text-[#F3ECE0]/40" : "text-[#6E6151]"}`}>
                     {pkg.note2}
                   </p>
                 )}
@@ -304,8 +304,8 @@ export default function MakelaarsPage() {
                   rel="noopener noreferrer"
                   className={`block text-center py-3 rounded-full font-semibold text-sm transition-colors ${
                     pkg.highlight
-                      ? "bg-[#C9A96E] text-[#0F0F0D] hover:bg-[#b8955a]"
-                      : "border border-[#1A1A18] text-[#1A1A18] hover:bg-[#1A1A18] hover:text-[#FAFAF8]"
+                      ? "bg-[#B45F38] text-[#F3ECE0] hover:bg-[#9E3D24]"
+                      : "border border-[#2A2218] text-[#2A2218] hover:bg-[#2A2218] hover:text-[#F3ECE0]"
                   }`}
                 >
                   Plan een shoot
@@ -317,7 +317,7 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── CONCURRENTIEVERGELIJKING ──────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-20 md:py-28">
+      <section className="bg-[#ECE2D2] py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -326,20 +326,20 @@ export default function MakelaarsPage() {
             className="text-center mb-12"
           >
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Wat kost het elders?
             </h2>
-            <p className="text-[#6B7280]">
+            <p className="text-[#6E6151]">
               Dezelfde kwaliteit, snellere oplevering, directe lijn met de videograaf.
             </p>
           </motion.div>
 
-          <div className="overflow-hidden rounded-2xl border border-[#E5E0D8]">
+          <div className="overflow-hidden rounded-2xl border border-[#E4D8C6]">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-[#1A1A18] text-[#FAFAF8]">
+                <tr className="bg-[#2A2218] text-[#F3ECE0]">
                   <th className="text-left px-5 py-4 font-semibold">Aanbieder</th>
                   <th className="text-left px-5 py-4 font-semibold">Prijs</th>
                   <th className="text-left px-5 py-4 font-semibold hidden sm:table-cell">Oplevering</th>
@@ -350,29 +350,29 @@ export default function MakelaarsPage() {
                 {COMPETITOR_COMPARE.map((row, i) => (
                   <tr
                     key={i}
-                    className={`border-t border-[#E5E0D8] ${
+                    className={`border-t border-[#E4D8C6] ${
                       row.personal
-                        ? "bg-[#F0E6D0] font-semibold"
-                        : "bg-[#FAFAF8]"
+                        ? "bg-[#ECE2D2] font-semibold"
+                        : "bg-[#F3ECE0]"
                     }`}
                   >
-                    <td className="px-5 py-4 text-[#1A1A18]">
+                    <td className="px-5 py-4 text-[#2A2218]">
                       {row.personal && (
-                        <span className="inline-flex items-center gap-1 text-[#C9A96E] mr-1">
+                        <span className="inline-flex items-center gap-1 text-[#B45F38] mr-1">
                           <ShieldCheck size={14} />
                         </span>
                       )}
                       {row.name}
                     </td>
-                    <td className={`px-5 py-4 ${row.personal ? "text-[#C9A96E]" : "text-[#6B7280]"}`}>
+                    <td className={`px-5 py-4 ${row.personal ? "text-[#B45F38]" : "text-[#6E6151]"}`}>
                       {row.price}
                     </td>
-                    <td className="px-5 py-4 text-[#6B7280] hidden sm:table-cell">{row.turnaround}</td>
+                    <td className="px-5 py-4 text-[#6E6151] hidden sm:table-cell">{row.turnaround}</td>
                     <td className="px-5 py-4 hidden md:table-cell">
                       {row.personal ? (
                         <span className="text-[#25D366] font-semibold">Ja, altijd dezelfde persoon</span>
                       ) : (
-                        <span className="text-[#6B7280]">Wisselend team</span>
+                        <span className="text-[#6E6151]">Wisselend team</span>
                       )}
                     </td>
                   </tr>
@@ -380,41 +380,41 @@ export default function MakelaarsPage() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-[#6B7280] mt-3 text-center">
+          <p className="text-xs text-[#6E6151] mt-3 text-center">
             Prijzen gebaseerd op marktonderzoek februari 2026. Excl. BTW.
           </p>
         </div>
       </section>
 
       {/* ─── PORTFOLIO — VIDEO GRID ────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-3">
               Portfolio Pit Makelaars
             </span>
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Bekijk onze vastgoedvideo&apos;s.
             </h2>
-            <p className="text-[#6B7280]">
+            <p className="text-[#6E6151]">
               Gemaakt voor Pit Makelaars in de regio Veldhoven, Eindhoven en De Kempen.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {STACK_VIDEOS.map((video) => (
-              <div key={video.id} className="rounded-2xl overflow-hidden bg-[#0F0F0D] flex flex-col">
+              <div key={video.id} className="rounded-2xl overflow-hidden bg-[#221C14] flex flex-col">
                 <VideoPlayer
                   src={video.src}
                   poster={video.poster}
                   title={video.title}
                 />
                 <div className="p-4">
-                  <p className="text-[#FAFAF8] font-semibold text-sm">{video.title}</p>
-                  <p className="text-[#FAFAF8]/50 text-xs mt-0.5">{video.location} · {video.description}</p>
+                  <p className="text-[#F3ECE0] font-semibold text-sm">{video.title}</p>
+                  <p className="text-[#F3ECE0]/50 text-xs mt-0.5">{video.location} · {video.description}</p>
                 </div>
               </div>
             ))}
@@ -423,16 +423,16 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── VERKOPER QUOTES ──────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-16 md:py-20">
+      <section className="bg-[#ECE2D2] py-16 md:py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-10">
             <h3
-              className="text-2xl md:text-3xl font-bold text-[#1A1A18] mb-2"
+              className="text-2xl md:text-3xl font-bold text-[#2A2218] mb-2"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Wat verkopers zeggen.
             </h3>
-            <p className="text-[#6B7280] text-sm">Reacties van huiseigenaren na oplevering, via WhatsApp.</p>
+            <p className="text-[#6E6151] text-sm">Reacties van huiseigenaren na oplevering, via WhatsApp.</p>
           </div>
           <div className="flex flex-wrap gap-4 justify-center">
             {SELLER_QUOTES.map((item, i) => (
@@ -442,12 +442,12 @@ export default function MakelaarsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                className="bg-[#FAFAF8] border border-[#E5E0D8] rounded-2xl px-6 py-5 max-w-xs"
+                className="bg-[#F3ECE0] border border-[#E4D8C6] rounded-2xl px-6 py-5 max-w-xs"
               >
-                <p className="text-[#1A1A18] text-sm italic leading-relaxed mb-3">
+                <p className="text-[#2A2218] text-sm italic leading-relaxed mb-3">
                   &ldquo;{item.quote}&rdquo;
                 </p>
-                <p className="text-xs text-[#6B7280] font-medium">{item.address}</p>
+                <p className="text-xs text-[#6E6151] font-medium">{item.address}</p>
               </motion.div>
             ))}
           </div>
@@ -455,11 +455,11 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── WERKWIJZE KORT ───────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Hoe het werkt.
@@ -467,7 +467,7 @@ export default function MakelaarsPage() {
           </div>
 
           <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-[#E5E0D8] hidden md:block" />
+            <div className="absolute left-6 top-0 bottom-0 w-px bg-[#E4D8C6] hidden md:block" />
             <div className="space-y-8">
               {[
                 {
@@ -493,13 +493,13 @@ export default function MakelaarsPage() {
               ].map((step, i) => (
                 <div key={i} className="flex gap-6 md:pl-12">
                   <div className="relative">
-                    <div className="w-12 h-12 rounded-full bg-[#C9A96E] flex items-center justify-center text-[#0F0F0D] font-bold text-sm shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-[#B45F38] flex items-center justify-center text-[#221C14] font-bold text-sm shrink-0">
                       {step.num}
                     </div>
                   </div>
                   <div className="pt-2.5">
-                    <h3 className="font-semibold text-[#1A1A18] mb-1">{step.title}</h3>
-                    <p className="text-[#6B7280] text-sm leading-relaxed">{step.desc}</p>
+                    <h3 className="font-semibold text-[#2A2218] mb-1">{step.title}</h3>
+                    <p className="text-[#6E6151] text-sm leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -509,11 +509,11 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── FAQ ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-20 md:py-28">
+      <section className="bg-[#ECE2D2] py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Veelgestelde vragen.
@@ -553,13 +553,13 @@ export default function MakelaarsPage() {
             ].map((faq, i) => (
               <details
                 key={i}
-                className="group bg-[#FAFAF8] rounded-xl border border-[#E5E0D8] p-5 cursor-pointer"
+                className="group bg-[#F3ECE0] rounded-xl border border-[#E4D8C6] p-5 cursor-pointer"
               >
-                <summary className="flex items-center justify-between font-semibold text-[#1A1A18] text-sm list-none">
+                <summary className="flex items-center justify-between font-semibold text-[#2A2218] text-sm list-none">
                   {faq.q}
-                  <span className="text-[#C9A96E] ml-4 group-open:rotate-45 transition-transform text-lg leading-none">+</span>
+                  <span className="text-[#B45F38] ml-4 group-open:rotate-45 transition-transform text-lg leading-none">+</span>
                 </summary>
-                <p className="mt-3 text-[#6B7280] text-sm leading-relaxed">{faq.a}</p>
+                <p className="mt-3 text-[#6E6151] text-sm leading-relaxed">{faq.a}</p>
               </details>
             ))}
           </div>
@@ -567,34 +567,34 @@ export default function MakelaarsPage() {
       </section>
 
       {/* ─── REVIEW ANITA (PIT MAKELAARS) ────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-16 border-t border-[#E5E0D8]">
+      <section className="bg-[#F3ECE0] py-16 border-t border-[#E4D8C6]">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="flex justify-center gap-0.5 mb-5">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={18} fill="#C9A96E" className="text-[#C9A96E]" />
+              <Star key={i} size={18} fill="#B45F38" className="text-[#B45F38]" />
             ))}
           </div>
           <blockquote
-            className="text-xl md:text-2xl font-medium text-[#1A1A18] leading-snug mb-6 italic"
+            className="text-xl md:text-2xl font-medium text-[#2A2218] leading-snug mb-6 italic"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             &ldquo;Iedere keer weer verrast hoe mooi het resultaat is. Hij denkt ontzettend goed mee,
             komt keer op keer met nieuwe creatieve ideeën en echt niets is voor hem te veel.&rdquo;
           </blockquote>
           <div className="flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#C9A96E]/20 flex items-center justify-center text-sm font-bold text-[#C9A96E]">
+            <div className="w-10 h-10 rounded-full bg-[#B45F38]/20 flex items-center justify-center text-sm font-bold text-[#B45F38]">
               AF
             </div>
             <div className="text-left">
-              <p className="font-semibold text-[#1A1A18] text-sm">Anita Fiers</p>
-              <p className="text-xs text-[#6B7280]">Your Veldhoven Broker · Pit Makelaars · Google Review</p>
+              <p className="font-semibold text-[#2A2218] text-sm">Anita Fiers</p>
+              <p className="text-xs text-[#6E6151]">Your Veldhoven Broker · Pit Makelaars · Google Review</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── FINAL CTA ────────────────────────────────────────────────── */}
-      <section className="bg-[#0F0F0D] py-20 text-[#FAFAF8] text-center">
+      <section className="bg-[#221C14] py-20 text-[#F3ECE0] text-center">
         <div className="max-w-2xl mx-auto px-6">
           <h2
             className="text-3xl md:text-5xl font-bold mb-5"
@@ -602,7 +602,7 @@ export default function MakelaarsPage() {
           >
             Jouw vaste videograaf. Plan een shoot.
           </h2>
-          <p className="text-[#FAFAF8]/60 mb-8">
+          <p className="text-[#F3ECE0]/60 mb-8">
             Stuur een WhatsApp. Ik reageer dezelfde dag en plannen we direct een shoot in.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -617,7 +617,7 @@ export default function MakelaarsPage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-[#FAFAF8]/20 text-[#FAFAF8] font-semibold hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-[#F3ECE0]/20 text-[#F3ECE0] font-semibold hover:border-[#B45F38] hover:text-[#B45F38] transition-colors"
             >
               Plan een belafspraak <ArrowRight size={16} />
             </Link>

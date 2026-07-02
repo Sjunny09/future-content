@@ -41,7 +41,7 @@ function VideoHoverCard({
         onMouseEnter={handleEnter}
         onMouseLeave={handleLeave}
         className={[
-          "relative rounded-2xl overflow-hidden bg-[#0F0F0D]",
+          "relative rounded-2xl overflow-hidden bg-[#221C14]",
           "transition-all duration-300 ease-out",
           hovered
             ? "scale-[1.07] shadow-[0_20px_60px_rgba(0,0,0,0.4)] z-10"
@@ -78,19 +78,19 @@ function VideoHoverCard({
         )}
         <div className="px-5 py-4">
           <div className="flex items-start justify-between gap-3 mb-1">
-            <h3 className="font-semibold text-[#FAFAF8] text-sm leading-snug">
+            <h3 className="font-semibold text-[#F3ECE0] text-sm leading-snug">
               {video.title}
             </h3>
-            <span className="shrink-0 px-2 py-0.5 rounded-full bg-[#C9A96E]/20 text-[#C9A96E] text-[10px] font-semibold uppercase tracking-wider">
+            <span className="shrink-0 px-2 py-0.5 rounded-full bg-[#B45F38]/20 text-[#B45F38] text-[10px] font-semibold uppercase tracking-wider">
               Vastgoed
             </span>
           </div>
           <div className="flex items-center justify-between mt-1">
-            <div className="flex items-center gap-1.5 text-xs text-[#FAFAF8]/40">
+            <div className="flex items-center gap-1.5 text-xs text-[#F3ECE0]/40">
               <Video size={11} />
               {video.description}
             </div>
-            <span className="text-xs text-[#C9A96E] font-medium">Bekijk case →</span>
+            <span className="text-xs text-[#B45F38] font-medium">Bekijk case →</span>
           </div>
         </div>
       </motion.div>
@@ -118,8 +118,8 @@ function CategoryNav({ active }: { active: string }) {
           className={[
             "inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200",
             active === cat.id
-              ? "bg-[#C9A96E] text-[#0F0F0D]"
-              : "bg-[#F0EBE3] text-[#6B7280] hover:bg-[#E5DDD3] hover:text-[#1A1A18]",
+              ? "bg-[#B45F38] text-[#F3ECE0]"
+              : "bg-[#F0EBE3] text-[#6E6151] hover:bg-[#E5DDD3] hover:text-[#2A2218]",
           ].join(" ")}
         >
           {cat.icon}
@@ -152,23 +152,23 @@ export default function PortfolioPage() {
   return (
     <>
       {/* ─── HEADER ───────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] pt-32 pb-12">
+      <section className="bg-[#F3ECE0] pt-32 pb-12">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
               Portfolio
             </span>
             <h1
-              className="text-4xl md:text-6xl font-bold text-[#1A1A18] mb-5"
+              className="text-4xl md:text-6xl font-bold text-[#2A2218] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Ons werk.
             </h1>
-            <p className="text-[#6B7280] text-lg max-w-xl mb-8">
+            <p className="text-[#6E6151] text-lg max-w-xl mb-8">
               Social media content, vastgoedvideo&apos;s en bruiloftsfilms, gemaakt in De Kempen, Eindhoven en omgeving.
             </p>
             <CategoryNav active={activeSection} />
@@ -177,35 +177,35 @@ export default function PortfolioPage() {
       </section>
 
       {/* ─── SOCIALS ──────────────────────────────────────────────────── */}
-      <section id="socials" className="bg-[#F5F1EB] py-20 md:py-28 scroll-mt-24">
+      <section id="socials" className="bg-[#ECE2D2] py-20 md:py-28 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center gap-3 mb-3">
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest">
               Socials
             </span>
           </div>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+            className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Social media video&apos;s.
           </h2>
-          <p className="text-[#6B7280] text-lg mb-12 max-w-xl">
+          <p className="text-[#6E6151] text-lg mb-12 max-w-xl">
             Korte, scherpe video&apos;s voor Instagram, TikTok en LinkedIn. Snel zichtbaar, lang bijblijvend.
           </p>
 
           {/* Coming soon card */}
           <div className="flex flex-col items-center justify-center py-20 rounded-2xl border-2 border-dashed border-[#D5CCBF] bg-[#FAF7F2] text-center">
-            <div className="w-14 h-14 rounded-full bg-[#C9A96E]/15 flex items-center justify-center mb-4">
-              <Clock size={22} className="text-[#C9A96E]" />
+            <div className="w-14 h-14 rounded-full bg-[#B45F38]/15 flex items-center justify-center mb-4">
+              <Clock size={22} className="text-[#B45F38]" />
             </div>
             <h3
-              className="text-xl font-bold text-[#1A1A18] mb-2"
+              className="text-xl font-bold text-[#2A2218] mb-2"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Binnenkort beschikbaar
             </h3>
-            <p className="text-[#6B7280] text-sm max-w-sm">
+            <p className="text-[#6E6151] text-sm max-w-sm">
               We werken aan ons social media portfolio. Wil je alvast zien wat we kunnen?
               Stuur een berichtje, we laten het je graag zien.
             </p>
@@ -213,7 +213,7 @@ export default function PortfolioPage() {
               href="https://wa.me/31650919960?text=Hallo%20John%2C%20ik%20wil%20graag%20voorbeelden%20zien%20van%20social%20media%20content."
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#C9A96E] text-[#0F0F0D] text-sm font-semibold hover:bg-[#b8955a] transition-colors"
+              className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#B45F38] text-[#F3ECE0] text-sm font-semibold hover:bg-[#9E3D24] transition-colors"
             >
               Vraag voorbeelden op <ArrowRight size={14} />
             </Link>
@@ -222,21 +222,21 @@ export default function PortfolioPage() {
       </section>
 
       {/* ─── WONINGEN ─────────────────────────────────────────────────── */}
-      <section id="woningen" className="bg-[#FAFAF8] py-20 md:py-28 scroll-mt-24">
+      <section id="woningen" className="bg-[#F3ECE0] py-20 md:py-28 scroll-mt-24">
         <div className="max-w-6xl mx-auto px-6">
-          <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-3">
             Woningen
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+            className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Vastgoedvideo&apos;s.
           </h2>
-          <p className="text-[#6B7280] text-lg mb-4 max-w-xl">
+          <p className="text-[#6E6151] text-lg mb-4 max-w-xl">
             Premium vastgoedvideo&apos;s gemaakt voor Pit Makelaars, in De Kempen, Eindhoven en omgeving.
           </p>
-          <p className="text-[#C9A96E] text-sm mb-10">
+          <p className="text-[#B45F38] text-sm mb-10">
             Beweeg over een woning om de video te bekijken. Klik voor meer info.
           </p>
 
@@ -246,25 +246,25 @@ export default function PortfolioPage() {
             ))}
           </div>
 
-          <p className="text-center text-sm text-[#6B7280] mt-10">
+          <p className="text-center text-sm text-[#6E6151] mt-10">
             * Gemiddelde verkooptijd woningen met Future Content video: binnen 2 maanden na publicatie.
           </p>
         </div>
       </section>
 
       {/* ─── TROUWEN ──────────────────────────────────────────────────── */}
-      <section id="trouwen" className="bg-[#0F0F0D] py-20 md:py-28 scroll-mt-24">
+      <section id="trouwen" className="bg-[#221C14] py-20 md:py-28 scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6">
-          <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+          <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-3">
             Trouwen
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#FAFAF8] mb-4"
+            className="text-3xl md:text-4xl font-bold text-[#F3ECE0] mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Bruiloftsvideo&apos;s.
           </h2>
-          <p className="text-[#FAFAF8]/60 mb-10 max-w-xl">
+          <p className="text-[#F3ECE0]/60 mb-10 max-w-xl">
             De mooiste dag van jullie leven, vastgelegd zoals jullie hem beleefd hebben.
           </p>
 
@@ -281,7 +281,7 @@ export default function PortfolioPage() {
           <div className="mt-8 text-center">
             <Link
               href="/trouwen"
-              className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#C9A96E] text-[#0F0F0D] font-semibold hover:bg-[#b8955a] transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#B45F38] text-[#F3ECE0] font-semibold hover:bg-[#9E3D24] transition-colors"
             >
               Meer over bruiloftsvideo&apos;s <ArrowRight size={16} />
             </Link>
@@ -290,15 +290,15 @@ export default function PortfolioPage() {
       </section>
 
       {/* ─── CTA ──────────────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-20 text-center border-t border-[#E5E0D8]">
+      <section className="bg-[#ECE2D2] py-20 text-center border-t border-[#E4D8C6]">
         <div className="max-w-2xl mx-auto px-6">
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+            className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Jouw project hier?
           </h2>
-          <p className="text-[#6B7280] mb-8">
+          <p className="text-[#6E6151] mb-8">
             Stuur een WhatsApp. Ik reageer dezelfde dag en we plannen een vrijblijvend gesprek.
           </p>
           <Link

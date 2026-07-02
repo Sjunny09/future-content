@@ -11,12 +11,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!branche) {
     return {
-      title: "Branche niet gevonden · Future Content",
+      title: "Branche niet gevonden",
     };
   }
 
   const url = `${SITE.url}/voor/${branche.slug}`;
-  const title = `${branche.heroH1} · Future Content`;
+  const title = branche.heroH1;
   const description = branche.heroLead;
 
   return {

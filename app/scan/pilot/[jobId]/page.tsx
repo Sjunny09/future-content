@@ -45,8 +45,8 @@ export default async function PilotPagina({ params }: { params: Params }) {
       >
         Voor €495 doe ik een volle week werk rond één concreet proces in jouw
         bedrijf. Maandag kies ik met je uit wat het wordt, donderdag staat er
-        iets werkends, vrijdag lopen we het samen door. Niet een adviesrapport
-        — iets dat al draait.
+        iets werkends, vrijdag lopen we het samen door. Geen adviesrapport,
+        maar iets dat al draait.
       </p>
 
       <ul
@@ -55,7 +55,7 @@ export default async function PilotPagina({ params }: { params: Params }) {
       >
         <li>• Één proces, end-to-end opgelost</li>
         <li>• Korte dagelijkse check-in (10 min per dag)</li>
-        <li>• Volle eigendom — alles wat we bouwen is van jou</li>
+        <li>• Volle eigendom: alles wat we bouwen is van jou</li>
         <li>• Refund als je vrijdag niet tevreden bent</li>
       </ul>
 
@@ -72,11 +72,11 @@ export default async function PilotPagina({ params }: { params: Params }) {
           >
             iDEAL-checkout wordt deze week opengezet. Mail John rechtstreeks op{" "}
             <a
-              href="mailto:john@futurecontent.nl"
+              href="mailto:john@future-content.nl"
               className="underline underline-offset-4"
               style={{ color: "var(--color-scan-terracotta)" }}
             >
-              john@futurecontent.nl
+              john@future-content.nl
             </a>{" "}
             als je nu al wilt boeken.
           </div>

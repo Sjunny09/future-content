@@ -3,6 +3,7 @@ import { z } from "zod"
 import { db } from "@/lib/scan/db"
 import { stuurMails } from "@/lib/scan/mail/stuurMails"
 import { notifyOs } from "@/lib/scan/notifyOs"
+import { notifyTelegram } from "@/lib/scan/notifyTelegram"
 import { reportError } from "@/lib/scan/observability/logger"
 
 export const runtime = "nodejs"
@@ -121,9 +122,16 @@ export async function POST(
     // Leads-bridge: ná mail, lead doorduwen naar Google Sheet (bron van waarheid).
     // Apart try/catch zodat mail-fouten notifyOs niet blokkeren en vice versa.
     try {
-      await notifyOs(jobId)
+      await notifyOs(jobId, "quickscan")
     } catch (err) {
       reportError(err, { waar: "compleet/notifyOs", jobId })
+    }
+    // Telegram-ping naar John: snelle heads-up op de telefoon zodat hij
+    // erop kan springen terwijl de lead warm is. Apart try/catch.
+    try {
+      await notifyTelegram(jobId, "quickscan")
+    } catch (err) {
+      reportError(err, { waar: "compleet/notifyTelegram", jobId })
     }
   })
 

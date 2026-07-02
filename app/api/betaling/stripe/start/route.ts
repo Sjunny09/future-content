@@ -68,7 +68,7 @@ export async function POST(req: NextRequest) {
             unit_amount: PILOT_BEDRAG_CENT,
             product_data: {
               name: PILOT_OMSCHRIJVING,
-              description: `${PILOT_OMSCHRIJVING} — ${job.lead.naam ?? job.lead.email}`,
+              description: `${PILOT_OMSCHRIJVING} - ${job.lead.naam ?? job.lead.email}`,
             },
           },
           quantity: 1,

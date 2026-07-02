@@ -1,10 +1,11 @@
 import { Resend } from "resend"
 import { db } from "@/lib/scan/db"
+import { BOOKING } from "@/lib/constants"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
 // Mail-adressen in één punt — makkelijker te veranderen later.
-const VAN = "Future Content <scan@futurecontent.nl>"
-const JOHN = process.env.SCAN_NOTIFY_EMAIL ?? "john@futurecontent.nl"
+const VAN = "Future Content <scan@future-content.nl>"
+const JOHN = process.env.SCAN_NOTIFY_EMAIL ?? "john@future-content.nl"
 
 let clientSingleton: Resend | null = null
 function client(): Resend | null {
@@ -67,8 +68,8 @@ export async function stuurMails(jobId: string): Promise<void> {
       .send({
         from: VAN,
         to: job.lead.email,
-        subject: "Dankjewel — binnen 24 uur stuur ik je de video",
-        text: bouwKlantMail({ naam: job.lead.naam }),
+        subject: "Je resultaten staan klaar",
+        text: bouwKlantMail({ naam: job.lead.naam, jobId: job.id }),
       })
       .catch((err) => {
         console.error("[mail] mail-naar-klant faalde", { jobId, err })
@@ -126,21 +127,28 @@ function bouwJohnMail(ctx: {
   return regels.join("\n")
 }
 
-function bouwKlantMail(ctx: { naam: string | null }): string {
+function bouwKlantMail(ctx: { naam: string | null; jobId: string }): string {
   const aanhef = ctx.naam ? `Hoi ${ctx.naam},` : `Hoi,`
+  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://future-content.nl"
+  const resultatenUrl = `${site}/scan/klaar/${ctx.jobId}`
+  const diepteUrl = `${site}/scan/diepte/${ctx.jobId}`
+  const boekUrl = `https://${BOOKING.calHost}/${BOOKING.calUser}/${BOOKING.calEvent}`
   return [
     aanhef,
     ``,
-    `Dankjewel dat je de scan hebt gedaan. Ik ga er nu rustig mee zitten.`,
+    `Je resultaten staan klaar: ${resultatenUrl}`,
     ``,
-    `Binnen 24 uur krijg je van mij een korte video waarin ik doorneem wat ik op de site zag, en wat ik zou doen als ik bij jullie aan tafel zat. Gewoon mijn eerlijke eerste indruk.`,
+    `Als bonus stuur ik je binnen 24 uur ook nog een korte, persoonlijke video waarin ik doorneem wat ik op de site zag, en wat ik zou doen als ik bij jullie aan tafel zat.`,
+    ``,
+    `Wil je eerst meer diepgang? Doe de uitgebreide scan, 10 tot 15 minuten, gratis: ${diepteUrl}`,
+    `Al overtuigd? Plan direct ${BOOKING.duration} met me in: ${boekUrl}`,
     ``,
     `Als ik er langer dan 24 uur over doe, hoor je dat ook van me. Nooit stilte.`,
     ``,
     `Tot straks,`,
     `John`,
     ``,
-    `Future Content · futurecontent.nl`,
+    `Future Content · future-content.nl`,
   ].join("\n")
 }
 

@@ -86,7 +86,7 @@ export const AI_POSTS_3: BlogPost[] = [
       { type: "h2", text: "3. Een chatbot die direct een tafel reserveert" },
       { type: "p", text: "Voor de horeca bouwde ik een chatbot die niet alleen vragen beantwoordt, maar in hetzelfde gesprek meteen een tafel reserveert. De gast hoeft niet te bellen of een formulier te zoeken. Hij typt wanneer en met hoeveel personen, en het staat geboekt. Dat is het verschil tussen een leuke gimmick en iets dat echt werk uit handen neemt." },
       { type: "h2", text: "4. Een ticketsysteem dat live een evenement draaide" },
-      { type: "ul", items: ["Voor Koningsdag in Reusel bouwde ik een ticketsysteem met online betaling.", "Bezoekers konden vooraf betalen en kregen een geldig ticket.", "Het draaide live tijdens het evenement zelf, onder echte druk.", "Geen kassarij met los geld, geen handmatig bijhouden. Het systeem deed het werk."] },
+      { type: "ul", items: ["Voor Köningsdag in Reusel bouwde ik een ticketsysteem met online betaling.", "Bezoekers konden vooraf betalen en kregen een geldig ticket.", "Het draaide live tijdens het evenement zelf, onder echte druk.", "Geen kassarij met los geld, geen handmatig bijhouden. Het systeem deed het werk."] },
       { type: "h2", text: "5. Hardop praten met AI terwijl het op de achtergrond werkt" },
       { type: "p", text: "Een van de leukste dingen die ik bouwde is een voice-orchestrator. Ik praat hardop met de AI, en ondertussen gaan achtergrond-agenten voor mij aan het onderzoek. Terwijl ik gewoon doorpraat over een idee, wordt het werk al gedaan. Dat klinkt futuristisch, maar het draait gewoon op mijn eigen opzet." },
       { type: "h2", text: "6. Een app die cafedrukte laat zien" },

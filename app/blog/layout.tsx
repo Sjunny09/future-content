@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Blog | Video, Content & AI voor lokale bedrijven",
@@ -8,6 +9,9 @@ export const metadata: Metadata = {
     title: "Blog | Future Content",
     description: "Inzichten over video, social media content en AI voor lokale ondernemers.",
     images: ["/photos/PhotoSessions-757307-pww_6404-vy-1.jpg"],
+  },
+  alternates: {
+    canonical: `${SITE.url}/blog`,
   },
 };
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { ipLimiet, hashIp } from "@/lib/scan/ratelimit";
 
 // Zod schema validates and types the request body in one step.
 // If a required field is missing or wrong type, schema.parse() throws a
@@ -17,13 +18,28 @@ const schema = z.object({
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limit (go-live audit 2 juli): zelfde IP-limiet als de scan-start
+    // (20/uur), met eigen sleutel-prefix zodat scan en contact elkaar niet
+    // optellen. Voorkomt formulier-spam richting John's mailbox.
+    const ip =
+      req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+      req.headers.get("x-real-ip") ??
+      "0.0.0.0";
+    const limiet = await ipLimiet.limit(`contact:${hashIp(ip)}`);
+    if (!limiet.success) {
+      return NextResponse.json(
+        { ok: false, fout: "Te veel berichten achter elkaar. Probeer het later nog eens, of mail hello@future-content.nl direct." },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
     const data = schema.parse(body); // throws ZodError on invalid input
 
     // If RESEND_API_KEY is missing (local dev), log and pretend success.
     // In production, add RESEND_API_KEY to Vercel environment variables.
     const apiKey = process.env.RESEND_API_KEY;
-    const toEmail = process.env.CONTACT_EMAIL ?? "info@future-content.nl";
+    const toEmail = process.env.CONTACT_EMAIL ?? "hello@future-content.nl";
 
     if (!apiKey) {
       // Dev mode: log and return success
@@ -35,13 +51,13 @@ export async function POST(req: NextRequest) {
       <h2>Nieuw contactformulier | Future Content</h2>
       <table style="border-collapse:collapse;width:100%">
         <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Naam</td><td style="padding:8px;border:1px solid #eee">${data.naam}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Bedrijf</td><td style="padding:8px;border:1px solid #eee">${data.bedrijf ?? "—"}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Bedrijf</td><td style="padding:8px;border:1px solid #eee">${data.bedrijf ?? "-"}</td></tr>
         <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">E-mail</td><td style="padding:8px;border:1px solid #eee"><a href="mailto:${data.email}">${data.email}</a></td></tr>
-        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Telefoon</td><td style="padding:8px;border:1px solid #eee">${data.telefoon ?? "—"}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Telefoon</td><td style="padding:8px;border:1px solid #eee">${data.telefoon ?? "-"}</td></tr>
         <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Type shoot</td><td style="padding:8px;border:1px solid #eee">${data.type}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Locatie</td><td style="padding:8px;border:1px solid #eee">${data.locatie ?? "—"}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Datum voorkeur</td><td style="padding:8px;border:1px solid #eee">${data.datum ?? "—"}</td></tr>
-        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Bericht</td><td style="padding:8px;border:1px solid #eee">${data.bericht ?? "—"}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Locatie</td><td style="padding:8px;border:1px solid #eee">${data.locatie ?? "-"}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Datum voorkeur</td><td style="padding:8px;border:1px solid #eee">${data.datum ?? "-"}</td></tr>
+        <tr><td style="padding:8px;border:1px solid #eee;font-weight:bold">Bericht</td><td style="padding:8px;border:1px solid #eee">${data.bericht ?? "-"}</td></tr>
       </table>
     `;
 

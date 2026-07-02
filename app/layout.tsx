@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, Playfair_Display, Fraunces, IBM_Plex_Sans } from "next/font/google";
+import { Inter, Playfair_Display, Archivo, Space_Mono } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/components/layout/SiteChrome";
 import { SITE } from "@/lib/constants";
@@ -17,19 +17,20 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-// Scan-flow typografie — docs/quickscan/03_ceo_synthese.md §1.9
-const fraunces = Fraunces({
+// Nieuwe huisstijl (handboek): Archivo als body/UI-sans, Space Mono voor labels.
+// De scan-flow gebruikt Playfair (koppen) + Archivo (body) via de aliassen
+// --font-fraunces / --font-plex in globals.css.
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-archivo",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
-const plex = IBM_Plex_Sans({
+const spaceMono = Space_Mono({
   subsets: ["latin"],
-  variable: "--font-plex",
+  variable: "--font-space-mono",
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -39,17 +40,25 @@ export const metadata: Metadata = {
     template: "%s | Future Content",
   },
   description: SITE.description,
+  alternates: {
+    canonical: SITE.url,
+  },
   keywords: [
-    "AI bouwer",
-    "AI bouwer Brabant",
-    "AI bouwer Eindhoven",
     "AI voor MKB",
     "automatisering MKB",
+    "processen automatiseren bedrijf",
+    "offertes automatiseren",
+    "administratie automatiseren",
+    "klantvragen automatisch beantwoorden",
+    "AI consultant Eindhoven",
+    "AI consultant Tilburg",
+    "AI bouwer Brabant",
     "AI training Brabant",
     "AI consultant Bladel",
     "AI implementatie Eindhoven",
     "SLIM subsidie AI training",
-    "tweede brein AI",
+    "AI voor transport en logistiek",
+    "AI voor makelaars",
     "vastgoedvideograaf",
     "videograaf Kempen",
   ],
@@ -87,12 +96,13 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "LocalBusiness",
+      "@type": ["LocalBusiness", "ProfessionalService"],
       "@id": `${SITE.url}/#business`,
       name: SITE.name,
       url: SITE.url,
       telephone: SITE.phone,
       email: SITE.email,
+      founder: { "@id": `${SITE.url}/#john` },
       address: {
         "@type": "PostalAddress",
         addressLocality: SITE.city,
@@ -165,6 +175,26 @@ const jsonLd = {
       name: SITE.name,
       url: SITE.url,
       logo: `${SITE.url}/logo/logo.png`,
+      founder: { "@id": `${SITE.url}/#john` },
+    },
+    {
+      "@type": "Person",
+      "@id": `${SITE.url}/#john`,
+      name: SITE.ownerName,
+      jobTitle: "AI-bouwer en oprichter",
+      worksFor: { "@id": `${SITE.url}/#business` },
+      url: `${SITE.url}/over`,
+      image: `${SITE.url}/photos/PhotoSessions-757307-pww_6420-vy-1.jpg`,
+      description:
+        "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant, gevestigd in Bladel. Voorheen business engineer in de transportsector en zes jaar vastgoedvideograaf.",
+      knowsAbout: [
+        "AI-automatisering voor MKB",
+        "Procesoptimalisatie",
+        "Workflow-automatisering",
+        "AI-chatbots",
+        "Vastgoedvideografie",
+      ],
+      sameAs: [`https://wa.me/${SITE.whatsapp}`],
     },
   ],
 };
@@ -181,7 +211,7 @@ export default function RootLayout({
   return (
     <html
       lang="nl"
-      className={`${inter.variable} ${playfair.variable} ${fraunces.variable} ${plex.variable}`}
+      className={`${inter.variable} ${playfair.variable} ${archivo.variable} ${spaceMono.variable}`}
     >
       <head>
         <script

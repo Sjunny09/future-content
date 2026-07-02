@@ -1,6 +1,6 @@
 import { Resend } from "resend"
 
-const VAN = "Future Content <scan@futurecontent.nl>"
+const VAN = "Future Content <scan@future-content.nl>"
 
 let clientSingleton: Resend | null = null
 function client(): Resend | null {
@@ -48,7 +48,7 @@ function bouwHerinneringsmail(naam: string | null): string {
     ``,
     `John`,
     ``,
-    `—`,
-    `Future Content · futurecontent.nl`,
+    `-`,
+    `Future Content · future-content.nl`,
   ].join("\n")
 }

@@ -30,7 +30,7 @@ export default async function Image({ params }: Props) {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0F0F0D",
+          background: "#221C14",
           display: "flex",
           flexDirection: "column",
           padding: "80px",
@@ -46,14 +46,14 @@ export default async function Image({ params }: Props) {
             left: "80px",
             width: "120px",
             height: "2px",
-            background: "#C9A96E",
+            background: "#B45F38",
           }}
         />
 
         {/* Eyebrow */}
         <div
           style={{
-            color: "#C9A96E",
+            color: "#B45F38",
             fontSize: "20px",
             fontWeight: 600,
             letterSpacing: "4px",
@@ -69,7 +69,7 @@ export default async function Image({ params }: Props) {
         {/* Hoofdregel (hero-claim) */}
         <div
           style={{
-            color: "#FAFAF8",
+            color: "#F3ECE0",
             fontSize: headline.length > 60 ? "56px" : "68px",
             fontWeight: 700,
             lineHeight: 1.06,
@@ -96,7 +96,7 @@ export default async function Image({ params }: Props) {
         >
           <div
             style={{
-              color: "#FAFAF8",
+              color: "#F3ECE0",
               opacity: 0.55,
               fontSize: "22px",
               fontWeight: 500,
@@ -107,7 +107,7 @@ export default async function Image({ params }: Props) {
           </div>
           <div
             style={{
-              color: "#C9A96E",
+              color: "#B45F38",
               fontSize: "22px",
               fontWeight: 600,
               letterSpacing: "1px",

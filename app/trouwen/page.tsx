@@ -35,7 +35,7 @@ export default function TrouwenPage() {
       />
 
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#0F0F0D] pb-16">
+      <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#221C14] pb-16">
         <div className="absolute inset-0">
           <Image
             src={PHOTOS[0]}
@@ -45,7 +45,7 @@ export default function TrouwenPage() {
             className="object-cover object-center opacity-40"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0D] via-[#0F0F0D]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#221C14] via-[#221C14]/50 to-transparent" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 pt-28 w-full">
@@ -55,16 +55,16 @@ export default function TrouwenPage() {
             transition={{ duration: 0.7 }}
             className="max-w-2xl"
           >
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
               Bruiloftsvideo&apos;s
             </span>
             <h1
-              className="text-4xl md:text-6xl font-bold text-[#FAFAF8] leading-[1.1] mb-5"
+              className="text-4xl md:text-6xl font-bold text-[#F3ECE0] leading-[1.1] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Jouw mooiste dag. Voor altijd vastgelegd.
             </h1>
-            <p className="text-[#FAFAF8]/70 text-lg mb-8 leading-relaxed">
+            <p className="text-[#F3ECE0]/70 text-lg mb-8 leading-relaxed">
               Een bruiloftsvideo is meer dan beelden. Het is het gevoel van die dag:
               de spanning, de lach, de tranen. Voor jullie, voor later, voor altijd.
             </p>
@@ -80,7 +80,7 @@ export default function TrouwenPage() {
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-[#FAFAF8]/30 text-[#FAFAF8] font-semibold hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-[#F3ECE0]/30 text-[#F3ECE0] font-semibold hover:border-[#B45F38] hover:text-[#B45F38] transition-colors"
               >
                 Vrijblijvend gesprek <ArrowRight size={16} />
               </Link>
@@ -90,20 +90,20 @@ export default function TrouwenPage() {
       </section>
 
       {/* ─── WAT JE KRIJGT ────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+              <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
                 Wat je krijgt
               </span>
               <h2
-                className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-6"
+                className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-6"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Twee video&apos;s. Eén dag.
               </h2>
-              <p className="text-[#6B7280] text-lg mb-8 leading-relaxed">
+              <p className="text-[#6E6151] text-lg mb-8 leading-relaxed">
                 Van elke bruiloft maak ik standaard twee bewerkingen, zodat jullie de dag
                 op élk moment kunnen herbeleven.
               </p>
@@ -128,12 +128,12 @@ export default function TrouwenPage() {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex gap-4 p-4 rounded-xl bg-[#F5F1EB] border border-[#E5E0D8]"
+                    className="flex gap-4 p-4 rounded-xl bg-[#ECE2D2] border border-[#E4D8C6]"
                   >
-                    <div className="text-[#C9A96E] mt-0.5 shrink-0">{item.icon}</div>
+                    <div className="text-[#B45F38] mt-0.5 shrink-0">{item.icon}</div>
                     <div>
-                      <p className="font-semibold text-[#1A1A18] text-sm">{item.title}</p>
-                      <p className="text-xs text-[#6B7280] mt-0.5 leading-relaxed">{item.desc}</p>
+                      <p className="font-semibold text-[#2A2218] text-sm">{item.title}</p>
+                      <p className="text-xs text-[#6E6151] mt-0.5 leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -154,18 +154,18 @@ export default function TrouwenPage() {
       </section>
 
       {/* ─── VIDEO VOORBEELD ──────────────────────────────────────────── */}
-      <section className="bg-[#0F0F0D] py-20 md:py-28">
+      <section className="bg-[#221C14] py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
             Bekijk een voorbeeld
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#FAFAF8] mb-4"
+            className="text-3xl md:text-4xl font-bold text-[#F3ECE0] mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Zo ziet jullie dag eruit.
           </h2>
-          <p className="text-[#FAFAF8]/60 mb-10 max-w-xl mx-auto">
+          <p className="text-[#F3ECE0]/60 mb-10 max-w-xl mx-auto">
             Een echte bruiloftsvideo, gefilmd en bewerkt door Future Content.
           </p>
           <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
@@ -181,25 +181,25 @@ export default function TrouwenPage() {
       </section>
 
       {/* ─── TARIEF ───────────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-20 md:py-28">
+      <section className="bg-[#ECE2D2] py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 text-center">
-          <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+          <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
             Tarief
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+            className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Prijs op aanvraag.
           </h2>
-          <p className="text-[#6B7280] text-lg mb-10 max-w-xl mx-auto">
+          <p className="text-[#6E6151] text-lg mb-10 max-w-xl mx-auto">
             Elke bruiloft is anders. De locatie, tijdsduur, wensen en stijl verschillen elke keer.
             Daarom bespreek ik de prijs altijd persoonlijk, zodat het past bij
             jullie dag én budget.
           </p>
 
-          <div className="bg-[#0F0F0D] rounded-2xl p-8 text-left max-w-xl mx-auto">
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+          <div className="bg-[#221C14] rounded-2xl p-8 text-left max-w-xl mx-auto">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-3">
               Altijd inbegrepen
             </span>
             <ul className="space-y-3 mb-8">
@@ -211,8 +211,8 @@ export default function TrouwenPage() {
                 "Bestanden via WeTransfer, direct downloadbaar",
               ].map((f, i) => (
                 <li key={i} className="flex items-start gap-2.5 text-sm">
-                  <Check size={15} className="text-[#C9A96E] mt-0.5 shrink-0" />
-                  <span className="text-[#FAFAF8]/80">{f}</span>
+                  <Check size={15} className="text-[#B45F38] mt-0.5 shrink-0" />
+                  <span className="text-[#F3ECE0]/80">{f}</span>
                 </li>
               ))}
             </ul>
@@ -220,7 +220,7 @@ export default function TrouwenPage() {
               href={waLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center py-3.5 rounded-full bg-[#C9A96E] text-[#0F0F0D] font-semibold text-sm hover:bg-[#b8955a] transition-colors"
+              className="block text-center py-3.5 rounded-full bg-[#B45F38] text-[#F3ECE0] font-semibold text-sm hover:bg-[#9E3D24] transition-colors"
             >
               Vraag een offerte aan via WhatsApp
             </Link>
@@ -229,11 +229,11 @@ export default function TrouwenPage() {
       </section>
 
       {/* ─── WERKWIJZE ────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Hoe het werkt.
@@ -241,7 +241,7 @@ export default function TrouwenPage() {
           </div>
 
           <div className="relative">
-            <div className="absolute left-6 top-0 bottom-0 w-px bg-[#E5E0D8] hidden md:block" />
+            <div className="absolute left-6 top-0 bottom-0 w-px bg-[#E4D8C6] hidden md:block" />
             <div className="space-y-8">
               {[
                 {
@@ -261,12 +261,12 @@ export default function TrouwenPage() {
                 },
               ].map((step, i) => (
                 <div key={i} className="flex gap-6 md:pl-12">
-                  <div className="w-12 h-12 rounded-full bg-[#C9A96E] flex items-center justify-center text-[#0F0F0D] font-bold text-sm shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-[#B45F38] flex items-center justify-center text-[#221C14] font-bold text-sm shrink-0">
                     {step.num}
                   </div>
                   <div className="pt-2.5">
-                    <h3 className="font-semibold text-[#1A1A18] mb-1">{step.title}</h3>
-                    <p className="text-[#6B7280] text-sm leading-relaxed">{step.desc}</p>
+                    <h3 className="font-semibold text-[#2A2218] mb-1">{step.title}</h3>
+                    <p className="text-[#6E6151] text-sm leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -276,15 +276,15 @@ export default function TrouwenPage() {
       </section>
 
       {/* ─── REVIEW ───────────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-16 border-t border-[#E5E0D8]">
+      <section className="bg-[#ECE2D2] py-16 border-t border-[#E4D8C6]">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="flex justify-center gap-0.5 mb-5">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={18} fill="#C9A96E" className="text-[#C9A96E]" />
+              <Star key={i} size={18} fill="#B45F38" className="text-[#B45F38]" />
             ))}
           </div>
           <blockquote
-            className="text-xl md:text-2xl font-medium text-[#1A1A18] leading-snug mb-6 italic"
+            className="text-xl md:text-2xl font-medium text-[#2A2218] leading-snug mb-6 italic"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             &ldquo;John heeft onze trouwvideo gemaakt, waar wij super tevreden over waren!
@@ -292,19 +292,19 @@ export default function TrouwenPage() {
             van heeft gemaakt. Een fijne man om mee samen te werken.&rdquo;
           </blockquote>
           <div className="flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#C9A96E]/20 flex items-center justify-center text-sm font-bold text-[#C9A96E]">
+            <div className="w-10 h-10 rounded-full bg-[#B45F38]/20 flex items-center justify-center text-sm font-bold text-[#B45F38]">
               MD
             </div>
             <div className="text-left">
-              <p className="font-semibold text-[#1A1A18] text-sm">Mandy Daniels</p>
-              <p className="text-xs text-[#6B7280]">Bruidspaar · Google Review</p>
+              <p className="font-semibold text-[#2A2218] text-sm">Mandy Daniels</p>
+              <p className="text-xs text-[#6E6151]">Bruidspaar · Google Review</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── FINAL CTA ────────────────────────────────────────────────── */}
-      <section className="bg-[#0F0F0D] py-20 text-[#FAFAF8] text-center">
+      <section className="bg-[#221C14] py-20 text-[#F3ECE0] text-center">
         <div className="max-w-2xl mx-auto px-6">
           <h2
             className="text-3xl md:text-5xl font-bold mb-5"
@@ -312,7 +312,7 @@ export default function TrouwenPage() {
           >
             Jullie dag verdient het beste.
           </h2>
-          <p className="text-[#FAFAF8]/60 mb-8">
+          <p className="text-[#F3ECE0]/60 mb-8">
             Stuur een WhatsApp. Ik reageer dezelfde dag en we plannen een vrijblijvend gesprek.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -327,7 +327,7 @@ export default function TrouwenPage() {
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-[#FAFAF8]/20 text-[#FAFAF8] font-semibold hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-[#F3ECE0]/20 text-[#F3ECE0] font-semibold hover:border-[#B45F38] hover:text-[#B45F38] transition-colors"
             >
               Plan een gesprek <ArrowRight size={16} />
             </Link>

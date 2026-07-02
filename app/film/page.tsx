@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MessageCircle, ArrowRight, Heart } from "lucide-react";
 import { SITE, STACK_VIDEOS } from "@/lib/constants";
+import Reviews from "@/components/sections/Reviews";
 
 export const metadata: Metadata = {
-  title: "Film",
+  title: "Film & video in De Kempen",
   description:
     "Video voor makelaars, bedrijven en bruidsparen in De Kempen en omstreken. Shoot now, content later. App John voor een boeking of prijs.",
+  alternates: { canonical: "/film" },
 };
 
 const WA = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
@@ -16,8 +18,8 @@ const WA = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
 export default function FilmPage() {
   return (
     <>
-      {/* ─── Hero (donker) ─────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0F0F0D] text-[#FAFAF8]">
+      {/* ─── Hero (donker, inkt) ────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-[#2A2218] text-[#F3ECE0]">
         {/* Logo-animatie als sfeer-achtergrond (zoals op de live site) */}
         <video
           src="/logo/logo.mp4"
@@ -27,9 +29,9 @@ export default function FilmPage() {
           playsInline
           className="absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-luminosity"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F0D]/70 via-[#0F0F0D]/40 to-[#0F0F0D]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2A2218]/70 via-[#2A2218]/40 to-[#221C14]" />
         <div className="relative max-w-5xl mx-auto px-6 pt-40 pb-24 md:pt-48 md:pb-32">
-          <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.25em]">
+          <span className="fc-mono text-[#B45F38] text-xs font-semibold uppercase tracking-[0.25em]">
             Future Content · Film
           </span>
           <h1
@@ -38,9 +40,9 @@ export default function FilmPage() {
           >
             Shoot now,
             <br />
-            <span className="text-[#C9A96E]">content later.</span>
+            <span className="text-[#B45F38]">content later.</span>
           </h1>
-          <p className="mt-7 text-lg md:text-xl text-[#FAFAF8]/70 max-w-2xl leading-relaxed">
+          <p className="mt-7 text-lg md:text-xl text-[#F3ECE0]/70 max-w-2xl leading-relaxed">
             Video voor makelaars, bedrijven en bruidsparen. Strak gefilmd, snel opgeleverd, gemaakt om
             te verkopen of te bewaren.
           </p>
@@ -56,26 +58,32 @@ export default function FilmPage() {
       </section>
 
       {/* ─── Huizenvideo's ─────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8]">
+      <section className="bg-[#F3ECE0]">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-28">
-          <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.2em]">
+          <span className="fc-mono text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
             Vastgoed
           </span>
           <h2
-            className="mt-3 text-3xl md:text-4xl font-semibold text-[#1A1A18]"
+            className="mt-3 text-3xl md:text-4xl font-semibold text-[#2A2218]"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Huizenvideo's, Funda-ready
+            Huizenvideo&apos;s, Funda-ready
           </h2>
-          <p className="mt-3 text-[#6B7280] max-w-2xl leading-relaxed">
+          <p className="mt-3 text-[#6E6151] max-w-2xl leading-relaxed">
             Een rondleiding die kopers het gevoel van de woning geeft, voordat ze de drempel over zijn.
           </p>
+          <Link
+            href="/makelaars"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#B45F38] hover:gap-3 transition-all"
+          >
+            Meer over vastgoedvideo&apos;s voor makelaars <ArrowRight size={14} />
+          </Link>
 
           <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {STACK_VIDEOS.map((v) => (
               <figure
                 key={v.id}
-                className="rounded-2xl overflow-hidden border border-[#E5E0D8] bg-white"
+                className="rounded-2xl overflow-hidden border border-[#E4D8C6] bg-[#FBF8F2]"
               >
                 <video
                   src={v.src}
@@ -83,11 +91,11 @@ export default function FilmPage() {
                   controls
                   preload="none"
                   playsInline
-                  className="w-full aspect-video object-cover bg-[#1A1A18]"
+                  className="w-full aspect-video object-cover bg-[#2A2218]"
                 />
                 <figcaption className="px-4 py-3">
-                  <span className="block text-sm font-semibold text-[#1A1A18]">{v.title}</span>
-                  <span className="block text-xs text-[#6B7280]">{v.location}</span>
+                  <span className="block text-sm font-semibold text-[#2A2218]">{v.title}</span>
+                  <span className="block text-xs text-[#6E6151]">{v.location}</span>
                 </figcaption>
               </figure>
             ))}
@@ -96,25 +104,31 @@ export default function FilmPage() {
       </section>
 
       {/* ─── Bruiloftvideo ─────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] border-t border-[#E5E0D8]">
+      <section className="bg-[#ECE2D2] border-t border-[#E4D8C6]">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-          <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.2em]">
+          <span className="fc-mono text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
             Bruiloft
           </span>
           <h2
-            className="mt-3 text-3xl md:text-4xl font-semibold text-[#1A1A18]"
+            className="mt-3 text-3xl md:text-4xl font-semibold text-[#2A2218]"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Trouwfilms en aftermovies
           </h2>
-          <p className="mt-3 text-[#6B7280] max-w-2xl leading-relaxed">
+          <p className="mt-3 text-[#6E6151] max-w-2xl leading-relaxed">
             Bij elke bruiloft krijg je altijd twee films: een korte met de hoogtepunten om te delen,
             en een langere die de hele dag vertelt.
           </p>
+          <Link
+            href="/trouwen"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#B45F38] hover:gap-3 transition-all"
+          >
+            Meer over trouwfilms en aftermovies <ArrowRight size={14} />
+          </Link>
 
           <div className="mt-10 flex flex-col items-center gap-8">
             {/* Werner & Manon */}
-            <figure className="w-full max-w-2xl overflow-hidden rounded-2xl border border-[#E5E0D8] bg-black">
+            <figure className="w-full max-w-2xl overflow-hidden rounded-2xl border border-[#E4D8C6] bg-black">
               <div className="relative aspect-video">
                 <iframe
                   src="https://player.vimeo.com/video/1203460952?app_id=122963"
@@ -125,15 +139,15 @@ export default function FilmPage() {
                   title="Bruiloft Werner en Manon"
                 />
               </div>
-              <figcaption className="flex items-center justify-center gap-2 bg-white px-4 py-3">
-                <Heart size={14} className="text-[#C9A96E]" />
-                <span className="text-sm font-semibold text-[#1A1A18]">Werner &amp; Manon</span>
+              <figcaption className="flex items-center justify-center gap-2 bg-[#FBF8F2] px-4 py-3">
+                <Heart size={14} className="text-[#B45F38]" />
+                <span className="text-sm font-semibold text-[#2A2218]">Werner &amp; Manon</span>
               </figcaption>
             </figure>
 
             {/* Luuk & Mandy: de hele dag + de korte film */}
             <div className="flex flex-wrap items-start justify-center gap-6">
-              <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-black">
+              <figure className="overflow-hidden rounded-2xl border border-[#E4D8C6] bg-black">
                 <div className="relative h-[260px] aspect-video">
                   <iframe
                     src="https://player.vimeo.com/video/1203439014?app_id=122963"
@@ -144,24 +158,24 @@ export default function FilmPage() {
                     title="Bruiloft Luuk en Mandy"
                   />
                 </div>
-                <figcaption className="flex items-center justify-center gap-2 bg-white px-4 py-3">
-                  <Heart size={14} className="text-[#C9A96E]" />
-                  <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
+                <figcaption className="flex items-center justify-center gap-2 bg-[#FBF8F2] px-4 py-3">
+                  <Heart size={14} className="text-[#B45F38]" />
+                  <span className="text-sm font-semibold text-[#2A2218]">Luuk &amp; Mandy</span>
                 </figcaption>
               </figure>
 
-              <figure className="overflow-hidden rounded-2xl border border-[#E5E0D8] bg-white">
+              <figure className="overflow-hidden rounded-2xl border border-[#E4D8C6] bg-[#FBF8F2]">
                 <video
                   src="/videos/Bruiloft%20luuk%20en%20Mandy%20instagram%20v4%20website.mp4"
                   controls
                   preload="metadata"
                   playsInline
-                  className="block h-[260px] aspect-square object-cover bg-[#1A1A18]"
+                  className="block h-[260px] aspect-square object-cover bg-[#2A2218]"
                 />
                 <figcaption className="flex items-center justify-center gap-2 px-4 py-3">
-                  <Heart size={14} className="text-[#C9A96E]" />
-                  <span className="text-sm font-semibold text-[#1A1A18]">Luuk &amp; Mandy</span>
-                  <span className="text-xs text-[#6B7280]">· korte film</span>
+                  <Heart size={14} className="text-[#B45F38]" />
+                  <span className="text-sm font-semibold text-[#2A2218]">Luuk &amp; Mandy</span>
+                  <span className="text-xs text-[#6E6151]">· korte film</span>
                 </figcaption>
               </figure>
             </div>
@@ -178,19 +192,19 @@ export default function FilmPage() {
       </section>
 
       {/* ─── Festivals & evenementen ───────────────────────────────── */}
-      <section className="bg-[#FAFAF8] border-t border-[#E5E0D8]">
+      <section className="bg-[#F3ECE0] border-t border-[#E4D8C6]">
         <div className="max-w-6xl mx-auto px-6 py-20 md:py-24">
-          <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.2em]">
+          <span className="fc-mono text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
             Festivals &amp; evenementen
           </span>
           <h2
-            className="mt-3 text-3xl md:text-4xl font-semibold text-[#1A1A18]"
+            className="mt-3 text-3xl md:text-4xl font-semibold text-[#2A2218]"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             Aftermovies die de sfeer vangen
           </h2>
           <div className="mt-10 flex justify-center">
-            <figure className="w-full max-w-3xl rounded-2xl overflow-hidden border border-[#E5E0D8] bg-black">
+            <figure className="w-full max-w-3xl rounded-2xl overflow-hidden border border-[#E4D8C6] bg-black">
               <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
                 <iframe
                   src="https://player.vimeo.com/video/843642501?app_id=122963"
@@ -201,12 +215,12 @@ export default function FilmPage() {
                   title="Köningsdag aftermovie 3.0"
                 />
               </div>
-              <figcaption className="px-4 py-3 text-center">
-                <span className="text-sm font-semibold text-[#1A1A18]">Köningsdag aftermovie</span>
+              <figcaption className="px-4 py-3 text-center bg-[#FBF8F2]">
+                <span className="text-sm font-semibold text-[#2A2218]">Köningsdag aftermovie</span>
               </figcaption>
             </figure>
           </div>
-          <p className="mt-8 text-center text-base text-[#1A1A18]">
+          <p className="mt-8 text-center text-base text-[#2A2218]">
             Neem contact op met mij via{" "}
             <a
               href={WA}
@@ -221,8 +235,11 @@ export default function FilmPage() {
         </div>
       </section>
 
+      {/* ─── Reviews (bewijs) ──────────────────────────────────────── */}
+      <Reviews />
+
       {/* ─── Slot-CTA ──────────────────────────────────────────────── */}
-      <section className="bg-[#0F0F0D] text-[#FAFAF8]">
+      <section className="bg-[#221C14] text-[#F3ECE0]">
         <div className="max-w-5xl mx-auto px-6 py-16 flex flex-col sm:flex-row items-center justify-between gap-6">
           <p className="text-2xl font-semibold" style={{ fontFamily: "var(--font-playfair)" }}>
             Iets in gedachten? Eén appje is genoeg.
@@ -237,8 +254,8 @@ export default function FilmPage() {
               <MessageCircle size={17} /> App me
             </Link>
             <Link
-              href="/"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#FAFAF8]/25 text-[#FAFAF8] font-semibold hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+              href="/ai"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#F3ECE0]/25 text-[#F3ECE0] font-semibold hover:border-[#B45F38] hover:text-[#B45F38] transition-colors"
             >
               Naar AI <ArrowRight size={16} />
             </Link>

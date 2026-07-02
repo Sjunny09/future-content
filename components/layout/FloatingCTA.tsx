@@ -61,7 +61,7 @@ export default function FloatingCTA() {
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
               onClick={() => setOpen(true)}
-              className="group flex items-center gap-2.5 pl-4 pr-5 py-3.5 rounded-full bg-[#C9A96E] text-[#0F0F0D] font-semibold shadow-lg hover:bg-[#b8955a] transition-colors"
+              className="group flex items-center gap-2.5 pl-4 pr-5 py-3.5 rounded-full bg-[#B45F38] text-[#F3ECE0] font-semibold shadow-lg hover:bg-[#9E3D24] transition-colors"
             >
               <Phone size={17} className="shrink-0" />
               <span className="text-sm">Bel mij terug</span>
@@ -91,37 +91,37 @@ export default function FloatingCTA() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="fixed bottom-6 right-6 z-50 w-full max-w-sm bg-[#FAFAF8] rounded-2xl shadow-2xl p-7"
+              className="fixed bottom-6 right-6 z-50 w-full max-w-sm bg-[#F3ECE0] rounded-2xl shadow-2xl p-7"
             >
               {/* Close */}
               <button
                 onClick={() => { setOpen(false); setStatus("idle"); }}
-                className="absolute top-4 right-4 text-[#6B7280] hover:text-[#1A1A18]"
+                className="absolute top-4 right-4 text-[#6E6151] hover:text-[#2A2218]"
               >
                 <X size={18} />
               </button>
 
               {status === "success" ? (
                 <div className="text-center py-4">
-                  <div className="w-14 h-14 rounded-full bg-[#F0E6D0] flex items-center justify-center mx-auto mb-4">
-                    <Phone size={22} className="text-[#C9A96E]" />
+                  <div className="w-14 h-14 rounded-full bg-[#ECE2D2] flex items-center justify-center mx-auto mb-4">
+                    <Phone size={22} className="text-[#B45F38]" />
                   </div>
-                  <h3 className="font-bold text-[#1A1A18] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
+                  <h3 className="font-bold text-[#2A2218] mb-2" style={{ fontFamily: "var(--font-playfair)" }}>
                     Verzoek ontvangen!
                   </h3>
-                  <p className="text-sm text-[#6B7280]">
+                  <p className="text-sm text-[#6E6151]">
                     We bellen je zo snel mogelijk terug. Bedankt!
                   </p>
                 </div>
               ) : (
                 <>
                   <h3
-                    className="text-xl font-bold text-[#1A1A18] mb-1"
+                    className="text-xl font-bold text-[#2A2218] mb-1"
                     style={{ fontFamily: "var(--font-playfair)" }}
                   >
                     Bel mij terug
                   </h3>
-                  <p className="text-sm text-[#6B7280] mb-5">
+                  <p className="text-sm text-[#6E6151] mb-5">
                     Laat je nummer achter en we bellen je zo snel mogelijk terug.
                   </p>
 
@@ -133,7 +133,7 @@ export default function FloatingCTA() {
                         onChange={handleChange}
                         placeholder="Jouw naam *"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-[#E5E0D8] text-sm text-[#1A1A18] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#C9A96E] focus:ring-2 focus:ring-[#C9A96E]/20 transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-[#E4D8C6] text-sm text-[#2A2218] placeholder:text-[#A89A85] focus:outline-none focus:border-[#B45F38] focus:ring-2 focus:ring-[#B45F38]/20 transition-all"
                       />
                     </div>
                     <div>
@@ -144,7 +144,7 @@ export default function FloatingCTA() {
                         onChange={handleChange}
                         placeholder="Telefoonnummer *"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-[#E5E0D8] text-sm text-[#1A1A18] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#C9A96E] focus:ring-2 focus:ring-[#C9A96E]/20 transition-all"
+                        className="w-full px-4 py-3 rounded-xl border border-[#E4D8C6] text-sm text-[#2A2218] placeholder:text-[#A89A85] focus:outline-none focus:border-[#B45F38] focus:ring-2 focus:ring-[#B45F38]/20 transition-all"
                       />
                     </div>
                     <div>
@@ -152,7 +152,7 @@ export default function FloatingCTA() {
                         name="tijd"
                         value={form.tijd}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl border border-[#E5E0D8] text-sm text-[#6B7280] focus:outline-none focus:border-[#C9A96E] transition-all bg-white"
+                        className="w-full px-4 py-3 rounded-xl border border-[#E4D8C6] text-sm text-[#6E6151] focus:outline-none focus:border-[#B45F38] transition-all bg-white"
                       >
                         <option value="">Wanneer bellen? (optioneel)</option>
                         <option value="Ochtend (9–12u)">Ochtend (9–12u)</option>
@@ -169,17 +169,17 @@ export default function FloatingCTA() {
                     <button
                       type="submit"
                       disabled={status === "loading"}
-                      className="w-full py-3.5 rounded-full bg-[#1A1A18] text-[#FAFAF8] font-semibold text-sm hover:bg-[#C9A96E] hover:text-[#0F0F0D] transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                      className="w-full py-3.5 rounded-full bg-[#2A2218] text-[#F3ECE0] font-semibold text-sm hover:bg-[#B45F38] hover:text-[#F3ECE0] transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                       {status === "loading" ? "Versturen..." : "Stuur terugbelverzoek"}
                       {status !== "loading" && <ArrowRight size={14} />}
                     </button>
                   </form>
 
-                  <div className="mt-4 pt-4 border-t border-[#E5E0D8] flex items-center justify-center gap-2">
+                  <div className="mt-4 pt-4 border-t border-[#E4D8C6] flex items-center justify-center gap-2">
                     <a
                       href={`tel:${SITE.phone}`}
-                      className="text-xs text-[#6B7280] hover:text-[#C9A96E] transition-colors"
+                      className="text-xs text-[#6E6151] hover:text-[#B45F38] transition-colors"
                     >
                       Of bel direct: {SITE.phone}
                     </a>

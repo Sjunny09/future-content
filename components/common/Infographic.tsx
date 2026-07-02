@@ -2,19 +2,19 @@
 // Lijn-gebaseerd, editorial, in de Future Content huisstijl. Geen clip-art.
 // Cijfers zijn illustratief en als zodanig gelabeld.
 
-const GOLD = "#C9A96E";
-const INK = "#1A1A18";
-const MUTED = "#6B7280";
-const BORDER = "#E5E0D8";
+const GOLD = "#B45F38";
+const INK = "#2A2218";
+const MUTED = "#6E6151";
+const BORDER = "#E4D8C6";
 
 function Frame({ title, caption, children }: { title: string; caption?: string; children: React.ReactNode }) {
   return (
-    <figure className="my-10 rounded-2xl border border-[#E5E0D8] bg-[#FAFAF8] p-6 md:p-8">
-      <figcaption className="text-xs font-semibold uppercase tracking-[0.15em] text-[#C9A96E] mb-5">
+    <figure className="my-10 rounded-2xl border border-[#E4D8C6] bg-[#F3ECE0] p-6 md:p-8">
+      <figcaption className="text-xs font-semibold uppercase tracking-[0.15em] text-[#B45F38] mb-5">
         {title}
       </figcaption>
       {children}
-      {caption && <p className="text-[11px] text-[#6B7280] mt-4">{caption}</p>}
+      {caption && <p className="text-[11px] text-[#6E6151] mt-4">{caption}</p>}
     </figure>
   );
 }
@@ -27,16 +27,16 @@ function ModelVergelijking() {
   ];
   return (
     <Frame title="Welk model waarvoor" caption="Algemene richtlijn, geen harde rangschikking. De beste keuze hangt af van je taak.">
-      <div className="grid sm:grid-cols-3 gap-px bg-[#E5E0D8] rounded-xl overflow-hidden border border-[#E5E0D8]">
+      <div className="grid sm:grid-cols-3 gap-px bg-[#E4D8C6] rounded-xl overflow-hidden border border-[#E4D8C6]">
         {cols.map((c) => (
-          <div key={c.name} className="bg-[#FAFAF8] p-5">
-            <p className="font-semibold text-[#1A1A18] mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
+          <div key={c.name} className="bg-[#F3ECE0] p-5">
+            <p className="font-semibold text-[#2A2218] mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
               {c.name}
             </p>
             <ul className="space-y-2">
               {c.tags.map((t) => (
-                <li key={t} className="flex items-start gap-2 text-sm text-[#6B7280]">
-                  <span className="text-[#C9A96E] mt-0.5">▸</span>
+                <li key={t} className="flex items-start gap-2 text-sm text-[#6E6151]">
+                  <span className="text-[#B45F38] mt-0.5">▸</span>
                   {t}
                 </li>
               ))}
@@ -61,11 +61,11 @@ function Tijdwinst() {
         {rows.map((r) => (
           <div key={r.label}>
             <div className="flex justify-between text-sm mb-1.5">
-              <span className="text-[#1A1A18]">{r.label}</span>
-              <span className="text-[#C9A96E] font-semibold tabular-nums">{r.v}%</span>
+              <span className="text-[#2A2218]">{r.label}</span>
+              <span className="text-[#B45F38] font-semibold tabular-nums">{r.v}%</span>
             </div>
-            <div className="h-2.5 rounded-full bg-[#F0E6D0] overflow-hidden">
-              <div className="h-full rounded-full bg-[#C9A96E]" style={{ width: `${r.v}%` }} />
+            <div className="h-2.5 rounded-full bg-[#ECE2D2] overflow-hidden">
+              <div className="h-full rounded-full bg-[#B45F38]" style={{ width: `${r.v}%` }} />
             </div>
           </div>
         ))}
@@ -95,7 +95,7 @@ function AiVolwassenheid() {
                 />
               ))}
             </div>
-            <span className="text-sm text-[#1A1A18]">{d.label}</span>
+            <span className="text-sm text-[#2A2218]">{d.label}</span>
           </div>
         ))}
       </div>
@@ -110,11 +110,11 @@ function Workflow() {
       <div className="flex flex-col md:flex-row items-stretch gap-3">
         {steps.map((s, i) => (
           <div key={s} className="flex-1 flex items-center gap-3">
-            <div className="flex-1 rounded-xl border border-[#E5E0D8] bg-[#FAFAF8] p-4 text-center">
-              <span className="block text-[#C9A96E] text-xs font-semibold mb-1 tabular-nums">0{i + 1}</span>
-              <span className="text-sm text-[#1A1A18] leading-snug">{s}</span>
+            <div className="flex-1 rounded-xl border border-[#E4D8C6] bg-[#F3ECE0] p-4 text-center">
+              <span className="block text-[#B45F38] text-xs font-semibold mb-1 tabular-nums">0{i + 1}</span>
+              <span className="text-sm text-[#2A2218] leading-snug">{s}</span>
             </div>
-            {i < steps.length - 1 && <span className="text-[#C9A96E] text-xl rotate-90 md:rotate-0">→</span>}
+            {i < steps.length - 1 && <span className="text-[#B45F38] text-xl rotate-90 md:rotate-0">→</span>}
           </div>
         ))}
       </div>
@@ -133,11 +133,11 @@ function PromptFormule() {
     <Frame title="De formule voor een goede prompt" caption="Hoe completer deze vier, hoe beter het antwoord.">
       <div className="space-y-2.5">
         {parts.map((p) => (
-          <div key={p.k} className="flex items-start gap-4 rounded-xl border border-[#E5E0D8] bg-[#FAFAF8] p-4">
-            <span className="text-[#C9A96E] font-semibold w-20 shrink-0" style={{ fontFamily: "var(--font-playfair)" }}>
+          <div key={p.k} className="flex items-start gap-4 rounded-xl border border-[#E4D8C6] bg-[#F3ECE0] p-4">
+            <span className="text-[#B45F38] font-semibold w-20 shrink-0" style={{ fontFamily: "var(--font-playfair)" }}>
               {p.k}
             </span>
-            <span className="text-sm text-[#6B7280] leading-relaxed">{p.v}</span>
+            <span className="text-sm text-[#6E6151] leading-relaxed">{p.v}</span>
           </div>
         ))}
       </div>

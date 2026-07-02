@@ -12,23 +12,23 @@ export default function BlogPage() {
   return (
     <>
       {/* ─── HEADER ───────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] pt-32 pb-16">
+      <section className="bg-[#F3ECE0] pt-32 pb-16">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
               Blog
             </span>
             <h1
-              className="text-4xl md:text-6xl font-bold text-[#1A1A18] mb-5"
+              className="text-4xl md:text-6xl font-bold text-[#2A2218] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Inzichten over video, content & AI.
             </h1>
-            <p className="text-[#6B7280] text-lg max-w-2xl">
+            <p className="text-[#6E6151] text-lg max-w-2xl">
               Praktische artikelen over hoe lokale bedrijven en makelaars meer klanten aantrekken
               met video, en hoe AI dat in de toekomst verder versterkt.
             </p>
@@ -37,12 +37,12 @@ export default function BlogPage() {
       </section>
 
       {/* ─── CATEGORY CHIPS ───────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] pb-4 border-b border-[#E5E0D8]">
+      <section className="bg-[#F3ECE0] pb-4 border-b border-[#E4D8C6]">
         <div className="max-w-6xl mx-auto px-6 flex gap-2 overflow-x-auto scrollbar-none">
           {CATEGORIES.map((cat) => (
             <span
               key={cat}
-              className="shrink-0 px-4 py-1.5 rounded-full text-xs font-medium bg-[#F5F1EB] text-[#6B7280] border border-[#E5E0D8]"
+              className="shrink-0 px-4 py-1.5 rounded-full text-xs font-medium bg-[#ECE2D2] text-[#6E6151] border border-[#E4D8C6]"
             >
               {cat}
             </span>
@@ -51,7 +51,7 @@ export default function BlogPage() {
       </section>
 
       {/* ─── BLOG GRID ────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-12 md:py-16">
+      <section className="bg-[#F3ECE0] py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...BLOG_POSTS].reverse().map((post, i) => (
@@ -63,7 +63,7 @@ export default function BlogPage() {
               >
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="group block h-full bg-[#FAFAF8] rounded-2xl border border-[#E5E0D8] overflow-hidden hover:border-[#C9A96E] hover:shadow-md transition-all"
+                  className="group block h-full bg-[#F3ECE0] rounded-2xl border border-[#E4D8C6] overflow-hidden hover:border-[#B45F38] hover:shadow-md transition-all"
                 >
                   {/* Featured image */}
                   <div className="relative w-full aspect-[16/9] overflow-hidden">
@@ -75,29 +75,29 @@ export default function BlogPage() {
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#C9A96E] text-[#0F0F0D] text-[10px] font-semibold uppercase tracking-wider">
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#B45F38] text-[#F3ECE0] text-[10px] font-semibold uppercase tracking-wider">
                       {post.category}
                     </span>
                   </div>
 
                   <div className="p-5">
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-xs text-[#6B7280]">{formatDate(post.date)}</span>
-                      <div className="flex items-center gap-1 text-xs text-[#6B7280]">
+                      <span className="text-xs text-[#6E6151]">{formatDate(post.date)}</span>
+                      <div className="flex items-center gap-1 text-xs text-[#6E6151]">
                         <Clock size={11} />
                         {post.readTime}
                       </div>
                     </div>
                     <h2
-                      className="text-base font-bold text-[#1A1A18] mb-2 leading-snug group-hover:text-[#C9A96E] transition-colors"
+                      className="text-base font-bold text-[#2A2218] mb-2 leading-snug group-hover:text-[#B45F38] transition-colors"
                       style={{ fontFamily: "var(--font-playfair)" }}
                     >
                       {post.title}
                     </h2>
-                    <p className="text-sm text-[#6B7280] leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-sm text-[#6E6151] leading-relaxed mb-4 line-clamp-2">
                       {post.excerpt}
                     </p>
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#C9A96E] group-hover:gap-2 transition-all">
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#B45F38] group-hover:gap-2 transition-all">
                       Lees meer <ArrowRight size={12} />
                     </span>
                   </div>

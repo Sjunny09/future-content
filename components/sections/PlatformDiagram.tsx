@@ -22,11 +22,11 @@ export const PlatformDiagram: React.FC<PlatformDiagramProps> = ({
   compact = false,
   dark = false,
 }) => {
-  const bg = dark ? "#0F0F0D" : "#FAFAF8";
-  const ink = dark ? "#FAFAF8" : "#1A1A18";
-  const muted = dark ? "#FAFAF8" : "#6B7280";
-  const border = dark ? "#FAFAF8" : "#E5E0D8";
-  const gold = "#C9A96E";
+  const bg = dark ? "#221C14" : "#F3ECE0";
+  const ink = dark ? "#F3ECE0" : "#2A2218";
+  const muted = dark ? "#F3ECE0" : "#6E6151";
+  const border = dark ? "#F3ECE0" : "#E4D8C6";
+  const gold = "#B45F38";
 
   const blockHeight = compact ? 42 : 56;
   const blockGap = compact ? 4 : 6;

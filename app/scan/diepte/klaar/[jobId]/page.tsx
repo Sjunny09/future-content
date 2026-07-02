@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation"
 import { db } from "@/lib/scan/db"
 import { BOOKING } from "@/lib/constants"
+import { AiDisclaimer } from "@/components/scan/AiDisclaimer"
 
 type Params = Promise<{ jobId: string }>
 
@@ -47,6 +48,36 @@ export default async function DiepteKlaarPagina({ params }: { params: Params }) 
         eerste stap is.
       </p>
 
+      <div
+        className="mt-8 rounded-2xl border p-6"
+        style={{
+          borderColor: "var(--color-scan-border)",
+          backgroundColor: "rgba(0,0,0,0.02)",
+        }}
+      >
+        <p
+          className="text-base font-medium"
+          style={{ color: "var(--color-scan-drukinkt)" }}
+        >
+          Zo haal je het meeste uit ons gesprek
+        </p>
+        <p
+          className="mt-2 text-sm leading-relaxed"
+          style={{ color: "var(--color-scan-drukinkt)" }}
+        >
+          Je hoeft niks voor te bereiden of uit te zoeken. Denk vooraf alleen even
+          kort over deze drie dingen na, dan komen we samen sneller tot de kern:
+        </p>
+        <ul
+          className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed"
+          style={{ color: "var(--color-scan-drukinkt)" }}
+        >
+          <li>Waar lekt in jullie week de meeste tijd weg?</li>
+          <li>Wat zou je het liefst makkelijker of vanzelf willen hebben?</li>
+          <li>Wie beslist er bij jullie over zoiets mee?</li>
+        </ul>
+      </div>
+
       {calConfigured ? (
         <div
           className="mt-8 overflow-hidden rounded-2xl border bg-white"
@@ -66,12 +97,15 @@ export default async function DiepteKlaarPagina({ params }: { params: Params }) 
         </p>
       )}
 
-      <p
-        className="mt-12 text-center text-xs"
-        style={{ color: "var(--color-scan-muted)" }}
-      >
-        Future Content · Bladel · KvK 93482641
-      </p>
+      <div className="mt-12 flex flex-col items-center gap-3">
+        <p
+          className="text-center text-xs"
+          style={{ color: "var(--color-scan-muted)" }}
+        >
+          Future Content · Bladel · KvK 86880675
+        </p>
+        <AiDisclaimer className="max-w-xl text-center" />
+      </div>
     </main>
   )
 }

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Voor wie: zeven branches met een eigen skin · Future Content",
+  title: "Voor wie: zeven branches met een eigen skin",
   description:
     "Het core-platform met 8 modules is voor iedereen hetzelfde. De skin per branche maakt het concreet. Transport, makelaardij, evenementen, schoonmaak, bouw, autobedrijf en horeca.",
   openGraph: {

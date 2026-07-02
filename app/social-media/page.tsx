@@ -34,7 +34,7 @@ export default function SocialMediaPage() {
       />
 
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#0F0F0D] pb-16">
+      <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#221C14] pb-16">
         <div className="absolute inset-0">
           <Image
             src={PHOTOS[1]}
@@ -44,7 +44,7 @@ export default function SocialMediaPage() {
             className="object-cover object-center opacity-45"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F0D] via-[#0F0F0D]/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#221C14] via-[#221C14]/30 to-transparent" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-6 pt-28 w-full">
@@ -54,16 +54,16 @@ export default function SocialMediaPage() {
             transition={{ duration: 0.7 }}
             className="max-w-2xl"
           >
-            <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+            <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
               Voor bedrijven
             </span>
             <h1
-              className="text-4xl md:text-6xl font-bold text-[#FAFAF8] leading-[1.1] mb-5"
+              className="text-4xl md:text-6xl font-bold text-[#F3ECE0] leading-[1.1] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Eén shoot. Maanden aan Instagram Reels.
             </h1>
-            <p className="text-[#FAFAF8]/70 text-lg mb-8 leading-relaxed">
+            <p className="text-[#F3ECE0]/70 text-lg mb-8 leading-relaxed">
               Ik kom eens per kwartaal langs, film alles wat nodig is en zorg dat elke maand verse Reels klaarstaan.
               Jij hoeft niks te doen. Gewoon zichtbaar zijn op Instagram.
             </p>
@@ -79,7 +79,7 @@ export default function SocialMediaPage() {
               </Link>
               <Link
                 href="#pakketten"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-[#FAFAF8]/30 text-[#FAFAF8] font-semibold hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-[#F3ECE0]/30 text-[#F3ECE0] font-semibold hover:border-[#B45F38] hover:text-[#B45F38] transition-colors"
               >
                 Bekijk pakketten <ArrowRight size={16} />
               </Link>
@@ -89,7 +89,7 @@ export default function SocialMediaPage() {
       </section>
 
       {/* ─── WAAROM VIDEO? (ROI FOCUS) ─────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -97,21 +97,21 @@ export default function SocialMediaPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-4">
+              <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-4">
                 Waarom video?
               </span>
               <h2
-                className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-6"
+                className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-6"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Meer klanten. Minder advertentiekosten.
               </h2>
-              <p className="text-[#6B7280] leading-relaxed mb-5">
+              <p className="text-[#6E6151] leading-relaxed mb-5">
                 Veel ondernemers geven honderden euro&apos;s per maand uit aan advertenties,
                 terwijl organische video op Instagram, TikTok en LinkedIn gratis bereik genereert.
-                Het enige wat je nodig hebt is <strong className="text-[#1A1A18]">consistente, goede content.</strong>
+                Het enige wat je nodig hebt is <strong className="text-[#2A2218]">consistente, goede content.</strong>
               </p>
-              <p className="text-[#6B7280] leading-relaxed mb-8">
+              <p className="text-[#6E6151] leading-relaxed mb-8">
                 Het probleem: filmen, editen, captions schrijven, posten: dat kost uren per week.
                 Uren die jij liever in je bedrijf steekt. Precies daarom bestaat dit abonnement.
               </p>
@@ -122,8 +122,8 @@ export default function SocialMediaPage() {
                   "Meer zichtbaarheid zonder advertentiebudget",
                   "Opgebouwde aanwezigheid die voor jou blijft werken",
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3 text-sm text-[#1A1A18]">
-                    <Check size={15} className="text-[#C9A96E] shrink-0" />
+                  <div key={item} className="flex items-center gap-3 text-sm text-[#2A2218]">
+                    <Check size={15} className="text-[#B45F38] shrink-0" />
                     {item}
                   </div>
                 ))}
@@ -149,16 +149,16 @@ export default function SocialMediaPage() {
       </section>
 
       {/* ─── VOOR WIE ─────────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-16">
+      <section className="bg-[#ECE2D2] py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-10">
             <h3
-              className="text-2xl font-bold text-[#1A1A18] mb-2"
+              className="text-2xl font-bold text-[#2A2218] mb-2"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Geschikt voor elk lokaal bedrijf.
             </h3>
-            <p className="text-[#6B7280] text-sm">
+            <p className="text-[#6E6151] text-sm">
               Iedereen die zichtbaar wil zijn en er zelf geen tijd voor heeft.
             </p>
           </div>
@@ -178,7 +178,7 @@ export default function SocialMediaPage() {
             ].map((sector) => (
               <span
                 key={sector}
-                className="px-4 py-2 rounded-full bg-[#FAFAF8] border border-[#E5E0D8] text-sm text-[#1A1A18] font-medium"
+                className="px-4 py-2 rounded-full bg-[#F3ECE0] border border-[#E4D8C6] text-sm text-[#2A2218] font-medium"
               >
                 {sector}
               </span>
@@ -188,7 +188,7 @@ export default function SocialMediaPage() {
       </section>
 
       {/* ─── PAKKETTEN ────────────────────────────────────────────────── */}
-      <section id="pakketten" className="bg-[#FAFAF8] py-20 md:py-28">
+      <section id="pakketten" className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -197,12 +197,12 @@ export default function SocialMediaPage() {
             className="text-center mb-14"
           >
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Kies jouw abonnement.
             </h2>
-            <p className="text-[#6B7280]">
+            <p className="text-[#6E6151]">
               Excl. BTW · Minimaal 3 maanden · Daarna maandelijks opzegbaar
             </p>
           </motion.div>
@@ -217,58 +217,58 @@ export default function SocialMediaPage() {
                 transition={{ delay: i * 0.1 }}
                 className={`rounded-2xl p-8 border-2 flex flex-col ${
                   pkg.highlight
-                    ? "border-[#C9A96E] bg-[#0F0F0D] text-[#FAFAF8]"
-                    : "border-[#E5E0D8] bg-[#FAFAF8]"
+                    ? "border-[#B45F38] bg-[#221C14] text-[#F3ECE0]"
+                    : "border-[#E4D8C6] bg-[#F3ECE0]"
                 }`}
               >
                 {pkg.highlight && (
-                  <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#C9A96E] mb-3">
+                  <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#B45F38] mb-3">
                     Populairste keuze
                   </span>
                 )}
                 <h3
-                  className={`text-xl font-bold mb-1 ${pkg.highlight ? "text-[#FAFAF8]" : "text-[#1A1A18]"}`}
+                  className={`text-xl font-bold mb-1 ${pkg.highlight ? "text-[#F3ECE0]" : "text-[#2A2218]"}`}
                   style={{ fontFamily: "var(--font-playfair)" }}
                 >
                   {pkg.name}
                 </h3>
                 <div className="flex items-baseline gap-1 mb-1">
-                  <span className={`text-3xl font-bold ${pkg.highlight ? "text-[#C9A96E]" : "text-[#1A1A18]"}`}>
+                  <span className={`text-3xl font-bold ${pkg.highlight ? "text-[#B45F38]" : "text-[#2A2218]"}`}>
                     {pkg.price}
                   </span>
-                  <span className={`text-sm ${pkg.highlight ? "text-[#FAFAF8]/50" : "text-[#6B7280]"}`}>
+                  <span className={`text-sm ${pkg.highlight ? "text-[#F3ECE0]/50" : "text-[#6E6151]"}`}>
                     {pkg.period}
                   </span>
                 </div>
-                <span className={`text-xs ${pkg.highlight ? "text-[#FAFAF8]/40" : "text-[#6B7280]"}`}>
+                <span className={`text-xs ${pkg.highlight ? "text-[#F3ECE0]/40" : "text-[#6E6151]"}`}>
                   {pkg.note}
                 </span>
                 {"inclPrice" in pkg && (
-                  <span className={`text-xs mb-4 block ${pkg.highlight ? "text-[#FAFAF8]/30" : "text-[#9CA3AF]"}`}>
+                  <span className={`text-xs mb-4 block ${pkg.highlight ? "text-[#F3ECE0]/30" : "text-[#A89A85]"}`}>
                     {pkg.inclPrice}
                   </span>
                 )}
-                <p className={`text-sm mb-6 ${pkg.highlight ? "text-[#FAFAF8]/60" : "text-[#6B7280]"}`}>
+                <p className={`text-sm mb-6 ${pkg.highlight ? "text-[#F3ECE0]/60" : "text-[#6E6151]"}`}>
                   {pkg.description}
                 </p>
                 <ul className="space-y-3 mb-4 flex-1">
                   {pkg.features.map((f, j) => (
                     <li key={j} className="flex items-start gap-2.5 text-sm">
-                      <Check size={14} className="text-[#C9A96E] mt-0.5 shrink-0" />
-                      <span className={pkg.highlight ? "text-[#FAFAF8]/80" : "text-[#1A1A18]"}>{f}</span>
+                      <Check size={14} className="text-[#B45F38] mt-0.5 shrink-0" />
+                      <span className={pkg.highlight ? "text-[#F3ECE0]/80" : "text-[#2A2218]"}>{f}</span>
                     </li>
                   ))}
                 </ul>
                 {"notIncluded" in pkg && pkg.notIncluded && (
-                  <div className={`mb-5 pt-4 border-t ${pkg.highlight ? "border-white/10" : "border-[#E5E0D8]"}`}>
-                    <p className={`text-xs font-semibold uppercase tracking-wide mb-2 ${pkg.highlight ? "text-[#FAFAF8]/30" : "text-[#9CA3AF]"}`}>
+                  <div className={`mb-5 pt-4 border-t ${pkg.highlight ? "border-white/10" : "border-[#E4D8C6]"}`}>
+                    <p className={`text-xs font-semibold uppercase tracking-wide mb-2 ${pkg.highlight ? "text-[#F3ECE0]/30" : "text-[#A89A85]"}`}>
                       Niet inbegrepen
                     </p>
                     <ul className="space-y-2">
                       {(pkg.notIncluded as string[]).map((f, j) => (
                         <li key={j} className="flex items-start gap-2 text-xs">
-                          <X size={12} className={`mt-0.5 shrink-0 ${pkg.highlight ? "text-[#FAFAF8]/25" : "text-[#D1D5DB]"}`} />
-                          <span className={pkg.highlight ? "text-[#FAFAF8]/40" : "text-[#9CA3AF]"}>{f}</span>
+                          <X size={12} className={`mt-0.5 shrink-0 ${pkg.highlight ? "text-[#F3ECE0]/25" : "text-[#D1D5DB]"}`} />
+                          <span className={pkg.highlight ? "text-[#F3ECE0]/40" : "text-[#A89A85]"}>{f}</span>
                         </li>
                       ))}
                     </ul>
@@ -276,7 +276,7 @@ export default function SocialMediaPage() {
                 )}
                 {/* Content voorbeeld */}
                 <div className={`text-xs rounded-lg p-3 mb-6 italic leading-relaxed ${
-                  pkg.highlight ? "bg-white/5 text-[#FAFAF8]/50" : "bg-[#F5F1EB] text-[#6B7280]"
+                  pkg.highlight ? "bg-white/5 text-[#F3ECE0]/50" : "bg-[#ECE2D2] text-[#6E6151]"
                 }`}>
                   {pkg.contentExample}
                 </div>
@@ -286,8 +286,8 @@ export default function SocialMediaPage() {
                   rel="noopener noreferrer"
                   className={`block text-center py-3 rounded-full font-semibold text-sm transition-colors mt-auto ${
                     pkg.highlight
-                      ? "bg-[#C9A96E] text-[#0F0F0D] hover:bg-[#b8955a]"
-                      : "border border-[#1A1A18] text-[#1A1A18] hover:bg-[#1A1A18] hover:text-[#FAFAF8]"
+                      ? "bg-[#B45F38] text-[#F3ECE0] hover:bg-[#9E3D24]"
+                      : "border border-[#2A2218] text-[#2A2218] hover:bg-[#2A2218] hover:text-[#F3ECE0]"
                   }`}
                 >
                   Kies {pkg.name}
@@ -296,23 +296,23 @@ export default function SocialMediaPage() {
             ))}
           </div>
 
-          <p className="text-center text-sm text-[#6B7280] mt-8">
+          <p className="text-center text-sm text-[#6E6151] mt-8">
             Twijfel je welk pakket past? Stuur een WhatsApp, dan denk ik met je mee.
           </p>
         </div>
       </section>
 
       {/* ─── WERKWIJZE SHOOT DAY ──────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-20 md:py-28">
+      <section className="bg-[#ECE2D2] py-20 md:py-28">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-14">
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Zo ziet een shootmoment eruit.
             </h2>
-            <p className="text-[#6B7280] max-w-lg mx-auto">
+            <p className="text-[#6E6151] max-w-lg mx-auto">
               Geen gedoe, geen stress. Ik regel alles.
             </p>
           </div>
@@ -348,11 +348,11 @@ export default function SocialMediaPage() {
                 transition={{ delay: i * 0.1 }}
                 className="text-center p-6"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#F0E6D0] flex items-center justify-center text-[#C9A96E] mx-auto mb-4">
+                <div className="w-14 h-14 rounded-2xl bg-[#ECE2D2] flex items-center justify-center text-[#B45F38] mx-auto mb-4">
                   {item.icon}
                 </div>
-                <h3 className="font-semibold text-[#1A1A18] mb-2">{item.title}</h3>
-                <p className="text-sm text-[#6B7280] leading-relaxed">{item.desc}</p>
+                <h3 className="font-semibold text-[#2A2218] mb-2">{item.title}</h3>
+                <p className="text-sm text-[#6E6151] leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -360,11 +360,11 @@ export default function SocialMediaPage() {
       </section>
 
       {/* ─── FAQ ──────────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-20 md:py-28">
+      <section className="bg-[#F3ECE0] py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2
-              className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-4"
+              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
               Veelgestelde vragen.
@@ -400,13 +400,13 @@ export default function SocialMediaPage() {
             ].map((faq, i) => (
               <details
                 key={i}
-                className="group bg-[#F5F1EB] rounded-xl border border-[#E5E0D8] p-5 cursor-pointer"
+                className="group bg-[#ECE2D2] rounded-xl border border-[#E4D8C6] p-5 cursor-pointer"
               >
-                <summary className="flex items-center justify-between font-semibold text-[#1A1A18] text-sm list-none">
+                <summary className="flex items-center justify-between font-semibold text-[#2A2218] text-sm list-none">
                   {faq.q}
-                  <span className="text-[#C9A96E] ml-4 group-open:rotate-45 transition-transform text-lg leading-none">+</span>
+                  <span className="text-[#B45F38] ml-4 group-open:rotate-45 transition-transform text-lg leading-none">+</span>
                 </summary>
-                <p className="mt-3 text-[#6B7280] text-sm leading-relaxed">{faq.a}</p>
+                <p className="mt-3 text-[#6E6151] text-sm leading-relaxed">{faq.a}</p>
               </details>
             ))}
           </div>
@@ -414,20 +414,20 @@ export default function SocialMediaPage() {
       </section>
 
       {/* ─── BLOG CTA ─────────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] py-12 border-t border-[#E5E0D8]">
+      <section className="bg-[#ECE2D2] py-12 border-t border-[#E4D8C6]">
         <div className="max-w-4xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#C9A96E]/20 flex items-center justify-center text-[#C9A96E] shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-[#B45F38]/20 flex items-center justify-center text-[#B45F38] shrink-0">
               <Users size={18} />
             </div>
             <div>
-              <p className="font-semibold text-[#1A1A18] text-sm">Waarom video meer klanten oplevert dan advertenties</p>
-              <p className="text-xs text-[#6B7280]">Lees onze blogs over content, bereik en AI</p>
+              <p className="font-semibold text-[#2A2218] text-sm">Waarom video meer klanten oplevert dan advertenties</p>
+              <p className="text-xs text-[#6E6151]">Lees onze blogs over content, bereik en AI</p>
             </div>
           </div>
           <Link
             href="/blog"
-            className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-[#C9A96E] hover:gap-3 transition-all"
+            className="shrink-0 inline-flex items-center gap-2 text-sm font-semibold text-[#B45F38] hover:gap-3 transition-all"
           >
             Naar de blog <ArrowRight size={14} />
           </Link>
@@ -435,7 +435,7 @@ export default function SocialMediaPage() {
       </section>
 
       {/* ─── FINAL CTA ────────────────────────────────────────────────── */}
-      <section className="bg-[#1A1A18] py-20 text-[#FAFAF8] text-center">
+      <section className="bg-[#2A2218] py-20 text-[#F3ECE0] text-center">
         <div className="max-w-2xl mx-auto px-6">
           <h2
             className="text-3xl md:text-5xl font-bold mb-5"
@@ -443,7 +443,7 @@ export default function SocialMediaPage() {
           >
             Klaar voor maandelijkse content?
           </h2>
-          <p className="text-[#FAFAF8]/60 mb-8">
+          <p className="text-[#F3ECE0]/60 mb-8">
             Stuur een WhatsApp, dan kijk ik samen met je welk abonnement het beste past.
           </p>
           <Link

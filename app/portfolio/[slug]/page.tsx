@@ -22,7 +22,8 @@ export async function generateMetadata({
   if (!video) return {};
 
   return {
-    title: `${video.title} | Vastgoedvideo | Future Content`,
+    title: `${video.title} | Vastgoedvideo`,
+    alternates: { canonical: `/portfolio/${video.slug}` },
     description: `Bekijk de premium vastgoedvideo van ${video.title}, gemaakt door Future Content voor Pit Makelaars. Professionele walkthrough video voor Funda en social media.`,
     openGraph: {
       title: `${video.title} | Vastgoedvideo | Future Content`,
@@ -75,11 +76,11 @@ export default async function PortfolioDetailPage({
       />
 
       {/* ─── BACK + BREADCRUMB ────────────────────────────────────────── */}
-      <div className="bg-[#FAFAF8] pt-24 pb-4">
+      <div className="bg-[#F3ECE0] pt-24 pb-4">
         <div className="max-w-4xl mx-auto px-6">
           <Link
             href="/portfolio"
-            className="inline-flex items-center gap-2 text-sm text-[#6B7280] hover:text-[#C9A96E] transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-[#6E6151] hover:text-[#B45F38] transition-colors"
           >
             <ArrowLeft size={14} />
             Terug naar portfolio
@@ -88,7 +89,7 @@ export default async function PortfolioDetailPage({
       </div>
 
       {/* ─── VIDEO ────────────────────────────────────────────────────── */}
-      <section className="bg-[#0F0F0D]">
+      <section className="bg-[#221C14]">
         <div className="max-w-4xl mx-auto">
           <VideoPlayer
             src={video.src}
@@ -99,20 +100,20 @@ export default async function PortfolioDetailPage({
       </section>
 
       {/* ─── INFO ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] py-12">
+      <section className="bg-[#F3ECE0] py-12">
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
             <div>
-              <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-2">
+              <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-2">
                 Portfolio Pit Makelaars
               </span>
               <h1
-                className="text-3xl md:text-4xl font-bold text-[#1A1A18] mb-2"
+                className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-2"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {video.title}
               </h1>
-              <div className="flex items-center gap-1.5 text-[#6B7280] text-sm">
+              <div className="flex items-center gap-1.5 text-[#6E6151] text-sm">
                 <MapPin size={13} />
                 {video.location}
               </div>
@@ -131,8 +132,8 @@ export default async function PortfolioDetailPage({
 
           {/* Deliverables */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-5 rounded-xl bg-[#F5F1EB] border border-[#E5E0D8]">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#C9A96E] mb-3">
+            <div className="p-5 rounded-xl bg-[#ECE2D2] border border-[#E4D8C6]">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#B45F38] mb-3">
                 Opgeleverd
               </p>
               <ul className="space-y-2">
@@ -142,20 +143,20 @@ export default async function PortfolioDetailPage({
                   "Professionele audio & muziek",
                   "Klaar voor Funda & social media",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-[#1A1A18]">
-                    <Check size={13} className="text-[#C9A96E] shrink-0" />
+                  <li key={i} className="flex items-center gap-2 text-sm text-[#2A2218]">
+                    <Check size={13} className="text-[#B45F38] shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="p-5 rounded-xl bg-[#F5F1EB] border border-[#E5E0D8]">
-              <p className="text-xs font-semibold uppercase tracking-widest text-[#C9A96E] mb-3">
+            <div className="p-5 rounded-xl bg-[#ECE2D2] border border-[#E4D8C6]">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#B45F38] mb-3">
                 Opdrachtgever
               </p>
-              <p className="text-sm text-[#1A1A18] font-medium mb-1">Pit Makelaars</p>
-              <p className="text-xs text-[#6B7280] leading-relaxed">
+              <p className="text-sm text-[#2A2218] font-medium mb-1">Pit Makelaars</p>
+              <p className="text-xs text-[#6E6151] leading-relaxed">
                 Vaste samenwerking voor vastgoedvideo&apos;s in de regio Eindhoven,
                 Veldhoven en De Kempen. Alle video&apos;s zijn opgeleverd als Premium pakket.
               </p>
@@ -165,18 +166,18 @@ export default async function PortfolioDetailPage({
       </section>
 
       {/* ─── CASE DETAILS ─────────────────────────────────────────────── */}
-      <section className="bg-[#FAFAF8] border-t border-[#E5E0D8] py-12">
+      <section className="bg-[#F3ECE0] border-t border-[#E4D8C6] py-12">
         <div className="max-w-4xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Context */}
             <div>
-              <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+              <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-3">
                 Over dit object
               </span>
-              <p className="text-xs font-semibold text-[#1A1A18] uppercase tracking-wider mb-3">
+              <p className="text-xs font-semibold text-[#2A2218] uppercase tracking-wider mb-3">
                 {video.details.propertyType}
               </p>
-              <p className="text-[#6B7280] text-sm leading-relaxed">
+              <p className="text-[#6E6151] text-sm leading-relaxed">
                 {video.details.context}
               </p>
             </div>
@@ -184,23 +185,23 @@ export default async function PortfolioDetailPage({
             {/* Challenges + Result */}
             <div className="space-y-6">
               <div>
-                <span className="inline-block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-3">
+                <span className="inline-block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-3">
                   Uitdagingen tijdens de shoot
                 </span>
                 <ul className="space-y-2">
                   {video.details.challenges.map((c, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-[#1A1A18]">
-                      <span className="text-[#C9A96E] mt-0.5 shrink-0 font-bold">→</span>
+                    <li key={i} className="flex items-start gap-2 text-sm text-[#2A2218]">
+                      <span className="text-[#B45F38] mt-0.5 shrink-0 font-bold">→</span>
                       {c}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="p-4 rounded-xl bg-[#F5F1EB] border border-[#E5E0D8]">
-                <span className="block text-[#C9A96E] text-xs font-semibold uppercase tracking-widest mb-2">
+              <div className="p-4 rounded-xl bg-[#ECE2D2] border border-[#E4D8C6]">
+                <span className="block text-[#B45F38] text-xs font-semibold uppercase tracking-widest mb-2">
                   Resultaat
                 </span>
-                <p className="text-sm text-[#1A1A18] leading-relaxed">
+                <p className="text-sm text-[#2A2218] leading-relaxed">
                   {video.details.result}
                 </p>
               </div>
@@ -210,12 +211,12 @@ export default async function PortfolioDetailPage({
       </section>
 
       {/* ─── PREV / NEXT ──────────────────────────────────────────────── */}
-      <section className="bg-[#F5F1EB] border-t border-[#E5E0D8] py-10">
+      <section className="bg-[#ECE2D2] border-t border-[#E4D8C6] py-10">
         <div className="max-w-4xl mx-auto px-6 flex justify-between gap-4">
           {prevVideo ? (
             <Link
               href={`/portfolio/${prevVideo.slug}`}
-              className="flex items-center gap-2 text-sm text-[#6B7280] hover:text-[#C9A96E] transition-colors"
+              className="flex items-center gap-2 text-sm text-[#6E6151] hover:text-[#B45F38] transition-colors"
             >
               <ArrowLeft size={14} />
               <span>{prevVideo.title}</span>
@@ -226,7 +227,7 @@ export default async function PortfolioDetailPage({
           {nextVideo && (
             <Link
               href={`/portfolio/${nextVideo.slug}`}
-              className="flex items-center gap-2 text-sm text-[#6B7280] hover:text-[#C9A96E] transition-colors"
+              className="flex items-center gap-2 text-sm text-[#6E6151] hover:text-[#B45F38] transition-colors"
             >
               <span>{nextVideo.title}</span>
               <ArrowLeft size={14} className="rotate-180" />
@@ -236,7 +237,7 @@ export default async function PortfolioDetailPage({
       </section>
 
       {/* ─── CTA ─────────────────────────────────────────────────────── */}
-      <section className="bg-[#0F0F0D] py-16 text-center text-[#FAFAF8]">
+      <section className="bg-[#221C14] py-16 text-center text-[#F3ECE0]">
         <div className="max-w-xl mx-auto px-6">
           <h2
             className="text-2xl md:text-3xl font-bold mb-3"
@@ -244,7 +245,7 @@ export default async function PortfolioDetailPage({
           >
             Jouw object hier?
           </h2>
-          <p className="text-[#FAFAF8]/60 text-sm mb-6">
+          <p className="text-[#F3ECE0]/60 text-sm mb-6">
             Plan een shoot en laat kopers jouw woning écht beleven.
           </p>
           <Link

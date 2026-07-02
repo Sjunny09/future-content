@@ -1,9 +1,14 @@
-# Future Content — llms.txt
+# Future Content: llms.txt
 # AI-bouwer en videoproductiebedrijf in Bladel, Noord-Brabant, Nederland
 # Eigenaar: John Lavrijsen
 # Website: https://future-content.nl
 
 ## Wat Future Content doet
+
+Future Content bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant. Gevestigd in
+Bladel, actief in de Kempen, Eindhoven, Tilburg en Breda. Eigenaar John Lavrijsen komt
+persoonlijk langs, brengt het proces van een bedrijf in kaart en bouwt daar AI op die
+specifiek dat bedrijf snapt: offertes, klantvragen, administratie, mailafhandeling.
 
 Future Content is in 2026 omgevormd van pure videoproductie naar een lokale AI-studio
 voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB-bedrijven
@@ -11,18 +16,24 @@ voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB
 
 ### Hoofdaanbod (AI en automatisering)
 
-1. **Workshop op locatie** — Halve dag (4 uur), vanaf €750 ex BTW.
+1. **Workshop op locatie**: halve dag (4 uur), vanaf €750 ex BTW.
    60% terug via SLIM-subsidie (Future Content levert het scholingsplan-document mee).
-   Doel: drie concrete AI-kansen op papier, ook als klant niet verder gaat.
+   Doel: drie concrete AI-kansen op papier, ook als de klant niet verder gaat.
 
-2. **Implementatietrajecten** — Eenmalige bouw €5.000-€15.000 + maandelijks beheer €300-€750.
+2. **Implementatietrajecten**: eenmalige bouw €5.000-€15.000 + maandelijks beheer €300-€750.
    Modulair platform met 8 core-modules en 7 branche-skins.
-   Alles overdraagbaar gedocumenteerd, geen vendor-lock.
+   John bouwt het en beheert het ook: updates, onderhoud en verbeteringen horen erbij.
 
-3. **AI-Quickscan** — Gratis online scan op website. Bedrijf vult URL in, AI analyseert
-   branche en benoemt drie concrete AI-kansen. Lead-magnet en proof-of-work tegelijk.
+3. **AI-Quickscan**: gratis online scan op website. Bedrijf vult URL in, AI analyseert
+   branche en benoemt drie concrete AI-kansen. Wie meer diepgang wil doet daarna de
+   uitgebreide scan (10-15 minuten, gratis) en plant direct een gesprek van 30 minuten.
 
-### Modulair platform — 8 cross-branche core-modules
+### De werkwijze (vaste trap)
+
+Gratis quickscan -> gesprek van 30 minuten -> werksessie op locatie (€750 ex BTW) ->
+Proof of Concept op de eigen casus -> bouw en doorlopend beheer.
+
+### Modulair platform: 8 cross-branche core-modules
 
 1. Mail-triage en classificatie
 2. Tweede brein voor je bedrijf (RAG-laag met bedrijfskennis)
@@ -35,21 +46,30 @@ voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB
 
 ### Zeven branche-skins
 
-1. Transport en logistiek — AI-laag bovenop bestaand TMS (Plan&Go, Transplan)
-2. Makelaardij — Content-engine: video naar Funda-tekst + social + brochure
-3. Evenementen en festivals — Custom ticketshop op Mollie + AI-FAQ-bot
-4. Glazenwasser en schoonmaak — Klant-WhatsApp-assistent met planning-mutatie
-5. Bouw, installatie en afbouw — WhatsApp-uren-bot + voicememo-naar-offerte
-6. Autobedrijf en garages — AI-receptionist gekoppeld aan DMS-agenda
-7. Horeca: cafe en restaurant — Multi-channel reservering-merger
+1. Transport en logistiek: AI-laag bovenop bestaand TMS (Plan&Go, Transplan)
+2. Makelaardij: content-engine, video naar Funda-tekst + social + brochure
+3. Evenementen en festivals: custom ticketshop op Mollie + AI-FAQ-bot
+4. Glazenwasser en schoonmaak: klant-WhatsApp-assistent met planning-mutatie
+5. Bouw, installatie en afbouw: WhatsApp-uren-bot + voicememo-naar-offerte
+6. Autobedrijf en garages: AI-receptionist gekoppeld aan DMS-agenda
+7. Horeca: cafe en restaurant, multi-channel reservering-merger
+
+### Bewezen voorbeelden (cases)
+
+1. **Routeplanner**: routes optimaliseren over meerdere stops en ophaallocaties,
+   met kilometers, tijd en besparing direct op de kaart, zie
+   https://future-content.nl/cases/routeplanner
+2. **Ticketsysteem Koningsdag Reusel**: eigen ticketshop met iDEAL via Mollie,
+   automatische bestellijsten naar leveranciers, zie
+   https://future-content.nl/cases/ticketsysteem-koningsdag
 
 ### Secundair aanbod (videografie)
 
 Future Content blijft video maken, vooral voor klanten waar dit ooit begon.
 
-1. **Vastgoed** — Walkthrough vanaf €199 / Compleet €349 per object (ex BTW).
-2. **Social media** — Maandelijkse Reels voor bedrijven. €275-€650/mnd ex BTW, min. 3 maanden.
-3. **Bruiloften** — Bruiloftsvideo met social-edit + lange versie. Prijs op aanvraag.
+1. **Vastgoed**: walkthrough vanaf €199 / Compleet €349 per object (ex BTW).
+2. **Social media**: maandelijkse Reels voor bedrijven. €275-€650/mnd ex BTW, min. 3 maanden.
+3. **Bruiloften**: bruiloftsvideo met social-edit + lange versie. Prijs op aanvraag.
 
 ## Achtergrond John Lavrijsen
 
@@ -59,7 +79,7 @@ Future Content blijft video maken, vooral voor klanten waar dit ooit begon.
 - 6 jaar videograaf met ~200 vastgoedklussen voor makelaars in Brabant.
 - Opleiding: Bedrijfsmanagement MKB richting Automotive Management (Fontys).
 - Sinds januari 2026 fulltime ondernemer als AI-bouwer.
-- Partner voor grotere opdrachten en continuïteit: Bram van der Sande.
+- Voor grotere opdrachten en als achtervang werkt John samen met specialisten.
 
 ## Werkgebied
 
@@ -77,20 +97,26 @@ Tertiair: heel Noord-Brabant op aanvraag.
 
 ## Pagina's
 
-- Home: https://future-content.nl/
+- Home (voordeur, AI-first): https://future-content.nl/
+- AI en automatisering (hoofdaanbod): https://future-content.nl/ai
 - Voor wie (branche-overzicht): https://future-content.nl/voor
 - Werkwijze: https://future-content.nl/werkwijze
 - Trainingen: https://future-content.nl/trainingen
-- AI-Quickscan: https://future-content.nl/scan
-- Boek een gesprek: https://future-content.nl/boek
-- Videografie: https://future-content.nl/videografie
+- AI-Quickscan (gratis, voordeur): https://future-content.nl/scan
+- Boek een gesprek (Cal.com, 30 min): https://future-content.nl/boek
+- Case routeplanner: https://future-content.nl/cases/routeplanner
+- Case ticketsysteem Koningsdag: https://future-content.nl/cases/ticketsysteem-koningsdag
+- Film / video (secundaire tak): https://future-content.nl/film
+- Videografie-overzicht: https://future-content.nl/videografie
 - Makelaars (video): https://future-content.nl/makelaars
 - Social Media (video): https://future-content.nl/social-media
 - Trouwen (video): https://future-content.nl/trouwen
 - Portfolio: https://future-content.nl/portfolio
 - Blog: https://future-content.nl/blog
-- Over: https://future-content.nl/over
+- Over John Lavrijsen: https://future-content.nl/over
 - Contact: https://future-content.nl/contact
+- Algemene voorwaarden: https://future-content.nl/voorwaarden
+- Privacy: https://future-content.nl/privacy
 
 ## Branchepagina's per skin
 

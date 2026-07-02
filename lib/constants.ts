@@ -2,7 +2,7 @@ export const SITE = {
   name: "Future Content",
   tagline: "Eerst zien welk werk repeterend is. Dan pas bouwen.",
   description:
-    "Future Content bouwt en beheert AI en automatiseringen voor MKB-bedrijven in de Kempen, Eindhoven, Tilburg en Breda. John komt langs, brengt je proces in kaart en bouwt daar AI op die jouw bedrijf snapt. Modulair platform met branche-skin. Geregeld, ook zonder John.",
+    "Future Content bouwt en beheert AI en automatiseringen voor MKB-bedrijven in de Kempen, Eindhoven, Tilburg en Breda. John komt langs, brengt je proces in kaart en bouwt daar AI op die jouw bedrijf snapt. Modulair platform met branche-skin. Gebouwd én beheerd.",
   url: "https://future-content.nl",
   address: "Bladel, Noord-Brabant",
   city: "Bladel",
@@ -13,6 +13,16 @@ export const SITE = {
   whatsapp: "31650919960",
   ownerName: "John Lavrijsen",
   kvk: "86880675",
+};
+
+// Social-kanalen. Instagram is het actieve kanaal; overige velden leeg laten
+// tot ze er echt zijn (footer/contact tonen alleen wat gevuld is).
+export const SOCIALS = {
+  instagram: {
+    label: "Instagram",
+    handle: "@future.cntnt.nl",
+    url: "https://www.instagram.com/future.cntnt.nl",
+  },
 };
 
 export const PHOTOS = [
@@ -416,7 +426,7 @@ export const STACK_VIDEOS = [
 ];
 
 export const NAV_LINKS = [
-  { href: "/", label: "AI" },
+  { href: "/ai", label: "AI" },
   { href: "/film", label: "Film" },
 ];
 
@@ -487,7 +497,7 @@ export const METHOD_STEPS = [
 export const PROOF_POINTS = [
   {
     title: "Een ticketshop die werkt als een Nederlander",
-    tag: "Voor onze eigen Koningsdag",
+    tag: "Voor onze eigen Köningsdag",
     desc: "Vorig jaar deed ik dit met Google Sheets en handmatige mails. Dit jaar bouwde ik een eigen landingpage: groep, namen, allergieën, broodjeskeuze, iDeal-betaalmuur via Mollie. Na sluiting trekt het systeem zelf een Excel-lijst die direct naar de broodjes-leverancier kan. WeezTicket rekent €0,99 per ticket plus 2,75% processing. Mollie kost €0,32 per transactie. Op een paar honderd tickets scheelt dat al snel een paar honderd euro.",
   },
   {
@@ -537,7 +547,7 @@ export const AI_TRUST = [
   "Werk vanuit Bladel, kom langs in heel Brabant",
   "Ik bouw het, jij blijft eigenaar van je proces",
   "AVG-bewust ingericht",
-  "Geregeld, ook als ik morgen wegval",
+  "Ik bouw het én houd het draaiend",
 ];
 
 // Boeking (Cal.com). Vul calUser/calEvent in zodra het Cal.com-account gekoppeld is
@@ -555,14 +565,14 @@ export const BOOKING = {
 
 export const BELOFTES = [
   {
-    title: "Jij blijft eigenaar van je proces",
+    title: "Jij gebruikt, ik beheer",
     body:
-      "Alles wat ik bouw is overdraagbaar gemaakt. Wil je op een dag wisselen, of wil je het door iemand anders laten beheren, dan kan dat zonder dat alles uit elkaar valt. Geen 'alleen John kan dit nog ontwarren'.",
+      "Jij en je mensen werken met de tool, ik houd hem draaiend: updates, onderhoud en verbeteringen horen er gewoon bij. Zo blijft het werken, ook als jouw bedrijf verandert.",
   },
   {
-    title: "Geregeld, ook zonder mij",
+    title: "Geregeld, ook op de lange termijn",
     body:
-      "Als ik morgen stop, valt jouw bedrijf niet om. Voor grotere opdrachten en als achtervang werk ik samen met Bram van der Sande. Geen bureau, wel een net dat draagt.",
+      "Ik blijf beheerder van wat ik bouw: updates, onderhoud en verbeteringen, zodat het blijft werken. Voor grotere opdrachten en als achtervang werk ik samen met specialisten. Geen bureau, wel een net dat draagt.",
   },
   {
     title: "Eerlijk over wat AI wel en niet doet",
@@ -733,7 +743,7 @@ export const BRANCHES: Branche[] = [
     observatieH2: "Wat ik zie bij dorps en buurt-events",
     observatieBody: [
       "Voor lokale evenementen tot ~3.000 bezoekers is Weezevent vaak te duur en te generiek. Eventbrite is ondoorgrondelijk. Veel organisaties knutselen met Google Forms + handmatige mails.",
-      "Wat ik bouwde voor onze eigen Koningsdag in Reusel: landingpage met groepsnaam + namen + allergieën + broodjeskeuze + iDeal via Mollie. Na sluiting trekt het systeem zelf een Excel-lijst die direct naar de broodjes-leverancier kan.",
+      "Wat ik bouwde voor onze eigen Köningsdag in Reusel: landingpage met groepsnaam + namen + allergieën + broodjeskeuze + iDeal via Mollie. Na sluiting trekt het systeem zelf een Excel-lijst die direct naar de broodjes-leverancier kan.",
       "Die architectuur is direct herbruikbaar voor 5-10 vergelijkbare evenementen per jaar. Kort projectmatig werk, maar met dezelfde modules als de rest van het platform.",
     ],
     aiDoetWel: [
@@ -763,10 +773,10 @@ export const BRANCHES: Branche[] = [
         desc: "Koppelt ticketverkoop + weervoorspelling + historie aan leveranciersbestellingen. Voorkomt overbestelling en derving.",
       },
     ],
-    skinSummary: "Ticketshop op Mollie + AI-FAQ-bot + catering-forecast. Bewezen op Koningsdag Reusel.",
-    casusStand: "Bewezen op Koningsdag Reusel. Schaalbaar naar 5-10 vergelijkbare evenementen per jaar.",
+    skinSummary: "Ticketshop op Mollie + AI-FAQ-bot + catering-forecast. Bewezen op Köningsdag Reusel.",
+    casusStand: "Bewezen op Köningsdag Reusel. Schaalbaar naar 5-10 vergelijkbare evenementen per jaar.",
     casusBewijs:
-      "Voor onze eigen Koningsdag Reusel gebouwd: landingpage met groep + namen + allergieën + broodjeskeuze + Mollie iDeal + automatische Excel-lijst naar broodjes-leverancier. Live gedraaid tijdens het evenement, werkt zoals het hoort.",
+      "Voor onze eigen Köningsdag Reusel gebouwd: landingpage met groep + namen + allergieën + broodjeskeuze + Mollie iDeal + automatische Excel-lijst naar broodjes-leverancier. Live gedraaid tijdens het evenement, werkt zoals het hoort.",
     casusAanbod:
       "Voor jouw evenement gebouwd in 2-3 weken. Eenmalige bouw + per-ticket-fee die altijd onder Weezevent zit. Volg-evenementen worden goedkoper omdat de architectuur al staat.",
     featuredOnHomepage: false,

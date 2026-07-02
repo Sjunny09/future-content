@@ -88,7 +88,7 @@ export default async function GeluktPagina({ params }: { params: Params }) {
           className="mt-3 text-sm"
           style={{ color: "var(--color-scan-muted)" }}
         >
-          Je krijgt altijd eerst de video die ik beloofd had — die komt
+          Je krijgt altijd eerst de video die ik beloofd had, die komt
           ongewijzigd.
         </p>
       </main>
@@ -112,7 +112,7 @@ export default async function GeluktPagina({ params }: { params: Params }) {
           className="mt-6 text-base leading-relaxed"
           style={{ color: "var(--color-scan-drukinkt)" }}
         >
-          Geen zorg — er is niks afgeschreven. Probeer het opnieuw, of mail me
+          Geen zorg, er is niks afgeschreven. Probeer het opnieuw, of mail me
           direct.
         </p>
         <div className="mt-8 flex gap-4">
@@ -124,7 +124,7 @@ export default async function GeluktPagina({ params }: { params: Params }) {
             Opnieuw proberen
           </Link>
           <a
-            href="mailto:john@futurecontent.nl"
+            href="mailto:john@future-content.nl"
             className="rounded-md border px-6 py-3 text-base"
             style={{
               borderColor: "var(--color-scan-border)",
@@ -148,7 +148,7 @@ export default async function GeluktPagina({ params }: { params: Params }) {
           color: "var(--color-scan-drukinkt)",
         }}
       >
-        Een moment — ik wacht op bevestiging van de bank.
+        Een moment, ik wacht op bevestiging van de bank.
       </h1>
       <p
         className="mt-6 text-base leading-relaxed"

@@ -16,7 +16,7 @@ export default async function Image() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0F0F0D",
+          background: "#221C14",
           display: "flex",
           flexDirection: "column",
           padding: "80px",
@@ -32,14 +32,14 @@ export default async function Image() {
             left: "80px",
             width: "120px",
             height: "2px",
-            background: "#C9A96E",
+            background: "#B45F38",
           }}
         />
 
         {/* Eyebrow */}
         <div
           style={{
-            color: "#C9A96E",
+            color: "#B45F38",
             fontSize: "20px",
             fontWeight: 600,
             letterSpacing: "4px",
@@ -55,7 +55,7 @@ export default async function Image() {
         {/* Hoofdregel */}
         <div
           style={{
-            color: "#FAFAF8",
+            color: "#F3ECE0",
             fontSize: "72px",
             fontWeight: 700,
             lineHeight: 1.04,
@@ -82,7 +82,7 @@ export default async function Image() {
         >
           <div
             style={{
-              color: "#FAFAF8",
+              color: "#F3ECE0",
               opacity: 0.55,
               fontSize: "20px",
               fontWeight: 500,
@@ -94,7 +94,7 @@ export default async function Image() {
           </div>
           <div
             style={{
-              color: "#C9A96E",
+              color: "#B45F38",
               fontSize: "22px",
               fontWeight: 600,
               letterSpacing: "1px",

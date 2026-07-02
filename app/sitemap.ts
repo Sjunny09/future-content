@@ -10,19 +10,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: base,                    lastModified: now, changeFrequency: "weekly",  priority: 1.0 },
+    { url: `${base}/ai`,            lastModified: now, changeFrequency: "monthly", priority: 0.98 },
     { url: `${base}/voor`,          lastModified: now, changeFrequency: "monthly", priority: 0.95 },
     { url: `${base}/werkwijze`,     lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/trainingen`,    lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${base}/scan`,          lastModified: now, changeFrequency: "monthly", priority: 0.85 },
     { url: `${base}/boek`,          lastModified: now, changeFrequency: "monthly", priority: 0.85 },
-    { url: `${base}/videografie`,   lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/film`,          lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${base}/videografie`,   lastModified: now, changeFrequency: "monthly", priority: 0.65 },
     { url: `${base}/makelaars`,     lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/social-media`,  lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/trouwen`,       lastModified: now, changeFrequency: "monthly", priority: 0.65 },
     { url: `${base}/portfolio`,     lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
+    { url: `${base}/cases/routeplanner`,             lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/cases/ticketsysteem-koningsdag`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/blog`,          lastModified: now, changeFrequency: "weekly",  priority: 0.75 },
     { url: `${base}/over`,          lastModified: now, changeFrequency: "yearly",  priority: 0.5 },
     { url: `${base}/contact`,       lastModified: now, changeFrequency: "yearly",  priority: 0.6 },
+    { url: `${base}/voorwaarden`,   lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
+    { url: `${base}/privacy`,       lastModified: now, changeFrequency: "yearly",  priority: 0.3 },
   ];
 
   // Branchepagina's per skin (uit BRANCHES) — strategische landingspages

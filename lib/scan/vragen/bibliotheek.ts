@@ -28,9 +28,9 @@ export const EMAIL_NAAM_VRAAG: Vraag = {
   id: "EMAIL",
   thema: "contact",
   type: "email-naam",
-  titel: "Waar stuur ik de video naartoe?",
+  titel: "Laat je gegevens achter en krijg direct toegang tot je persoonlijke resultaten.",
   helptekst:
-    "Binnen 24 uur stuur ik je een korte video met wat ik zag. Geen nieuwsbrief.",
+    "Als bonus stuur ik je binnen 24 uur een persoonlijke video met wat ik zag. Geen nieuwsbrief.",
 }
 
 export const VRAGEN_BIBLIOTHEEK: Vraag[] = [

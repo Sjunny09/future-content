@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 import { track } from "@/lib/scan/analytics/plausible"
+import { AiDisclaimer } from "@/components/scan/AiDisclaimer"
 
 type Kans = { titel: string; beschrijving?: string }
 type Analyse = { branche?: string; niche?: string; kansen?: Kans[] } | null
@@ -48,12 +49,24 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
     return () => clearInterval(id)
   }, [])
 
-  // Polling
+  // Polling. Twee vangnetten (go-live audit 2 juli):
+  //   1. Een enkele netwerk-blip is niet meteen fataal: tot 3 pogingen
+  //      opnieuw (met 3s tussenpoos) voordat de foutmelding verschijnt.
+  //   2. Harde bovengrens van 3 minuten: als de scan dan nog niet klaar is,
+  //      stoppen we met pollen en tonen we een nette fout i.p.v. eindeloos
+  //      te blijven draaien.
   useEffect(() => {
     let actief = true
     let timeoutId: ReturnType<typeof setTimeout>
+    let netwerkFouten = 0
+    const gestartOp = Date.now()
+    const MAX_WACHT_MS = 3 * 60_000
 
     async function tick() {
+      if (Date.now() - gestartOp > MAX_WACHT_MS && !klaarRef.current) {
+        setFout("Dit duurt langer dan het hoort. Probeer het zo nog eens.")
+        return
+      }
       try {
         const res = await fetch(`/api/scan/${jobId}/status`, {
           cache: "no-store",
@@ -61,6 +74,7 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         if (!res.ok) throw new Error("status-fout")
         const data = (await res.json()) as StatusRespons
         if (!actief) return
+        netwerkFouten = 0
 
         // Houd referentie stabiel als inhoud gelijk is, anders reset de
         // 7s-slide-timer elke poll en loopt de index nooit door.
@@ -92,6 +106,12 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         timeoutId = setTimeout(tick, 1500)
       } catch {
         if (!actief) return
+        netwerkFouten += 1
+        if (netwerkFouten < 3) {
+          // Eén hapering is geen reden om de scan af te breken.
+          timeoutId = setTimeout(tick, 3000)
+          return
+        }
         setFout("Geen verbinding. Probeer het opnieuw.")
       }
     }
@@ -261,6 +281,10 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
             Opnieuw proberen
           </Link>
         </div>
+      )}
+
+      {kansen.length > 0 && (
+        <AiDisclaimer className="mt-10 max-w-xl text-center" />
       )}
     </main>
   )

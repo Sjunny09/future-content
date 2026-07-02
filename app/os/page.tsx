@@ -1,9 +1,16 @@
+import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
 import { OsLogin, VideoForm } from "./ui"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
+
+// Interne backoffice: nooit indexeren.
+export const metadata: Metadata = {
+  title: "Future Content OS",
+  robots: { index: false, follow: false },
+}
 
 const GOLD = "#C9A96E"
 const INK = "#1A1A18"

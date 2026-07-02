@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
       currency: "EUR",
       value: centenAlsEuroString(PILOT_BEDRAG_CENT),
     },
-    description: `${PILOT_OMSCHRIJVING} — ${job.lead.naam ?? job.lead.email}`,
+    description: `${PILOT_OMSCHRIJVING} - ${job.lead.naam ?? job.lead.email}`,
     redirectUrl: `${basis}/scan/pilot/${job.id}/gelukt`,
     webhookUrl: `${basis}/api/betaling/mollie/webhook`,
     metadata: {

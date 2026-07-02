@@ -4,9 +4,10 @@ import { Check, MessageCircle, CalendarCheck } from "lucide-react";
 import { SITE, BOOKING } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Plan een gesprek · Future Content",
+  title: "Plan een gesprek",
   description:
     "Plan een vrijblijvend online gesprek van 30 minuten met John Lavrijsen. Daarna weet je of je zelf verder kunt, of een workshop past, of we samen iets bouwen.",
+  alternates: { canonical: "/boek" },
 };
 
 const OPBOUW = [
@@ -40,18 +41,18 @@ export default function BoekPage() {
   const calSrc = `https://${BOOKING.calHost}/${BOOKING.calUser}/${BOOKING.calEvent}?embed=true&theme=light`;
 
   return (
-    <main className="bg-[#FAFAF8]">
+    <main className="bg-[#F3ECE0]">
       <section className="max-w-6xl mx-auto px-6 pt-32 pb-16 md:pt-40">
-        <span className="text-[#C9A96E] text-xs font-semibold uppercase tracking-[0.2em]">
+        <span className="text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
           Kennismaken
         </span>
         <h1
-          className="text-4xl md:text-[3.2rem] font-bold text-[#1A1A18] mt-4 leading-[1.05] max-w-3xl tracking-[-0.01em]"
+          className="text-4xl md:text-[3.2rem] font-bold text-[#2A2218] mt-4 leading-[1.05] max-w-3xl tracking-[-0.01em]"
           style={{ fontFamily: "var(--font-playfair)" }}
         >
           Een half uur, gratis. Daarna weet je een van drie dingen.
         </h1>
-        <p className="text-[#6B7280] text-lg mt-5 max-w-2xl leading-relaxed">
+        <p className="text-[#6E6151] text-lg mt-5 max-w-2xl leading-relaxed">
           Online, vrijblijvend. Of je kunt zelf verder en ik wijs je de juiste richting. Of een
           workshop op locatie is voor jullie team de beste eerste stap. Of we gaan samen iets
           bouwen.
@@ -61,28 +62,28 @@ export default function BoekPage() {
       <section className="max-w-6xl mx-auto px-6 pb-28 grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16">
         {/* Links: opbouw + waarde */}
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#1A1A18] mb-6">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.15em] text-[#2A2218] mb-6">
             Hoe het gesprek loopt
           </h2>
           <div className="relative flex flex-col gap-7 mb-12">
-            <div className="absolute left-[15px] top-2 bottom-2 w-px bg-[#E5E0D8]" />
+            <div className="absolute left-[15px] top-2 bottom-2 w-px bg-[#E4D8C6]" />
             {OPBOUW.map((s, i) => (
               <div key={s.t} className="relative pl-12">
-                <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-[#C9A96E]/15 text-[#C9A96E] text-sm font-bold flex items-center justify-center">
+                <span className="absolute left-0 top-0 w-8 h-8 rounded-full bg-[#B45F38]/15 text-[#B45F38] text-sm font-bold flex items-center justify-center">
                   {i + 1}
                 </span>
-                <h3 className="font-semibold text-[#1A1A18]">{s.t}</h3>
-                <p className="text-[#6B7280] text-sm mt-1 leading-relaxed">{s.d}</p>
+                <h3 className="font-semibold text-[#2A2218]">{s.t}</h3>
+                <p className="text-[#6E6151] text-sm mt-1 leading-relaxed">{s.d}</p>
               </div>
             ))}
           </div>
 
-          <div className="rounded-2xl bg-[#F5F1EB] p-7">
-            <h3 className="font-semibold text-[#1A1A18] mb-4">Wat je uit het gesprek meeneemt</h3>
+          <div className="rounded-2xl bg-[#ECE2D2] p-7">
+            <h3 className="font-semibold text-[#2A2218] mb-4">Wat je uit het gesprek meeneemt</h3>
             <ul className="flex flex-col gap-3">
               {VALUE.map((v) => (
-                <li key={v} className="flex items-start gap-3 text-[#1A1A18] text-sm">
-                  <Check size={16} className="text-[#C9A96E] mt-0.5 shrink-0" />
+                <li key={v} className="flex items-start gap-3 text-[#2A2218] text-sm">
+                  <Check size={16} className="text-[#B45F38] mt-0.5 shrink-0" />
                   <span className="leading-snug">{v}</span>
                 </li>
               ))}
@@ -93,7 +94,7 @@ export default function BoekPage() {
         {/* Rechts: agenda */}
         <div>
           {calConfigured ? (
-            <div className="rounded-2xl overflow-hidden border border-[#E5E0D8] bg-white min-h-[640px]">
+            <div className="rounded-2xl overflow-hidden border border-[#E4D8C6] bg-white min-h-[640px]">
               <iframe
                 src={calSrc}
                 title="Plan een gesprek"
@@ -102,17 +103,17 @@ export default function BoekPage() {
               />
             </div>
           ) : (
-            <div className="rounded-2xl border border-[#E5E0D8] bg-white p-8 md:p-10 flex flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-full bg-[#C9A96E]/15 text-[#C9A96E] flex items-center justify-center mb-5">
+            <div className="rounded-2xl border border-[#E4D8C6] bg-white p-8 md:p-10 flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-full bg-[#B45F38]/15 text-[#B45F38] flex items-center justify-center mb-5">
                 <CalendarCheck size={26} />
               </div>
               <h3
-                className="text-2xl font-bold text-[#1A1A18] mb-3"
+                className="text-2xl font-bold text-[#2A2218] mb-3"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Plan direct een moment
               </h3>
-              <p className="text-[#6B7280] leading-relaxed mb-7 max-w-sm">
+              <p className="text-[#6E6151] leading-relaxed mb-7 max-w-sm">
                 De online agenda wordt hier geladen zodra Cal.com gekoppeld is. Wil je nu al een
                 moment prikken? Stuur me een WhatsApp, dan zet ik het meteen in de agenda.
               </p>
@@ -127,7 +128,7 @@ export default function BoekPage() {
                 </Link>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#1A1A18] text-[#1A1A18] font-semibold hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-[#2A2218] text-[#2A2218] font-semibold hover:border-[#B45F38] hover:text-[#B45F38] transition-colors"
                 >
                   Contactformulier
                 </Link>

@@ -160,7 +160,7 @@ export default function VideoCarousel({ videos }: { videos: VideoItem[] }) {
                 playsInline
                 muted={muted}
                 loop
-                className="w-full aspect-video object-cover bg-[#0F0F0D]"
+                className="w-full aspect-video object-cover bg-[#221C14]"
               />
 
               {/* Play overlay shown on non-active cards */}
@@ -173,11 +173,11 @@ export default function VideoCarousel({ videos }: { videos: VideoItem[] }) {
               )}
 
               {/* Caption */}
-              <div className="bg-[#0F0F0D] px-5 py-4">
-                <p className="font-semibold text-[#FAFAF8] text-sm leading-snug">
+              <div className="bg-[#221C14] px-5 py-4">
+                <p className="font-semibold text-[#F3ECE0] text-sm leading-snug">
                   {video.title}
                 </p>
-                <p className="text-[#FAFAF8]/40 text-xs mt-0.5">
+                <p className="text-[#F3ECE0]/40 text-xs mt-0.5">
                   {video.description}
                 </p>
               </div>
@@ -202,8 +202,8 @@ export default function VideoCarousel({ videos }: { videos: VideoItem[] }) {
             className={[
               "rounded-full transition-all duration-300",
               i === activeIndex
-                ? "w-5 h-2 bg-[#C9A96E]"
-                : "w-2 h-2 bg-[#6B7280]/40 hover:bg-[#C9A96E]/50",
+                ? "w-5 h-2 bg-[#B45F38]"
+                : "w-2 h-2 bg-[#6E6151]/40 hover:bg-[#B45F38]/50",
             ].join(" ")}
           />
         ))}

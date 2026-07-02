@@ -1,15 +1,18 @@
 /**
- * Leads-bridge: stuurt een afgeronde scan naar Future Content OS (Flask).
+ * Leads-bridge: stuurt een afgeronde scan naar Future Content OS (Next.js).
  *
- * Contract met Flask:
- *   POST {SCAN_TO_OS_URL}   (bv. https://os.future-content.nl/leads/van-scan)
- *   Headers: X-FC-Secret: {SCAN_TO_OS_WEBHOOK_SECRET}
- *   Body: { bedrijf, contactpersoon, email, telefoon, interesse, opmerkingen }
+ * Contract met de OS-route (`os/app/api/leads/van-scan/route.ts`):
+ *   POST {OS_BASE_URL}/api/leads/van-scan
+ *   Headers: Authorization: Bearer {OS_WEBHOOK_SECRET}
+ *   Body (additief, oude/kleine payload blijft ook werken):
+ *     { scanLeadId, bedrijf, contactpersoon, email, telefoon, interesse,
+ *       opmerkingen, type, url, branche, niche, tone, antwoorden, kansen }
  *
- * Bron van waarheid = Google Sheet (via Flask). Neon blijft de operationele
- * scan-store (jobs, vragen, mail-history), maar leads vloeien door naar Sheet.
+ * Env-vars nodig:
+ *   OS_BASE_URL        — bv. https://os.future-content.nl (geen trailing slash)
+ *   OS_WEBHOOK_SECRET   — zelfde secret als de OS-route (`OS_WEBHOOK_SECRET`)
  *
- * Fail-soft: als env ontbreekt of call faalt, loggen en doorgaan. De scan-
+ * Fail-soft: als env ontbreekt of de call faalt, loggen en doorgaan. De scan-
  * ervaring van de bezoeker mag hier NOOIT van afhangen.
  */
 
@@ -20,6 +23,8 @@ type SiteData = {
   title?: string
   description?: string
 }
+
+type ScanType = "quickscan" | "diepte"
 
 function domeinUit(url: string): string {
   try {
@@ -50,11 +55,21 @@ function interesseUit(
   return ""
 }
 
-export async function notifyOs(jobId: string): Promise<void> {
-  const url = process.env.SCAN_TO_OS_URL
-  const secret = process.env.SCAN_TO_OS_WEBHOOK_SECRET
-  if (!url || !secret) {
-    console.info("[notifyOs] SCAN_TO_OS_URL of _WEBHOOK_SECRET ontbreekt; overgeslagen", { jobId })
+function antwoordenAlsObject(
+  antwoorden: Array<{ vraagId: string; vraagTitel?: string; waarde: unknown }>,
+): Record<string, unknown> {
+  const out: Record<string, unknown> = {}
+  for (const a of antwoorden) {
+    out[a.vraagId] = a.vraagTitel ? { titel: a.vraagTitel, waarde: a.waarde } : a.waarde
+  }
+  return out
+}
+
+export async function notifyOs(jobId: string, type: ScanType = "quickscan"): Promise<void> {
+  const base = process.env.OS_BASE_URL
+  const secret = process.env.OS_WEBHOOK_SECRET
+  if (!base || !secret) {
+    console.info("[notifyOs] OS_BASE_URL of OS_WEBHOOK_SECRET ontbreekt; overgeslagen", { jobId })
     return
   }
 
@@ -62,7 +77,7 @@ export async function notifyOs(jobId: string): Promise<void> {
     where: { id: jobId },
     include: {
       lead: true,
-      antwoorden: { select: { vraagId: true, waarde: true } },
+      antwoorden: { select: { vraagId: true, vraagTitel: true, waarde: true } },
     },
   })
   if (!job || !job.lead) return
@@ -71,20 +86,29 @@ export async function notifyOs(jobId: string): Promise<void> {
   const analyse = (job.analyseJson ?? null) as SiteAnalyse | null
 
   const payload = {
+    scanLeadId: job.id,
     bedrijf: bedrijfsnaamUit(siteData, job.url),
     contactpersoon: job.lead.naam ?? "",
     email: job.lead.email,
     telefoon: job.lead.telefoon ?? "",
     interesse: interesseUit(analyse, job.antwoorden),
     opmerkingen: `Scan ${job.id} · ${job.url}`,
+    // Uitgebreid contract voor de leads-module (additief, zie OS-route).
+    type,
+    url: job.url,
+    branche: analyse?.branche ?? null,
+    niche: analyse?.niche ?? null,
+    tone: analyse?.tone ?? null,
+    antwoorden: antwoordenAlsObject(job.antwoorden),
+    kansen: analyse?.kansen ?? [],
   }
 
   try {
-    const res = await fetch(url, {
+    const res = await fetch(`${base}/api/leads/van-scan`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-FC-Secret": secret,
+        Authorization: `Bearer ${secret}`,
       },
       body: JSON.stringify(payload),
     })
@@ -93,8 +117,8 @@ export async function notifyOs(jobId: string): Promise<void> {
       console.error("[notifyOs] OS-response niet-ok", { jobId, status: res.status, tekst })
       return
     }
-    const data = (await res.json().catch(() => ({}))) as { lcode?: string; bestond?: boolean }
-    console.info("[notifyOs] lead doorgegeven", { jobId, lcode: data.lcode, bestond: data.bestond })
+    const data = (await res.json().catch(() => ({}))) as { ref?: string; status?: string }
+    console.info("[notifyOs] lead doorgegeven", { jobId, ref: data.ref, status: data.status })
   } catch (err) {
     console.error("[notifyOs] call faalde", { jobId, err })
   }

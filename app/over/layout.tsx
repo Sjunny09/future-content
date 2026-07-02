@@ -1,13 +1,18 @@
 import { Metadata } from "next";
+import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Over ons | Future Content Bladel",
+  title: "Over John Lavrijsen | AI-bouwer uit Bladel",
   description:
-    "Future Content is jouw lokale videograaf in Bladel. Persoonlijk, snel, betrouwbaar. Sony A6400 + DJI Mini 3 Pro. Actief door heel De Kempen en omstreken.",
+    "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant. Voorheen business engineer in de transportsector, zes jaar vastgoedvideograaf. Gevestigd in Bladel, actief in de Kempen, Eindhoven en Tilburg.",
   openGraph: {
-    title: "Over ons | Future Content",
-    description: "Persoonlijk, snel en betrouwbaar. Jouw lokale videograaf in De Kempen.",
+    title: "Over John Lavrijsen | Future Content",
+    description:
+      "AI-bouwer uit Bladel. Vier jaar business engineer in transport, zes jaar videograaf. Sinds 2026 fulltime AI voor het MKB.",
     images: ["/photos/PhotoSessions-757307-pww_6270-vy-1.jpg"],
+  },
+  alternates: {
+    canonical: `${SITE.url}/over`,
   },
 };
 

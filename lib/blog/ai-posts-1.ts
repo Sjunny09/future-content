@@ -224,7 +224,7 @@ export const AI_POSTS_1: BlogPost[] = [
       { type: "h2", text: "Intake-workflow" },
       { type: "p", text: "Een nieuwe klant doorloopt een aantal vragen, en aan het eind heb jij een nette samenvatting plus de juiste vervolgstap. Geen losse mailtjes meer waar je informatie uit moet vissen, maar een vaste route die zichzelf afhandelt." },
       { type: "ul", items: ["Offerte: formulier in, concept-offerte klaar voor check", "Mail: routinevragen automatisch beantwoord of voorgesorteerd", "Intake: vaste route met nette samenvatting aan het eind", "Reserveren: chatbot die zelf afspraken of tafels inplant"] },
-      { type: "p", text: "Dat laatste is geen theorie. Voor een restaurant bouwde ik een chatbot die zelf tafels reserveert. Voor Koningsdag in Reusel maakte ik een ticketsysteem met online betaling, zodat de organisatie niet meer met losse lijstjes en contant geld hoefde te werken." },
+      { type: "p", text: "Dat laatste is geen theorie. Voor een restaurant bouwde ik een chatbot die zelf tafels reserveert. Voor Köningsdag in Reusel maakte ik een ticketsysteem met online betaling, zodat de organisatie niet meer met losse lijstjes en contant geld hoefde te werken." },
       { type: "quote", text: "Automatisering is niet je hele bedrijf vervangen. Het is de tien kleine handelingen per dag wegnemen waar niemand blij van wordt." },
       { type: "h2", text: "Hoe je begint zonder groot project" },
       { type: "p", text: "Kies een ergernis die elke dag terugkomt en bouw daar een kleine workflow op. Werkt het, dan pak je de volgende. Zo groeit het organisch, zonder maandenlang project en zonder dat je hele team op zijn kop staat. Klein beginnen wint het hier echt van groots denken." },

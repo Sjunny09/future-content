@@ -6,13 +6,17 @@ import Footer from "@/components/layout/Footer"
 import FloatingCTA from "@/components/layout/FloatingCTA"
 import CookieBanner from "@/components/layout/CookieBanner"
 
-// Verberg de videografie-chrome op /scan/*.
-// De quickscan heeft een eigen, losstaande look (zie docs/quickscan/03_ceo_synthese.md §3).
+// Verberg de chrome op de immersieve routes: /scan/*, de poort (/) en de
+// AI-ervaring (/ai). Die hebben elk hun eigen, rustige chrome.
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const isScan = pathname?.startsWith("/scan")
+  const bare =
+    pathname === "/" ||
+    pathname === "/ai" ||
+    pathname?.startsWith("/ai/") ||
+    pathname?.startsWith("/scan")
 
-  if (isScan) {
+  if (bare) {
     return <>{children}</>
   }
 

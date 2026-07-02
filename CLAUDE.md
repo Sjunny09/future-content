@@ -32,7 +32,7 @@ No linting or test commands are configured. TypeScript errors surface via `npm r
 
 **Layout-level fixed UI:**
 - `FloatingCTA` — persistent WhatsApp button
-- `CookieBanner` — GDPR consent banner (drone + cookie animation); GA4 only loads after accept; consent stored in `localStorage` under key `"cookie-consent"`
+- `CookieBanner` — small huisstijl notice bottom-left, appears after 6s (not on first paint); GA4 only loads after accept; consent stored in `localStorage` under key `"cookie-consent"`. Plausible (in `app/layout.tsx`) is cookieless and loads regardless, no consent needed.
 - `NewPostNotification` — camera-viewfinder popup on homepage only; shows latest `BLOG_POSTS` entry; dismissed state stored in `sessionStorage` under key `"new-post-dismissed"`
 
 **Contact form:** `/contact` POSTs to [app/api/contact/route.ts](app/api/contact/route.ts), validated with Zod, delivered via Resend. Without `RESEND_API_KEY` it logs to console.

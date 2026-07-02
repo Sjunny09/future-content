@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
     try {
       const resend = new Resend(key)
       await resend.emails.send({
-        from: "Future Content <privacy@futurecontent.nl>",
+        from: "Future Content <privacy@future-content.nl>",
         to: email,
         subject: "Je gegevens zijn verwijderd",
         text: bouwBevestigingsmail(lead.naam),
@@ -88,10 +88,10 @@ function bouwBevestigingsmail(naam: string | null): string {
   return [
     aanhef,
     ``,
-    `Hierbij bevestig ik dat alle gegevens gekoppeld aan dit e-mailadres uit Future Content zijn verwijderd — scans, antwoorden, en contactgegevens. Niets meer te vinden.`,
+    `Hierbij bevestig ik dat alle gegevens gekoppeld aan dit e-mailadres uit Future Content zijn verwijderd: scans, antwoorden en contactgegevens. Niets meer te vinden.`,
     ``,
     `Mocht je alsnog vragen hebben: stuur maar een mail.`,
     ``,
-    `John — Future Content`,
+    `John, Future Content`,
   ].join("\n")
 }

@@ -37,10 +37,10 @@ export function DirectContact() {
 
   return (
     <div
-      className="rounded-2xl border p-5"
-      style={{ borderColor: "var(--color-scan-border)", backgroundColor: "transparent" }}
+      className="rounded-2xl border-2 p-5"
+      style={{ borderColor: "var(--color-scan-terracotta)", backgroundColor: "rgba(184,71,42,0.05)" }}
     >
-      <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+      <p className="text-base font-semibold" style={{ color: "var(--color-scan-terracotta)" }}>
         Liever direct contact?
       </p>
       <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
@@ -53,18 +53,13 @@ export function DirectContact() {
           href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-3 rounded-md border px-4 py-3 transition hover:opacity-90"
-          style={{ borderColor: "var(--color-scan-border)" }}
+          className="plausible-event-name=WhatsApp-klik group flex items-center gap-3 rounded-md px-4 py-3.5 text-white shadow-sm transition hover:opacity-90"
+          style={{ backgroundColor: "#25D366" }}
         >
-          <span
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white"
-            style={{ backgroundColor: "#25D366" }}
-          >
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20">
             <WhatsAppGlyph className="h-5 w-5" />
           </span>
-          <span className="text-sm font-medium" style={{ color: "var(--color-scan-drukinkt)" }}>
-            Stuur me een appje
-          </span>
+          <span className="text-sm font-semibold">Stuur me een appje</span>
         </a>
 
         {/* Afspraak via cal.eu */}
@@ -116,10 +111,10 @@ export function DirectContact() {
           </span>
           <span>
             <span className="block text-sm font-medium" style={{ color: "var(--color-scan-drukinkt)" }}>
-              Kom een bak koffie doen
+              Kom een keer koffie doen
             </span>
             <span className="block text-xs" style={{ color: "var(--color-scan-muted)" }}>
-              Ik zet 'm klaar in Bladel
+              Ik kom graag langs wanneer je in de buurt van Bladel woont
             </span>
           </span>
         </a>

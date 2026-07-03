@@ -1,2 +1,8 @@
 # Video's zijn verkleind naar <100MB per bestand en worden nu geüpload naar Vercel.
 # Vercel Pro: max 100MB per bestand. GitHub (zie .gitignore): nog steeds uitgesloten.
+
+# .env is lokaal een symlink naar de andere worktree (future-content/.env). Op
+# Vercel is dat een kapotte symlink die de build breekt (touch/stat faalt).
+# Env-variabelen komen van de Vercel-projectinstellingen, niet uit een bestand.
+.env
+.env.*

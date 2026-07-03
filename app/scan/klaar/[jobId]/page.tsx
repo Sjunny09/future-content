@@ -1,5 +1,3 @@
-import fs from "node:fs"
-import path from "node:path"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
@@ -15,16 +13,6 @@ import type { SiteAnalyse } from "@/lib/scan/claude"
 type Params = Promise<{ jobId: string }>
 
 const FOTO_PAD = "/images/john-lightbulb.png"
-
-// Fallback-safe: de asset komt nog. Zolang 'm ontbreekt tonen we een
-// transparant/subtiel placeholder-vlak in plaats van een gebroken layout.
-function fotoAanwezig(): boolean {
-  try {
-    return fs.existsSync(path.join(process.cwd(), "public", "images", "john-lightbulb.png"))
-  } catch {
-    return false
-  }
-}
 
 function domeinUit(url: string): string | null {
   try {
@@ -62,7 +50,6 @@ export default async function KlaarPagina({ params }: { params: Params }) {
   const domein = domeinUit(job.url)
   const kansen = Array.isArray(analyse?.kansen) ? analyse.kansen.slice(0, 3) : []
   const diepteVoltooid = job.diepteStatus === "voltooid"
-  const heeftFoto = fotoAanwezig()
 
   return (
     <main className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-10 lg:h-screen lg:justify-center lg:overflow-hidden lg:py-8">
@@ -96,27 +83,17 @@ export default async function KlaarPagina({ params }: { params: Params }) {
       <div className="mt-6 flex flex-1 flex-col gap-8 lg:mt-8 lg:grid lg:min-h-0 lg:grid-cols-[24%_1fr_30%] lg:items-stretch lg:gap-8">
         {/* LINKS: persoon. Asset volgt nog (/public/images/john-lightbulb.png);
             zolang die ontbreekt een rustig linnen vlak zodat de layout niet breekt. */}
-        <div className="relative hidden overflow-hidden rounded-2xl lg:block">
-          {heeftFoto ? (
-            <div className="h-full w-full" style={{ backgroundColor: "#F3ECE0" }}>
-              <Image
-                src={FOTO_PAD}
-                alt="John Lavrijsen, Future Content"
-                fill
-                sizes="24vw"
-                className="object-contain object-bottom"
-              />
-            </div>
-          ) : (
-            <div
-              className="h-full w-full"
-              style={{
-                backgroundColor: "var(--color-scan-linnen)",
-                border: "1px solid var(--color-scan-border)",
-              }}
-              aria-hidden
-            />
-          )}
+        <div
+          className="relative hidden overflow-hidden rounded-2xl lg:block"
+          style={{ backgroundColor: "#F3ECE0" }}
+        >
+          <Image
+            src={FOTO_PAD}
+            alt="John Lavrijsen, Future Content"
+            fill
+            sizes="24vw"
+            className="object-contain object-bottom"
+          />
         </div>
 
         {/* MIDDEN: de drie kansen (het rapport) + het opmerkingenveld. */}

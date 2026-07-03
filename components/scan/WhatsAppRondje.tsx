@@ -15,7 +15,7 @@ import { WhatsAppGlyph } from "./ContactIcons"
 // Ontbreekt de foto nog? Dan valt 'ie terug op een WhatsApp-glyph in de disc,
 // zodat de layout nooit breekt.
 
-const FOTO = "/images/john-whatsapp.png"
+const FOTO = "/photos/john-scan.jpg"
 const WA_TEKST = "Hoi John, ik ben met je AI-scan bezig en app je liever even direct."
 
 export function WhatsAppRondje() {
@@ -39,17 +39,16 @@ export function WhatsAppRondje() {
           }}
         />
 
-        {/* John-cutout die eruit springt (of glyph-fallback) */}
+        {/* John's foto rond in de disc (of glyph-fallback) */}
         {!fotoKapot ? (
           <motion.img
             src={FOTO}
             alt="John Lavrijsen"
             onError={() => setFotoKapot(true)}
-            initial={{ y: 0 }}
-            whileHover={{ y: -8 }}
+            whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 420, damping: 16 }}
-            className="absolute bottom-0 left-1/2 h-[92px] w-[68px] -translate-x-1/2 object-contain object-bottom"
-            style={{ transformOrigin: "bottom center" }}
+            className="absolute bottom-0 left-1/2 h-[70px] w-[70px] -translate-x-1/2 rounded-full object-cover"
+            style={{ objectPosition: "50% 22%" }}
           />
         ) : (
           <div className="absolute inset-0 flex items-end justify-center pb-3">

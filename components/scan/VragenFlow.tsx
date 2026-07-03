@@ -101,22 +101,6 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="flex flex-col gap-6"
           >
-            {/* Klein, persoonlijk: John's foto bij de eerste twee vragen */}
-            {slot <= 2 && (
-              <div className="flex items-center gap-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/photos/john-scan.jpg"
-                  alt="John Lavrijsen"
-                  className="h-12 w-12 shrink-0 rounded-full object-cover"
-                  style={{ objectPosition: "50% 22%", border: "2px solid var(--color-scan-border)" }}
-                />
-                <span className="text-sm" style={{ color: "var(--color-scan-muted)" }}>
-                  Ik ben John. Ik kijk even met je mee.
-                </span>
-              </div>
-            )}
-
             <h2
               className="text-2xl leading-snug md:text-3xl"
               style={{

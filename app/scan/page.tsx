@@ -1,8 +1,12 @@
 import Image from "next/image"
 import { StartScanForm } from "@/components/scan/StartScanForm"
 import Wordmark from "@/components/common/Wordmark"
+import { SITE } from "@/lib/constants"
 
 const FOTO = "/photos/PhotoSessions-757307-pww_6404-vy-1.jpg"
+const WA = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
+  "Hallo John, ik wil graag AI voor mijn bedrijf.",
+)}`
 
 export default function ScanLandingPagina() {
   return (
@@ -50,9 +54,9 @@ export default function ScanLandingPagina() {
             className="mt-5 max-w-xl text-base leading-relaxed md:text-lg"
             style={{ color: "var(--color-scan-muted)" }}
           >
-            Vul je website in. Ik blader er rustig doorheen en stel je daarna een
-            paar vragen die er echt toe doen. Daarna krijg je direct drie
-            concrete AI-kansen voor jouw bedrijf.
+            Vul alleen je websiteadres in. Ik kijk er rustig doorheen en stuur je
+            binnen 24 uur een persoonlijke video terug met wat ik zie en wat ik
+            zou aanpakken. Meer hoef je nu niet te doen.
           </p>
 
           <div className="mt-8">
@@ -63,9 +67,21 @@ export default function ScanLandingPagina() {
             className="mt-4 max-w-xl text-xs leading-relaxed"
             style={{ color: "var(--color-scan-muted)" }}
           >
-            Door te starten geef je toestemming dat ik je website publiek inlees en
-            via AI analyseer. Je gegevens gebruik ik alleen persoonlijk voor jouw
-            analyse, niets anders.
+            Ik bekijk alleen je publieke website. Je gegevens gebruik ik nergens
+            anders voor.
+          </p>
+
+          <p className="mt-5 text-sm" style={{ color: "var(--color-scan-muted)" }}>
+            Liever direct contact?{" "}
+            <a
+              href={WA}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold underline underline-offset-2"
+              style={{ color: "var(--color-scan-terracotta)" }}
+            >
+              App me
+            </a>
           </p>
         </div>
 

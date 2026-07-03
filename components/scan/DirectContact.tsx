@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import { SITE, BOOKING } from "@/lib/constants"
-import { WhatsAppGlyph, AgendaGlyph, KoffieGlyph } from "./ContactIcons"
+import { WhatsAppGlyph, AgendaGlyph, KoffieGlyph, MailGlyph } from "./ContactIcons"
 
-// Drie manieren om na de quick scan direct contact te leggen:
+// Vier manieren om na de quick scan direct contact te leggen:
 //   1. WhatsApp  → wa.me met korte opener
 //   2. Afspraak  → cal.eu (Cal.com)
-//   3. Bak koffie → opent de mail met een warme, ingevulde tekst
+//   3. Mail      → opent de mail met een korte, ingevulde vraag
+//   4. Bak koffie → opent de mail met een warme, ingevulde uitnodiging
 //
 // Koffie-afbeelding (John levert aan): public/images/john-koffie.png
 //   → vierkant/rond bruikbaar, valt terug op een koffie-glyph als 'ie ontbreekt.
@@ -17,12 +18,17 @@ const KOFFIE_FOTO = "/images/john-koffie.png"
 const WA_TEKST =
   "Hoi John, ik deed net je AI-scan en werd nieuwsgierig. Kunnen we even sparren?"
 
-const MAIL_ONDERWERP = "Benieuwd wat AI voor mijn bedrijf kan doen"
+const MAIL_ONDERWERP = "Naar aanleiding van je AI-scan"
 const MAIL_BODY = `Hoi John,
 
 Ik heb net je AI-scan gedaan en werd er wel nieuwsgierig van. Ik ben benieuwd wat dit concreet voor mijn bedrijf kan betekenen.
 
-Zullen we een keer een bak koffie doen?
+Groet,`
+
+const KOFFIE_ONDERWERP = "Zullen we een keer koffie doen?"
+const KOFFIE_BODY = `Hoi John,
+
+Ik heb net je AI-scan gedaan en werd er nieuwsgierig van. Zullen we een keer een bak koffie doen om het te bespreken?
 
 Groet,`
 
@@ -34,6 +40,9 @@ export function DirectContact() {
   const mailUrl = `mailto:${SITE.email}?subject=${encodeURIComponent(
     MAIL_ONDERWERP,
   )}&body=${encodeURIComponent(MAIL_BODY)}`
+  const koffieUrl = `mailto:${SITE.email}?subject=${encodeURIComponent(
+    KOFFIE_ONDERWERP,
+  )}&body=${encodeURIComponent(KOFFIE_BODY)}`
 
   return (
     <div
@@ -84,9 +93,29 @@ export function DirectContact() {
           </span>
         </a>
 
-        {/* Bak koffie → mail met ingevulde tekst */}
+        {/* Mail → mail met korte, ingevulde vraag */}
         <a
           href={mailUrl}
+          className="group flex items-center gap-3 rounded-md border px-4 py-3 transition hover:opacity-90"
+          style={{ borderColor: "var(--color-scan-border)" }}
+        >
+          <span
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+            style={{
+              backgroundColor: "rgba(184,71,42,0.10)",
+              color: "var(--color-scan-terracotta)",
+            }}
+          >
+            <MailGlyph className="h-5 w-5" />
+          </span>
+          <span className="text-sm font-medium" style={{ color: "var(--color-scan-drukinkt)" }}>
+            Stuur me een mail
+          </span>
+        </a>
+
+        {/* Bak koffie → mail met warme, ingevulde uitnodiging */}
+        <a
+          href={koffieUrl}
           className="group flex items-center gap-3 rounded-md border px-4 py-3 transition hover:opacity-90"
           style={{ borderColor: "var(--color-scan-border)" }}
         >

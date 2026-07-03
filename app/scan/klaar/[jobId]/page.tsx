@@ -78,26 +78,28 @@ export default async function KlaarPagina({ params }: { params: Params }) {
       </div>
 
       {/* Drie kolommen op desktop, alles binnen één viewport:
-          links de persoon (John), midden de oplossingen + het opmerkingenveld,
-          rechts de knoppen. Op mobiel stapelt alles en mag er gescrold worden. */}
-      <div className="mt-6 flex flex-1 flex-col gap-8 lg:mt-8 lg:grid lg:min-h-0 lg:grid-cols-[24%_1fr_30%] lg:items-stretch lg:gap-8">
-        {/* LINKS: persoon. Asset volgt nog (/public/images/john-lightbulb.png);
-            zolang die ontbreekt een rustig linnen vlak zodat de layout niet breekt. */}
-        <div
-          className="relative hidden overflow-hidden rounded-2xl lg:block"
-          style={{ backgroundColor: "#F3ECE0" }}
-        >
-          <Image
-            src={FOTO_PAD}
-            alt="John Lavrijsen, Future Content"
-            fill
-            sizes="24vw"
-            className="object-contain object-bottom"
-          />
+          links John op het contact-blok, midden het rapport, rechts de vervolgstap
+          + het opmerkingenveld. Op mobiel stapelt alles in leesvolgorde. */}
+      <div className="mt-6 flex flex-1 flex-col gap-8 lg:mt-8 lg:grid lg:min-h-0 lg:grid-cols-[28%_1fr_30%] lg:items-stretch lg:gap-8">
+        {/* LINKS: liever direct contact, met John die op de bovenrand van het
+            blok leunt. De foto staat op mobiel uit; daar telt de tekst. */}
+        <div className="order-3 flex flex-col lg:order-none lg:min-h-0">
+          <div className="relative hidden h-40 shrink-0 lg:block xl:h-52">
+            <Image
+              src={FOTO_PAD}
+              alt="John Lavrijsen, Future Content"
+              fill
+              sizes="28vw"
+              className="object-contain object-bottom"
+            />
+          </div>
+          <div className="lg:-mt-px lg:min-h-0 lg:overflow-y-auto">
+            <DirectContact />
+          </div>
         </div>
 
-        {/* MIDDEN: de drie kansen (het rapport) + het opmerkingenveld. */}
-        <div className="flex flex-col gap-6 lg:min-h-0 lg:overflow-y-auto">
+        {/* MIDDEN: de drie kansen (het rapport). */}
+        <div className="order-1 flex flex-col gap-6 lg:order-none lg:min-h-0 lg:overflow-y-auto">
           {kansen.length > 0 && (
             <section>
               <p
@@ -120,62 +122,53 @@ export default async function KlaarPagina({ params }: { params: Params }) {
               Je persoonlijke video komt binnen 24 uur naar {job.lead.email}.
             </p>
           )}
+        </div>
+
+        {/* RECHTS: de vervolgstap (uitgebreide scan) + het opmerkingenveld. */}
+        <div className="order-2 flex flex-col gap-4 lg:order-none lg:min-h-0 lg:overflow-y-auto">
+          {diepteVoltooid ? (
+            <div
+              className="rounded-2xl border p-5"
+              style={{
+                borderColor: "var(--color-scan-border)",
+                backgroundColor: "var(--color-scan-linnen)",
+              }}
+            >
+              <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+                Je deed de uitgebreide scan, top.
+              </p>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
+                Plan gerust een half uur met me om het live te bespreken.
+              </p>
+            </div>
+          ) : (
+            /* Primair: uitgebreide scan (terracotta) */
+            <div
+              className="rounded-2xl border p-5"
+              style={{
+                borderColor: "var(--color-scan-border)",
+                backgroundColor: "var(--color-scan-linnen)",
+              }}
+            >
+              <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+                Wat levert dit voor jouw bedrijf concreet op?
+              </p>
+              <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
+                Doe de uitgebreide scan, 10 tot 15 minuten, en eindig direct in een
+                afspraak. Gratis en vrijblijvend.
+              </p>
+              <Link
+                href={`/scan/diepte/${jobId}`}
+                className="mt-4 inline-flex items-center gap-2 rounded-md px-5 py-3 text-base font-medium text-white"
+                style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+              >
+                Start de uitgebreide scan
+              </Link>
+            </div>
+          )}
 
           {/* Vrij opmerkingenveld, slaat op naar de database (John ziet het in de OS) */}
           <OpmerkingVeld jobId={jobId} />
-        </div>
-
-        {/* RECHTS: de knoppen. Uitgebreide scan als primaire route, daaronder
-            de drie directe-contact-opties. */}
-        <div className="flex flex-col gap-4 lg:min-h-0 lg:overflow-y-auto">
-          {diepteVoltooid ? (
-            <>
-              <div
-                className="rounded-2xl border p-5"
-                style={{
-                  borderColor: "var(--color-scan-border)",
-                  backgroundColor: "var(--color-scan-linnen)",
-                }}
-              >
-                <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
-                  Je deed de uitgebreide scan, top.
-                </p>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-                  Plan gerust een half uur met me om het live te bespreken.
-                </p>
-              </div>
-              <DirectContact />
-            </>
-          ) : (
-            <>
-              {/* Primair: uitgebreide scan (terracotta) */}
-              <div
-                className="rounded-2xl border p-5"
-                style={{
-                  borderColor: "var(--color-scan-border)",
-                  backgroundColor: "var(--color-scan-linnen)",
-                }}
-              >
-                <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
-                  Wat levert dit voor jouw bedrijf concreet op?
-                </p>
-                <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-                  Doe de uitgebreide scan, 10 tot 15 minuten, en eindig direct in een
-                  afspraak. Gratis en vrijblijvend.
-                </p>
-                <Link
-                  href={`/scan/diepte/${jobId}`}
-                  className="mt-4 inline-flex items-center gap-2 rounded-md px-5 py-3 text-base font-medium text-white"
-                  style={{ backgroundColor: "var(--color-scan-terracotta)" }}
-                >
-                  Start de uitgebreide scan
-                </Link>
-              </div>
-
-              {/* Secundair: liever gelijk contact, drie manieren */}
-              <DirectContact />
-            </>
-          )}
         </div>
       </div>
 

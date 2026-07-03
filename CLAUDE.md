@@ -2,6 +2,21 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Repo- & werkstructuur (LEES DIT EERST)
+
+De site woont in de GitHub-repo `Sjunny09/future-content`. Lokaal staan twee mappen die **git-worktrees van dezelfde repo** zijn:
+
+- **`fc-rebrand/` op branch `nieuwe-huisstijl` = DE canonieke werkplek.** Hier werk je. Actuele rebrand (blogserie, huisstijl, scan, /os). Dit is een linked worktree, maar wel de up-to-date versie.
+- **`future-content/` op branch `scan-op-future-content` = OUD/DOOD, niet in werken.** Dit is de hoofd-worktree (bevat de fysieke `.git`) maar de inhoud is verouderd. Wordt later veilig gearchiveerd (kan NIET met een simpele `mv`: `fc-rebrand` leunt op deze `.git`; vereist een herbouw: push → schone kloon in `future-content/` → `.env` + Vercel-koppeling terug → `npm install`).
+
+**Één-sessie-regel (HARD):** slechts één Claude-sessie tegelijk in deze repo. Twee sessies = race conditions + gedivergeerde branches (ging mis op 3 juli 2026: twee mappen, vijf branches). Check vóór je begint `git worktree list` en werk uitsluitend in `fc-rebrand` op `nieuwe-huisstijl`.
+
+**Deploy-flow:**
+- Vercel-project: `future-content`.
+- Testen: commit op `nieuwe-huisstijl` → `npx vercel --yes` = preview-URL.
+- Live: merge `nieuwe-huisstijl` → `main`, push, dan `npx vercel --prod --force` + `npx vercel alias set <url> future-content.nl` (bare domain handmatig, www automatisch).
+- `.env` (DATABASE_URL, DIRECT_DATABASE_URL, ANTHROPIC_API_KEY, ADMIN_TOKEN) staat NIET in git; leeft lokaal + op Vercel.
+
 ## Commands
 
 ```bash

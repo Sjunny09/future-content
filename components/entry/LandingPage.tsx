@@ -91,7 +91,7 @@ export default function LandingPage() {
           <Link
             href="/ai"
             data-fc-keuze="ai"
-            className="group flex flex-col gap-6 rounded-2xl border border-[#F3ECE0]/10 bg-[#F3ECE0]/[0.03] p-7 transition-colors hover:border-[#B45F38]/50 hover:bg-[#F3ECE0]/[0.05] md:p-8"
+            className="plausible-event-name=Keuzeblok-AI group flex flex-col gap-6 rounded-2xl border border-[#F3ECE0]/10 bg-[#F3ECE0]/[0.03] p-7 transition-colors hover:border-[#B45F38]/50 hover:bg-[#F3ECE0]/[0.05] md:p-8"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#B45F38]/40 bg-[#B45F38]/10 text-[#B45F38]">
               <Workflow size={22} />
@@ -116,7 +116,7 @@ export default function LandingPage() {
           <Link
             href="/film"
             data-fc-keuze="film"
-            className="group flex flex-col gap-6 rounded-2xl border border-[#F3ECE0]/10 bg-[#F3ECE0]/[0.03] p-7 transition-colors hover:border-[#B45F38]/50 hover:bg-[#F3ECE0]/[0.05] md:p-8"
+            className="plausible-event-name=Keuzeblok-Film group flex flex-col gap-6 rounded-2xl border border-[#F3ECE0]/10 bg-[#F3ECE0]/[0.03] p-7 transition-colors hover:border-[#B45F38]/50 hover:bg-[#F3ECE0]/[0.05] md:p-8"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#B45F38]/40 bg-[#B45F38]/10 text-[#B45F38]">
               <Clapperboard size={22} />

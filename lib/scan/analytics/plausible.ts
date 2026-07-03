@@ -12,6 +12,9 @@ export type ScanEvent =
   | "vraag_6_klaar"
   | "pilot_geboekt"
   | "gesprek_geboekt"
+  | "scan_afgerond"
+  | "formulier_verstuurd"
+  | "cal_geladen"
 
 type PlausibleFn = (
   event: string,

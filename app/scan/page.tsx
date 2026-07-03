@@ -77,7 +77,7 @@ export default function ScanLandingPagina() {
               href={WA}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold underline underline-offset-2"
+              className="plausible-event-name=WhatsApp-klik font-semibold underline underline-offset-2"
               style={{ color: "var(--color-scan-terracotta)" }}
             >
               App me

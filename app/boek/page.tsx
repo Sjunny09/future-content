@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, MessageCircle, CalendarCheck } from "lucide-react";
 import { SITE, BOOKING } from "@/lib/constants";
+import CalLoadTracker from "@/components/scan/CalLoadTracker";
 
 export const metadata: Metadata = {
   title: "Plan een gesprek",
@@ -95,6 +96,7 @@ export default function BoekPage() {
         <div>
           {calConfigured ? (
             <div className="rounded-2xl overflow-hidden border border-[#E4D8C6] bg-white min-h-[640px]">
+              <CalLoadTracker />
               <iframe
                 src={calSrc}
                 title="Plan een gesprek"

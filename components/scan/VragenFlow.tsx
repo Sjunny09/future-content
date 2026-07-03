@@ -57,6 +57,7 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
         })
         if (!res.ok) throw new Error("compleet-fout")
         track("vraag_6_klaar")
+        track("scan_afgerond")
         router.push(`/scan/klaar/${jobId}`)
         return
       }

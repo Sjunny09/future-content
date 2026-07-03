@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, X, ArrowRight } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import { track } from "@/lib/scan/analytics/plausible";
 
 type FormState = {
   naam: string;
@@ -39,6 +40,7 @@ export default function FloatingCTA() {
       });
       if (!res.ok) throw new Error("Failed");
       setStatus("success");
+      track("formulier_verstuurd");
     } catch {
       setStatus("error");
     }

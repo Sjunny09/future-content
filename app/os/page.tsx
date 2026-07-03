@@ -12,13 +12,22 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 }
 
-const GOLD = "#C9A96E"
-const INK = "#1A1A18"
-const BORDER = "#E5E0D8"
-const MUTED = "#6B7280"
-const BG = "#FAFAF8"
+const GOLD = "#B45F38"
+const INK = "#2A2218"
+const BORDER = "#E4D8C6"
+const MUTED = "#6E6151"
+const BG = "#F3ECE0"
+const CARD = "#FBF8F2"
 
-type Analyse = { branche?: string; niche?: string; kansen?: { titel?: string }[] } | null
+type Kans = { titel?: string; beschrijving?: string }
+type Analyse = { branche?: string; niche?: string; tone?: string; kansen?: Kans[] } | null
+type Diagnose = {
+  advies?: string
+  kop?: string
+  onderbouwing?: string
+  signalen?: string[]
+  vervolg?: string
+} | null
 
 function domein(url: string): string {
   try {
@@ -35,13 +44,34 @@ function dt(d: Date | null | undefined): string {
   }).format(new Date(d))
 }
 
+// Hoe lang de bezoeker in de scan zat, uit de bestaande timestamps.
+function duur(start?: Date | null, eind?: Date | null): string {
+  if (!start || !eind) return "—"
+  const sec = Math.max(0, Math.round((new Date(eind).getTime() - new Date(start).getTime()) / 1000))
+  const m = Math.floor(sec / 60)
+  const s = sec % 60
+  return m > 0 ? `${m} min ${s} sec` : `${s} sec`
+}
+
+function waardeTekst(w: unknown): string {
+  if (Array.isArray(w)) return w.join(", ")
+  if (typeof w === "string") return w
+  if (w && typeof w === "object") return JSON.stringify(w)
+  return String(w ?? "—")
+}
+
 function videoStatus(deadline: Date | null, verstuurdOp: Date | null): { tekst: string; kleur: string } {
-  if (verstuurdOp) return { tekst: `verstuurd ${dt(verstuurdOp)}`, kleur: "#4E7A51" }
+  if (verstuurdOp) return { tekst: `video verstuurd ${dt(verstuurdOp)}`, kleur: "#4E7A51" }
   if (!deadline) return { tekst: "geen deadline", kleur: MUTED }
   const urenOver = (new Date(deadline).getTime() - Date.now()) / 36e5
   if (urenOver < 0) return { tekst: "deadline verstreken", kleur: "#B8472A" }
-  if (urenOver < 6) return { tekst: `nog ${Math.round(urenOver)}u`, kleur: "#B8472A" }
-  return { tekst: `nog ${Math.round(urenOver)}u`, kleur: INK }
+  return { tekst: `video nog ${Math.round(urenOver)}u`, kleur: urenOver < 6 ? "#B8472A" : INK }
+}
+
+const diagnoseKleur: Record<string, string> = {
+  bouw: "#4E7A51",
+  training: "#B45F38",
+  zelf: MUTED,
 }
 
 export default async function OsPage() {
@@ -53,22 +83,28 @@ export default async function OsPage() {
     orderBy: { createdAt: "desc" },
     take: 200,
     include: {
-      scans: { orderBy: { startedAt: "desc" }, take: 1 },
+      scans: {
+        orderBy: { startedAt: "desc" },
+        take: 1,
+        include: {
+          antwoorden: {
+            orderBy: { createdAt: "asc" },
+            select: { vraagId: true, vraagTitel: true, waarde: true, createdAt: true },
+          },
+        },
+      },
       loomVideos: { orderBy: { createdAt: "desc" }, take: 1 },
     },
   })
 
-  const th: React.CSSProperties = {
-    textAlign: "left", fontSize: 11, letterSpacing: ".06em", textTransform: "uppercase",
-    color: MUTED, fontWeight: 600, padding: "0 14px 10px",
-  }
-  const td: React.CSSProperties = {
-    padding: "14px", borderTop: `1px solid ${BORDER}`, fontSize: 13.5, verticalAlign: "top",
+  const label: React.CSSProperties = {
+    fontSize: 10.5, letterSpacing: ".08em", textTransform: "uppercase",
+    color: MUTED, fontWeight: 700, marginBottom: 6,
   }
 
   return (
-    <main style={{ background: BG, minHeight: "100vh", padding: "40px 28px" }}>
-      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+    <main style={{ background: BG, minHeight: "100vh", padding: "40px 20px", color: INK }}>
+      <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <header style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 24 }}>
           <div>
             <div style={{ fontSize: 11, letterSpacing: ".2em", textTransform: "uppercase", color: MUTED, fontWeight: 600 }}>
@@ -84,59 +120,143 @@ export default async function OsPage() {
             Nog geen leads. Zodra iemand de Quickscan afrondt, verschijnt die hier.
           </p>
         ) : (
-          <div style={{ background: "#fff", border: `1px solid ${BORDER}`, borderRadius: 14, padding: "20px 8px 8px", overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 820 }}>
-              <thead>
-                <tr>
-                  <th style={th}>Bedrijf</th>
-                  <th style={th}>Contact</th>
-                  <th style={th}>Scan-kans</th>
-                  <th style={th}>Binnen</th>
-                  <th style={th}>24u-video</th>
-                </tr>
-              </thead>
-              <tbody>
-                {leads.map((lead) => {
-                  const scan = lead.scans[0]
-                  const video = lead.loomVideos[0]
-                  const analyse = (scan?.analyseJson ?? null) as Analyse
-                  const bedrijf = lead.bedrijfsnaam || (scan ? domein(scan.url) : "—")
-                  const kans = analyse?.kansen?.[0]?.titel || analyse?.branche || "—"
-                  const vs = video ? videoStatus(video.deadline, video.verstuurdOp) : { tekst: "—", kleur: MUTED }
-                  return (
-                    <tr key={lead.id}>
-                      <td style={td}>
-                        <div style={{ fontWeight: 600 }}>{bedrijf}</div>
-                        {scan && <a href={scan.url} target="_blank" rel="noreferrer" style={{ color: GOLD, fontSize: 12 }}>{domein(scan.url)}</a>}
-                      </td>
-                      <td style={td}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {leads.map((lead) => {
+              const scan = lead.scans[0]
+              const video = lead.loomVideos[0]
+              const analyse = (scan?.analyseJson ?? null) as Analyse
+              const diagnose = (scan?.diagnoseJson ?? null) as Diagnose
+              const bedrijf = lead.bedrijfsnaam || (scan ? domein(scan.url) : "—")
+              const vs = video ? videoStatus(video.deadline, video.verstuurdOp) : { tekst: "—", kleur: MUTED }
+              const antwoorden = scan?.antwoorden ?? []
+              const diepAntw = antwoorden.filter((a) => a.vraagId.startsWith("DV"))
+
+              return (
+                <details key={lead.id} style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, overflow: "hidden" }}>
+                  {/* Samenvattingsregel (klik om uit te klappen) */}
+                  <summary style={{ listStyle: "none", cursor: "pointer", padding: "16px 18px", display: "flex", flexWrap: "wrap", alignItems: "center", gap: "6px 16px" }}>
+                    <span style={{ fontWeight: 700, fontSize: 15, minWidth: 160 }}>{bedrijf}</span>
+                    <span style={{ color: MUTED, fontSize: 13 }}>{lead.naam || "—"}</span>
+                    <span style={{ color: MUTED, fontSize: 13 }}>{dt(lead.createdAt)}</span>
+                    {scan?.diepteStatus === "voltooid" && (
+                      <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", background: GOLD, padding: "2px 8px", borderRadius: 20 }}>
+                        uitgebreide scan
+                      </span>
+                    )}
+                    <span style={{ marginLeft: "auto", color: vs.kleur, fontSize: 12, fontWeight: 600 }}>{vs.tekst}</span>
+                  </summary>
+
+                  {/* Uitgeklapt: het volledige prospect-onderzoek */}
+                  <div style={{ borderTop: `1px solid ${BORDER}`, padding: "18px", display: "grid", gap: 18 }}>
+                    {/* Contact + site + tijd */}
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16 }}>
+                      <div>
+                        <div style={label}>Contact</div>
                         <div>{lead.naam || "—"}</div>
-                        <div style={{ color: MUTED, fontSize: 12 }}>{lead.email}</div>
-                        {lead.telefoon && <div style={{ color: MUTED, fontSize: 12 }}>{lead.telefoon}</div>}
-                      </td>
-                      <td style={{ ...td, maxWidth: 220 }}>
-                        <div>{kans}</div>
-                        {analyse?.branche && <div style={{ color: MUTED, fontSize: 12 }}>{analyse.branche}</div>}
-                      </td>
-                      <td style={td}>{dt(lead.createdAt)}</td>
-                      <td style={{ ...td, minWidth: 280 }}>
-                        <div style={{ color: vs.kleur, fontSize: 12, fontWeight: 600, marginBottom: 7 }}>{vs.tekst}</div>
-                        <VideoForm
-                          leadId={lead.id}
-                          bestaandeUrl={video?.loomUrl ?? null}
-                          verstuurd={Boolean(video?.verstuurdOp)}
-                        />
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+                        <div style={{ color: MUTED, fontSize: 13 }}>
+                          <a href={`mailto:${lead.email}`} style={{ color: INK }}>{lead.email}</a>
+                        </div>
+                        {lead.telefoon && (
+                          <div style={{ color: MUTED, fontSize: 13 }}>
+                            <a href={`tel:${lead.telefoon}`} style={{ color: INK }}>{lead.telefoon}</a>
+                          </div>
+                        )}
+                      </div>
+                      <div>
+                        <div style={label}>Website</div>
+                        {scan ? (
+                          <a href={scan.url} target="_blank" rel="noreferrer" style={{ color: GOLD, fontWeight: 600, wordBreak: "break-all" }}>
+                            {domein(scan.url)} ↗
+                          </a>
+                        ) : "—"}
+                      </div>
+                      <div>
+                        <div style={label}>Tijd in de scan</div>
+                        <div>{duur(scan?.startedAt, scan?.completedAt)}</div>
+                        <div style={{ color: MUTED, fontSize: 12 }}>
+                          {antwoorden.length} antwoorden{diepAntw.length > 0 ? ` · ${diepAntw.length} uit de diepe scan` : ""}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* AI-analyse */}
+                    {analyse && (
+                      <div>
+                        <div style={label}>Wat de AI zag</div>
+                        {analyse.branche && <div style={{ fontSize: 14 }}>{analyse.branche}</div>}
+                        {analyse.niche && <div style={{ color: MUTED, fontSize: 13, marginTop: 2 }}>{analyse.niche}</div>}
+                        {Array.isArray(analyse.kansen) && analyse.kansen.length > 0 && (
+                          <ul style={{ margin: "8px 0 0", paddingLeft: 18, fontSize: 13 }}>
+                            {analyse.kansen.slice(0, 3).map((k, i) => (
+                              <li key={i} style={{ marginBottom: 3 }}>
+                                <strong>{k.titel}</strong>
+                                {k.beschrijving ? <span style={{ color: MUTED }}> — {k.beschrijving}</span> : null}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Alle vragen + antwoorden */}
+                    {antwoorden.length > 0 && (
+                      <div>
+                        <div style={label}>Vragen en antwoorden</div>
+                        <div style={{ display: "grid", gap: 8 }}>
+                          {antwoorden.map((a, i) => (
+                            <div key={i} style={{ fontSize: 13, borderLeft: `2px solid ${a.vraagId.startsWith("DV") ? GOLD : BORDER}`, paddingLeft: 10 }}>
+                              <div style={{ color: MUTED }}>
+                                {a.vraagId.startsWith("DV") ? "◆ " : ""}{a.vraagTitel}
+                              </div>
+                              <div style={{ fontWeight: 600 }}>{waardeTekst(a.waarde)}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Opmerking van de klant */}
+                    {scan?.opmerking && (
+                      <div>
+                        <div style={label}>Opmerking van de klant</div>
+                        <div style={{ fontSize: 14, background: "#fff", border: `1px solid ${BORDER}`, borderRadius: 8, padding: "10px 12px", whiteSpace: "pre-wrap" }}>
+                          {scan.opmerking}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Diagnose uit de uitgebreide scan (jouw gespreksvoorbereiding) */}
+                    {diagnose?.advies && (
+                      <div>
+                        <div style={label}>Diagnose (uit de uitgebreide scan)</div>
+                        <div style={{ display: "inline-block", fontSize: 12, fontWeight: 700, color: "#fff", background: diagnoseKleur[diagnose.advies] ?? GOLD, padding: "3px 10px", borderRadius: 20, textTransform: "uppercase" }}>
+                          {diagnose.advies}
+                        </div>
+                        {diagnose.kop && <div style={{ marginTop: 8, fontSize: 14, fontWeight: 600 }}>{diagnose.kop}</div>}
+                        {diagnose.onderbouwing && <div style={{ marginTop: 4, fontSize: 13, color: MUTED }}>{diagnose.onderbouwing}</div>}
+                        {diagnose.vervolg && <div style={{ marginTop: 6, fontSize: 13 }}><strong>Vervolg:</strong> {diagnose.vervolg}</div>}
+                      </div>
+                    )}
+
+                    {/* 24u-video */}
+                    <div>
+                      <div style={label}>24u-video</div>
+                      <div style={{ color: vs.kleur, fontSize: 12, fontWeight: 600, marginBottom: 7 }}>{vs.tekst}</div>
+                      <VideoForm
+                        leadId={lead.id}
+                        bestaandeUrl={video?.loomUrl ?? null}
+                        verstuurd={Boolean(video?.verstuurdOp)}
+                      />
+                    </div>
+                  </div>
+                </details>
+              )
+            })}
           </div>
         )}
 
         <p style={{ color: MUTED, fontSize: 12, marginTop: 18 }}>
-          Bron van waarheid = Neon (Postgres). De oude Google-Sheet-push staat uit. Beveiligd met ADMIN_TOKEN.
+          Bron van waarheid = Neon (Postgres). De oude Google-Sheet-push staat uit. Beveiligd met ADMIN_TOKEN. Klik een lead open voor het volledige onderzoek.
         </p>
       </div>
     </main>

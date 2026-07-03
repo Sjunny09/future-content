@@ -9,6 +9,38 @@ import { BLOG_POSTS, getBlogPost, formatDate } from "@/lib/blog";
 import Infographic from "@/components/common/Infographic";
 import { use } from "react";
 
+// Backlinking: laat [tekst](/pad) in blogtekst als echte, klikbare link renderen.
+// Interne links via next/link (SEO + snappy), externe links als gewone <a>.
+function renderRichText(text: string) {
+  const parts: (string | React.ReactElement)[] = [];
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  let last = 0;
+  let key = 0;
+  let m: RegExpExecArray | null;
+  while ((m = regex.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    const label = m[1];
+    const href = m[2];
+    const cls = "text-[#B45F38] underline underline-offset-2 hover:text-[#8f4a2b] transition-colors";
+    if (href.startsWith("/")) {
+      parts.push(
+        <Link key={key++} href={href} className={cls}>
+          {label}
+        </Link>,
+      );
+    } else {
+      parts.push(
+        <a key={key++} href={href} className={cls} target="_blank" rel="noopener noreferrer">
+          {label}
+        </a>,
+      );
+    }
+    last = regex.lastIndex;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
 export default function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   const post = getBlogPost(slug);
@@ -82,7 +114,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
               if (section.type === "intro") {
                 return (
                   <p key={i} className="text-lg text-[#2A2218] leading-relaxed font-medium">
-                    {section.text}
+                    {renderRichText(section.text ?? "")}
                   </p>
                 );
               }
@@ -100,7 +132,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
               if (section.type === "p") {
                 return (
                   <p key={i} className="text-[#6E6151] leading-relaxed">
-                    {section.text}
+                    {renderRichText(section.text ?? "")}
                   </p>
                 );
               }

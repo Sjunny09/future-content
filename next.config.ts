@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [],
+    // Eigen, vertrouwde SVG-covers (blog) toestaan. De CSP + sandbox zorgt dat
+    // een SVG geen scripts kan draaien; wij leveren deze bestanden zelf aan.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
     optimizePackageImports: ["framer-motion", "lucide-react"],

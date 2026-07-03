@@ -54,7 +54,7 @@ export default function BlogPage() {
       <section className="bg-[#F3ECE0] py-12 md:py-16">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...BLOG_POSTS].reverse().map((post, i) => (
+            {[...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date)).map((post, i) => (
               <motion.article
                 key={post.slug}
                 initial={{ opacity: 0, y: 20 }}

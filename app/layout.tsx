@@ -3,6 +3,7 @@ import Script from "next/script";
 import { Inter, Playfair_Display, Archivo, Space_Mono } from "next/font/google";
 import "./globals.css";
 import SiteChrome from "@/components/layout/SiteChrome";
+import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import { SITE } from "@/lib/constants";
 
 const inter = Inter({
@@ -234,6 +235,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased">
         <SiteChrome>{children}</SiteChrome>
+        <WhatsAppFloat />
       </body>
     </html>
   );

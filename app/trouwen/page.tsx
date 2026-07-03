@@ -7,6 +7,7 @@ import {
   ArrowRight, Check, MessageCircle, Heart, Film, Star, Camera,
 } from "lucide-react";
 import { PHOTOS, SITE } from "@/lib/constants";
+import { PriceIndicator } from "@/components/PriceIndicator";
 
 export default function TrouwenPage() {
   const waLink = `https://wa.me/${SITE.whatsapp}?text=Hallo%20John%2C%20ik%20wil%20graag%20meer%20informatie%20over%20een%20bruiloftsvideo.`;
@@ -190,7 +191,7 @@ export default function TrouwenPage() {
             className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Prijs op aanvraag.
+            <PriceIndicator item="trouwfilm" />.
           </h2>
           <p className="text-[#6E6151] text-lg mb-10 max-w-xl mx-auto">
             Elke bruiloft is anders. De locatie, tijdsduur, wensen en stijl verschillen elke keer.

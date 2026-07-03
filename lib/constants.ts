@@ -981,3 +981,17 @@ export const BRANCHES: Branche[] = [
     order: 7,
   },
 ];
+
+// ─── VANAF-PRIJZEN ──────────────────────────────────────────────────
+// Eén centrale plek voor alle "vanaf"-prijzen. Toon via <PriceIndicator />.
+// Waarde "[PRIJS]" = nog geen bedrag bepaald (placeholder, John vult later in).
+// Bedragen hier aanpassen wijzigt ze overal op de site tegelijk.
+export const PRIJZEN = {
+  vastgoedvideo: "199",
+  trouwfilm: "800",
+  zakelijkeVideo: "600",
+  aftermovie: "400",
+  workshop: "750", // workshop met proof of concept
+  proofOfConcept: "750",
+  aiScanLocatie: "[PRIJS]", // AI-scan op locatie, bedrag nog te bepalen
+} as const;

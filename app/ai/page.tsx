@@ -8,6 +8,7 @@ import {
   CalendarCheck,
   Clapperboard,
 } from "lucide-react";
+import { PriceIndicator } from "@/components/PriceIndicator";
 import Wordmark from "@/components/common/Wordmark";
 // OUDE HERO — bewaard voor rollback, zie rapport 07-website-review-en-herofix.md.
 // ScrollStory.tsx zelf is ongewijzigd; alleen het gebruik hieronder is vervangen
@@ -133,11 +134,12 @@ export default function AiPage() {
           <p className="mt-4 max-w-2xl leading-relaxed text-[#6E6151]">
             Na de kennismaking volgt de workshop: een dagdeel bij jullie op
             locatie waarin we niet praten maar bouwen, op jullie eigen
-            taken. De prijs bepaal ik per klant, afhankelijk van jullie
-            situatie.
+            taken. Wat het precies wordt, hangt af van jullie situatie.
           </p>
           <div className="mt-6 flex flex-wrap items-baseline gap-2">
-            <span className="text-2xl font-semibold text-[#2A2218]">Op aanvraag</span>
+            <span className="text-2xl font-semibold text-[#2A2218]">
+              <PriceIndicator item="workshop" />
+            </span>
           </div>
           <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#6E6151]">
             Mogelijk (deels) via de SLIM-subsidie te financieren.{" "}

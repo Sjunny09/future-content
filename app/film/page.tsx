@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MessageCircle, ArrowRight, Heart } from "lucide-react";
 import { SITE, STACK_VIDEOS } from "@/lib/constants";
+import { PriceIndicator } from "@/components/PriceIndicator";
 import Reviews from "@/components/sections/Reviews";
 
 export const metadata: Metadata = {
@@ -72,6 +73,9 @@ export default function FilmPage() {
           <p className="mt-3 text-[#6E6151] max-w-2xl leading-relaxed">
             Een rondleiding die kopers het gevoel van de woning geeft, voordat ze de drempel over zijn.
           </p>
+          <p className="mt-3 text-lg font-semibold text-[#2A2218]">
+            <PriceIndicator item="vastgoedvideo" />
+          </p>
           <Link
             href="/makelaars"
             className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#B45F38] hover:gap-3 transition-all"
@@ -118,6 +122,9 @@ export default function FilmPage() {
           <p className="mt-3 text-[#6E6151] max-w-2xl leading-relaxed">
             Vaak levert dat twee films op: een korte met de hoogtepunten om te delen, en een
             langere die de hele dag vertelt.
+          </p>
+          <p className="mt-3 text-lg font-semibold text-[#2A2218]">
+            <PriceIndicator item="trouwfilm" />
           </p>
           <Link
             href="/trouwen"
@@ -203,6 +210,9 @@ export default function FilmPage() {
           >
             Aftermovies die de sfeer vangen
           </h2>
+          <p className="mt-3 text-lg font-semibold text-[#2A2218]">
+            <PriceIndicator item="aftermovie" />
+          </p>
           <div className="mt-10 flex justify-center">
             <figure className="w-full max-w-3xl rounded-2xl overflow-hidden border border-[#E4D8C6] bg-black">
               <div className="relative w-full" style={{ paddingTop: "56.25%" }}>

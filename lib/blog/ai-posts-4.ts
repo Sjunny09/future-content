@@ -13,7 +13,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "AI implementeren in je bedrijf, waar begin je dan echt? Niet bij een waterval van veertig tools, maar bij een taak deze week. Zo pak je dat aan.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-waar-begin-je.svg",
+    image: "/blog/ai-waar-begin-je.png",
     content: [
       { type: "intro", text: "Een vraag die ik vaak hoor van ondernemers: AI implementeren in je bedrijf, waar begin je dan eigenlijk? Overal lees je dat je iets met AI moet, maar niemand legt uit wat dat concreet betekent voor een gewone dinsdag op kantoor. Mijn antwoord blijft hetzelfde: begin klein, begin met een taak, en begin deze week." },
       { type: "h2", text: "De vraag die steeds terugkomt" },
@@ -40,7 +40,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Ben ik geen IT'er, is AI dan iets voor mij? Een vraag die veel zzp'ers en MKB'ers zich stellen. Het antwoord: kun je een appje typen, dan kun je ook AI aansturen.",
     readTime: "4 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-geen-it-er.svg",
+    image: "/blog/ai-geen-it-er.png",
     content: [
       { type: "intro", text: "Ben ik geen IT'er, is AI dan iets voor mij? Een vraag die ik regelmatig krijg, vaak van zzp'ers en MKB'ers die zich afvragen of AI voor niet-IT'ers eigenlijk wel te doen is. Het korte antwoord: ja. Je hoeft niet te kunnen programmeren om AI te gebruiken. Kun je een appje typen aan een collega, dan kun je ook een AI-tool aansturen. De techniek is niet de drempel. De vertaling naar jouw eigen werk, daar loopt het bij de meeste ondernemers op vast, en precies daar help ik bij, met [AI-oplossingen op maat](/ai) voor je bedrijf." },
       { type: "h2", text: "Zonde van mijn tijd?" },
@@ -66,7 +66,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Wat kost AI voor een MKB-bedrijf, of als zzp'er? Eerlijke bedragen: beginnen kan rond de 20 dollar per maand, serieus draaien rond de 200. Dit is hoe je het zelf uitrekent.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-wat-kost.svg",
+    image: "/blog/ai-wat-kost.png",
     content: [
       { type: "intro", text: "Wat kost AI voor een MKB-bedrijf, of voor een zzp'er? Een vraag die bijna iedereen me stelt, en terecht, want niemand wil geld steken in iets vaags. Hier zijn de eerlijke bedragen: beginnen kan al rond de 20 dollar per maand, serieus doorpakken zit eerder rond de 200. Het enige getal dat er echt toe doet, leg ik verderop uit." },
       { type: "h2", text: "Heb je daar als zzp'er wel de ruimte voor?" },
@@ -95,7 +95,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Is mijn bedrijf te klein voor AI? Nee, eerder andersom. Als zzp'er of klein bedrijf heb je geen logge IT-afdeling die eerst ja moet zeggen. Dat is precies je voordeel.",
     readTime: "4 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-te-klein.svg",
+    image: "/blog/ai-te-klein.png",
     content: [
       { type: "intro", text: "Is mijn bedrijf te klein voor AI? Die vraag hoor ik geregeld, meestal van zzp'ers en eigenaren van een klein bedrijf. Het beeld dat veel mensen hebben: AI is voor grote bedrijven met een IT-afdeling en tien systemen die op elkaar aangesloten moeten worden. Voor een zaak met twee, drie of vijf man personeel zou het de moeite niet waard zijn. Dat beeld klopt niet, en het staat de zaak eigenlijk op zijn kop. Klein zijn is juist je voordeel." },
       { type: "h2", text: "Waarom klein juist helpt" },
@@ -119,7 +119,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Claude of ChatGPT, welke AI kies je? Je hoeft geen kamp te kiezen. Belangrijker dan de tool is dat je begrijpt waar elke tool sterk in is, en dat je gewoon begint.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-claude-of-chatgpt.svg",
+    image: "/blog/ai-claude-of-chatgpt.png",
     content: [
       { type: "intro", text: "Claude of ChatGPT, welke AI kies je? En waar past Gemini dan weer bij? Het is een van de vragen die ik het vaakst krijg van ondernemers die willen beginnen met AI. Het korte antwoord: het maakt minder uit dan je denkt, zolang je er maar een kiest en gewoon begint. Het iets langere antwoord staat hieronder." },
       { type: "h2", text: "Stop met een kamp kiezen" },
@@ -143,7 +143,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Wat is een AI-agent en wat levert het op? Zie het als een digitale collega voor een terugkerend klusje: een opdracht, wat gereedschap en een geheugen.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-wat-is-een-agent.svg",
+    image: "/blog/ai-wat-is-een-agent.png",
     content: [
       { type: "intro", text: "Wat is een AI-agent en wat levert het op? Dat is een vraag die ik geregeld krijg, meestal na een gesprek over automatisering. Iedereen kent inmiddels een chatbot die een vraag beantwoordt, maar een agent is net iets anders. Zie het als een digitale collega voor een terugkerend klusje. Niet meer, niet minder." },
       { type: "h2", text: "Een opdracht, wat gereedschap en een geheugen" },
@@ -168,7 +168,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Is mijn klantdata veilig bij AI? Een vraag die ik vaak hoor, en een terechte. Het antwoord zit niet in goede bedoelingen, maar in instellingen die de techniek zelf afdwingt.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-klantdata-veilig.svg",
+    image: "/blog/ai-klantdata-veilig.png",
     content: [
       { type: "intro", text: "Is mijn klantdata veilig bij AI? Dat is een vraag die ik vaak hoor, en een terechte. Je stopt informatie over je klanten in een tool die je niet zelf hebt gebouwd, en je wilt weten waar die informatie blijft. Het goede nieuws: met de juiste instellingen en de juiste tools blijft je data van jou. Het minder goede nieuws: dat gaat niet vanzelf. Je moet het zelf regelen, en weten waar je precies op moet letten." },
       { type: "h2", text: "Een terechte zorg, geen reden om te wachten" },
@@ -196,7 +196,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Wat kan AI niet? Een vraag die te weinig gesteld wordt. Wie de grenzen van AI eerlijk benoemt, gebruikt het beter en houdt het echte contact waar het hoort: bij jou.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-wat-ai-niet-kan.svg",
+    image: "/blog/ai-wat-ai-niet-kan.png",
     content: [
       { type: "intro", text: "Iedereen praat over wat AI allemaal kan. Teksten schrijven, agenda's plannen, gesprekken samenvatten, zelfs een hele strategie uittekenen. Minder mensen vragen: wat kan AI niet? Dat is jammer, want juist die grens is waar je als ondernemer het meest aan hebt. Wie eerlijk is over wat AI niet kan, gebruikt het beter en wint bovendien vertrouwen bij iedereen die meekijkt." },
       { type: "h2", text: "AI ziet niet wat jij niet opschrijft" },
@@ -225,7 +225,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "AI voor vakmensen klinkt al snel als een tegenstelling: je werkt met je handen, dus wat moet je met een computerprogramma? Terechte vraag. Je vak blijft van jou, maar het papierwerk eromheen mag best wat hulp krijgen.",
     readTime: "4 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-vakmensen.svg",
+    image: "/blog/ai-vakmensen.png",
     content: [
       { type: "intro", text: "AI voor vakmensen voelt voor veel installateurs, monteurs en kappers als een tegenstelling. Je werkt met je handen, met vakmanschap dat je jarenlang hebt opgebouwd. Een vraag die ik daarom vaak hoor is kort en duidelijk: ik werk met mijn handen, dus ik haak hier nu echt af. Helemaal terecht, en toch klopt het maar voor de helft. Want je vak blijft van jou. Het is het papierwerk eromheen waar AI je tijd teruggeeft, niet je vak zelf." },
       { type: "h2", text: "Je vak blijft gewoon van jou" },
@@ -250,7 +250,7 @@ export const AI_POSTS_4: BlogPost[] = [
       "Je hebt genoeg gelezen over wat AI allemaal kan. Je zoekt gewoon iemand die AI kan implementeren bij je bedrijf, iemand die het komt bouwen. Als AI-specialist in Brabant leg ik hier eerlijk uit hoe dat traject eruitziet, van kennismaking tot een systeem dat blijft draaien.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-implementeren-brabant.svg",
+    image: "/blog/ai-implementeren-brabant.png",
     content: [
       { type: "intro", text: "Op een gegeven moment heb je genoeg artikelen gelezen over wat AI allemaal kan. Dan wil je niet nog een lijstje met tools of nog een blog over kansen. Dan zoek je iemand die AI kan implementeren bij je bedrijf, iemand die langskomt en het echt bouwt. Een vraag die ik daarom vaak krijg is kort: wie doet dit voor mijn bedrijf, en hoe gaat dat dan in z'n werk? Hier is het eerlijke antwoord: dezelfde stappen die ook op de pagina [werkwijze](/werkwijze) staan, in de volgorde waarin het bij mij ook echt gaat." },
       { type: "h2", text: "Stap 1: een vrijblijvend gesprek" },

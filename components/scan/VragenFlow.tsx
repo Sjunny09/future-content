@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
 import { track } from "@/lib/scan/analytics/plausible"
+import { WhatsAppRondje } from "./WhatsAppRondje"
 
 export type Antwoord = string | string[] | { naam: string; email: string; telefoon: string }
 
@@ -126,6 +127,16 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
               opEnter={volgende}
               uitgeschakeld={bezig}
             />
+
+            {/* Alleen bij de eerste vraag: liever direct appen dan de vragen doen */}
+            {slot === 1 && (
+              <div
+                className="mt-2 border-t pt-6"
+                style={{ borderColor: "var(--color-scan-border)" }}
+              >
+                <WhatsAppRondje />
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

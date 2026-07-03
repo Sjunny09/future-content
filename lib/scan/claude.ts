@@ -48,7 +48,8 @@ Je output gaat via de tool \`schrijf_analyse\`. Dit zijn de velden:
 Vangrails:
 - Nooit het woord "wij" gebruiken — John werkt alleen.
 - Nooit iets verzinnen dat niet in de site staat. Als de site weinig zegt: noteer dat in niche of tone.
-- Geen marketing-copy. Dit is een analyse die John straks voorleest in een Loom-video.`
+- Geen marketing-copy. Dit is een analyse die John straks voorleest in een Loom-video.
+- Geen em-dashes (—) of en-dashes (–). Gebruik een komma, punt of dubbele punt.`
 
 const ANALYSE_TOOL: Anthropic.Tool = {
   name: "schrijf_analyse",
@@ -117,7 +118,17 @@ export async function analyseerSite(siteData: SiteData): Promise<SiteAnalyse> {
   if (!toolBlok || toolBlok.name !== "schrijf_analyse") {
     throw new Error("claude-gaf-geen-tool-use-terug")
   }
-  return toolBlok.input as SiteAnalyse
+  const ruw = toolBlok.input as SiteAnalyse
+  // Vangnet: strip em-/en-dashes uit alle klant-zichtbare tekst (John's regel).
+  return {
+    branche: zonderDash(ruw.branche),
+    niche: zonderDash(ruw.niche),
+    tone: zonderDash(ruw.tone),
+    kansen: ruw.kansen.map((k) => ({
+      titel: zonderDash(k.titel),
+      beschrijving: zonderDash(k.beschrijving),
+    })),
+  }
 }
 
 // ─────────────────────────────────────────
@@ -136,6 +147,7 @@ Regels:
 - Beginnen met een werkwoord: "Ik lees…", "Ik kijk…", "Ik zie…", "Me valt op…".
 - Nooit het woord "AI", "analyse", "scan" of "tool".
 - Nooit iets beweren dat niet op de site staat.
+- Geen em-dashes (—). Gebruik een komma of punt.
 - Eindig zin 1-3 met "…" (John is nog bezig). Zin 4 eindigt normaal.
 
 Output gaat via de tool \`schrijf_observaties\`.`
@@ -187,12 +199,18 @@ export async function genereerObservaties(
     throw new Error("claude-gaf-geen-observaties-terug")
   }
   const input = toolBlok.input as { observaties: string[] }
-  return input.observaties
+  return input.observaties.map(zonderDash)
 }
 
 // ─────────────────────────────────────────
 // Helpers
 // ─────────────────────────────────────────
+
+// Em-dash en en-dash zijn verboden in klant-zichtbare tekst. De prompt vraagt
+// er al om, dit is het vangnet: vervang door een komma zodat de zin blijft lopen.
+function zonderDash(tekst: string): string {
+  return tekst.replace(/\s*[—–]\s*/g, ", ").replace(/,\s*,/g, ",")
+}
 
 function formatteerSiteData(siteData: SiteData): string {
   const regels: string[] = []

@@ -43,6 +43,10 @@ model ScanJob {
   analyseJson     Json?  // { branche, niche, tone, kansen: [...] }
   vragenJson      Json?  // Array van 6 vraag-ids uit bibliotheek, Haiku-gekozen
 
+  // Vrije opmerking die de klant op de eindpagina achterlaat (optioneel).
+  // Komt mee in /os en de John-notificatie zodat John context heeft.
+  opmerking        String?
+
   // Uitgebreide (diepte) scan — optionele tweede ronde, dieper dan de quickscan
   diepteStatus     String?  // null = niet gestart, "bezig", "voltooid"
   diepteVragenJson Json?    // Logboek van de diepe vragen (zoals vragenJson)

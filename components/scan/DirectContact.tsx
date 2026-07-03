@@ -1,0 +1,129 @@
+"use client"
+
+import { useState } from "react"
+import { SITE, BOOKING } from "@/lib/constants"
+import { WhatsAppGlyph, AgendaGlyph, KoffieGlyph } from "./ContactIcons"
+
+// Drie manieren om na de quick scan direct contact te leggen:
+//   1. WhatsApp  → wa.me met korte opener
+//   2. Afspraak  → cal.eu (Cal.com)
+//   3. Bak koffie → opent de mail met een warme, ingevulde tekst
+//
+// Koffie-afbeelding (John levert aan): public/images/john-koffie.png
+//   → vierkant/rond bruikbaar, valt terug op een koffie-glyph als 'ie ontbreekt.
+
+const KOFFIE_FOTO = "/images/john-koffie.png"
+
+const WA_TEKST =
+  "Hoi John, ik deed net je AI-scan en werd nieuwsgierig. Kunnen we even sparren?"
+
+const MAIL_ONDERWERP = "Benieuwd wat AI voor mijn bedrijf kan doen"
+const MAIL_BODY = `Hoi John,
+
+Ik heb net je AI-scan gedaan en werd er wel nieuwsgierig van. Ik ben benieuwd wat dit concreet voor mijn bedrijf kan betekenen.
+
+Zullen we een keer een bak koffie doen?
+
+Groet,`
+
+export function DirectContact() {
+  const [fotoKapot, setFotoKapot] = useState(false)
+
+  const waUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(WA_TEKST)}`
+  const calUrl = `https://${BOOKING.calHost}/${BOOKING.calUser}/${BOOKING.calEvent}`
+  const mailUrl = `mailto:${SITE.email}?subject=${encodeURIComponent(
+    MAIL_ONDERWERP,
+  )}&body=${encodeURIComponent(MAIL_BODY)}`
+
+  return (
+    <div
+      className="rounded-2xl border p-5"
+      style={{ borderColor: "var(--color-scan-border)", backgroundColor: "transparent" }}
+    >
+      <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+        Liever direct contact?
+      </p>
+      <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
+        Kies wat bij je past, ik reageer zelf.
+      </p>
+
+      <div className="mt-4 flex flex-col gap-2.5">
+        {/* WhatsApp */}
+        <a
+          href={waUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-3 rounded-md border px-4 py-3 transition hover:opacity-90"
+          style={{ borderColor: "var(--color-scan-border)" }}
+        >
+          <span
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white"
+            style={{ backgroundColor: "#25D366" }}
+          >
+            <WhatsAppGlyph className="h-5 w-5" />
+          </span>
+          <span className="text-sm font-medium" style={{ color: "var(--color-scan-drukinkt)" }}>
+            Stuur me een appje
+          </span>
+        </a>
+
+        {/* Afspraak via cal.eu */}
+        <a
+          href={calUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex items-center gap-3 rounded-md border px-4 py-3 transition hover:opacity-90"
+          style={{ borderColor: "var(--color-scan-border)" }}
+        >
+          <span
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full"
+            style={{
+              backgroundColor: "rgba(184,71,42,0.10)",
+              color: "var(--color-scan-terracotta)",
+            }}
+          >
+            <AgendaGlyph className="h-5 w-5" />
+          </span>
+          <span className="text-sm font-medium" style={{ color: "var(--color-scan-drukinkt)" }}>
+            Plan direct een afspraak
+          </span>
+        </a>
+
+        {/* Bak koffie → mail met ingevulde tekst */}
+        <a
+          href={mailUrl}
+          className="group flex items-center gap-3 rounded-md border px-4 py-3 transition hover:opacity-90"
+          style={{ borderColor: "var(--color-scan-border)" }}
+        >
+          <span
+            className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full"
+            style={{
+              backgroundColor: "rgba(184,71,42,0.10)",
+              color: "var(--color-scan-terracotta)",
+            }}
+          >
+            {!fotoKapot ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={KOFFIE_FOTO}
+                alt=""
+                onError={() => setFotoKapot(true)}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <KoffieGlyph className="h-5 w-5" />
+            )}
+          </span>
+          <span>
+            <span className="block text-sm font-medium" style={{ color: "var(--color-scan-drukinkt)" }}>
+              Kom een bak koffie doen
+            </span>
+            <span className="block text-xs" style={{ color: "var(--color-scan-muted)" }}>
+              Ik zet 'm klaar in Bladel
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+  )
+}

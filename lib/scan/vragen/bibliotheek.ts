@@ -45,7 +45,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "B2",
     thema: "bevestiging",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Werken jullie vooral voor particulieren of voor bedrijven?",
     opties: ["Vooral particulieren", "Vooral bedrijven", "Ongeveer gelijk verdeeld"],
   },
@@ -60,7 +60,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "F4",
     thema: "frustratie",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Wat vreet de meeste tijd?",
     opties: ["Offertes schrijven", "Planning rondkrijgen", "Communicatie met klanten", "Facturatie", "Iets anders"],
   },
@@ -82,7 +82,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "K3",
     thema: "klantkant",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Krijg je vaak dezelfde vragen van verschillende klanten?",
     opties: ["Ja, regelmatig", "Af en toe", "Nee, elke klant is anders"],
   },
@@ -102,7 +102,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "K6",
     thema: "klantkant",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Hoeveel tijd per week ben je kwijt aan dezelfde klantvragen?",
     opties: ["Minder dan 1 uur", "1-3 uur", "3-6 uur", "Meer dan 6 uur"],
   },
@@ -117,7 +117,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "O2",
     thema: "operatie",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Wie doet de administratie?",
     opties: ["Ik zelf", "Een medewerker binnen het bedrijf", "Een externe boekhouder of VA", "Combinatie"],
   },
@@ -130,14 +130,14 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "O4",
     thema: "operatie",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Gebruik je nu één systeem voor klantinfo, of zit het verspreid?",
     opties: ["Eén systeem, alles netjes op z'n plek", "Twee of drie systemen", "Vooral in mail en WhatsApp", "Echt versnipperd"],
   },
   {
     id: "O6",
     thema: "operatie",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Wie handelt deze terugkerende taken nu af?",
     opties: ["Vooral ik zelf", "Een vaste medewerker", "Verdeeld over het team", "Uitbesteed aan extern of VA"],
   },
@@ -158,7 +158,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "G4",
     thema: "groei",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Ben je bereid iets in je werkwijze te veranderen als het duidelijk tijd scheelt?",
     opties: ["Ja, graag", "Ja, mits niet te ingewikkeld", "Liever niet, routine werkt voor mij"],
   },
@@ -174,7 +174,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "T2",
     thema: "tools",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Heb je ooit met AI-tools gewerkt (ChatGPT, Copilot, Claude)?",
     opties: ["Ja, gebruik ik geregeld", "Af en toe geprobeerd", "Nee, nog niet"],
   },
@@ -195,7 +195,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "V1",
     thema: "voorbereiding",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Hoe snel zou je willen dat er iets verandert?",
     opties: ["Liefst nu al", "Binnen een maand", "Binnen een kwartaal", "Dit jaar is goed"],
   },
@@ -208,14 +208,14 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "V3",
     thema: "voorbereiding",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Beslis je zelf, of is er iemand die meebeslist?",
     opties: ["Ik beslis zelf", "Samen met een compagnon of partner", "Via een team of board"],
   },
   {
     id: "V4",
     thema: "voorbereiding",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Wat houdt je vandaag het meest tegen?",
     opties: ["Tijd", "Geld", "Kennis", "Mankracht", "Niets concreets, het loopt wel"],
   },
@@ -224,7 +224,7 @@ export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
   {
     id: "WENS",
     thema: "wens",
-    type: "enkelkeuze",
+    type: "meerkeuze",
     titel: "Welk deel van je werk voelt het meest als hetzelfde kunstje, steeds opnieuw?",
     opties: ["Klantcommunicatie", "Planning en agenda", "Offertes en facturen", "Rapportage of administratie", "Wisselt te veel om te zeggen"],
     helptekst: "Helpt me jouw video scherper te richten.",

@@ -92,7 +92,7 @@ const VOLGENDE_SYSTEEM = `Je bedenkt de VOLGENDE vraag voor John's quickscan, he
 
 Harde regels:
 - De vraag EN de opties zijn branche-specifiek. Verplaats je in dit bedrijf. Een cafe krijgt geen "offertes schrijven" maar bijvoorbeeld "reserveringen, no-shows, personeel inroosteren, voorraad bestellen". Een makelaar krijgt vragen over bezichtigingen en opvolging. Een webshop over voorraad, retouren en klantvragen. Nooit opties die niet bij dit type bedrijf passen.
-- Type: meestal "enkelkeuze" met 3 tot 6 concrete opties. Soms "meerkeuze". Hooguit een paar keer per scan "open" (open vragen zijn zwaar, nooit als tweede vraag). De laatste optie van een keuzevraag mag "Iets anders" zijn.
+- Type: bij keuzevragen ALTIJD "meerkeuze" met 3 tot 6 concrete opties, zodat de klant meerdere dingen kan aanvinken (meerdere antwoorden zijn bij deze vragen bijna altijd waar). Hooguit een paar keer per scan "open" (open vragen zijn zwaar, nooit als tweede vraag). De laatste optie van een keuzevraag mag "Iets anders" zijn.
 - Bouw voort op het laatste antwoord. Was dat vaag of partieel ("deels", "iets anders", "wisselt te veel"), maak de volgende vraag juist concreter en dieper op precies dat punt.
 - Zorg dat de scan ergens de operatie raakt (waar tijd weglekt, welk werk steeds terugkomt) en minstens één keer aansluit op de grootste AI-kans uit de analyse.
 - Richting het einde: één kwalificatie-vraag (wie beslist mee, wat houdt je tegen, of hoe snel wil je iets veranderen).
@@ -115,13 +115,13 @@ const VOLGENDE_TOOL: Anthropic.Tool = {
       titel: { type: "string", description: "De volgende vraag, branche-specifiek, max ~16 woorden." },
       type: {
         type: "string",
-        enum: ["enkelkeuze", "meerkeuze", "open"],
-        description: "Het type vraag.",
+        enum: ["meerkeuze", "open"],
+        description: "Het type vraag. Keuzevragen zijn altijd meerkeuze zodat de klant meerdere opties kan aanvinken.",
       },
       opties: {
         type: "array",
         items: { type: "string" },
-        description: "3 tot 6 concrete, branche-relevante opties. Alleen bij enkelkeuze of meerkeuze.",
+        description: "3 tot 6 concrete, branche-relevante opties. Alleen bij meerkeuze.",
       },
     },
     required: [],
@@ -150,7 +150,8 @@ function bouwGegenereerdeVraag(
       .filter(Boolean)
       .slice(0, 6)
     if (opties.length < 2) return null
-    return { id: `GEN${slot}`, thema: "operatie", type: input.type, titel, opties }
+    // Keuzevragen zijn altijd meerkeuze: de klant mag meerdere opties aanvinken.
+    return { id: `GEN${slot}`, thema: "operatie", type: "meerkeuze", titel, opties }
   }
   return null
 }

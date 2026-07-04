@@ -6,7 +6,12 @@
  *   Headers: Authorization: Bearer {OS_WEBHOOK_SECRET}
  *   Body (additief, oude/kleine payload blijft ook werken):
  *     { scanLeadId, bedrijf, contactpersoon, email, telefoon, interesse,
- *       opmerkingen, type, url, branche, niche, tone, antwoorden, kansen }
+ *       opmerkingen, type, url, branche, niche, tone, antwoorden, kansen,
+ *       opmerking, diagnose }
+ *   Nieuw sinds de nachtrun (juli 2026), allebei optioneel:
+ *     - opmerking: de vrije opmerking die de lead zelf achterliet (OpmerkingVeld)
+ *     - diagnose: de interne diepte-diagnose voor John (advies bouw/training/zelf
+ *       + kop, onderbouwing, signalen, vervolg). Alleen bij type "diepte".
  *
  * Env-vars nodig:
  *   OS_BASE_URL        — bv. https://os.future-content.nl (geen trailing slash)
@@ -101,6 +106,13 @@ export async function notifyOs(jobId: string, type: ScanType = "quickscan"): Pro
     tone: analyse?.tone ?? null,
     antwoorden: antwoordenAlsObject(job.antwoorden),
     kansen: analyse?.kansen ?? [],
+    // Belvoorbereiding voor John: de vrije opmerking van de lead en (bij een
+    // diepte-scan) de interne diagnose. Additief; de OS-route mag ze negeren.
+    opmerking: job.opmerking ?? null,
+    diagnose:
+      type === "diepte" && job.diagnoseJson && typeof job.diagnoseJson === "object"
+        ? job.diagnoseJson
+        : null,
   }
 
   try {

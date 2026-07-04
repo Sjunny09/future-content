@@ -7,6 +7,7 @@ import { KansenStagger } from "@/components/scan/KansenStagger"
 import { AiDisclaimer } from "@/components/scan/AiDisclaimer"
 import { DirectContact } from "@/components/scan/DirectContact"
 import { OpmerkingVeld } from "@/components/scan/OpmerkingVeld"
+import { OpmerkingPopup } from "@/components/scan/OpmerkingPopup"
 import { PriceIndicator } from "@/components/PriceIndicator"
 import { BOOKING } from "@/lib/constants"
 import type { SiteAnalyse } from "@/lib/scan/claude"
@@ -55,6 +56,8 @@ export default async function KlaarPagina({ params }: { params: Params }) {
   return (
     <main className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-10 lg:h-screen lg:justify-center lg:overflow-hidden lg:py-8">
       <ExitIntentModal calUrl={calUrl} />
+      {/* Na 5s: uitnodiging rechtsonder om een opmerking achter te laten */}
+      <OpmerkingPopup jobId={jobId} />
 
       {/* Compacte kop: naam + branche-regel, geen ruimteverspilling op desktop */}
       <div className="shrink-0">

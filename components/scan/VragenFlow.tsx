@@ -2,12 +2,25 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
 import { track } from "@/lib/scan/analytics/plausible"
 import { WhatsAppRondje } from "./WhatsAppRondje"
 
 export type Antwoord = string | string[] | { naam: string; email: string; telefoon: string }
+
+export type VoortgangInfo = {
+  huidige: number
+  geschatTotaal: number
+  isLaatste: boolean
+}
+
+// Eerlijke fractie voor de balk: nooit 100% suggereren voordat de laatste
+// stap er echt is. De parent bewaakt dat de balk nooit terugloopt.
+export function voortgangFractie(v: VoortgangInfo): number {
+  if (v.isLaatste) return 0.95
+  return Math.min(v.huidige / Math.max(v.geschatTotaal, 1), 0.95)
+}
 
 type Props = {
   jobId: string
@@ -22,12 +35,13 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
   const [antwoord, setAntwoord] = useState<Antwoord | undefined>(undefined)
   const [bezig, setBezig] = useState(false)
   const [fout, setFout] = useState<string | null>(null)
+  // Startschatting: ~5 vragen + email. De server stuurt bij elk antwoord de
+  // echte stand mee; de balk loopt nooit terug.
+  const [fractie, setFractie] = useState(() =>
+    Math.min((startSlot - 1) / 6, 0.95),
+  )
 
   const isEmail = huidig.type === "email-naam"
-  // De email-vraag staat altijd op slot 6 (zie bibliotheek.ts). Op slot 5
-  // maakt de knoptekst alvast nieuwsgierig naar de persoonlijke resultaten,
-  // in plaats van dat de vraag om gegevens als drempel voelt.
-  const isLaatsteVoorEmail = !isEmail && slot === 5
   const mag = heeftGeldigAntwoord(huidig, antwoord)
 
   function zetAntwoord(waarde: Antwoord) {
@@ -73,10 +87,17 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
         }),
       })
       if (!res.ok) throw new Error("antwoord-fout")
-      const data = (await res.json()) as { volgende?: Vraag }
+      const data = (await res.json()) as {
+        volgende?: Vraag
+        voortgang?: VoortgangInfo
+      }
       if (!data.volgende) throw new Error("geen-volgende")
 
       if (slot === 1) track("vraag_1_klaar")
+      if (data.voortgang) {
+        const nieuw = voortgangFractie(data.voortgang)
+        setFractie((oud) => Math.max(oud, nieuw))
+      }
       setHuidig(data.volgende)
       setSlot(slot + 1)
       setAntwoord(undefined)
@@ -89,7 +110,11 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 py-10">
-      <Kop slot={slot} />
+      <Kop
+        label={isEmail ? "Laatste stap" : `Vraag ${slot}`}
+        fractie={isEmail ? 0.95 : fractie}
+        sublabel={isEmail ? undefined : "nog een paar vragen"}
+      />
 
       <div className="mt-10 flex flex-1 flex-col">
         <AnimatePresence mode="wait">
@@ -142,7 +167,7 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
         </AnimatePresence>
       </div>
 
-      <div className="mt-10 flex items-center justify-end">
+      <div className="mt-10 flex flex-col items-end gap-2">
         <button
           type="button"
           onClick={volgende}
@@ -151,13 +176,15 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
           style={{ backgroundColor: "var(--color-scan-terracotta)" }}
         >
           {bezig
-            ? "Even…"
+            ? "Momentje…"
             : isEmail
               ? "Laat mijn resultaten zien"
-              : isLaatsteVoorEmail
-                ? "Klik door: wil je de persoonlijke resultaten zien?"
-                : "Volgende"}
+              : "Volgende"}
         </button>
+        <Microstatus
+          zichtbaar={bezig && !isEmail}
+          tekst="Ik kijk even naar je antwoord en pak de volgende vraag."
+        />
       </div>
 
       {fout && (
@@ -172,15 +199,76 @@ export function VragenFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
   )
 }
 
-function Kop({ slot }: { slot: number }) {
+// Kop met determinate voortgangsbalk. Eerlijk: de balk suggereert nooit 100%
+// voordat de laatste stap er is, en loopt nooit terug (parent bewaakt dat).
+export function Kop({
+  label,
+  fractie,
+  sublabel,
+}: {
+  label: string
+  fractie: number
+  sublabel?: string
+}) {
+  const rustig = useReducedMotion()
+  const procent = Math.round(Math.min(Math.max(fractie, 0), 1) * 100)
   return (
-    <div className="flex items-center justify-between">
-      <span className="w-4" aria-hidden />
-      <p className="text-sm" style={{ color: "var(--color-scan-muted)" }}>
-        Vraag {slot}
-      </p>
-      <span className="w-4" aria-hidden />
+    <div className="flex flex-col gap-2">
+      <div className="flex items-baseline justify-between">
+        <p className="text-sm" style={{ color: "var(--color-scan-muted)" }}>
+          {label}
+        </p>
+        {sublabel && (
+          <p className="text-xs" style={{ color: "var(--color-scan-muted)" }}>
+            {sublabel}
+          </p>
+        )}
+      </div>
+      <div
+        className="relative h-1 w-full overflow-hidden rounded-full"
+        style={{ backgroundColor: "var(--color-scan-border)" }}
+        role="progressbar"
+        aria-valuenow={procent}
+        aria-valuemin={0}
+        aria-valuemax={100}
+      >
+        <motion.div
+          className="absolute inset-y-0 left-0 rounded-full"
+          style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+          initial={false}
+          animate={{ width: `${procent}%` }}
+          transition={rustig ? { duration: 0 } : { duration: 0.5, ease: "easeOut" }}
+        />
+      </div>
     </div>
+  )
+}
+
+// Rustige microstatus tijdens de 1-3s dat de volgende vraag wordt bedacht,
+// zodat de wachttijd bewust voelt in plaats van een bevroren knop.
+export function Microstatus({
+  zichtbaar,
+  tekst,
+}: {
+  zichtbaar: boolean
+  tekst: string
+}) {
+  return (
+    <AnimatePresence>
+      {zichtbaar && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          className="text-xs"
+          style={{ color: "var(--color-scan-muted)" }}
+          aria-live="polite"
+        >
+          {tekst}
+        </motion.p>
+      )}
+    </AnimatePresence>
   )
 }
 
@@ -432,7 +520,7 @@ function EmailNaam({
           }
         }}
         disabled={uitgeschakeld}
-        placeholder="Telefoonnummer, zodat ik je kan bellen"
+        placeholder="Telefoonnummer, dan bel ik je even (geen mailtrein)"
         className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B45F38]/30"
         style={veldStyle}
       />

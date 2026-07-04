@@ -156,5 +156,23 @@ export async function POST(
     })
   }
 
-  return NextResponse.json({ ok: true, volgende }, { status: 200 })
+  // Voortgang voor de balk boven de vragen. Het totaal is dynamisch (de AI
+  // bepaalt wanneer het genoeg is), dus we schatten eerlijk: het geschatte
+  // totaal krimpt nooit en de balk loopt nooit terug.
+  const isLaatste = volgende.id === "EMAIL"
+  const geschatTotaal = isLaatste
+    ? aantalBeantwoord + 1
+    : Math.min(
+        Math.max(BASIS_VRAGEN + 1, aantalBeantwoord + 2),
+        MAX_TOTAAL + 1,
+      )
+
+  return NextResponse.json(
+    {
+      ok: true,
+      volgende,
+      voortgang: { huidige: aantalBeantwoord, geschatTotaal, isLaatste },
+    },
+    { status: 200 },
+  )
 }

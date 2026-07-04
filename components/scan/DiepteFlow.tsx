@@ -4,7 +4,15 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { AnimatePresence, motion } from "framer-motion"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
-import { VraagVeld, heeftGeldigAntwoord, type Antwoord } from "@/components/scan/VragenFlow"
+import {
+  VraagVeld,
+  heeftGeldigAntwoord,
+  Kop,
+  Microstatus,
+  voortgangFractie,
+  type Antwoord,
+  type VoortgangInfo,
+} from "@/components/scan/VragenFlow"
 
 type Props = {
   jobId: string
@@ -21,6 +29,10 @@ export function DiepteFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
   const [antwoord, setAntwoord] = useState<Antwoord | undefined>(undefined)
   const [bezig, setBezig] = useState(false)
   const [fout, setFout] = useState<string | null>(null)
+  // Startschatting: minstens 8 diepe vragen. Server stuurt de echte stand mee.
+  const [fractie, setFractie] = useState(() =>
+    Math.min((startSlot - 1) / 8, 0.95),
+  )
 
   const mag = heeftGeldigAntwoord(huidig, antwoord)
 
@@ -40,7 +52,16 @@ export function DiepteFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
         }),
       })
       if (!res.ok) throw new Error("antwoord-fout")
-      const data = (await res.json()) as { volgende?: Vraag | null; klaar?: boolean }
+      const data = (await res.json()) as {
+        volgende?: Vraag | null
+        klaar?: boolean
+        voortgang?: VoortgangInfo
+      }
+
+      if (data.voortgang) {
+        const nieuw = voortgangFractie(data.voortgang)
+        setFractie((oud) => Math.max(oud, nieuw))
+      }
 
       if (data.klaar || !data.volgende) {
         // Klaar: afronden (zet status + maakt diagnose) en door naar de afspraak.
@@ -62,13 +83,11 @@ export function DiepteFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-6 py-10">
-      <div className="flex items-center justify-between">
-        <span className="w-4" aria-hidden />
-        <p className="text-sm" style={{ color: "var(--color-scan-muted)" }}>
-          Verdieping {slot}
-        </p>
-        <span className="w-4" aria-hidden />
-      </div>
+      <Kop
+        label={`Verdieping ${slot}`}
+        fractie={fractie}
+        sublabel="nog een paar vragen"
+      />
 
       <div className="mt-10 flex flex-1 flex-col">
         <AnimatePresence mode="wait">
@@ -108,7 +127,7 @@ export function DiepteFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
         </AnimatePresence>
       </div>
 
-      <div className="mt-10 flex items-center justify-end">
+      <div className="mt-10 flex flex-col items-end gap-2">
         <button
           type="button"
           onClick={volgende}
@@ -116,8 +135,12 @@ export function DiepteFlow({ jobId, eersteVraag, startSlot = 1 }: Props) {
           className="rounded-md px-6 py-3 text-base font-medium text-white transition disabled:opacity-40"
           style={{ backgroundColor: "var(--color-scan-terracotta)" }}
         >
-          {bezig ? "Even…" : "Volgende"}
+          {bezig ? "Momentje…" : "Volgende"}
         </button>
+        <Microstatus
+          zichtbaar={bezig}
+          tekst="Ik kijk even naar je antwoord en denk de volgende vraag uit."
+        />
       </div>
 
       {fout && (

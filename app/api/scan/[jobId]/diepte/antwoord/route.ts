@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
 import { db } from "@/lib/scan/db"
-import { volgendeDiepteVraag } from "@/lib/scan/diepte"
+import { volgendeDiepteVraag, MIN_DIEPTE, MAX_DIEPTE } from "@/lib/scan/diepte"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
@@ -113,8 +113,23 @@ export async function POST(
     diepAntwoordIds,
   })
 
+  // Voortgang voor de balk: dynamisch totaal dat nooit krimpt, balk loopt
+  // nooit terug. Onder MIN_DIEPTE weten we dat er minstens MIN_DIEPTE komen.
+  const aantalDiep = diepAntwoordIds.size
+  const geschatTotaal = Math.min(
+    Math.max(MIN_DIEPTE, aantalDiep + 2),
+    MAX_DIEPTE,
+  )
+
   if (!volgende) {
-    return NextResponse.json({ ok: true, klaar: true }, { status: 200 })
+    return NextResponse.json(
+      {
+        ok: true,
+        klaar: true,
+        voortgang: { huidige: aantalDiep, geschatTotaal: aantalDiep, isLaatste: true },
+      },
+      { status: 200 },
+    )
   }
 
   if (!gesteldeVragen.some((v) => v.id === volgende.id)) {
@@ -126,5 +141,12 @@ export async function POST(
     })
   }
 
-  return NextResponse.json({ ok: true, volgende }, { status: 200 })
+  return NextResponse.json(
+    {
+      ok: true,
+      volgende,
+      voortgang: { huidige: aantalDiep, geschatTotaal, isLaatste: false },
+    },
+    { status: 200 },
+  )
 }

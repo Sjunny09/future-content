@@ -44,9 +44,9 @@ export default async function DiepteKlaarPagina({ params }: { params: Params }) 
         className="mt-6 text-lg leading-relaxed md:text-xl"
         style={{ color: "var(--color-scan-drukinkt)" }}
       >
-        Je hebt de uitgebreide scan ingevuld. Plan hieronder direct een half uur
-        met me, dan bespreken we live wat ik zag en wat voor jullie de slimste
-        eerste stap is.
+        Je hebt de uitgebreide scan ingevuld. Ik werk je antwoorden uit tot een
+        persoonlijk rapport: dat ligt binnen een dag in je mail. Plan hieronder
+        alvast een half uur met me, dan nemen we het samen door.
       </p>
 
       <div

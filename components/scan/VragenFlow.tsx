@@ -520,7 +520,7 @@ function EmailNaam({
           }
         }}
         disabled={uitgeschakeld}
-        placeholder="Telefoonnummer, dan bel ik je even (geen mailtrein)"
+        placeholder="Telefoonnummer, zodat ik je kan bellen"
         className="w-full rounded-md border px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[#B45F38]/30"
         style={veldStyle}
       />

@@ -129,7 +129,8 @@ Elke vraag moet kwalificeren. Na de scan wil John weten: waar zit de pijn (welk 
 Harde regels:
 - De vraag EN de opties zijn branche-specifiek. Verplaats je in dit bedrijf. Een cafe krijgt geen "offertes schrijven" maar bijvoorbeeld "reserveringen, no-shows, personeel inroosteren, voorraad bestellen". Een makelaar krijgt vragen over bezichtigingen en opvolging. Een webshop over voorraad, retouren en klantvragen. Nooit opties die niet bij dit type bedrijf passen.
 - Type: "enkelkeuze" als er logisch één antwoord is (tempo, wie beslist), "meerkeuze" met 3 tot 6 opties als meerdere antwoorden waar kunnen zijn. De laatste optie van een keuzevraag mag "Iets anders" zijn.
-- Bouw voort op het laatste antwoord. Was dat vaag of partieel ("deels", "iets anders", "wisselt te veel"), maak de volgende vraag juist concreter en dieper op precies dat punt.
+- Bouw voort op het laatste antwoord. Was dat vaag of partieel ("deels", "wisselt te veel"), maak de volgende vraag juist concreter en dieper op precies dat punt.
+- Koos iemand "Iets anders" (of een vergelijkbare uitwijk-optie)? Dan is de EERSTVOLGENDE vraag ALTIJD een doorvraag op dat "iets anders": kort en open ("Wat is dat bij jullie?") of een nieuwe keuzevraag met concretere opties. Nooit doorschakelen naar een ander onderwerp zolang dat "iets anders" niet ingevuld is; die uitzondering telt niet mee voor de regel van maximaal één open vraag.
 - Zorg dat de scan ergens de operatie raakt (waar tijd weglekt, welk werk steeds terugkomt) en minstens één keer aansluit op de grootste AI-kans uit de analyse.
 - Stel nooit dezelfde vraag twee keer. Geen jargon, geen verkoperige of defensieve toon. Nederlands, tutoyeren, geen em-dashes.
 - Zet genoeg=true zodra pijn, urgentie en beslisser bekend zijn. Liever een vraag te weinig dan een vraag te veel, maar rond af op een klikvraag zodat het compleet voelt, niet abrupt.

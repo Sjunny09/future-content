@@ -89,7 +89,7 @@ export function DirectContact() {
             <AgendaGlyph className="h-5 w-5" />
           </span>
           <span className="text-sm font-medium" style={{ color: "var(--color-scan-drukinkt)" }}>
-            Plan direct een afspraak
+            Plan een half uur met mij
           </span>
         </a>
 

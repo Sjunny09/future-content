@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/scan/db"
+import { mockActief } from "@/lib/scan/mock"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -60,6 +61,8 @@ export async function GET(
       // balk nooit terugspringt.
       fase,
       voortgang,
+      // Zodat het wachtscherm een duidelijke nepdata-badge kan tonen.
+      testmodus: mockActief(),
     },
     {
       headers: {

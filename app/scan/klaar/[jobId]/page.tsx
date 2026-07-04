@@ -7,9 +7,9 @@ import { KansenStagger } from "@/components/scan/KansenStagger"
 import { AiDisclaimer } from "@/components/scan/AiDisclaimer"
 import { DirectContact } from "@/components/scan/DirectContact"
 import { OpmerkingVeld } from "@/components/scan/OpmerkingVeld"
-import { BookingCTA } from "@/components/common/BookingCTA"
 import { PriceIndicator } from "@/components/PriceIndicator"
 import { BOOKING } from "@/lib/constants"
+import { mockActief } from "@/lib/scan/mock"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
 type Params = Promise<{ jobId: string }>
@@ -52,15 +52,20 @@ export default async function KlaarPagina({ params }: { params: Params }) {
   const domein = domeinUit(job.url)
   const kansen = Array.isArray(analyse?.kansen) ? analyse.kansen.slice(0, 3) : []
   const diepteVoltooid = job.diepteStatus === "voltooid"
-  // Grootste kans in zinsvorm, voor de CTA-kop ("Je grootste kans: offertes
-  // uit het adviesbezoek laten schrijven.").
-  const kans1 = kansen[0]?.titel
-    ? kansen[0].titel.charAt(0).toLowerCase() + kansen[0].titel.slice(1)
-    : null
 
   return (
     <main className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-10 lg:h-screen lg:justify-center lg:overflow-hidden lg:py-8">
       <ExitIntentModal calUrl={calUrl} />
+
+      {mockActief() && (
+        <div
+          className="mb-4 shrink-0 rounded-md border px-3 py-2 text-xs font-medium"
+          style={{ borderColor: "var(--color-scan-error)", color: "var(--color-scan-error)" }}
+        >
+          Testmodus actief (SCAN_MOCK=1): dit is nepdata van een verzonnen
+          installatiebedrijf, niet de echte analyse van deze site.
+        </div>
+      )}
 
       {/* Compacte kop: naam + branche-regel, geen ruimteverspilling op desktop */}
       <div className="shrink-0">
@@ -131,62 +136,44 @@ export default async function KlaarPagina({ params }: { params: Params }) {
           )}
         </div>
 
-        {/* RECHTS: hoofdactie is het gesprek, gekoppeld aan de gevonden pijn.
-            Daaronder de uitgebreide scan als tussentrede en een eerlijk
-            prijsblok over de stap daarna. */}
+        {/* RECHTS: de vervolgstap (uitgebreide scan) + eerlijk prijsblok +
+            het opmerkingenveld. Het gesprek plannen zit links bij DirectContact
+            ("Plan een half uur met mij"), dus hier geen tweede afspraak-CTA. */}
         <div className="order-2 flex flex-col gap-4 lg:order-none lg:min-h-0 lg:overflow-y-auto">
-          <div
-            className="rounded-2xl border p-5"
-            style={{
-              borderColor: "var(--color-scan-border)",
-              backgroundColor: "var(--color-scan-linnen)",
-            }}
-          >
-            <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
-              {kans1
-                ? `Je grootste kans: ${kans1}.`
-                : "Zullen we je grootste kans concreet maken?"}
-            </p>
-            <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-              In een half uur maak ik dit concreet voor jou. Gratis, en je zit
-              nergens aan vast.
-            </p>
-            <div className="mt-4">
-              <BookingCTA label="Plan een half uur met mij" bron="scan-klaar" />
-            </div>
-          </div>
-
           {diepteVoltooid ? (
             <div
               className="rounded-2xl border p-5"
-              style={{ borderColor: "var(--color-scan-border)" }}
+              style={{
+                borderColor: "var(--color-scan-border)",
+                backgroundColor: "var(--color-scan-linnen)",
+              }}
             >
               <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
                 Je deed de uitgebreide scan, top.
               </p>
               <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-                Ik heb alles wat ik nodig heb om het gesprek voor te bereiden.
+                Plan gerust een half uur met me om het live te bespreken.
               </p>
             </div>
           ) : (
             <div
               className="rounded-2xl border p-5"
-              style={{ borderColor: "var(--color-scan-border)" }}
+              style={{
+                borderColor: "var(--color-scan-border)",
+                backgroundColor: "var(--color-scan-linnen)",
+              }}
             >
               <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
-                Eerst nog wat dieper graven?
+                Wat levert dit voor jouw bedrijf concreet op?
               </p>
               <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-                Doe de uitgebreide scan, 10 tot 15 minuten. Hoe scherper het
-                beeld, hoe concreter ons gesprek.
+                Doe de uitgebreide scan, 10 tot 15 minuten, en eindig direct in
+                een afspraak. Gratis en vrijblijvend.
               </p>
               <Link
                 href={`/scan/diepte/${jobId}`}
-                className="mt-4 inline-flex items-center gap-2 rounded-md border px-5 py-3 text-base font-medium transition-colors hover:bg-black/[0.03]"
-                style={{
-                  borderColor: "var(--color-scan-border)",
-                  color: "var(--color-scan-drukinkt)",
-                }}
+                className="mt-4 inline-flex items-center gap-2 rounded-md px-5 py-3 text-base font-medium text-white"
+                style={{ backgroundColor: "var(--color-scan-terracotta)" }}
               >
                 Start de uitgebreide scan
               </Link>

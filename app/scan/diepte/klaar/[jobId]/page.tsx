@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation"
 import { db } from "@/lib/scan/db"
 import { BOOKING } from "@/lib/constants"
 import { AiDisclaimer } from "@/components/scan/AiDisclaimer"
+import { PriceIndicator } from "@/components/PriceIndicator"
 
 type Params = Promise<{ jobId: string }>
 
@@ -96,6 +97,30 @@ export default async function DiepteKlaarPagina({ params }: { params: Params }) 
           contact met je op om een moment te prikken.
         </p>
       )}
+
+      {/* Eerlijk over de stap na het gesprek: het proof of concept. */}
+      <div
+        className="mt-8 rounded-2xl border p-6"
+        style={{ borderColor: "var(--color-scan-border)" }}
+      >
+        <p
+          className="text-base font-medium"
+          style={{ color: "var(--color-scan-drukinkt)" }}
+        >
+          Goed om te weten: het gesprek is gratis
+        </p>
+        <p
+          className="mt-2 text-sm leading-relaxed"
+          style={{ color: "var(--color-scan-muted)" }}
+        >
+          Willen we daarna samen verder, dan is de volgende stap meestal een
+          proof of concept: <PriceIndicator item="proofOfConcept" prefix="" />.
+          Ik draai een halve dag mee op locatie, interview je mensen en
+          verzamel data uit je bedrijf. Daarna ga ik thuis aan de slag en
+          binnen een week ligt er een proof of concept met wat het jouw
+          bedrijf oplevert in tijd of geld.
+        </p>
+      </div>
 
       <div className="mt-12 flex flex-col items-center gap-3">
         <p

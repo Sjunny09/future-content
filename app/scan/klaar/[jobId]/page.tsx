@@ -7,6 +7,8 @@ import { KansenStagger } from "@/components/scan/KansenStagger"
 import { AiDisclaimer } from "@/components/scan/AiDisclaimer"
 import { DirectContact } from "@/components/scan/DirectContact"
 import { OpmerkingVeld } from "@/components/scan/OpmerkingVeld"
+import { BookingCTA } from "@/components/common/BookingCTA"
+import { PriceIndicator } from "@/components/PriceIndicator"
 import { BOOKING } from "@/lib/constants"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
@@ -50,6 +52,11 @@ export default async function KlaarPagina({ params }: { params: Params }) {
   const domein = domeinUit(job.url)
   const kansen = Array.isArray(analyse?.kansen) ? analyse.kansen.slice(0, 3) : []
   const diepteVoltooid = job.diepteStatus === "voltooid"
+  // Grootste kans in zinsvorm, voor de CTA-kop ("Je grootste kans: offertes
+  // uit het adviesbezoek laten schrijven.").
+  const kans1 = kansen[0]?.titel
+    ? kansen[0].titel.charAt(0).toLowerCase() + kansen[0].titel.slice(1)
+    : null
 
   return (
     <main className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-10 lg:h-screen lg:justify-center lg:overflow-hidden lg:py-8">
@@ -124,48 +131,85 @@ export default async function KlaarPagina({ params }: { params: Params }) {
           )}
         </div>
 
-        {/* RECHTS: de vervolgstap (uitgebreide scan) + het opmerkingenveld. */}
+        {/* RECHTS: hoofdactie is het gesprek, gekoppeld aan de gevonden pijn.
+            Daaronder de uitgebreide scan als tussentrede en een eerlijk
+            prijsblok over de stap daarna. */}
         <div className="order-2 flex flex-col gap-4 lg:order-none lg:min-h-0 lg:overflow-y-auto">
+          <div
+            className="rounded-2xl border p-5"
+            style={{
+              borderColor: "var(--color-scan-border)",
+              backgroundColor: "var(--color-scan-linnen)",
+            }}
+          >
+            <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+              {kans1
+                ? `Je grootste kans: ${kans1}.`
+                : "Zullen we je grootste kans concreet maken?"}
+            </p>
+            <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
+              In een half uur maak ik dit concreet voor jou. Gratis, en je zit
+              nergens aan vast.
+            </p>
+            <div className="mt-4">
+              <BookingCTA label="Plan een half uur met mij" bron="scan-klaar" />
+            </div>
+          </div>
+
           {diepteVoltooid ? (
             <div
               className="rounded-2xl border p-5"
-              style={{
-                borderColor: "var(--color-scan-border)",
-                backgroundColor: "var(--color-scan-linnen)",
-              }}
+              style={{ borderColor: "var(--color-scan-border)" }}
             >
               <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
                 Je deed de uitgebreide scan, top.
               </p>
               <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-                Plan gerust een half uur met me om het live te bespreken.
+                Ik heb alles wat ik nodig heb om het gesprek voor te bereiden.
               </p>
             </div>
           ) : (
-            /* Primair: uitgebreide scan (terracotta) */
             <div
               className="rounded-2xl border p-5"
-              style={{
-                borderColor: "var(--color-scan-border)",
-                backgroundColor: "var(--color-scan-linnen)",
-              }}
+              style={{ borderColor: "var(--color-scan-border)" }}
             >
               <p className="text-base font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
-                Wat levert dit voor jouw bedrijf concreet op?
+                Eerst nog wat dieper graven?
               </p>
               <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-                Doe de uitgebreide scan, 10 tot 15 minuten, en eindig direct in een
-                afspraak. Gratis en vrijblijvend.
+                Doe de uitgebreide scan, 10 tot 15 minuten. Hoe scherper het
+                beeld, hoe concreter ons gesprek.
               </p>
               <Link
                 href={`/scan/diepte/${jobId}`}
-                className="mt-4 inline-flex items-center gap-2 rounded-md px-5 py-3 text-base font-medium text-white"
-                style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+                className="mt-4 inline-flex items-center gap-2 rounded-md border px-5 py-3 text-base font-medium transition-colors hover:bg-black/[0.03]"
+                style={{
+                  borderColor: "var(--color-scan-border)",
+                  color: "var(--color-scan-drukinkt)",
+                }}
               >
                 Start de uitgebreide scan
               </Link>
             </div>
           )}
+
+          {/* Eerlijk over de trede na het gesprek: het proof of concept. */}
+          <div
+            className="rounded-2xl border p-5"
+            style={{ borderColor: "var(--color-scan-border)" }}
+          >
+            <p className="text-sm font-semibold" style={{ color: "var(--color-scan-drukinkt)" }}>
+              En daarna?
+            </p>
+            <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
+              De stap na het gesprek is een proof of concept:{" "}
+              <PriceIndicator item="proofOfConcept" prefix="" />. Ik draai een
+              halve dag mee op locatie, interview je mensen en verzamel data
+              uit je bedrijf. Daarna ga ik thuis aan de slag en binnen een week
+              ligt er een proof of concept met wat het jouw bedrijf oplevert in
+              tijd of geld.
+            </p>
+          </div>
 
           {/* Vrij opmerkingenveld, slaat op naar de database (John ziet het in de OS) */}
           <OpmerkingVeld jobId={jobId} />

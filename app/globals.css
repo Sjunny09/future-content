@@ -118,3 +118,46 @@
   --font-fraunces: var(--font-playfair);
   --font-plex: var(--font-archivo);
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Merk-systeem: de poort (/) + AI-skin (/ai).
+   Twee expressies, één merk. Alleen gebruikt door de nieuwe
+   entree- en AI-pagina's; raakt de video-kant niet.
+   ───────────────────────────────────────────────────────────── */
+
+/* Wordmark-font: strak sans (Helvetica-lockup uit het logo), krappe tracking.
+   Bewust anders dan de Playfair-koppen op de video-kant. */
+.fc-wordmark {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Inter", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+/* De knipperende gouden cursor (caret) uit het logo. Subtiele bouwer-cue,
+   geen sci-fi. */
+@keyframes fc-blink {
+  0%, 48% { opacity: 1; }
+  49%, 100% { opacity: 0; }
+}
+.fc-caret {
+  display: inline-block;
+  background-color: #C9A96E;
+  animation: fc-blink 1.1s steps(1) infinite;
+}
+
+/* Filmgrain-overlay: warme, ingetogen textuur i.p.v. neon/glow.
+   Zet op een relatief-gepositioneerde container. */
+.fc-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Zachte, ademende scroll-hint. */
+@keyframes fc-scroll-hint {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+.fc-scroll-hint { animation: fc-scroll-hint 1.8s ease-in-out infinite; }

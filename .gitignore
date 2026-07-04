@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# Claude Code tooling (skill-bundles, niet onderdeel van het website-product)
+/.claude/
+/.agents/
+/skills-lock.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

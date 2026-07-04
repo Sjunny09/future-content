@@ -306,6 +306,7 @@ export const STACK_VIDEOS = [
 ];
 
 export const NAV_LINKS = [
+  { href: "/ai", label: "AI" },
   { href: "/social-media", label: "Social Media" },
   { href: "/makelaars", label: "Makelaars" },
   { href: "/trouwen", label: "Trouwen" },

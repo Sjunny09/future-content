@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { AnimatePresence, motion } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { track } from "@/lib/scan/analytics/plausible"
 import { AiDisclaimer } from "@/components/scan/AiDisclaimer"
 
@@ -18,9 +18,19 @@ type StatusRespons = {
   gefaald: boolean
   analyse?: Analyse
   url?: string
+  fase?: string
+  voortgang?: number
 }
 
 const SLIDE_DUUR_MS = 7_000
+
+// Fase-teksten in John's stem, onder de voortgangsbalk.
+const FASE_LABEL: Record<string, string> = {
+  scrapen: "Ik open je site",
+  lezen: "Ik lees je site en kijk naar je aanbod",
+  "plan-bouwen": "Ik bouw je plan",
+  klaar: "Klaar, we gaan beginnen",
+}
 
 function domeinUit(url?: string): string | null {
   if (!url) return null
@@ -34,13 +44,17 @@ function domeinUit(url?: string): string | null {
 
 export function ScanInProgress({ jobId }: { jobId: string }) {
   const router = useRouter()
+  const rustig = useReducedMotion()
   const [observaties, setObservaties] = useState<string[]>([])
   const [index, setIndex] = useState(0)
   const [fout, setFout] = useState<string | null>(null)
   const [analyse, setAnalyse] = useState<Analyse>(null)
   const [domein, setDomein] = useState<string | null>(null)
   const [seconden, setSeconden] = useState(0)
+  const [voortgang, setVoortgang] = useState(0)
+  const [fase, setFase] = useState<string>("scrapen")
   const klaarRef = useRef(false)
+  const redirectRef = useRef(false)
 
   // Seconden-teller voor de "duurt langer"-melding, zodat het scherm nooit
   // bevroren lijkt als de scrape traag is.
@@ -92,6 +106,13 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         if (data.analyse) setAnalyse(data.analyse)
         if (data.url) setDomein(domeinUit(data.url))
 
+        // Echte voortgang uit de timestamps; nooit terugspringen.
+        if (typeof data.voortgang === "number") {
+          const nieuw = data.voortgang
+          setVoortgang((v) => Math.max(v, nieuw))
+        }
+        if (data.fase) setFase(data.fase)
+
         if (data.gefaald) {
           setFout("Ik kom niet door je site heen. Probeer het zo nog eens.")
           return
@@ -100,6 +121,13 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         if (data.klaar) {
           if (!klaarRef.current) track("scan_ready")
           klaarRef.current = true
+          setVoortgang(100)
+          // Redirect hangt aan de echte 'klaar', niet aan de slide-rotatie.
+          // Korte pauze zodat de balk zichtbaar vol loopt.
+          if (!redirectRef.current) {
+            redirectRef.current = true
+            setTimeout(() => router.push(`/scan/vragen/${jobId}`), 1200)
+          }
           return
         }
 
@@ -123,26 +151,19 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
     }
   }, [jobId])
 
-  // Slide-rotatie: elke 7s door naar de volgende observatie.
-  // Bij klaar + laatste slide → redirect naar vragen.
+  // Slide-rotatie: elke 7s door naar de volgende observatie. De redirect
+  // gebeurt in de polling zodra de scan echt klaar is (zie hierboven).
   useEffect(() => {
     if (observaties.length === 0) return
 
     const tussenpoos = setInterval(() => {
-      setIndex((huidig) => {
-        const volgend = huidig + 1
-        if (volgend >= observaties.length) {
-          if (klaarRef.current) {
-            router.push(`/scan/vragen/${jobId}`)
-          }
-          return observaties.length - 1
-        }
-        return volgend
-      })
+      setIndex((huidig) =>
+        huidig + 1 >= observaties.length ? observaties.length - 1 : huidig + 1,
+      )
     }, SLIDE_DUUR_MS)
 
     return () => clearInterval(tussenpoos)
-  }, [observaties, jobId, router])
+  }, [observaties])
 
   const huidige = observaties[index] ?? "Een moment…"
   const kansen = (analyse?.kansen ?? []).slice(0, 3)
@@ -182,17 +203,28 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         )}
       </AnimatePresence>
 
-      <div
-        className="relative mb-10 h-1 w-32 overflow-hidden rounded-full"
-        style={{ backgroundColor: "var(--color-scan-border)" }}
-      >
-        <motion.div
-          className="absolute inset-y-0 w-1/3 rounded-full"
-          style={{ backgroundColor: "var(--color-scan-terracotta)" }}
-          animate={{ x: ["-40%", "260%"] }}
-          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
-        />
+      {/* Echte voortgang: determinate balk op basis van de scan-timestamps */}
+      <div className="mb-3 w-full max-w-xs">
+        <div
+          className="relative h-1.5 w-full overflow-hidden rounded-full"
+          style={{ backgroundColor: "var(--color-scan-border)" }}
+        >
+          <motion.div
+            className="absolute inset-y-0 left-0 rounded-full"
+            style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+            initial={{ width: "0%" }}
+            animate={{ width: `${voortgang}%` }}
+            transition={rustig ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
+          />
+        </div>
       </div>
+      <p
+        className="mb-10 text-xs uppercase tracking-[0.18em]"
+        style={{ color: "var(--color-scan-muted)" }}
+        aria-live="polite"
+      >
+        {FASE_LABEL[fase] ?? FASE_LABEL.scrapen}
+      </p>
 
       <div className="flex min-h-[6rem] w-full items-center justify-center">
         <AnimatePresence mode="wait">
@@ -261,7 +293,7 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         >
           {heelTraag
             ? "Het duurt wat langer dan normaal, een grote site kost me meer tijd. Blijf nog heel even."
-            : "Ik lees je site grondig, dit kan tot een halve minuut duren."}
+            : "Een grote site kost me wat meer leestijd, ik ben er bijna."}
         </p>
       )}
 

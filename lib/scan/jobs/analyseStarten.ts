@@ -4,10 +4,12 @@ import { analyseerSite, genereerObservaties } from "@/lib/scan/claude"
 import { kiesEersteVraag } from "@/lib/scan/vragen/selecteer"
 import { reportError } from "@/lib/scan/observability/logger"
 
-// Minimum-duur uit 03_ceo_synthese.md §4.3: "Wachttijd 35-45s — als Claude
-// sneller klaar is, houd de slides vast." Geeft de observatie-slides tijd
-// om te landen en voelt menselijker dan een flits-resultaat.
-const MIN_WACHT_MS = 30_000
+// Adaptieve vloer (nachtrun juli 2026, verving de oude 30s uit 03_ceo_synthese
+// §4.3): de echte wachttijd is max(echt werk, ~11s). Sonnet duurt meestal
+// 15-25s, dus de vloer bijt alleen bij hele snelle sites. Net genoeg om de
+// eerste observatie-slides te laten landen, zonder de bezoeker kunstmatig
+// vast te houden.
+const MIN_WACHT_MS = 11_000
 
 // Initiële slides terwijl Jina nog bezig is. Overschreven zodra Haiku klaar is
 // met site-specifieke observaties.

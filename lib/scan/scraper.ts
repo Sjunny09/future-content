@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio"
 import { stripPII } from "@/lib/scan/pii-filter"
+import { mockActief, mockSiteData, mockVertraging } from "@/lib/scan/mock"
 
 // Wat Claude straks binnenkrijgt. Bewust plat — geen nested HTML, geen DOM.
 export type SiteData = {
@@ -17,6 +18,11 @@ const JINA_TIMEOUT_MS = 12_000
 const CHEERIO_TIMEOUT_MS = 10_000
 
 export async function haalSiteDataOp(url: string): Promise<SiteData> {
+  // Testmodus (SCAN_MOCK=1): de enige seam. Alles stroomafwaarts blijft echt.
+  if (mockActief()) {
+    await mockVertraging("scrape")
+    return mockSiteData(url)
+  }
   try {
     return await scrapeMetJina(url)
   } catch {

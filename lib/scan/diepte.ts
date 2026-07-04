@@ -1,6 +1,12 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
+import {
+  mockActief,
+  mockDiepteVraag,
+  mockDiagnose,
+  mockVertraging,
+} from "@/lib/scan/mock"
 
 // De uitgebreide (diepte) scan: een tweede, diepere ronde adaptieve vragen na de
 // quickscan. Haiku bedenkt elke vraag op maat (dieper dan de quickscan, gericht op
@@ -46,11 +52,11 @@ Je krijgt de site-analyse (branche, niche, 3 kansen) en alle antwoorden tot nu t
 
 Harde regels:
 - Ga DIEPER dan de quickscan. Niet opnieuw "wat kost tijd", maar doorvragen: hoe vaak gebeurt het, hoeveel uur per week, met welke tools/systemen nu, waar loopt het stuk, wat is al geprobeerd.
-- Diep minstens een van de 3 kansen uit de analyse concreet uit (volume, frequentie, wie doet het nu, hoeveel tijd).
-- Kwalificeer richting bouw vs training: vraag naar wie meebeslist, hoeveel mensen het raakt, hoe vaak het terugkomt, hoe snel ze iets willen veranderen, en of er een systeem is waar het op moet aansluiten.
-- Type: meestal "enkelkeuze" of "meerkeuze" met 3 tot 6 concrete, branche-relevante opties. Af en toe "open" voor iets dat echt tekst nodig heeft. De laatste optie van een keuzevraag mag "Iets anders" zijn.
+- Diep minstens een van de 3 kansen uit de analyse concreet uit (volume, frequentie, wie doet het nu, hoeveel tijd). Volume en frequentie zijn goud: daarmee kan John straks in het gesprek voorrekenen wat het oplevert in tijd of geld.
+- Kwalificeer richting bouw vs training: vraag naar wie meebeslist, hoeveel mensen het raakt, hoe vaak het terugkomt, hoe snel ze iets willen veranderen, en of er een systeem is waar het op moet aansluiten. Veel volume plus een beslisser aan tafel wijst naar bouw; honger om te leren bij klein volume wijst naar training.
+- Type: meestal "enkelkeuze" of "meerkeuze" met 3 tot 6 concrete, branche-relevante opties. Af en toe "open" voor iets dat echt tekst nodig heeft, nooit twee open vragen achter elkaar. De laatste optie van een keuzevraag mag "Iets anders" zijn.
 - Bouw voort op het laatste antwoord. Stel nooit een vraag die al gesteld is (quickscan of diepte).
-- Nederlands, tutoyeren, geen jargon, geen verkooppraat, geen em-dashes.
+- Nederlands, tutoyeren, geen jargon, geen verkooppraat, geen em-dashes. John's toon: nuchter, nieuwsgierig, op ooghoogte.
 - Zet genoeg ALLEEN op true als je in het bericht expliciet leest dat afronden mag. Zolang die instructie er niet staat, bedenk je altijd een volgende vraag (nooit genoeg=true).
 
 Output uitsluitend via de tool diepte_vraag.`
@@ -109,6 +115,12 @@ export async function kiesDiepteVraag(args: {
   bijnaKlaar?: boolean
 }): Promise<Vraag | null> {
   const { analyse, antwoorden, slot, bijnaKlaar = false } = args
+
+  // Testmodus: bekend script van 8 diepe vragen, daarna klaar.
+  if (mockActief()) {
+    await mockVertraging("vraag")
+    return mockDiepteVraag(slot, bijnaKlaar)
+  }
 
   const content = [
     `Diepe vraag die je nu bedenkt: nummer ${slot}`,
@@ -270,6 +282,11 @@ export async function genereerDiagnose(args: {
   antwoorden: AntwoordKort[]
 }): Promise<Diagnose | null> {
   const { analyse, antwoorden } = args
+  // Testmodus: vaste interne diagnose, zodat ook de OS-brug te testen is.
+  if (mockActief()) {
+    await mockVertraging("diagnose")
+    return mockDiagnose()
+  }
   try {
     const response = await client().messages.create({
       model: MODEL_DIAGNOSE,

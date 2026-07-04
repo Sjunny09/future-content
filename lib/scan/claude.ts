@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { SiteData } from "@/lib/scan/scraper"
+import { mockActief, mockAnalyse, mockObservaties, mockVertraging } from "@/lib/scan/mock"
 
 // Model-keuzes vastgelegd in 03_ceo_synthese.md §1.8:
 //  - Sonnet 4.6 → hoofdanalyse (branche, niche, tone, 3 kansen)
@@ -43,12 +44,14 @@ Je output gaat via de tool \`schrijf_analyse\`. Dit zijn de velden:
 - tone: twee à drie zinnen over hoe de teksten op de site klinken (formeel/informeel, zakelijk/warm, jij/u, technisch/toegankelijk). Wees concreet.
 - kansen: precies drie AI-toepassingen die voor dít bedrijf concreet zin hebben. Geen generieke lijsten. Per kans:
     - titel: maximaal 8 woorden, doe-woord vooraan ("Offertes uit intake-formulier laten schrijven")
-    - beschrijving: 2-3 zinnen die uitleggen wat het doet, waarom het voor dít bedrijf past, en welk concreet proces er sneller/beter van wordt
+    - beschrijving: 2-3 zinnen die uitleggen wat het doet, waarom het voor dít bedrijf past, en welk concreet proces er sneller/beter van wordt. Benoem wat het scheelt (tijd of geld); een orde van grootte mag als de site er aanleiding toe geeft.
+    - De kans geeft het WAT en WAAROM, nooit het HOE. Geen stappenplan, geen toolnamen, geen inrichting: de prioritering en de aanpak zijn precies waar het gesprek met John voor is. Concreet genoeg dat de lezer denkt "die snapt mijn bedrijf", niet zo compleet dat hij er zelf mee wegloopt.
 
 Vangrails:
 - Nooit het woord "wij" gebruiken — John werkt alleen.
 - Nooit iets verzinnen dat niet in de site staat. Als de site weinig zegt: noteer dat in niche of tone.
 - Geen marketing-copy. Dit is een analyse die John straks voorleest in een Loom-video.
+- Geen stappenplannen of toolnamen in de kansen: wel het wat en waarom, niet het hoe.
 - Geen em-dashes (—) of en-dashes (–). Gebruik een komma, punt of dubbele punt.`
 
 const ANALYSE_TOOL: Anthropic.Tool = {
@@ -88,6 +91,11 @@ const ANALYSE_TOOL: Anthropic.Tool = {
 }
 
 export async function analyseerSite(siteData: SiteData): Promise<SiteAnalyse> {
+  // Testmodus: alleen de betaalde call wordt vervangen, de rest blijft echt.
+  if (mockActief()) {
+    await mockVertraging("analyse")
+    return mockAnalyse()
+  }
   const stream = client().messages.stream({
     model: MODEL_ANALYSE,
     max_tokens: 2048,
@@ -172,6 +180,10 @@ const OBSERVATIES_TOOL: Anthropic.Tool = {
 export async function genereerObservaties(
   siteData: SiteData,
 ): Promise<string[]> {
+  if (mockActief()) {
+    await mockVertraging("observaties")
+    return mockObservaties()
+  }
   const response = await client().messages.create({
     model: MODEL_OBSERVATIES,
     max_tokens: 512,

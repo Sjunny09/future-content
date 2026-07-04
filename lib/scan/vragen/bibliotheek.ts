@@ -30,17 +30,24 @@ export const EMAIL_NAAM_VRAAG: Vraag = {
   type: "email-naam",
   titel: "Laat je gegevens achter en krijg direct toegang tot je persoonlijke resultaten.",
   helptekst:
-    "Als bonus stuur ik je binnen 24 uur een persoonlijke video met wat ik zag. Geen nieuwsbrief.",
+    "Laat je je nummer achter, dan bel ik je binnen een dag om je kansen door te nemen. Geen mailtrein. Als bonus krijg je binnen 24 uur een korte persoonlijke video met wat ik zag.",
 }
 
 export const VRAGEN_BIBLIOTHEEK: Vraag[] = [
-  // ── Bevestiging (opener, altijd slot 1)
+  // ── Opener (altijd slot 1): 2-seconden-klik over waar de schoen wringt.
+  // Wordt normaal door de AI branche-specifiek herschreven (titel + opties);
+  // dit is het neutrale vangnet.
   {
     id: "B1",
     thema: "bevestiging",
     type: "enkelkeuze",
-    titel: "Ik zag dat jullie vooral {{hoofdactiviteit|dat wat op de site staat}} doen, klopt dat nog?",
-    opties: ["Ja, dat klopt", "Deels, zit nog meer aan vast", "Nee, dat is veranderd"],
+    titel: "Als je nu naar je werkweek kijkt, wat zit je het meest dwars?",
+    opties: [
+      "Te weinig nieuwe klanten",
+      "Terugkerend werk vreet tijd",
+      "Te veel hangt aan mij",
+      "Eigenlijk niks, het loopt",
+    ],
   },
   {
     id: "B2",

@@ -1,12 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 import type { Vraag } from "@/lib/scan/vragen/bibliotheek"
-import {
-  mockActief,
-  mockDiepteVraag,
-  mockDiagnose,
-  mockVertraging,
-} from "@/lib/scan/mock"
 
 // De uitgebreide (diepte) scan: een tweede, diepere ronde adaptieve vragen na de
 // quickscan. Haiku bedenkt elke vraag op maat (dieper dan de quickscan, gericht op
@@ -116,12 +110,6 @@ export async function kiesDiepteVraag(args: {
   bijnaKlaar?: boolean
 }): Promise<Vraag | null> {
   const { analyse, antwoorden, slot, bijnaKlaar = false } = args
-
-  // Testmodus: bekend script van 8 diepe vragen, daarna klaar.
-  if (mockActief()) {
-    await mockVertraging("vraag")
-    return mockDiepteVraag(slot, bijnaKlaar)
-  }
 
   const content = [
     `Diepe vraag die je nu bedenkt: nummer ${slot}`,
@@ -283,11 +271,6 @@ export async function genereerDiagnose(args: {
   antwoorden: AntwoordKort[]
 }): Promise<Diagnose | null> {
   const { analyse, antwoorden } = args
-  // Testmodus: vaste interne diagnose, zodat ook de OS-brug te testen is.
-  if (mockActief()) {
-    await mockVertraging("diagnose")
-    return mockDiagnose()
-  }
   try {
     const response = await client().messages.create({
       model: MODEL_DIAGNOSE,

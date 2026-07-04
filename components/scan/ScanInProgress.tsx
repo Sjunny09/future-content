@@ -20,7 +20,6 @@ type StatusRespons = {
   url?: string
   fase?: string
   voortgang?: number
-  testmodus?: boolean
 }
 
 const SLIDE_DUUR_MS = 7_000
@@ -54,7 +53,6 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
   const [seconden, setSeconden] = useState(0)
   const [voortgang, setVoortgang] = useState(0)
   const [fase, setFase] = useState<string>("scrapen")
-  const [testmodus, setTestmodus] = useState(false)
   const klaarRef = useRef(false)
   const redirectRef = useRef(false)
 
@@ -114,7 +112,6 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
           setVoortgang((v) => Math.max(v, nieuw))
         }
         if (data.fase) setFase(data.fase)
-        if (data.testmodus) setTestmodus(true)
 
         if (data.gefaald) {
           setFout("Ik kom niet door je site heen. Probeer het zo nog eens.")
@@ -175,15 +172,6 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
 
   return (
     <main className="relative mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center overflow-hidden px-6 py-16">
-      {testmodus && (
-        <p
-          className="mb-6 rounded-md border px-3 py-2 text-center text-xs font-medium"
-          style={{ borderColor: "var(--color-scan-error)", color: "var(--color-scan-error)" }}
-        >
-          Testmodus actief (SCAN_MOCK=1): alles hierna is nepdata, niet de echte
-          analyse van deze site.
-        </p>
-      )}
       {/* Subtiele scan-sweep over het scherm, in de scan-stijl (één terracotta-accent) */}
       {!fout && (
         <motion.div

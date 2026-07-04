@@ -1,6 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk"
 import type { SiteData } from "@/lib/scan/scraper"
-import { mockActief, mockAnalyse, mockObservaties, mockVertraging } from "@/lib/scan/mock"
 
 // Model-keuzes vastgelegd in 03_ceo_synthese.md §1.8:
 //  - Sonnet 4.6 → hoofdanalyse (branche, niche, tone, 3 kansen)
@@ -91,11 +90,6 @@ const ANALYSE_TOOL: Anthropic.Tool = {
 }
 
 export async function analyseerSite(siteData: SiteData): Promise<SiteAnalyse> {
-  // Testmodus: alleen de betaalde call wordt vervangen, de rest blijft echt.
-  if (mockActief()) {
-    await mockVertraging("analyse")
-    return mockAnalyse()
-  }
   const stream = client().messages.stream({
     model: MODEL_ANALYSE,
     max_tokens: 2048,
@@ -180,10 +174,6 @@ const OBSERVATIES_TOOL: Anthropic.Tool = {
 export async function genereerObservaties(
   siteData: SiteData,
 ): Promise<string[]> {
-  if (mockActief()) {
-    await mockVertraging("observaties")
-    return mockObservaties()
-  }
   const response = await client().messages.create({
     model: MODEL_OBSERVATIES,
     max_tokens: 512,

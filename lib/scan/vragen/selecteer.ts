@@ -6,12 +6,6 @@ import {
   vindVraag,
   type Vraag,
 } from "@/lib/scan/vragen/bibliotheek"
-import {
-  mockActief,
-  mockEersteVraag,
-  mockVolgendeVraag,
-  mockVertraging,
-} from "@/lib/scan/mock"
 
 // Adaptieve, branche-gebonden vraagselectie. B1 wordt vooraf gepersonaliseerd
 // (kiesEersteVraag). Daarna BEDENKT Haiku na elk antwoord de volgende vraag
@@ -65,11 +59,6 @@ const B1_TOOL: Anthropic.Tool = {
 }
 
 export async function kiesEersteVraag(analyse: SiteAnalyse): Promise<Vraag[]> {
-  // Testmodus: deterministisch script in plaats van de betaalde call.
-  if (mockActief()) {
-    await mockVertraging("vraag")
-    return mockEersteVraag()
-  }
   const b1 = vindVraag("B1")
   if (!b1) return [EMAIL_NAAM_VRAAG]
 
@@ -200,12 +189,6 @@ export async function kiesVolgendeVraag(args: {
   alleenDoorvraag?: boolean
 }): Promise<Vraag | null> {
   const { analyse, gesteldeIds, antwoorden, slot, alleenDoorvraag = false } = args
-
-  // Testmodus: bekend script (5 vragen, alle typen), daarna genoeg.
-  if (mockActief()) {
-    await mockVertraging("vraag")
-    return mockVolgendeVraag(slot)
-  }
 
   try {
     const response = await client().messages.create({

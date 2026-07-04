@@ -9,7 +9,6 @@ import { DirectContact } from "@/components/scan/DirectContact"
 import { OpmerkingVeld } from "@/components/scan/OpmerkingVeld"
 import { PriceIndicator } from "@/components/PriceIndicator"
 import { BOOKING } from "@/lib/constants"
-import { mockActief } from "@/lib/scan/mock"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
 type Params = Promise<{ jobId: string }>
@@ -56,16 +55,6 @@ export default async function KlaarPagina({ params }: { params: Params }) {
   return (
     <main className="mx-auto flex min-h-screen max-w-6xl flex-col px-6 py-10 lg:h-screen lg:justify-center lg:overflow-hidden lg:py-8">
       <ExitIntentModal calUrl={calUrl} />
-
-      {mockActief() && (
-        <div
-          className="mb-4 shrink-0 rounded-md border px-3 py-2 text-xs font-medium"
-          style={{ borderColor: "var(--color-scan-error)", color: "var(--color-scan-error)" }}
-        >
-          Testmodus actief (SCAN_MOCK=1): dit is nepdata van een verzonnen
-          installatiebedrijf, niet de echte analyse van deze site.
-        </div>
-      )}
 
       {/* Compacte kop: naam + branche-regel, geen ruimteverspilling op desktop */}
       <div className="shrink-0">

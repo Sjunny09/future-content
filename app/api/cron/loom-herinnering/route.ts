@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { db } from "@/lib/scan/db"
 import { stuurLoomHerinnering } from "@/lib/scan/mail/stuurHerinnering"
 import { reportError } from "@/lib/scan/observability/logger"
+import { mailsNaarLeadsAan } from "@/lib/scan/settings"
+import { logMail } from "@/lib/scan/mail/mailLog"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -28,6 +30,15 @@ export async function GET(req: NextRequest) {
     }
   }
 
+  // Respecteer de mail-schakelaar uit /os: staat 'ie uit, dan sturen we ook
+  // geen herinneringen naar leads.
+  if (!(await mailsNaarLeadsAan())) {
+    return NextResponse.json(
+      { ok: true, gevonden: 0, verstuurd: 0, overgeslagen: "mail-schakelaar staat uit" },
+      { status: 200 },
+    )
+  }
+
   const drempel = new Date(Date.now() - GRENS_MS)
 
   const kandidaten = await db.loomVideo.findMany({
@@ -35,11 +46,13 @@ export async function GET(req: NextRequest) {
       verstuurdOp: null,
       herinneringVerstuurd: false,
       createdAt: { lte: drempel },
+      // Geen herinneringen naar testleads.
+      lead: { isTest: false },
     },
     select: {
       id: true,
       createdAt: true,
-      lead: { select: { email: true, naam: true } },
+      lead: { select: { id: true, email: true, naam: true } },
     },
     take: 50,
   })
@@ -50,6 +63,14 @@ export async function GET(req: NextRequest) {
     const gelukt = await stuurLoomHerinnering({
       email: rij.lead.email,
       naam: rij.lead.naam,
+    })
+    await logMail({
+      leadId: rij.lead.id,
+      ontvanger: rij.lead.email,
+      richting: "naar_lead",
+      soort: "herinnering",
+      onderwerp: "Korte heads-up over je video",
+      status: gelukt ? "verstuurd" : "mislukt",
     })
     if (!gelukt) continue
     try {

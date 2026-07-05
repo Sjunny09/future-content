@@ -70,6 +70,9 @@ export async function POST(req: NextRequest) {
       url: validatie.url.toString(),
       ipHash: ipH,
       status: "queued",
+      // John test met de fc_os-cookie erop: markeer de scan als test zodat de
+      // lead niet gemaild wordt en straks in het test-tabblad van /os belandt.
+      isTest,
     },
     select: { id: true },
   })

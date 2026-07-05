@@ -13,14 +13,22 @@ export type SiteData = {
 }
 
 const MAX_TEKST = 6000
-const JINA_TIMEOUT_MS = 12_000
-const CHEERIO_TIMEOUT_MS = 10_000
+const JINA_TIMEOUT_MS = 20_000
+const CHEERIO_TIMEOUT_MS = 12_000
 
 export async function haalSiteDataOp(url: string): Promise<SiteData> {
+  // Jina eerst (beste kwaliteit). Faalt de eerste poging op een timeout, dan is
+  // de kans groot dat Jina de pagina inmiddels gecachet heeft: één snelle retry
+  // vangt de trage sites die net over de rand tikten (zoals allplayzwembaden.nl,
+  // ~12s koud). Pas als ook dat mislukt vallen we terug op Cheerio.
   try {
     return await scrapeMetJina(url)
   } catch {
-    return await scrapeMetCheerio(url)
+    try {
+      return await scrapeMetJina(url)
+    } catch {
+      return await scrapeMetCheerio(url)
+    }
   }
 }
 

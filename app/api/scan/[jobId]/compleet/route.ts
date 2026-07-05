@@ -56,7 +56,7 @@ export async function POST(
 
   const job = await db.scanJob.findUnique({
     where: { id: jobId },
-    select: { id: true, status: true },
+    select: { id: true, status: true, isTest: true },
   })
   if (!job) {
     return NextResponse.json({ fout: "Niet gevonden." }, { status: 404 })
@@ -76,8 +76,14 @@ export async function POST(
   // netjes gekoppeld zonder duplicaten.
   const lead = await db.lead.upsert({
     where: { email },
-    update: { naam, ...(telefoon ? { telefoon } : {}) },
-    create: { email, naam, telefoon },
+    update: {
+      naam,
+      ...(telefoon ? { telefoon } : {}),
+      // Een testscan markeert de lead als test; een echte scan haalt dat nooit
+      // weg (John kan handmatig terugzetten in /os).
+      ...(job.isTest ? { isTest: true } : {}),
+    },
+    create: { email, naam, telefoon, isTest: job.isTest },
     select: { id: true },
   })
 

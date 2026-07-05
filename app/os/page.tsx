@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
-import { OsLogin, VideoForm } from "./ui"
+import { mailsNaarLeadsAan } from "@/lib/scan/settings"
+import { OsLogin, VideoForm, MailSchakelaar, TestToggle } from "./ui"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -74,28 +75,69 @@ const diagnoseKleur: Record<string, string> = {
   zelf: MUTED,
 }
 
-export default async function OsPage() {
+function tabStijl(actief: boolean): React.CSSProperties {
+  return {
+    padding: "8px 14px",
+    fontSize: 14,
+    fontWeight: 600,
+    color: actief ? INK : MUTED,
+    borderBottom: actief ? `2px solid ${GOLD}` : "2px solid transparent",
+    textDecoration: "none",
+    marginBottom: -1,
+  }
+}
+
+function mailSoortLabel(soort: string): string {
+  if (soort === "resultaten") return "Resultaten-mail"
+  if (soort === "john_notificatie") return "Notificatie aan jou"
+  if (soort === "herinnering") return "Herinnering"
+  return soort
+}
+
+function mailStatusPil(status: string): React.CSSProperties {
+  const kleur = status === "verstuurd" ? "#4E7A51" : status === "mislukt" ? "#B8472A" : MUTED
+  return {
+    fontSize: 10.5, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".04em",
+    color: "#fff", background: kleur, padding: "1px 7px", borderRadius: 20,
+  }
+}
+
+export default async function OsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ tab?: string }>
+}) {
   const token = (await cookies()).get("fc_os")?.value
   const ok = process.env.ADMIN_TOKEN && token === process.env.ADMIN_TOKEN
   if (!ok) return <OsLogin />
 
-  const leads = await db.lead.findMany({
-    orderBy: { createdAt: "desc" },
-    take: 200,
-    include: {
-      scans: {
-        orderBy: { startedAt: "desc" },
-        take: 1,
-        include: {
-          antwoorden: {
-            orderBy: { createdAt: "asc" },
-            select: { vraagId: true, vraagTitel: true, waarde: true, createdAt: true },
+  const tab = (await searchParams).tab === "test" ? "test" : "actueel"
+  const isTestFilter = tab === "test"
+
+  const [leads, actueelCount, testCount, mailsAan] = await Promise.all([
+    db.lead.findMany({
+      where: { isTest: isTestFilter },
+      orderBy: { createdAt: "desc" },
+      take: 200,
+      include: {
+        scans: {
+          orderBy: { startedAt: "desc" },
+          take: 1,
+          include: {
+            antwoorden: {
+              orderBy: { createdAt: "asc" },
+              select: { vraagId: true, vraagTitel: true, waarde: true, createdAt: true },
+            },
           },
         },
+        loomVideos: { orderBy: { createdAt: "desc" }, take: 1 },
+        mailLogs: { orderBy: { createdAt: "desc" }, take: 12 },
       },
-      loomVideos: { orderBy: { createdAt: "desc" }, take: 1 },
-    },
-  })
+    }),
+    db.lead.count({ where: { isTest: false } }),
+    db.lead.count({ where: { isTest: true } }),
+    mailsNaarLeadsAan(),
+  ])
 
   const label: React.CSSProperties = {
     fontSize: 10.5, letterSpacing: ".08em", textTransform: "uppercase",
@@ -105,19 +147,26 @@ export default async function OsPage() {
   return (
     <main style={{ background: BG, minHeight: "100vh", padding: "40px 20px", color: INK }}>
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
-        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 24 }}>
+        <header style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 16, gap: 16, flexWrap: "wrap" }}>
           <div>
             <div style={{ fontSize: 11, letterSpacing: ".2em", textTransform: "uppercase", color: MUTED, fontWeight: 600 }}>
               Future Content OS
             </div>
             <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: 30, marginTop: 4 }}>Leads uit de Quickscan</h1>
           </div>
-          <div style={{ fontSize: 13, color: MUTED }}>{leads.length} leads · bron: Neon</div>
+          <MailSchakelaar aan={mailsAan} />
         </header>
+
+        <div style={{ display: "flex", gap: 6, marginBottom: 20, borderBottom: `1px solid ${BORDER}` }}>
+          <a href="/os" style={tabStijl(tab === "actueel")}>Actueel · {actueelCount}</a>
+          <a href="/os?tab=test" style={tabStijl(tab === "test")}>Test · {testCount}</a>
+        </div>
 
         {leads.length === 0 ? (
           <p style={{ color: MUTED, fontSize: 15, padding: "40px 0" }}>
-            Nog geen leads. Zodra iemand de Quickscan afrondt, verschijnt die hier.
+            {tab === "test"
+              ? "Nog geen test-leads. Scans die je zelf doet terwijl je in /os bent ingelogd, komen hier."
+              : "Nog geen leads. Zodra iemand de Quickscan afrondt, verschijnt die hier."}
           </p>
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -247,6 +296,31 @@ export default async function OsPage() {
                         bestaandeUrl={video?.loomUrl ?? null}
                         verstuurd={Boolean(video?.verstuurdOp)}
                       />
+                    </div>
+
+                    {/* Verstuurde mails */}
+                    {lead.mailLogs.length > 0 && (
+                      <div>
+                        <div style={label}>Verstuurde mails</div>
+                        <div style={{ display: "grid", gap: 5 }}>
+                          {lead.mailLogs.map((m) => (
+                            <div key={m.id} style={{ fontSize: 12.5, display: "flex", gap: 8, alignItems: "baseline", flexWrap: "wrap" }}>
+                              <span style={mailStatusPil(m.status)}>{m.status}</span>
+                              <span style={{ fontWeight: 600 }}>{mailSoortLabel(m.soort)}</span>
+                              <span style={{ color: MUTED }}>
+                                {m.richting === "naar_john" ? "naar jou" : `naar ${m.ontvanger}`}
+                              </span>
+                              {m.detail && <span style={{ color: MUTED }}>· {m.detail}</span>}
+                              <span style={{ color: MUTED, marginLeft: "auto" }}>{dt(m.createdAt)}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Test-markering */}
+                    <div style={{ display: "flex", justifyContent: "flex-end", borderTop: `1px solid ${BORDER}`, paddingTop: 12 }}>
+                      <TestToggle leadId={lead.id} isTest={lead.isTest} />
                     </div>
                   </div>
                 </details>

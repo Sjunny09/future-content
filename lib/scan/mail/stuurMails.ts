@@ -2,6 +2,8 @@ import { Resend } from "resend"
 import { db } from "@/lib/scan/db"
 import { BOOKING } from "@/lib/constants"
 import type { SiteAnalyse } from "@/lib/scan/claude"
+import { mailsNaarLeadsAan } from "@/lib/scan/settings"
+import { logMail } from "@/lib/scan/mail/mailLog"
 
 // Mail-adressen in één punt — makkelijker te veranderen later.
 const VAN = "Future Content <scan@future-content.nl>"
@@ -43,38 +45,54 @@ export async function stuurMails(jobId: string): Promise<void> {
 
   const analyse = (job.analyseJson ?? null) as SiteAnalyse | null
   const antwoorden = job.antwoorden
+  const leadId = job.lead.id
+  const mailsAan = await mailsNaarLeadsAan()
 
-  await Promise.all([
-    resend.emails
-      .send({
-        from: VAN,
-        to: JOHN,
-        subject: `Nieuwe scan: ${job.lead.naam ?? "onbekend"} · ${job.url}`,
-        text: bouwJohnMail({
-          naam: job.lead.naam,
-          email: job.lead.email,
-          telefoon: job.lead.telefoon,
-          url: job.url,
-          jobId: job.id,
-          analyse,
-          antwoorden,
-        }),
-      })
-      .catch((err) => {
-        console.error("[mail] mail-naar-john faalde", { jobId, err })
+  // 1. Notificatie naar John — altijd, ook bij een testscan (John wil de
+  //    heads-up en ziet zo dat de pijplijn werkt).
+  const johnOnderwerp = `Nieuwe scan: ${job.lead.naam ?? "onbekend"} · ${job.url}`
+  try {
+    await resend.emails.send({
+      from: VAN,
+      to: JOHN,
+      subject: johnOnderwerp,
+      text: bouwJohnMail({
+        naam: job.lead.naam,
+        email: job.lead.email,
+        telefoon: job.lead.telefoon,
+        url: job.url,
+        jobId: job.id,
+        analyse,
+        antwoorden,
       }),
+    })
+    await logMail({ leadId, scanJobId: job.id, ontvanger: JOHN, richting: "naar_john", soort: "john_notificatie", onderwerp: johnOnderwerp, status: "verstuurd" })
+  } catch (err) {
+    console.error("[mail] mail-naar-john faalde", { jobId, err })
+    await logMail({ leadId, scanJobId: job.id, ontvanger: JOHN, richting: "naar_john", soort: "john_notificatie", onderwerp: johnOnderwerp, status: "mislukt", detail: err instanceof Error ? err.message : String(err) })
+  }
 
-    resend.emails
-      .send({
+  // 2. Resultaten-mail naar de lead — overslaan bij een testlead of als de
+  //    mail-schakelaar in /os uit staat.
+  const leadOnderwerp = "Je resultaten staan klaar"
+  if (job.isTest) {
+    await logMail({ leadId, scanJobId: job.id, ontvanger: job.lead.email, richting: "naar_lead", soort: "resultaten", onderwerp: leadOnderwerp, status: "overgeslagen", detail: "testlead" })
+  } else if (!mailsAan) {
+    await logMail({ leadId, scanJobId: job.id, ontvanger: job.lead.email, richting: "naar_lead", soort: "resultaten", onderwerp: leadOnderwerp, status: "overgeslagen", detail: "mail-schakelaar staat uit" })
+  } else {
+    try {
+      await resend.emails.send({
         from: VAN,
         to: job.lead.email,
-        subject: "Je resultaten staan klaar",
+        subject: leadOnderwerp,
         text: bouwKlantMail({ naam: job.lead.naam, jobId: job.id }),
       })
-      .catch((err) => {
-        console.error("[mail] mail-naar-klant faalde", { jobId, err })
-      }),
-  ])
+      await logMail({ leadId, scanJobId: job.id, ontvanger: job.lead.email, richting: "naar_lead", soort: "resultaten", onderwerp: leadOnderwerp, status: "verstuurd" })
+    } catch (err) {
+      console.error("[mail] mail-naar-klant faalde", { jobId, err })
+      await logMail({ leadId, scanJobId: job.id, ontvanger: job.lead.email, richting: "naar_lead", soort: "resultaten", onderwerp: leadOnderwerp, status: "mislukt", detail: err instanceof Error ? err.message : String(err) })
+    }
+  }
 }
 
 // ─────────────────────────────────────────

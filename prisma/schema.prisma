@@ -33,6 +33,10 @@ model ScanJob {
   url         String     // De ingevulde website-URL
   ipHash      String     // Gehashed IP voor rate-limiting (geen rauwe IP-opslag)
 
+  // Testscan: gezet als de scan gestart is met de admin-cookie (fc_os), dus door
+  // John zelf. Zorgt dat de lead niet gemaild wordt en in het test-tabblad belandt.
+  isTest      Boolean    @default(false)
+
   // Scrape-resultaat
   siteDataJson   Json?   // { title, description, paginas: [...] }
   scrapeBron     String? // "jina" | "cheerio"
@@ -79,6 +83,11 @@ model Lead {
   telefoon     String?
   bedrijfsnaam String?
 
+  // Testlead: markeert deze lead als test (handmatig in /os of automatisch via
+  // een testscan). Test-leads staan in het test-tabblad, niet in het actuele
+  // overzicht, en worden niet gemaild.
+  isTest       Boolean   @default(false)
+
   // Anonimisering na 18 maanden (zie docs/quickscan/03_ceo_synthese.md §4.1)
   geanonimiseerd Boolean @default(false)
 
@@ -88,9 +97,11 @@ model Lead {
   scans        ScanJob[]
   loomVideos   LoomVideo[]
   payments     Payment[]
+  mailLogs     MailLog[]
 
   @@index([email])
   @@index([createdAt])
+  @@index([isTest])
 }
 
 // Antwoorden op de 6 vragen — één row per vraag
@@ -123,6 +134,34 @@ model LoomVideo {
   @@index([leadId])
   @@index([deadline])
   @@index([verstuurdOp])
+}
+
+// MailLog = één rij per mail die de funnel verstuurt of bewust overslaat.
+// Zodat John in /os per lead precies ziet welke mails eruit zijn gegaan.
+model MailLog {
+  id         String   @id @default(cuid())
+  leadId     String?
+  lead       Lead?    @relation(fields: [leadId], references: [id])
+  scanJobId  String?
+  ontvanger  String   // e-mailadres van de ontvanger
+  richting   String   // "naar_lead" | "naar_john"
+  soort      String   // "resultaten" | "john_notificatie" | "herinnering"
+  onderwerp  String
+  status     String   // "verstuurd" | "mislukt" | "overgeslagen"
+  detail     String?  // reden bij overgeslagen of foutmelding bij mislukt
+  createdAt  DateTime @default(now())
+
+  @@index([leadId])
+  @@index([scanJobId])
+  @@index([createdAt])
+}
+
+// Setting = kleine key-value voor OS-instellingen die John in /os kan omzetten
+// zonder redeploy. Nu: of de funnel automatische mails naar leads stuurt.
+model Setting {
+  key       String   @id
+  waarde    String
+  updatedAt DateTime @updatedAt
 }
 
 // ─────────────────────────────────────────

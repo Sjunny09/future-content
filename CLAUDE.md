@@ -11,11 +11,14 @@ De site woont in de GitHub-repo `Sjunny09/future-content`. Lokaal staan twee map
 
 **Één-sessie-regel (HARD):** slechts één Claude-sessie tegelijk in deze repo. Twee sessies = race conditions + gedivergeerde branches (ging mis op 3 juli 2026: twee mappen, vijf branches). Check vóór je begint `git worktree list` en werk uitsluitend in `fc-rebrand` op `nieuwe-huisstijl`.
 
-**Deploy-flow:**
-- Vercel-project: `future-content`.
-- Testen: commit op `nieuwe-huisstijl` → `npx vercel --yes` = preview-URL.
-- Live: merge `nieuwe-huisstijl` → `main`, push, dan `npx vercel --prod --force` + `npx vercel alias set <url> future-content.nl` (bare domain handmatig, www automatisch).
-- `.env` (DATABASE_URL, DIRECT_DATABASE_URL, ANTHROPIC_API_KEY, ADMIN_TOKEN) staat NIET in git; leeft lokaal + op Vercel.
+**Deploy-flow (git-integratie, sinds 3 juli 2026 — de CLI-deploy is losgelaten):**
+- Vercel-project: `future-content` (team johns-projects). Deploy loopt via de GitHub-koppeling, niet via de CLI.
+- Testen: commit + push op `nieuwe-huisstijl` naar origin → Vercel bouwt automatisch een preview.
+- Live: in het Vercel-dashboard de gewenste `nieuwe-huisstijl`-build **Promote to Production**. Productie draait direct van `nieuwe-huisstijl` (er wordt NIET naar `main` gemerged).
+- **Na ELKE promote:** het kale domein `future-content.nl` handmatig opnieuw aliassen (`npx vercel alias set <deployment-url> future-content.nl`); alleen `www` volgt automatisch. Check met `npx vercel alias ls | grep future-content.nl`.
+- Commit-auteur MOET `johnlavrijsen@gmail.com` zijn, anders blokkeert Vercel de deploy.
+- Waarom geen CLI-deploy: `npx vercel --prod` faalde herhaaldelijk op de ~1GB `/film` video-assets ("Not authorized", vastlopen op building). Git-integratie is de betrouwbare route.
+- `.env` (DATABASE_URL, DIRECT_DATABASE_URL, ANTHROPIC_API_KEY, ADMIN_TOKEN, e.a.) staat NIET in git; leeft lokaal + op Vercel.
 
 ## Commands
 
@@ -27,12 +30,13 @@ npm run dev        # Start dev server at http://localhost:3000
 npm run build      # Type-check + production build
 npm run start      # Start production server
 
-# Deploy
-npx vercel --prod --force   # Deploy to production (--force skips build cache)
-# CRITICAL: after every deploy, also run:
+# Deploy (git-integratie — geen CLI prod-deploy meer)
+git push origin nieuwe-huisstijl   # Vercel bouwt automatisch een preview
+# Go-live: in het Vercel-dashboard de nieuwste nieuwe-huisstijl-build "Promote to Production".
+# CRITICAL: na elke promote het kale domein handmatig opnieuw aliassen:
 npx vercel alias set <new-deployment-url> future-content.nl
-# Vercel only auto-aliases www.future-content.nl; the bare domain must be
-# pointed manually after each deploy. Check with: npx vercel alias ls
+# Vercel aliast alleen www.future-content.nl automatisch; de bare domain moet
+# na elke deploy handmatig. Check met: npx vercel alias ls
 ```
 
 No linting or test commands are configured. TypeScript errors surface via `npm run build`.
@@ -76,7 +80,7 @@ No linting or test commands are configured. TypeScript errors surface via `npm r
 ## Key Decisions
 
 - **Bare domain alias:** Vercel CLI only auto-aliases `www.future-content.nl`. The bare domain `future-content.nl` must be re-aliased manually after every production deploy.
-- **Deploy flag:** Use `--force` to skip Vercel build cache when changes aren't reflecting live.
+- **Deploy via git-integratie:** productie gaat live via de Vercel-dashboard-knop "Promote to Production" op een `nieuwe-huisstijl`-build, niet via `vercel --prod` (die CLI-route is losgelaten, faalde op de grote video-assets). Zie de deploy-flow bovenaan.
 - **Vercel framework setting:** Must be set to "Next.js" in Project Settings (not auto-detected on initial setup).
 - **DNS (Vimexx):** `@` A record → `76.76.21.21`, `www` CNAME → `cname.vercel-dns.com`.
 - **Browser cache:** The site uses static prerendering heavily. When verifying changes, always test in an incognito window or use Cmd+Shift+R to bypass the browser cache. The Vercel deployment URL (`*.vercel.app`) always reflects the latest build.

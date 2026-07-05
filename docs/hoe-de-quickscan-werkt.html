@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoe de quickscan werkt · Future Content</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2A2218; --paper:#F3ECE0; --white:#FFFFFF;
+    --klei:#B45F38; --klei-light:#D9A066; --grey:#6E6151;
+    --sand:#C9BBA6; --card:#221C14; --card-2:#2c2418; --border:#463C2E;
+    --radius:2px;
+    --sans:"Helvetica Neue",Helvetica,Archivo,Arial,sans-serif;
+    --mono:"Space Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--ink); color:var(--paper);
+    font-family:var(--sans); font-weight:300; line-height:1.55;
+    -webkit-font-smoothing:antialiased; letter-spacing:.005em;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px}
+  .mono{font-family:var(--mono); text-transform:uppercase; letter-spacing:.18em; font-size:12px}
+  .caret{display:inline-block; width:12px; height:1.05em; background:var(--klei); margin-left:8px; vertical-align:-2px; animation:blink 1.1s step-end infinite}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+  /* Header */
+  header{padding:64px 0 40px; border-bottom:1px solid var(--border)}
+  .logo{width:210px; height:auto; display:block; margin-bottom:40px}
+  .eyebrow{color:var(--sand)}
+  .eyebrow .num{color:var(--klei); font-weight:700}
+  h1{font-size:clamp(38px,7vw,74px); line-height:.96; letter-spacing:-.03em; margin:18px 0 20px; font-weight:300}
+  h1 b{font-weight:900}
+  .lead{font-size:clamp(17px,2.4vw,21px); max-width:640px; color:var(--paper)}
+  .lead .accent{color:var(--klei-light)}
+
+  /* Sections */
+  section{padding:52px 0; border-bottom:1px solid var(--border)}
+  h2{font-size:clamp(24px,4vw,36px); line-height:1.05; letter-spacing:-.02em; font-weight:300; margin:14px 0 22px}
+  h2 b{font-weight:900}
+  p{max-width:660px}
+  a{color:var(--klei-light)}
+
+  /* Model cards */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:26px}
+  .card.klei{border-color:var(--klei)}
+  .card .tag{color:var(--klei); font-weight:700}
+  .card h3{font-family:var(--mono); font-size:15px; text-transform:none; letter-spacing:0; margin:10px 0 4px; font-weight:700; color:var(--white)}
+  .card .id{font-family:var(--mono); font-size:12px; color:var(--sand); word-break:break-all}
+  .card ul{margin:16px 0 0; padding:0; list-style:none}
+  .card li{position:relative; padding-left:20px; margin:10px 0; font-size:15px}
+  .card li::before{content:"▍"; position:absolute; left:0; color:var(--klei)}
+  .speed{margin-top:16px; font-family:var(--mono); font-size:12px; color:var(--sand)}
+
+  /* How-note strip */
+  .note{background:var(--card-2); border-left:3px solid var(--klei); border-radius:var(--radius); padding:18px 22px; margin-top:22px}
+  .note b{font-weight:700; color:var(--white)}
+
+  /* Diagram */
+  .diagram{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px; margin-top:10px; overflow-x:auto}
+  .mermaid{min-width:560px}
+  .diagram .fallback{font-family:var(--mono); font-size:12px; color:var(--grey); margin-top:8px}
+
+  /* Steps / why */
+  .why{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px}
+  @media(max-width:680px){.why{grid-template-columns:1fr}}
+  .why .item{border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; background:var(--card)}
+  .why .k{font-family:var(--mono); font-size:12px; color:var(--klei); font-weight:700; letter-spacing:.14em}
+  .why h4{margin:8px 0 6px; font-weight:700; font-size:17px; color:var(--white)}
+  .why p{font-size:15px; margin:0; color:var(--paper)}
+
+  /* Legend */
+  .legend{display:flex; gap:22px; flex-wrap:wrap; margin-top:18px; font-family:var(--mono); font-size:11px; color:var(--sand)}
+  .legend span{display:inline-flex; align-items:center; gap:8px}
+  .swatch{width:14px; height:14px; border-radius:var(--radius); display:inline-block}
+
+  /* Output list */
+  .out{margin-top:8px; padding:0; list-style:none; max-width:660px}
+  .out li{padding:14px 0; border-bottom:1px solid var(--border); display:flex; gap:14px; align-items:baseline}
+  .out li:last-child{border-bottom:none}
+  .out .n{font-family:var(--mono); color:var(--klei); font-weight:700; font-size:13px}
+
+  footer{padding:48px 0 72px}
+  .sig{font-size:clamp(22px,4vw,34px); letter-spacing:-.02em; font-weight:300}
+  .sig b{font-weight:900}
+  .colofon{margin-top:20px; color:var(--grey); font-family:var(--mono); font-size:12px; line-height:1.9}
+  .colofon .klei{color:var(--klei)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 862 404" role="img" aria-label="Future Content">
+      <text x="56" y="164" font-family="Arial,'Helvetica Neue',Helvetica,sans-serif" font-size="150" font-weight="900" letter-spacing="-3" fill="#F3ECE0">FUTURE</text>
+      <text x="56" y="290" font-family="Arial,'Helvetica Neue',Helvetica,sans-serif" font-size="150" font-weight="300" letter-spacing="-3" fill="#F3ECE0">CONTENT</text>
+      <rect x="776" y="182" width="30" height="108" fill="#B45F38"></rect>
+      <text x="56" y="356" font-family="Arial,'Helvetica Neue',Helvetica,sans-serif" font-size="30" font-weight="600" letter-spacing="9" fill="#C9BBA6"><tspan fill="#B45F38">THINK</tspan> NOW, <tspan fill="#D9A066">BUILD</tspan> TOMORROW</text>
+    </svg>
+    <div class="mono eyebrow"><span class="num">01</span> &nbsp; DE QUICKSCAN · ONDER DE MOTORKAP</div>
+    <h1>Hoe de <b>scan</b><br>is gebouwd<span class="caret"></span></h1>
+    <p class="lead">Iemand zet zijn website-adres in, en krijgt binnen een halve minuut een concreet AI-plan op maat. Geen trucje: er draaien <span class="accent">twee Claude-modellen</span> achter, elk op zijn eigen taak. Dit is de uitleg, zonder jargon.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow"><span class="num">02</span> &nbsp; WAT HET IS</div>
+    <h2>Een <b>voordeur</b>, geen speeltje</h2>
+    <p>De scan is er om van een naam op LinkedIn een gesprek te maken. De bezoeker vult alleen een website-URL in. Daarna leest het systeem de site, denkt na, en stelt een paar vragen op maat. Aan het eind staat er een plan met drie concrete kansen voor dat bedrijf.</p>
+    <p>Er zijn twee smaken. De <b style="font-weight:700;color:var(--white)">gratis quickscan</b> (URL, wachtscherm, vragen, e-mail, eindscherm met drie kansen) en de optionele <b style="font-weight:700;color:var(--white)">uitgebreide scan</b> die dieper graaft en organisch eindigt in een afspraak.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow"><span class="num">03</span> &nbsp; DE TWEE MODELLEN</div>
+    <h2>Zwaar denkwerk en <b>snel werk</b>, gescheiden</h2>
+    <p>Het geheim is de taakverdeling. Het dure, slimme model doet het denkwerk waar het op aankomt. Het snelle, goedkope model doet alles waar de bezoeker op zit te wachten. Zo voelt de scan snel en blijft hij toch scherp.</p>
+    <div class="grid">
+      <div class="card klei">
+        <div class="mono tag">HET DENKWERK</div>
+        <h3>Sonnet 4.6</h3>
+        <div class="id">claude-sonnet-4-6</div>
+        <ul>
+          <li>Leest de hele site en bepaalt branche, niche en toon</li>
+          <li>Schrijft exact drie AI-kansen die voor dit bedrijf hout snijden</li>
+          <li>Maakt bij de uitgebreide scan de interne diagnose: bouwen, training of zelf doen</li>
+        </ul>
+        <div class="speed">~15 tot 25 seconden · de traagste stap, bewust</div>
+      </div>
+      <div class="card">
+        <div class="mono tag">HET SNELLE WERK</div>
+        <h3>Haiku 4.5</h3>
+        <div class="id">claude-haiku-4-5</div>
+        <ul>
+          <li>Schrijft de vier observatie-zinnen tijdens het wachtscherm</li>
+          <li>Kiest de gepersonaliseerde openingsvraag</li>
+          <li>Bepaalt na elk antwoord de volgende vraag, en stopt zelf op tijd</li>
+        </ul>
+        <div class="speed">~1 tot 4 seconden per stap · goedkoop en direct</div>
+      </div>
+    </div>
+    <div class="note">
+      <b>Hoe ze aangestuurd worden.</b> Elke aanroep gebruikt geforceerde tool-use, zodat het model altijd nette JSON teruggeeft en nooit losse tekst. De vaste instructies worden gecachet (cache_control ephemeral) om tokens te sparen. Extended thinking staat bewust uit, want dat botst met geforceerde tool-use. Op de productie-sleutel staat Zero Data Retention aan: de klantdata blijft niet hangen bij het model.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow"><span class="num">04</span> &nbsp; DE FLOW</div>
+    <h2>Van <b>URL</b> tot boeking</h2>
+    <p>Zodra de URL binnenkomt, geeft de server meteen een job-nummer terug en gaat het echte werk op de achtergrond draaien. De bezoeker kijkt naar een wachtscherm terwijl het scrapen en de twee AI-stappen parallel lopen.</p>
+    <div class="legend">
+      <span><i class="swatch" style="background:#B45F38"></i> AI-stap (Claude)</span>
+      <span><i class="swatch" style="background:#33291d;border:1px solid #463C2E"></i> Systeem / server</span>
+      <span><i class="swatch" style="background:#2c2418;border:1px solid #463C2E"></i> Wat de bezoeker ziet</span>
+    </div>
+    <div class="diagram">
+      <pre class="mermaid">
+flowchart TD
+    A["Bezoeker vult website-URL in<br/>pagina /scan"]:::ui --> B["start-route<br/>Zod-check, SSRF-guard, rate-limit<br/>maakt ScanJob, geeft direct jobId"]:::sys
+    B --> C["Wachtscherm /scan/bezig<br/>polt elke 1,5s"]:::ui
+    B -. op de achtergrond .-> D["Site scrapen<br/>Jina Reader + Cheerio<br/>PII eruit gestript"]:::sys
+    D --> E{"parallel"}:::sys
+    E --> F["Haiku 4.5<br/>4 observatie-zinnen"]:::ai
+    E --> G["Sonnet 4.6<br/>branche, niche, toon<br/>exact 3 kansen"]:::ai
+    G --> H["Haiku 4.5<br/>openingsvraag op maat"]:::ai
+    F --> I["status: ready<br/>na een vloer van 30s"]:::sys
+    H --> I
+    C -. polt .-> I
+    I --> J["Adaptieve vragen<br/>5 tot 8, dan e-mail"]:::ui
+    J -->|na elk antwoord| K["Haiku 4.5<br/>kiest de volgende vraag<br/>stopt zelf met genoeg=true"]:::ai
+    K --> J
+    J --> L["compleet-route<br/>Lead opslaan, mails, OS-bridge, Telegram"]:::sys
+    L --> M["Eindscherm /scan/klaar<br/>3 kansen + volgende stap"]:::ui
+    M --> N["Optioneel: uitgebreide scan<br/>8 tot 14 diepere vragen (Haiku)"]:::ai
+    N --> O["Sonnet 4.6<br/>interne diagnose<br/>bouwen / training / zelf"]:::ai
+    O --> P["Cal.com-boeking<br/>het gesprek met John"]:::ui
+    classDef ai fill:#B45F38,stroke:#8f4a2b,color:#F3ECE0,font-weight:bold;
+    classDef sys fill:#33291d,stroke:#463C2E,color:#F3ECE0;
+    classDef ui fill:#2c2418,stroke:#463C2E,color:#F3ECE0;
+      </pre>
+      <div class="fallback">Het diagram rendert in de browser met internet. Broncode staat in SCAN-ARCHITECTUUR.md.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow"><span class="num">05</span> &nbsp; WAAROM ZO GEBOUWD</div>
+    <h2>De keuzes die het <b>echt maken</b></h2>
+    <div class="why">
+      <div class="item">
+        <div class="k">SNELHEID</div>
+        <h4>Antwoord voordat de AI klaar is</h4>
+        <p>De server geeft direct een job-nummer terug en draait de analyse op de achtergrond. De bezoeker wacht nooit op de HTTP-respons.</p>
+      </div>
+      <div class="item">
+        <div class="k">VERTROUWEN</div>
+        <h4>Een vloer van 30 seconden</h4>
+        <p>Ook als alles in 20s klaar is, houdt het wachtscherm de scan even vast. Iets wat te snel gaat voelt goedkoop; deze pauze laat het werk zien.</p>
+      </div>
+      <div class="item">
+        <div class="k">PRIVACY</div>
+        <h4>Persoonsgegevens eruit, vooraf</h4>
+        <p>De sitetekst wordt van PII gestript voordat er ook maar iets naar een model gaat. Plus Zero Data Retention op de sleutel.</p>
+      </div>
+      <div class="item">
+        <div class="k">ROBUUST</div>
+        <h4>Alles faalt zacht</h4>
+        <p>Mail, Telegram en de brug naar het OS mogen omvallen zonder dat de bezoeker het merkt. Valt een AI-call uit, dan pakt een vaste vragenpool het over.</p>
+      </div>
+      <div class="item">
+        <div class="k">CONTROLE</div>
+        <h4>De server telt de vragen</h4>
+        <p>Niet het model bepaalt hoeveel vragen er komen, maar de server (5 tot 8 bij de quickscan). Het model mag alleen doorvragen bij een vaag antwoord.</p>
+      </div>
+      <div class="item">
+        <div class="k">TOON</div>
+        <h4>Alles in John's stem</h4>
+        <p>De prompts schrijven in de ik-vorm, nuchter, geen beloftes, geen em-dashes. De kans geeft het wat en waarom, nooit het hoe: dat is het gesprek.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="mono eyebrow"><span class="num">06</span> &nbsp; WAT HET OPLEVERT</div>
+    <h2>Een <b>warme lead</b>, klaar om te bellen</h2>
+    <ul class="out">
+      <li><span class="n">01</span> <span>Een Lead in de database, met alle antwoorden en de drie kansen die de scan zag.</span></li>
+      <li><span class="n">02</span> <span>Automatische mails naar de bezoeker en een taak met 24-uurs opvolging.</span></li>
+      <li><span class="n">03</span> <span>Een ping naar het OS-leadsdashboard en naar Telegram, zodat John het meteen ziet.</span></li>
+      <li><span class="n">04</span> <span>Bij de uitgebreide scan: een interne diagnose (bouwen, training of zelf) die John leest voordat hij belt.</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="sig"><b>Think now,</b> build tomorrow.</div>
+    <div class="colofon">
+      GEBOUWD MET <span class="klei">SONNET 4.6</span> + <span class="klei">HAIKU 4.5</span> · NEXT.JS 16 · PRISMA + NEON<br>
+      VOLLEDIGE ARCHITECTUUR: SCAN-ARCHITECTUUR.md &nbsp;·&nbsp; FUTURE CONTENT · DE KEMPEN · 5 JULI 2026
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad:true,
+    theme:'base',
+    securityLevel:'loose',
+    flowchart:{ curve:'basis', htmlLabels:true, nodeSpacing:36, rankSpacing:44 },
+    themeVariables:{
+      fontFamily:'"Helvetica Neue", Archivo, Arial, sans-serif',
+      fontSize:'14px',
+      primaryColor:'#33291d',
+      primaryTextColor:'#F3ECE0',
+      primaryBorderColor:'#463C2E',
+      lineColor:'#C9BBA6',
+      secondaryColor:'#221C14',
+      tertiaryColor:'#221C14',
+      tertiaryTextColor:'#F3ECE0',
+      tertiaryBorderColor:'#463C2E',
+      clusterBkg:'#1b160f',
+      clusterBorder:'#463C2E',
+      edgeLabelBackground:'#2A2218',
+      nodeTextColor:'#F3ECE0'
+    }
+  });
+</script>
+</body>
+</html>

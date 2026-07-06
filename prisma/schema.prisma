@@ -88,6 +88,16 @@ model Lead {
   // overzicht, en worden niet gemaild.
   isTest       Boolean   @default(false)
 
+  // Bel-workflow (John belt elke lead na). Zichtbaar + bewerkbaar in /os.
+  gebeld       Boolean   @default(false)
+  gebeldOp     DateTime? // wanneer voor het laatst als gebeld gemarkeerd
+  belnotitie   String?   // vrije feedback na het bellen, blijft bij de lead
+
+  // Mail-controle per lead: staat dit aan, dan krijgt deze lead geen
+  // automatische mails meer (resultaten + herinnering). Los van de globale
+  // schakelaar en van isTest.
+  mailUit      Boolean   @default(false)
+
   // Anonimisering na 18 maanden (zie docs/quickscan/03_ceo_synthese.md §4.1)
   geanonimiseerd Boolean @default(false)
 

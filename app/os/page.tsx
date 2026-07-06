@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
 import { mailsNaarLeadsAan } from "@/lib/scan/settings"
-import { OsLogin, VideoForm, MailSchakelaar, TestToggle, UitlogKnop } from "./ui"
+import { OsLogin, VideoForm, MailSchakelaar, TestToggle, UitlogKnop, BelBlok, MailPerLead } from "./ui"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -102,6 +102,18 @@ function mailStatusPil(status: string): React.CSSProperties {
   }
 }
 
+// De 24u-herinnering vuurt op createdAt + 20u, maar alleen als 'ie nog niet
+// verstuurd is, John de video nog niet stuurde, en de lead niet test/mail-uit is.
+function geplandeHerinnering(
+  video: { createdAt: Date; herinneringVerstuurd: boolean; verstuurdOp: Date | null } | undefined,
+  lead: { isTest: boolean; mailUit: boolean },
+  mailsAan: boolean,
+): Date | null {
+  if (!video || video.herinneringVerstuurd || video.verstuurdOp) return null
+  if (lead.isTest || lead.mailUit || !mailsAan) return null
+  return new Date(new Date(video.createdAt).getTime() + 20 * 60 * 60 * 1000)
+}
+
 export default async function OsPage({
   searchParams,
 }: {
@@ -182,6 +194,7 @@ export default async function OsPage({
               const vs = video ? videoStatus(video.deadline, video.verstuurdOp) : { tekst: "—", kleur: MUTED }
               const antwoorden = scan?.antwoorden ?? []
               const diepAntw = antwoorden.filter((a) => a.vraagId.startsWith("DV"))
+              const gepland = geplandeHerinnering(video, lead, mailsAan)
 
               return (
                 <details key={lead.id} style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, overflow: "hidden" }}>
@@ -193,6 +206,11 @@ export default async function OsPage({
                     {scan?.diepteStatus === "voltooid" && (
                       <span style={{ fontSize: 11, fontWeight: 700, color: "#fff", background: GOLD, padding: "2px 8px", borderRadius: 20 }}>
                         uitgebreide scan
+                      </span>
+                    )}
+                    {lead.gebeld && (
+                      <span style={{ fontSize: 11, fontWeight: 700, color: "#2F5B33", background: "#DCEBDD", padding: "2px 8px", borderRadius: 20 }}>
+                        gebeld
                       </span>
                     )}
                     <span style={{ marginLeft: "auto", color: vs.kleur, fontSize: 12, fontWeight: 600 }}>{vs.tekst}</span>
@@ -229,6 +247,12 @@ export default async function OsPage({
                           {antwoorden.length} antwoorden{diepAntw.length > 0 ? ` · ${diepAntw.length} uit de diepe scan` : ""}
                         </div>
                       </div>
+                    </div>
+
+                    {/* Bellen + feedback */}
+                    <div>
+                      <div style={label}>Bellen</div>
+                      <BelBlok leadId={lead.id} gebeld={lead.gebeld} belnotitie={lead.belnotitie} />
                     </div>
 
                     {/* AI-analyse */}
@@ -299,6 +323,17 @@ export default async function OsPage({
                         bestaandeUrl={video?.loomUrl ?? null}
                         verstuurd={Boolean(video?.verstuurdOp)}
                       />
+                    </div>
+
+                    {/* Mail naar deze lead */}
+                    <div>
+                      <div style={label}>Mail naar deze lead</div>
+                      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                        <MailPerLead leadId={lead.id} mailUit={lead.mailUit} />
+                        <span style={{ fontSize: 12.5, color: MUTED }}>
+                          {gepland ? `Gepland: herinnering rond ${dt(gepland)}` : "Geen mail gepland"}
+                        </span>
+                      </div>
                     </div>
 
                     {/* Verstuurde mails */}

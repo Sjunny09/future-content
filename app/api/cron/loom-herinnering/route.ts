@@ -46,8 +46,8 @@ export async function GET(req: NextRequest) {
       verstuurdOp: null,
       herinneringVerstuurd: false,
       createdAt: { lte: drempel },
-      // Geen herinneringen naar testleads.
-      lead: { isTest: false },
+      // Geen herinneringen naar testleads of leads waarvoor mail uit staat.
+      lead: { isTest: false, mailUit: false },
     },
     select: {
       id: true,

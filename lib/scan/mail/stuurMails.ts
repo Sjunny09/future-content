@@ -79,6 +79,8 @@ export async function stuurMails(jobId: string): Promise<void> {
     await logMail({ leadId, scanJobId: job.id, ontvanger: job.lead.email, richting: "naar_lead", soort: "resultaten", onderwerp: leadOnderwerp, status: "overgeslagen", detail: "testlead" })
   } else if (!mailsAan) {
     await logMail({ leadId, scanJobId: job.id, ontvanger: job.lead.email, richting: "naar_lead", soort: "resultaten", onderwerp: leadOnderwerp, status: "overgeslagen", detail: "mail-schakelaar staat uit" })
+  } else if (job.lead.mailUit) {
+    await logMail({ leadId, scanJobId: job.id, ontvanger: job.lead.email, richting: "naar_lead", soort: "resultaten", onderwerp: leadOnderwerp, status: "overgeslagen", detail: "mail uit voor deze lead" })
   } else {
     try {
       await resend.emails.send({

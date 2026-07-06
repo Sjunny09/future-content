@@ -205,3 +205,106 @@ export function TestToggle({ leadId, isTest }: { leadId: string; isTest: boolean
     </button>
   )
 }
+
+// Bel-workflow per lead: markeer gebeld en schrijf feedback weg naar de lead.
+export function BelBlok({
+  leadId,
+  gebeld: gebeldInit,
+  belnotitie: notitieInit,
+}: {
+  leadId: string
+  gebeld: boolean
+  belnotitie: string | null
+}) {
+  const [gebeld, setGebeld] = useState(gebeldInit)
+  const [notitie, setNotitie] = useState(notitieInit ?? "")
+  const [status, setStatus] = useState<"idle" | "bezig" | "ok" | "fout">("idle")
+
+  async function opslaan(nieuwGebeld: boolean) {
+    setStatus("bezig")
+    const res = await fetch(`/api/os/lead/${leadId}/bellen`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ gebeld: nieuwGebeld, belnotitie: notitie }),
+    })
+    setStatus(res.ok ? "ok" : "fout")
+    if (res.ok) setGebeld(nieuwGebeld)
+  }
+
+  return (
+    <div style={{ display: "grid", gap: 8 }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+        <button
+          onClick={() => opslaan(!gebeld)}
+          disabled={status === "bezig"}
+          style={{
+            padding: "6px 12px", borderRadius: 7, fontSize: 13, fontWeight: 700, cursor: "pointer",
+            border: `1px solid ${gebeld ? "#4E7A51" : "#E4D8C6"}`,
+            background: gebeld ? "#EEF4EE" : "#fff", color: gebeld ? "#2F5B33" : "#6E6151",
+          }}
+        >
+          {gebeld ? "✓ Gebeld" : "Markeer als gebeld"}
+        </button>
+        {status === "ok" && <span style={{ color: "#4E7A51", fontSize: 12 }}>Opgeslagen</span>}
+        {status === "fout" && <span style={{ color: "#B8472A", fontSize: 12 }}>Opslaan mislukt</span>}
+      </div>
+      <textarea
+        value={notitie}
+        onChange={(e) => setNotitie(e.target.value)}
+        placeholder="Feedback na het bellen (blijft bij deze lead)..."
+        rows={3}
+        style={{
+          width: "100%", padding: "9px 11px", border: "1px solid #E4D8C6", borderRadius: 8,
+          fontSize: 13, fontFamily: "inherit", resize: "vertical", boxSizing: "border-box",
+        }}
+      />
+      <div>
+        <button
+          onClick={() => opslaan(gebeld)}
+          disabled={status === "bezig"}
+          style={{
+            padding: "7px 14px", borderRadius: 7, fontSize: 13, fontWeight: 600, cursor: "pointer",
+            border: "none", background: "#B45F38", color: "#fff",
+          }}
+        >
+          {status === "bezig" ? "..." : "Feedback opslaan"}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// Mail-controle per lead: zet de automatische mails naar deze ene lead aan/uit.
+export function MailPerLead({ leadId, mailUit: mailUitInit }: { leadId: string; mailUit: boolean }) {
+  const [mailUit, setMailUit] = useState(mailUitInit)
+  const [bezig, setBezig] = useState(false)
+
+  async function toggle() {
+    setBezig(true)
+    const res = await fetch(`/api/os/lead/${leadId}/mail`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      // staat mail nu UIT, dan willen we 'm AAN zetten (en andersom)
+      body: JSON.stringify({ mailAan: mailUit }),
+    })
+    setBezig(false)
+    if (res.ok) setMailUit(!mailUit)
+  }
+
+  const aan = !mailUit
+  return (
+    <button
+      onClick={toggle}
+      disabled={bezig}
+      style={{
+        display: "inline-flex", alignItems: "center", gap: 7,
+        padding: "6px 12px", borderRadius: 7, fontSize: 12.5, fontWeight: 600, cursor: "pointer",
+        border: `1px solid ${aan ? "#4E7A51" : "#B8472A"}`,
+        background: aan ? "#EEF4EE" : "#F7EBE7", color: aan ? "#2F5B33" : "#8B2C1C",
+      }}
+    >
+      <span style={{ width: 7, height: 7, borderRadius: 7, background: aan ? "#4E7A51" : "#B8472A" }} />
+      {bezig ? "..." : `Mails naar deze lead: ${aan ? "AAN" : "UIT"}`}
+    </button>
+  )
+}

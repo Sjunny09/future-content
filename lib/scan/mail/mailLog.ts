@@ -5,7 +5,7 @@ export type MailLogInvoer = {
   scanJobId?: string | null
   ontvanger: string
   richting: "naar_lead" | "naar_john"
-  soort: "resultaten" | "john_notificatie" | "herinnering"
+  soort: "resultaten" | "john_notificatie" | "herinnering" | "video"
   onderwerp: string
   status: "verstuurd" | "mislukt" | "overgeslagen"
   detail?: string

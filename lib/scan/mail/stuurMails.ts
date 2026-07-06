@@ -8,6 +8,9 @@ import { logMail } from "@/lib/scan/mail/mailLog"
 // Mail-adressen in één punt — makkelijker te veranderen later.
 const VAN = "Future Content <scan@future-content.nl>"
 const JOHN = process.env.SCAN_NOTIFY_EMAIL ?? "john@future-content.nl"
+// scan@ is alleen een verzendadres (Resend), geen postbus. Antwoorden van klanten
+// laten we daarom in John's Roundcube-inbox landen via Reply-To.
+const ANTWOORD_NAAR = process.env.SCAN_REPLY_TO ?? "hello@future-content.nl"
 
 let clientSingleton: Resend | null = null
 function client(): Resend | null {
@@ -85,6 +88,7 @@ export async function stuurMails(jobId: string): Promise<void> {
     try {
       await resend.emails.send({
         from: VAN,
+        replyTo: ANTWOORD_NAAR,
         to: job.lead.email,
         subject: leadOnderwerp,
         text: bouwKlantMail({ naam: job.lead.naam, jobId: job.id }),
@@ -170,6 +174,130 @@ function bouwKlantMail(ctx: { naam: string | null; jobId: string }): string {
     ``,
     `Future Content · future-content.nl`,
   ].join("\n")
+}
+
+// ─────────────────────────────────────────
+// Video-mail (handmatig getriggerd vanuit /os)
+// ─────────────────────────────────────────
+
+export type VideoMailResultaat = { ok: boolean; fout?: string }
+
+// Stuurt de persoonlijke-video-mail naar de lead, logt hem in de MailLog (zodat
+// John in /os ziet wanneer de video eruit ging) en stempelt LoomVideo.verstuurdOp
+// op het echte verzendmoment. loomUrl mag meegegeven worden; anders pakt hij de
+// laatst opgeslagen link van de lead.
+export async function stuurVideoMail(
+  leadId: string,
+  opts: { loomUrl?: string; persoonlijkBericht?: string } = {},
+): Promise<VideoMailResultaat> {
+  const resend = client()
+  if (!resend) return { ok: false, fout: "RESEND_API_KEY ontbreekt" }
+
+  const lead = await db.lead.findUnique({ where: { id: leadId } })
+  if (!lead) return { ok: false, fout: "Lead niet gevonden" }
+
+  const bestaand = await db.loomVideo.findFirst({
+    where: { leadId },
+    orderBy: { createdAt: "desc" },
+  })
+
+  const meegegeven = opts.loomUrl?.trim()
+  const geldigMeegegeven =
+    meegegeven && /^https?:\/\//i.test(meegegeven) ? meegegeven : null
+  const loomUrl = geldigMeegegeven ?? bestaand?.loomUrl ?? null
+  if (!loomUrl) {
+    return { ok: false, fout: "Geen video-link. Plak eerst de Loom-link." }
+  }
+
+  // Nieuwe of gewijzigde link meteen vastleggen op de video-taak.
+  let taakId = bestaand?.id ?? null
+  if (geldigMeegegeven && geldigMeegegeven !== bestaand?.loomUrl) {
+    if (bestaand) {
+      await db.loomVideo.update({
+        where: { id: bestaand.id },
+        data: { loomUrl: geldigMeegegeven },
+      })
+      taakId = bestaand.id
+    } else {
+      const nieuw = await db.loomVideo.create({
+        data: { leadId, loomUrl: geldigMeegegeven, deadline: new Date() },
+      })
+      taakId = nieuw.id
+    }
+  }
+
+  const onderwerp = "Je persoonlijke video staat klaar"
+  try {
+    await resend.emails.send({
+      from: VAN,
+      replyTo: ANTWOORD_NAAR,
+      to: lead.email,
+      subject: onderwerp,
+      text: bouwVideoMail({
+        naam: lead.naam,
+        loomUrl,
+        persoonlijkBericht: opts.persoonlijkBericht?.trim() || null,
+      }),
+    })
+    // Stempel het echte verzendmoment op de video-taak.
+    if (taakId) {
+      await db.loomVideo.update({
+        where: { id: taakId },
+        data: { verstuurdOp: new Date() },
+      })
+    }
+    await logMail({
+      leadId,
+      ontvanger: lead.email,
+      richting: "naar_lead",
+      soort: "video",
+      onderwerp,
+      status: "verstuurd",
+    })
+    return { ok: true }
+  } catch (err) {
+    console.error("[mail] video-mail faalde", { leadId, err })
+    await logMail({
+      leadId,
+      ontvanger: lead.email,
+      richting: "naar_lead",
+      soort: "video",
+      onderwerp,
+      status: "mislukt",
+      detail: err instanceof Error ? err.message : String(err),
+    })
+    return { ok: false, fout: "Versturen mislukte, probeer opnieuw." }
+  }
+}
+
+function bouwVideoMail(ctx: {
+  naam: string | null
+  loomUrl: string
+  persoonlijkBericht: string | null
+}): string {
+  const voornaam = ctx.naam?.split(" ")[0]
+  const aanhef = voornaam ? `Hoi ${voornaam},` : `Hoi,`
+  const boekUrl = `https://${BOOKING.calHost}/${BOOKING.calUser}/${BOOKING.calEvent}`
+  const regels: string[] = [aanhef, ``]
+  if (ctx.persoonlijkBericht) {
+    regels.push(ctx.persoonlijkBericht, ``)
+  }
+  regels.push(
+    `Zoals beloofd, hier je persoonlijke video. Geen mail vol tekst, gewoon ik die even met je door de site loopt en zeg wat ik zou doen als ik bij jullie aan tafel zat.`,
+    ``,
+    `Bekijk 'm hier: ${ctx.loomUrl}`,
+    ``,
+    `Duurt een minuutje. Geen haast, geen verplichting. Spreekt het je aan, dan kletsen we een keer verder. Je mag ook gewoon deze mail beantwoorden.`,
+    ``,
+    `Al overtuigd? Plan direct ${BOOKING.duration} met me in: ${boekUrl}`,
+    ``,
+    `Tot snel,`,
+    `John`,
+    ``,
+    `-`,
+    `Future Content · future-content.nl`,
+  )
+  return regels.join("\n")
 }
 
 function formatWaarde(waarde: unknown): string {

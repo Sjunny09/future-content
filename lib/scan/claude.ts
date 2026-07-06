@@ -39,7 +39,7 @@ Je werkt precies, in John's stem: rustig, nuchter, ik-vorm, tutoyeren, geen jarg
 Je output gaat via de tool \`schrijf_analyse\`. Dit zijn de velden:
 
 - branche: één korte zin die benoemt in welke branche dit bedrijf zit ("aannemersbedrijf, gespecialiseerd in verbouwingen"). Geen SBI-codes.
-- niche: één korte zin die noemt waarin dit bedrijf specifiek anders is dan de rest van zijn branche. Als je het niet kunt vaststellen: schrijf dat eerlijk op.
+- niche: één korte zin die noemt waarin dit bedrijf zich onderscheidt binnen zijn branche. Zoek dat actief in wat de site WEL prijsgeeft, in deze volgorde: (1) het werkgebied of de regio, (2) de klanten waar ze zich op richten, (3) de waarden of belofte die ze benadrukken, (4) de dienst waar de nadruk op ligt. Een echt bedrijf positioneert zich altijd ergens op, ook zonder formele specialisatie: jouw taak is dat onderscheid te benoemen op basis van de site, niet het te verzinnen. Voorbeeld: "richt zich op kopers en verkopers in de regio Veldhoven die persoonlijke aandacht en eerlijk advies boven snelheid stellen". Alleen als de site echt niets prijsgeeft (vrijwel lege pagina) schrijf je eerlijk op dat de niche niet vast te stellen is. Verzin nooit een specialisatie of werkgebied dat er niet staat.
 - tone: twee à drie zinnen over hoe de teksten op de site klinken (formeel/informeel, zakelijk/warm, jij/u, technisch/toegankelijk). Wees concreet.
 - kansen: precies drie AI-toepassingen die voor dít bedrijf concreet zin hebben. Geen generieke lijsten. Per kans:
     - titel: maximaal 8 woorden, doe-woord vooraan ("Offertes uit intake-formulier laten schrijven")
@@ -65,7 +65,8 @@ const ANALYSE_TOOL: Anthropic.Tool = {
       },
       niche: {
         type: "string",
-        description: "Eén korte zin over waarin dit bedrijf anders is.",
+        description:
+          "Eén korte zin over waarin dit bedrijf zich onderscheidt, afgeleid uit regio, doelgroep, waarden of dienst-nadruk op de site. Alleen 'niet vast te stellen' bij een vrijwel lege site.",
       },
       tone: {
         type: "string",

@@ -1,6 +1,9 @@
 import { Resend } from "resend"
 
 const VAN = "Future Content <scan@future-content.nl>"
+// Antwoorden op scan-mails landen in John's Roundcube-inbox (niet scan@, dat is
+// alleen een verzendadres). Zo kan een klant gewoon terugmailen.
+const ANTWOORD_NAAR = process.env.SCAN_REPLY_TO ?? "hello@future-content.nl"
 
 let clientSingleton: Resend | null = null
 function client(): Resend | null {
@@ -25,6 +28,7 @@ export async function stuurLoomHerinnering(ctx: {
   try {
     await resend.emails.send({
       from: VAN,
+      replyTo: ANTWOORD_NAAR,
       to: ctx.email,
       subject: "Korte heads-up over je video",
       text: bouwHerinneringsmail(ctx.naam),

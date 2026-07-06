@@ -73,6 +73,9 @@ export function VideoForm({
 }) {
   const [url, setUrl] = useState(bestaandeUrl ?? "")
   const [status, setStatus] = useState<"idle" | "bezig" | "ok" | "fout">("idle")
+  const [bericht, setBericht] = useState("")
+  const [mailStatus, setMailStatus] = useState<"idle" | "bezig" | "ok" | "fout">("idle")
+  const [mailFout, setMailFout] = useState("")
 
   async function opslaan(e: React.FormEvent) {
     e.preventDefault()
@@ -85,31 +88,84 @@ export function VideoForm({
     setStatus(res.ok ? "ok" : "fout")
   }
 
+  async function stuurMail() {
+    if (!url.trim()) {
+      setMailStatus("fout")
+      setMailFout("Plak eerst de link.")
+      return
+    }
+    if (!window.confirm("Video-mail nu naar de klant sturen?")) return
+    setMailStatus("bezig")
+    setMailFout("")
+    const res = await fetch(`/api/os/lead/${leadId}/video-mail`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url, persoonlijkBericht: bericht }),
+    })
+    if (res.ok) {
+      setMailStatus("ok")
+    } else {
+      const data = (await res.json().catch(() => ({}))) as { fout?: string }
+      setMailStatus("fout")
+      setMailFout(data.fout ?? "Versturen mislukte.")
+    }
+  }
+
   return (
-    <form onSubmit={opslaan} style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
-      <input
-        type="url"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        placeholder="Loom- of STACK-link plakken"
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <form onSubmit={opslaan} style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
+        <input
+          type="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          placeholder="Loom- of STACK-link plakken"
+          style={{
+            flex: "1 1 220px", padding: "7px 10px", border: `1px solid ${BORDER}`,
+            borderRadius: 7, fontSize: 13,
+          }}
+        />
+        <button
+          type="submit"
+          disabled={status === "bezig"}
+          style={{
+            padding: "7px 12px", background: verstuurd ? "#fff" : GOLD,
+            color: verstuurd ? INK : "#fff", border: verstuurd ? `1px solid ${BORDER}` : "none",
+            borderRadius: 7, fontSize: 13, fontWeight: 600, cursor: "pointer",
+          }}
+        >
+          {status === "bezig" ? "..." : status === "ok" ? "Opgeslagen" : verstuurd ? "Bijwerken" : "Link opslaan"}
+        </button>
+        {status === "fout" && <span style={{ color: "#B8472A", fontSize: 12 }}>Fout, check de link.</span>}
+      </form>
+
+      <textarea
+        value={bericht}
+        onChange={(e) => setBericht(e.target.value)}
+        placeholder="Persoonlijk zinnetje bovenaan de mail (optioneel)"
+        rows={2}
         style={{
-          flex: "1 1 220px", padding: "7px 10px", border: `1px solid ${BORDER}`,
-          borderRadius: 7, fontSize: 13,
+          width: "100%", padding: "7px 10px", border: `1px solid ${BORDER}`,
+          borderRadius: 7, fontSize: 13, resize: "vertical", fontFamily: "inherit",
         }}
       />
-      <button
-        type="submit"
-        disabled={status === "bezig"}
-        style={{
-          padding: "7px 12px", background: verstuurd ? "#fff" : GOLD,
-          color: verstuurd ? INK : "#fff", border: verstuurd ? `1px solid ${BORDER}` : "none",
-          borderRadius: 7, fontSize: 13, fontWeight: 600, cursor: "pointer",
-        }}
-      >
-        {status === "bezig" ? "..." : status === "ok" ? "Opgeslagen" : verstuurd ? "Bijwerken" : "Markeer verstuurd"}
-      </button>
-      {status === "fout" && <span style={{ color: "#B8472A", fontSize: 12 }}>Fout, check de link.</span>}
-    </form>
+      <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+        <button
+          type="button"
+          onClick={stuurMail}
+          disabled={mailStatus === "bezig"}
+          style={{
+            padding: "7px 12px", background: INK, color: "#fff", border: "none",
+            borderRadius: 7, fontSize: 13, fontWeight: 600, cursor: "pointer",
+          }}
+        >
+          {mailStatus === "bezig" ? "Versturen..." : mailStatus === "ok" ? "Video-mail verstuurd" : "Stuur video-mail"}
+        </button>
+        {mailStatus === "ok" && (
+          <span style={{ color: "#3F7A4E", fontSize: 12 }}>Staat nu bij Verstuurde mails.</span>
+        )}
+        {mailStatus === "fout" && <span style={{ color: "#B8472A", fontSize: 12 }}>{mailFout}</span>}
+      </div>
+    </div>
   )
 }
 

@@ -8,6 +8,8 @@
 export type ScanEvent =
   | "scan_start"
   | "scan_ready"
+  | "scan_mislukt"
+  | "scan_handmatig"
   | "vraag_1_klaar"
   | "vraag_6_klaar"
   | "pilot_geboekt"

@@ -13,29 +13,31 @@ export type SiteData = {
 }
 
 const MAX_TEKST = 6000
-const JINA_TIMEOUT_MS = 20_000
+const JINA_TIMEOUT_MS = 15_000          // snelle engine (tier 1)
+const JINA_BROWSER_TIMEOUT_MS = 25_000  // volledige browser-engine (tier 2, dieper graven)
 const CHEERIO_TIMEOUT_MS = 12_000
 
 export async function haalSiteDataOp(url: string): Promise<SiteData> {
   const [primair, alt] = hostVarianten(url)
   let laatsteFout: unknown = new Error("scrape-mislukt")
 
-  // Primaire host: Jina eerst (beste kwaliteit) met één retry (trage sites
-  // cachen na de eerste hit), dan Cheerio.
-  const pogingen: Array<() => Promise<SiteData>> = [
-    () => scrapeMetJina(primair),
-    () => scrapeMetJina(primair),
-    () => scrapeMetCheerio(primair),
-  ]
-  // Andere host-variant (www eraf of erop) als vangnet: sommige sites hebben een
-  // TLS-cert of redirect dat maar één variant dekt. www.allplayzwembaden.nl
-  // heeft bijvoorbeeld een ongeldig cert op www ("fetch failed"), terwijl de
-  // kale domein prima werkt. Zonder deze fallback zou de bezoeker stranden.
-  if (alt) {
-    pogingen.push(() => scrapeMetJina(alt), () => scrapeMetCheerio(alt))
-  }
+  // Tier 1 (standaard, snel): Jina snelle engine op beide host-varianten, dan
+  // Cheerio. Vangt verreweg de meeste sites in een paar seconden. De host-
+  // variant (www eraf/erop) redt sites met een scheef TLS-cert of redirect op
+  // maar één variant (zoals www.allplayzwembaden.nl, ongeldig cert op www).
+  const tier1: Array<() => Promise<SiteData>> = [() => scrapeMetJina(primair, {})]
+  if (alt) tier1.push(() => scrapeMetJina(alt, {}))
+  tier1.push(() => scrapeMetCheerio(primair))
+  if (alt) tier1.push(() => scrapeMetCheerio(alt))
 
-  for (const poging of pogingen) {
+  // Tier 2 (dieper graven): Jina met de volledige browser-engine, die JS rendert
+  // en de cache negeert. Trager, maar kraakt sommige zware sites die tier 1 niet
+  // lukt. Alleen op de primaire host, om de totale wachttijd te beperken.
+  const tier2: Array<() => Promise<SiteData>> = [
+    () => scrapeMetJina(primair, { engine: "browser" }),
+  ]
+
+  for (const poging of [...tier1, ...tier2]) {
     try {
       return await poging()
     } catch (e) {
@@ -62,20 +64,36 @@ function hostVarianten(url: string): [string, string | undefined] {
   }
 }
 
-async function scrapeMetJina(url: string): Promise<SiteData> {
+async function scrapeMetJina(
+  url: string,
+  opts: { engine?: "browser" },
+): Promise<SiteData> {
+  const browser = opts.engine === "browser"
+  const timeoutMs = browser ? JINA_BROWSER_TIMEOUT_MS : JINA_TIMEOUT_MS
   const ctrl = new AbortController()
-  const t = setTimeout(() => ctrl.abort(), JINA_TIMEOUT_MS)
+  const t = setTimeout(() => ctrl.abort(), timeoutMs)
 
   try {
+    const headers: Record<string, string> = {
+      Accept: "text/plain",
+      "X-Return-Format": "markdown",
+      // X-With-Generated-Alt spaart tokens op images die we toch niet gebruiken.
+      "X-With-Generated-Alt": "false",
+    }
+    // Optionele API-key: zonder key draait Jina op de geknepen anonieme tier
+    // (veel 429/422 onder druk). Een gratis key op jina.ai tilt de limiet flink
+    // omhoog. Zet 'm als JINA_API_KEY in Vercel; de code pakt 'm dan vanzelf.
+    const apiKey = process.env.JINA_API_KEY
+    if (apiKey) headers.Authorization = `Bearer ${apiKey}`
+    // Tier 2: de volledige browser-engine rendert JS en negeert de cache.
+    if (browser) {
+      headers["X-Engine"] = "browser"
+      headers["X-No-Cache"] = "true"
+    }
+
     const res = await fetch(`https://r.jina.ai/${url}`, {
       signal: ctrl.signal,
-      headers: {
-        Accept: "text/plain",
-        "X-Return-Format": "markdown",
-        // Jina Reader werkt zonder key op gratis tier; X-With-Generated-Alt
-        // spaart tokens op images we toch niet gebruiken.
-        "X-With-Generated-Alt": "false",
-      },
+      headers,
     })
 
     if (!res.ok) {

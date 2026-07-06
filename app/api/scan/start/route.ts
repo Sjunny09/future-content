@@ -63,6 +63,30 @@ export async function POST(req: NextRequest) {
         { status: 429 },
       )
     }
+
+    // DB-fallback rate limit — werkt ook zonder Upstash (dat staat niet in
+    // productie, dus de checks hierboven zijn nu no-ops). Beschermt tegen
+    // misbruik en API-kosten bij publiek verkeer, bijvoorbeeld na de LinkedIn-launch.
+    const uurGeleden = new Date(Date.now() - 60 * 60 * 1000)
+    const ipRecent = await db.scanJob.count({
+      where: { ipHash: ipH, startedAt: { gte: uurGeleden } },
+    })
+    if (ipRecent >= 6) {
+      return NextResponse.json(
+        { fout: "Teveel scans vanaf deze plek. Probeer het over een uurtje nog eens." },
+        { status: 429 },
+      )
+    }
+    const tienMinGeleden = new Date(Date.now() - 10 * 60 * 1000)
+    const urlRecent = await db.scanJob.count({
+      where: { url: validatie.url.toString(), startedAt: { gte: tienMinGeleden } },
+    })
+    if (urlRecent >= 3) {
+      return NextResponse.json(
+        { fout: "Deze website is net gescand. Probeer het over 10 minuten nog eens." },
+        { status: 429 },
+      )
+    }
   }
 
   const job = await db.scanJob.create({

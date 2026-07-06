@@ -53,8 +53,11 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
   const [seconden, setSeconden] = useState(0)
   const [voortgang, setVoortgang] = useState(0)
   const [fase, setFase] = useState<string>("scrapen")
+  const [scrapeMislukt, setScrapeMislukt] = useState(false)
+  const [handmatigGedaan, setHandmatigGedaan] = useState(false)
   const klaarRef = useRef(false)
   const redirectRef = useRef(false)
+  const handmatigRef = useRef(false)
 
   // Seconden-teller voor de "duurt langer"-melding, zodat het scherm nooit
   // bevroren lijkt als de scrape traag is.
@@ -114,11 +117,16 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         if (data.fase) setFase(data.fase)
 
         if (data.gefaald) {
-          setFout("Ik kom niet door je site heen. Probeer het zo nog eens.")
+          setFout("Het lukt me niet om je site automatisch te lezen.")
+          setScrapeMislukt(true)
+          track("scan_mislukt")
           return
         }
 
         if (data.klaar) {
+          // Heeft de bezoeker net om handmatige opvolging gevraagd? Dan niet
+          // alsnog doorsturen naar de vragen.
+          if (handmatigRef.current) return
           if (!klaarRef.current) track("scan_ready")
           klaarRef.current = true
           setVoortgang(100)
@@ -169,6 +177,10 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
   const kansen = (analyse?.kansen ?? []).slice(0, 3)
   const traag = seconden >= 30 && !klaarRef.current
   const heelTraag = seconden >= 60 && !klaarRef.current
+  // Blijft 'scrapen' hangen na ~14s? Dan lukte de standaard-route niet en graven
+  // we dieper. Toon de eerlijke melding + het gratis escape-luik.
+  const worstelt =
+    !fout && !klaarRef.current && fase === "scrapen" && seconden >= 14
 
   return (
     <main className="relative mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center overflow-hidden px-6 py-16">
@@ -286,33 +298,69 @@ export function ScanInProgress({ jobId }: { jobId: string }) {
         </div>
       )}
 
-      {traag && !fout && (
-        <p
-          className="mt-8 text-center text-sm"
-          style={{ color: "var(--color-scan-muted)" }}
-        >
-          {heelTraag
-            ? "Het duurt wat langer dan normaal, een grote site kost me meer tijd. Blijf nog heel even."
-            : "Een grote site kost me wat meer leestijd, ik ben er bijna."}
-        </p>
-      )}
+      {handmatigGedaan ? (
+        <Bedankt />
+      ) : (
+        <>
+          {traag && !fout && !worstelt && (
+            <p
+              className="mt-8 text-center text-sm"
+              style={{ color: "var(--color-scan-muted)" }}
+            >
+              {heelTraag
+                ? "Het duurt wat langer dan normaal, een grote site kost me meer tijd. Blijf nog heel even."
+                : "Een grote site kost me wat meer leestijd, ik ben er bijna."}
+            </p>
+          )}
 
-      {fout && (
-        <div className="mt-8 flex flex-col items-center gap-4">
-          <p
-            className="text-center text-sm"
-            style={{ color: "var(--color-scan-error)" }}
-          >
-            {fout}
-          </p>
-          <Link
-            href="/scan"
-            className="rounded-md px-6 py-2.5 text-base font-medium text-white transition hover:opacity-90"
-            style={{ backgroundColor: "var(--color-scan-terracotta)" }}
-          >
-            Opnieuw proberen
-          </Link>
-        </div>
+          {/* Standaard-route lukte niet: eerlijk melden dat ik dieper graaf, en
+              meteen het gratis escape-luik aanbieden. */}
+          {worstelt && (
+            <div className="mt-8 w-full max-w-md">
+              <p
+                className="mb-4 text-center text-sm"
+                style={{ color: "var(--color-scan-muted)" }}
+              >
+                Ik kom niet zomaar door je site heen. Ik probeer een andere route, dat kan even duren.
+              </p>
+              <OpvangKader
+                jobId={jobId}
+                onGedaan={() => {
+                  handmatigRef.current = true
+                  setHandmatigGedaan(true)
+                }}
+              />
+            </div>
+          )}
+
+          {fout && (
+            <div className="mt-8 flex w-full max-w-md flex-col items-center gap-4">
+              <p
+                className="text-center text-sm"
+                style={{ color: "var(--color-scan-error)" }}
+              >
+                {fout}
+              </p>
+              {scrapeMislukt ? (
+                <OpvangKader
+                  jobId={jobId}
+                  onGedaan={() => {
+                    handmatigRef.current = true
+                    setHandmatigGedaan(true)
+                  }}
+                />
+              ) : (
+                <Link
+                  href="/scan"
+                  className="rounded-md px-6 py-2.5 text-base font-medium text-white transition hover:opacity-90"
+                  style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+                >
+                  Opnieuw proberen
+                </Link>
+              )}
+            </div>
+          )}
+        </>
       )}
 
       {kansen.length > 0 && (
@@ -334,5 +382,114 @@ function Pill({ children }: { children: React.ReactNode }) {
     >
       {children}
     </span>
+  )
+}
+
+// Het gratis escape-luik: laat de bezoeker z'n gegevens achter zodat John de
+// site handmatig analyseert. Verschijnt tijdens het diepe graven én als de scan
+// helemaal niet lukt, zodat we het verkeer nooit verliezen.
+function OpvangKader({
+  jobId,
+  onGedaan,
+}: {
+  jobId: string
+  onGedaan: () => void
+}) {
+  const [naam, setNaam] = useState("")
+  const [email, setEmail] = useState("")
+  const [status, setStatus] = useState<"idle" | "bezig" | "fout">("idle")
+
+  async function verstuur(e: React.FormEvent) {
+    e.preventDefault()
+    if (!email) return
+    setStatus("bezig")
+    try {
+      const res = await fetch(`/api/scan/${jobId}/handmatig`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ naam: naam || undefined, email }),
+      })
+      if (res.ok) {
+        track("scan_handmatig")
+        onGedaan()
+      } else {
+        setStatus("fout")
+      }
+    } catch {
+      setStatus("fout")
+    }
+  }
+
+  return (
+    <div
+      className="rounded-xl border px-5 py-4"
+      style={{
+        borderColor: "var(--color-scan-border)",
+        backgroundColor: "var(--color-scan-linnen)",
+      }}
+    >
+      <p
+        className="mb-1 text-sm font-semibold"
+        style={{ color: "var(--color-scan-drukinkt)" }}
+      >
+        Niet willen wachten?
+      </p>
+      <p
+        className="mb-3 text-sm"
+        style={{ color: "var(--color-scan-muted)" }}
+      >
+        Laat je gegevens achter, dan analyseer ik je site zelf. Gratis, binnen 24 uur.
+      </p>
+      <form onSubmit={verstuur} className="flex flex-col gap-2">
+        <input
+          value={naam}
+          onChange={(e) => setNaam(e.target.value)}
+          placeholder="Je naam (optioneel)"
+          className="rounded-md border px-3 py-2 text-sm"
+          style={{ borderColor: "var(--color-scan-border)", backgroundColor: "#fff" }}
+        />
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Je e-mailadres"
+          className="rounded-md border px-3 py-2 text-sm"
+          style={{ borderColor: "var(--color-scan-border)", backgroundColor: "#fff" }}
+        />
+        <button
+          type="submit"
+          disabled={status === "bezig"}
+          className="rounded-md px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
+          style={{ backgroundColor: "var(--color-scan-terracotta)" }}
+        >
+          {status === "bezig" ? "Versturen…" : "Stuur mijn link, kijk zelf even"}
+        </button>
+        {status === "fout" && (
+          <p className="text-xs" style={{ color: "var(--color-scan-error)" }}>
+            Er ging iets mis, probeer het nog eens.
+          </p>
+        )}
+      </form>
+    </div>
+  )
+}
+
+function Bedankt() {
+  return (
+    <div className="mt-8 max-w-md text-center">
+      <p
+        className="text-2xl"
+        style={{
+          fontFamily: "var(--font-fraunces), Georgia, serif",
+          color: "var(--color-scan-drukinkt)",
+        }}
+      >
+        Top, ik kijk er zelf naar.
+      </p>
+      <p className="mt-2 text-sm" style={{ color: "var(--color-scan-muted)" }}>
+        Je hoort binnen 24 uur van me, met wat ik op je site zie.
+      </p>
+    </div>
   )
 }

@@ -80,13 +80,13 @@ async function scrapeMetJina(
       // X-With-Generated-Alt spaart tokens op images die we toch niet gebruiken.
       "X-With-Generated-Alt": "false",
     }
-    // Optionele API-key: zonder key draait Jina op de geknepen anonieme tier
-    // (veel 429/422 onder druk). Een gratis key op jina.ai tilt de limiet flink
-    // omhoog. Zet 'm als JINA_API_KEY in Vercel; de code pakt 'm dan vanzelf.
-    const apiKey = process.env.JINA_API_KEY
-    if (apiKey) headers.Authorization = `Bearer ${apiKey}`
-    // Tier 2: de volledige browser-engine rendert JS en negeert de cache.
+    // Tier 1 draait ANONIEM (gratis). De JINA_API_KEY is schaars (John vult 'm
+    // niet bij) en wordt daarom pas in tier 2 ingezet, als de gratis route al
+    // gefaald is. Tier 2 gebruikt tegelijk de volledige browser-engine (rendert
+    // JS, negeert cache). Zo verbruiken we de key alleen wanneer het anders niet lukt.
     if (browser) {
+      const apiKey = process.env.JINA_API_KEY
+      if (apiKey) headers.Authorization = `Bearer ${apiKey}`
       headers["X-Engine"] = "browser"
       headers["X-No-Cache"] = "true"
     }

@@ -123,7 +123,85 @@ export default async function OsPage({
   const ok = process.env.ADMIN_TOKEN && token === process.env.ADMIN_TOKEN
   if (!ok) return <OsLogin />
 
-  const tab = (await searchParams).tab === "test" ? "test" : "actueel"
+  const rawTab = (await searchParams).tab
+  const tab = rawTab === "test" ? "test" : rawTab === "dashboard" ? "dashboard" : "actueel"
+
+  // ── Dashboard-tab: scan-funnel-cijfers uit Neon (read-only aggregaties) ──
+  if (tab === "dashboard") {
+    const now = new Date()
+    const startVandaag = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const weekGeleden = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+    const [
+      actueelCount, testCount, scansGestart, scansAfgerond, scansMislukt,
+      analyseGelukt, diepteVoltooid, leadsGebeld, scansVandaag, scansWeek,
+    ] = await Promise.all([
+      db.lead.count({ where: { isTest: false } }),
+      db.lead.count({ where: { isTest: true } }),
+      db.scanJob.count({ where: { isTest: false } }),
+      db.scanJob.count({ where: { isTest: false, status: "completed" } }),
+      db.scanJob.count({ where: { isTest: false, status: "failed" } }),
+      db.scanJob.count({ where: { isTest: false, status: { in: ["ready", "answering", "completed"] } } }),
+      db.scanJob.count({ where: { isTest: false, diepteStatus: "voltooid" } }),
+      db.lead.count({ where: { isTest: false, gebeld: true } }),
+      db.scanJob.count({ where: { isTest: false, startedAt: { gte: startVandaag } } }),
+      db.scanJob.count({ where: { isTest: false, startedAt: { gte: weekGeleden } } }),
+    ])
+    const pct = (a: number, b: number) => (b > 0 ? Math.round((a / b) * 100) : 0)
+    const tegels: { label: string; waarde: number; sub: string }[] = [
+      { label: "Scans gestart", waarde: scansGestart, sub: "sinds de start (echt, excl. test)" },
+      { label: "Analyse gelukt", waarde: analyseGelukt, sub: `${pct(analyseGelukt, scansGestart)}% van gestart` },
+      { label: "Scans afgerond", waarde: scansAfgerond, sub: `${pct(scansAfgerond, scansGestart)}% van gestart` },
+      { label: "Leads (contact)", waarde: actueelCount, sub: `${pct(actueelCount, scansGestart)}% van gestart` },
+      { label: "Uitgebreide scan", waarde: diepteVoltooid, sub: "diepte voltooid" },
+      { label: "Gebeld", waarde: leadsGebeld, sub: `van ${actueelCount} leads` },
+      { label: "Mislukt bij scrape", waarde: scansMislukt, sub: `${pct(scansMislukt, scansGestart)}% van gestart` },
+      { label: "Vandaag gestart", waarde: scansVandaag, sub: `deze week: ${scansWeek}` },
+    ]
+    const tegelLabel: React.CSSProperties = {
+      fontSize: 10.5, letterSpacing: ".08em", textTransform: "uppercase",
+      color: MUTED, fontWeight: 700, marginBottom: 8,
+    }
+    return (
+      <main style={{ background: BG, minHeight: "100vh", padding: "40px 20px", color: INK }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <header style={{ marginBottom: 16 }}>
+            <div style={{ fontSize: 11, letterSpacing: ".2em", textTransform: "uppercase", color: MUTED, fontWeight: 600 }}>
+              Future Content OS
+            </div>
+            <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: 30, marginTop: 4 }}>Scan-funnel</h1>
+          </header>
+
+          <div style={{ display: "flex", gap: 6, marginBottom: 20, borderBottom: `1px solid ${BORDER}` }}>
+            <a href="/os" style={tabStijl(false)}>Actueel · {actueelCount}</a>
+            <a href="/os?tab=test" style={tabStijl(false)}>Test · {testCount}</a>
+            <a href="/os?tab=dashboard" style={tabStijl(true)}>Dashboard</a>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
+            {tegels.map((t) => (
+              <div key={t.label} style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "18px" }}>
+                <div style={tegelLabel}>{t.label}</div>
+                <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1, fontFamily: "var(--font-playfair)" }}>{t.waarde}</div>
+                <div style={{ fontSize: 12.5, color: MUTED, marginTop: 6 }}>{t.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ marginTop: 20, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "16px 18px" }}>
+            <div style={tegelLabel}>De trechter</div>
+            <div style={{ fontSize: 14, lineHeight: 1.7 }}>
+              {scansGestart} gestart → {analyseGelukt} analyse gelukt → {scansAfgerond} afgerond → {actueelCount} leads → {diepteVoltooid} uitgebreide scan → {leadsGebeld} gebeld
+            </div>
+          </div>
+
+          <p style={{ color: MUTED, fontSize: 12, marginTop: 18 }}>
+            Bron = Neon (Postgres), read-only. De trechter begint bij een gestarte scan (URL ingevuld); wie de /scan-pagina alleen opende zonder te starten zit niet in de database (dat is Plausible-data). Test-scans staan apart in het Test-tabblad. Beveiligd met ADMIN_TOKEN.
+          </p>
+        </div>
+      </main>
+    )
+  }
+
   const isTestFilter = tab === "test"
 
   const [leads, actueelCount, testCount, mailsAan] = await Promise.all([
@@ -175,6 +253,7 @@ export default async function OsPage({
         <div style={{ display: "flex", gap: 6, marginBottom: 20, borderBottom: `1px solid ${BORDER}` }}>
           <a href="/os" style={tabStijl(tab === "actueel")}>Actueel · {actueelCount}</a>
           <a href="/os?tab=test" style={tabStijl(tab === "test")}>Test · {testCount}</a>
+          <a href="/os?tab=dashboard" style={tabStijl(false)}>Dashboard</a>
         </div>
 
         {leads.length === 0 ? (

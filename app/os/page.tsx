@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
 import { mailsNaarLeadsAan } from "@/lib/scan/settings"
-import { OsLogin, VideoForm, MailSchakelaar, TestToggle, UitlogKnop, BelBlok, MailPerLead } from "./ui"
+import { OsLogin, VideoForm, MailSchakelaar, TestToggle, UitlogKnop, BelBlok, MailPerLead, DatumSlider } from "./ui"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -117,45 +117,64 @@ function geplandeHerinnering(
 export default async function OsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string }>
+  searchParams: Promise<{ tab?: string; van?: string }>
 }) {
   const token = (await cookies()).get("fc_os")?.value
   const ok = process.env.ADMIN_TOKEN && token === process.env.ADMIN_TOKEN
   if (!ok) return <OsLogin />
 
-  const rawTab = (await searchParams).tab
+  const sp = await searchParams
+  const rawTab = sp.tab
   const tab = rawTab === "test" ? "test" : rawTab === "dashboard" ? "dashboard" : "actueel"
 
   // ── Dashboard-tab: scan-funnel-cijfers uit Neon (read-only aggregaties) ──
   if (tab === "dashboard") {
+    // Periode: standaard 6 juli tot vandaag; sleepbaar tot uiterlijk 1 juni 2026.
+    // Het eind loopt altijd mee met vandaag.
+    const HARD_MIN = new Date("2026-06-01T00:00:00")
+    const STANDAARD_VAN = new Date("2026-07-06T00:00:00")
     const now = new Date()
-    const startVandaag = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-    const weekGeleden = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)
+    const vandaagStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+    const tot = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999)
+
+    let van = sp.van ? new Date(`${sp.van}T00:00:00`) : STANDAARD_VAN
+    if (isNaN(van.getTime())) van = STANDAARD_VAN
+    if (van < HARD_MIN) van = HARD_MIN
+    if (van > vandaagStart) van = vandaagStart
+
+    const isoDag = (d: Date) =>
+      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
+    const dagen = Math.floor((vandaagStart.getTime() - van.getTime()) / 864e5) + 1
+
+    const scanBereik = { startedAt: { gte: van, lte: tot } }
+    const leadBereik = { createdAt: { gte: van, lte: tot } }
+
     const [
-      actueelCount, testCount, scansGestart, scansAfgerond, scansMislukt,
-      analyseGelukt, diepteVoltooid, leadsGebeld, scansVandaag, scansWeek,
+      actueelCount, scansGestart, scansAfgerond, scansMislukt,
+      analyseGelukt, diepteVoltooid, leadsGebeld, videosVerstuurd,
+      actueelTotaal, testTotaal,
     ] = await Promise.all([
+      db.lead.count({ where: { isTest: false, ...leadBereik } }),
+      db.scanJob.count({ where: { isTest: false, ...scanBereik } }),
+      db.scanJob.count({ where: { isTest: false, status: "completed", ...scanBereik } }),
+      db.scanJob.count({ where: { isTest: false, status: "failed", ...scanBereik } }),
+      db.scanJob.count({ where: { isTest: false, status: { in: ["ready", "answering", "completed"] }, ...scanBereik } }),
+      db.scanJob.count({ where: { isTest: false, diepteStatus: "voltooid", ...scanBereik } }),
+      db.lead.count({ where: { isTest: false, gebeld: true, ...leadBereik } }),
+      db.loomVideo.count({ where: { verstuurdOp: { gte: van, lte: tot }, lead: { isTest: false } } }),
       db.lead.count({ where: { isTest: false } }),
       db.lead.count({ where: { isTest: true } }),
-      db.scanJob.count({ where: { isTest: false } }),
-      db.scanJob.count({ where: { isTest: false, status: "completed" } }),
-      db.scanJob.count({ where: { isTest: false, status: "failed" } }),
-      db.scanJob.count({ where: { isTest: false, status: { in: ["ready", "answering", "completed"] } } }),
-      db.scanJob.count({ where: { isTest: false, diepteStatus: "voltooid" } }),
-      db.lead.count({ where: { isTest: false, gebeld: true } }),
-      db.scanJob.count({ where: { isTest: false, startedAt: { gte: startVandaag } } }),
-      db.scanJob.count({ where: { isTest: false, startedAt: { gte: weekGeleden } } }),
     ])
     const pct = (a: number, b: number) => (b > 0 ? Math.round((a / b) * 100) : 0)
     const tegels: { label: string; waarde: number; sub: string }[] = [
-      { label: "Scans gestart", waarde: scansGestart, sub: "sinds de start (echt, excl. test)" },
+      { label: "Scans gestart", waarde: scansGestart, sub: "in deze periode (echt, excl. test)" },
       { label: "Analyse gelukt", waarde: analyseGelukt, sub: `${pct(analyseGelukt, scansGestart)}% van gestart` },
       { label: "Scans afgerond", waarde: scansAfgerond, sub: `${pct(scansAfgerond, scansGestart)}% van gestart` },
       { label: "Leads (contact)", waarde: actueelCount, sub: `${pct(actueelCount, scansGestart)}% van gestart` },
       { label: "Uitgebreide scan", waarde: diepteVoltooid, sub: "diepte voltooid" },
       { label: "Gebeld", waarde: leadsGebeld, sub: `van ${actueelCount} leads` },
+      { label: "Video's verstuurd", waarde: videosVerstuurd, sub: "persoonlijke video's" },
       { label: "Mislukt bij scrape", waarde: scansMislukt, sub: `${pct(scansMislukt, scansGestart)}% van gestart` },
-      { label: "Vandaag gestart", waarde: scansVandaag, sub: `deze week: ${scansWeek}` },
     ]
     const tegelLabel: React.CSSProperties = {
       fontSize: 10.5, letterSpacing: ".08em", textTransform: "uppercase",
@@ -172,10 +191,12 @@ export default async function OsPage({
           </header>
 
           <div style={{ display: "flex", gap: 6, marginBottom: 20, borderBottom: `1px solid ${BORDER}` }}>
-            <a href="/os" style={tabStijl(false)}>Actueel · {actueelCount}</a>
-            <a href="/os?tab=test" style={tabStijl(false)}>Test · {testCount}</a>
+            <a href="/os" style={tabStijl(false)}>Actueel · {actueelTotaal}</a>
+            <a href="/os?tab=test" style={tabStijl(false)}>Test · {testTotaal}</a>
             <a href="/os?tab=dashboard" style={tabStijl(true)}>Dashboard</a>
           </div>
+
+          <DatumSlider minIso="2026-06-01" maxIso={isoDag(vandaagStart)} vanIso={isoDag(van)} />
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
             {tegels.map((t) => (
@@ -195,7 +216,7 @@ export default async function OsPage({
           </div>
 
           <p style={{ color: MUTED, fontSize: 12, marginTop: 18 }}>
-            Bron = Neon (Postgres), read-only. De trechter begint bij een gestarte scan (URL ingevuld); wie de /scan-pagina alleen opende zonder te starten zit niet in de database (dat is Plausible-data). Test-scans staan apart in het Test-tabblad. Beveiligd met ADMIN_TOKEN.
+            De cijfers hierboven gelden voor de gekozen periode ({dagen} {dagen === 1 ? "dag" : "dagen"}); versleep de slider om verder terug te kijken (tot 1 juni 2026). Bron = Neon (Postgres), read-only. De trechter begint bij een gestarte scan (URL ingevuld); wie de /scan-pagina alleen opende zonder te starten zit niet in de database (dat is Plausible-data). Test-scans staan apart in het Test-tabblad. Beveiligd met ADMIN_TOKEN.
           </p>
         </div>
       </main>

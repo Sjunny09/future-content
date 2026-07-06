@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 const GOLD = "#C9A96E"
 const INK = "#1A1A18"
@@ -164,6 +165,77 @@ export function VideoForm({
           <span style={{ color: "#3F7A4E", fontSize: 12 }}>Staat nu bij Verstuurde mails.</span>
         )}
         {mailStatus === "fout" && <span style={{ color: "#B8472A", fontSize: 12 }}>{mailFout}</span>}
+      </div>
+    </div>
+  )
+}
+
+// Datum-slider voor het dashboard. Stelt de STARTdatum van de periode in; het
+// eind is altijd vandaag (loopt mee met de tijd). Sleepbaar tot uiterlijk minIso.
+// De keuze wordt als ?van=YYYY-MM-DD in de URL gezet, waarna de server de cijfers
+// voor die periode opnieuw ophaalt. Tijdens het slepen updatet alleen het label;
+// de navigatie gebeurt bij loslaten, zodat we niet elke stap opnieuw laden.
+export function DatumSlider({
+  minIso,
+  maxIso,
+  vanIso,
+}: {
+  minIso: string
+  maxIso: string
+  vanIso: string
+}) {
+  const router = useRouter()
+  const DAG = 86400000
+  const parse = (iso: string) => {
+    const [y, m, d] = iso.split("-").map(Number)
+    return Date.UTC(y, m - 1, d)
+  }
+  const minMs = parse(minIso)
+  const maxMs = parse(maxIso)
+  const totaal = Math.max(1, Math.round((maxMs - minMs) / DAG))
+  const startIdx = Math.min(totaal, Math.max(0, Math.round((parse(vanIso) - minMs) / DAG)))
+  const [idx, setIdx] = useState(startIdx)
+
+  const fmt = (ms: number) =>
+    new Intl.DateTimeFormat("nl-NL", {
+      day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+    }).format(new Date(ms))
+
+  const gekozenMs = minMs + idx * DAG
+  const dagen = totaal - idx + 1
+
+  const commit = (i: number) => {
+    const iso = new Date(minMs + i * DAG).toISOString().slice(0, 10)
+    router.push(`/os?tab=dashboard&van=${iso}`)
+  }
+
+  const CARD = "#FBF8F2", BORDER2 = "#E4D8C6", INK2 = "#2A2218", MUTED2 = "#6E6151", KLEI = "#B45F38"
+
+  return (
+    <div style={{ background: CARD, border: `1px solid ${BORDER2}`, borderRadius: 14, padding: "16px 18px", marginBottom: 16 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, flexWrap: "wrap", marginBottom: 10 }}>
+        <div style={{ fontSize: 10.5, letterSpacing: ".08em", textTransform: "uppercase", color: MUTED2, fontWeight: 700 }}>
+          Periode
+        </div>
+        <div style={{ fontSize: 13.5, color: INK2 }}>
+          <strong>{fmt(gekozenMs)}</strong> tot vandaag{" "}
+          <span style={{ color: MUTED2 }}>· {dagen} {dagen === 1 ? "dag" : "dagen"}</span>
+        </div>
+      </div>
+      <input
+        type="range"
+        min={0}
+        max={totaal}
+        value={idx}
+        onChange={(e) => setIdx(Number(e.target.value))}
+        onMouseUp={(e) => commit(Number((e.target as HTMLInputElement).value))}
+        onTouchEnd={(e) => commit(Number((e.target as HTMLInputElement).value))}
+        onKeyUp={(e) => commit(Number((e.target as HTMLInputElement).value))}
+        style={{ width: "100%", accentColor: KLEI, cursor: "pointer" }}
+      />
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: MUTED2, marginTop: 4 }}>
+        <span>{fmt(minMs)}</span>
+        <span>vandaag</span>
       </div>
     </div>
   )

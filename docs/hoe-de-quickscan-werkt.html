@@ -157,7 +157,7 @@
   <div class="wrap">
     <div class="mono eyebrow"><span class="num">04</span> &nbsp; DE FLOW</div>
     <h2>Van <b>URL</b> tot boeking</h2>
-    <p>Zodra de URL binnenkomt, geeft de server meteen een job-nummer terug en gaat het echte werk op de achtergrond draaien. De bezoeker kijkt naar een wachtscherm terwijl het scrapen en de twee AI-stappen parallel lopen.</p>
+    <p>Zodra de URL binnenkomt, geeft de server meteen een job-nummer terug en gaat het echte werk op de achtergrond draaien. De bezoeker kijkt naar een wachtscherm terwijl het scrapen en de twee AI-stappen parallel lopen. Lukt het lezen van de site niet, dan loopt de bezoeker niet dood: een gratis handmatig aanbod vangt 'm op.</p>
     <div class="legend">
       <span><i class="swatch" style="background:#B45F38"></i> AI-stap (Claude)</span>
       <span><i class="swatch" style="background:#33291d;border:1px solid #463C2E"></i> Systeem / server</span>
@@ -168,12 +168,14 @@
 flowchart TD
     A["Bezoeker vult website-URL in<br/>pagina /scan"]:::ui --> B["start-route<br/>Zod-check, SSRF-guard, rate-limit<br/>maakt ScanJob, geeft direct jobId"]:::sys
     B --> C["Wachtscherm /scan/bezig<br/>polt elke 1,5s"]:::ui
-    B -. op de achtergrond .-> D["Site scrapen<br/>Jina Reader + Cheerio<br/>PII eruit gestript"]:::sys
-    D --> E{"parallel"}:::sys
+    B -. op de achtergrond .-> D["Site scrapen<br/>tier 1: Jina + Cheerio, www-varianten<br/>tier 2: browser-engine (Jina-key)<br/>PII eruit gestript"]:::sys
+    D -->|gelukt| E{"parallel"}:::sys
+    D -. lukt niet .-> X["Escape-luik op het wachtscherm<br/>gratis handmatige analyse, binnen 24u"]:::ui
+    X --> Y["Lead + heads-up naar John<br/>mail + Telegram"]:::sys
     E --> F["Haiku 4.5<br/>4 observatie-zinnen"]:::ai
     E --> G["Sonnet 4.6<br/>branche, niche, toon<br/>exact 3 kansen"]:::ai
     G --> H["Haiku 4.5<br/>openingsvraag op maat"]:::ai
-    F --> I["status: ready<br/>na een vloer van 30s"]:::sys
+    F --> I["status: ready<br/>na een vloer van ~11s"]:::sys
     H --> I
     C -. polt .-> I
     I --> J["Adaptieve vragen<br/>5 tot 8, dan e-mail"]:::ui
@@ -205,8 +207,8 @@ flowchart TD
       </div>
       <div class="item">
         <div class="k">VERTROUWEN</div>
-        <h4>Een vloer van 30 seconden</h4>
-        <p>Ook als alles in 20s klaar is, houdt het wachtscherm de scan even vast. Iets wat te snel gaat voelt goedkoop; deze pauze laat het werk zien.</p>
+        <h4>Een vloer van ~11 seconden</h4>
+        <p>Ook als alles supersnel klaar is, houdt het wachtscherm de scan heel even vast, net genoeg om de eerste observaties te laten landen. Iets wat te snel gaat voelt goedkoop.</p>
       </div>
       <div class="item">
         <div class="k">PRIVACY</div>
@@ -216,7 +218,12 @@ flowchart TD
       <div class="item">
         <div class="k">ROBUUST</div>
         <h4>Alles faalt zacht</h4>
-        <p>Mail, Telegram en de brug naar het OS mogen omvallen zonder dat de bezoeker het merkt. Valt een AI-call uit, dan pakt een vaste vragenpool het over.</p>
+        <p>Mail, Telegram en de brug naar het OS mogen omvallen zonder dat de bezoeker het merkt. Valt een AI-call uit, dan pakt een vaste vragenpool het over. Lukt een site niet in één keer, dan probeert de scraper de www-variant en een zwaardere route.</p>
+      </div>
+      <div class="item">
+        <div class="k">NOOIT KWIJT</div>
+        <h4>Een mislukte scan wordt tóch een lead</h4>
+        <p>Kan een site echt niet gelezen worden, dan krijgt de bezoeker geen dood spoor maar een gratis aanbod: laat je gegevens achter, John kijkt persoonlijk binnen 24 uur. Geen AI-gok, wel echte opvolging.</p>
       </div>
       <div class="item">
         <div class="k">CONTROLE</div>
@@ -250,7 +257,7 @@ flowchart TD
     <div class="sig"><b>Think now,</b> build tomorrow.</div>
     <div class="colofon">
       GEBOUWD MET <span class="klei">SONNET 4.6</span> + <span class="klei">HAIKU 4.5</span> · NEXT.JS 16 · PRISMA + NEON<br>
-      VOLLEDIGE ARCHITECTUUR: SCAN-ARCHITECTUUR.md &nbsp;·&nbsp; FUTURE CONTENT · DE KEMPEN · 5 JULI 2026
+      VOLLEDIGE ARCHITECTUUR: SCAN-ARCHITECTUUR.md &nbsp;·&nbsp; FUTURE CONTENT · DE KEMPEN · 6 JULI 2026
     </div>
   </div>
 </footer>

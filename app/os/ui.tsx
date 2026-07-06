@@ -170,19 +170,23 @@ export function VideoForm({
   )
 }
 
-// Datum-slider voor het dashboard. Stelt de STARTdatum van de periode in; het
-// eind is altijd vandaag (loopt mee met de tijd). Sleepbaar tot uiterlijk minIso.
-// De keuze wordt als ?van=YYYY-MM-DD in de URL gezet, waarna de server de cijfers
-// voor die periode opnieuw ophaalt. Tijdens het slepen updatet alleen het label;
-// de navigatie gebeurt bij loslaten, zodat we niet elke stap opnieuw laden.
-export function DatumSlider({
+// Periode-kiezer voor het dashboard: twee sleepbare knoppen (begin + eind) plus
+// datum-invulvelden. Beide grenzen zijn instelbaar tussen minIso en maxIso (vandaag).
+// De keuze komt als ?van=...&tot=... in de URL; de server haalt dan de cijfers voor
+// die periode op. Tijdens slepen updatet alleen het label; navigeren bij loslaten,
+// zodat we niet elke stap herladen. Het openstaande detail-paneel blijft behouden.
+export function DatumBereik({
   minIso,
   maxIso,
   vanIso,
+  totIso,
+  detail,
 }: {
   minIso: string
   maxIso: string
   vanIso: string
+  totIso: string
+  detail?: string
 }) {
   const router = useRouter()
   const DAG = 86400000
@@ -193,49 +197,112 @@ export function DatumSlider({
   const minMs = parse(minIso)
   const maxMs = parse(maxIso)
   const totaal = Math.max(1, Math.round((maxMs - minMs) / DAG))
-  const startIdx = Math.min(totaal, Math.max(0, Math.round((parse(vanIso) - minMs) / DAG)))
-  const [idx, setIdx] = useState(startIdx)
+  const clamp = (n: number) => Math.min(totaal, Math.max(0, n))
 
-  const fmt = (ms: number) =>
+  const [vanIdx, setVanIdx] = useState(clamp(Math.round((parse(vanIso) - minMs) / DAG)))
+  const [totIdx, setTotIdx] = useState(clamp(Math.round((parse(totIso) - minMs) / DAG)))
+
+  const isoVan = (i: number) => new Date(minMs + i * DAG).toISOString().slice(0, 10)
+  const fmt = (i: number) =>
     new Intl.DateTimeFormat("nl-NL", {
       day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
-    }).format(new Date(ms))
+    }).format(new Date(minMs + i * DAG))
 
-  const gekozenMs = minMs + idx * DAG
-  const dagen = totaal - idx + 1
-
-  const commit = (i: number) => {
-    const iso = new Date(minMs + i * DAG).toISOString().slice(0, 10)
-    router.push(`/os?tab=dashboard&van=${iso}`)
+  const commit = (v: number, t: number) => {
+    const staart = detail ? `&detail=${detail}` : ""
+    router.push(`/os?tab=dashboard&van=${isoVan(v)}&tot=${isoVan(t)}${staart}`)
   }
 
-  const CARD = "#FBF8F2", BORDER2 = "#E4D8C6", INK2 = "#2A2218", MUTED2 = "#6E6151", KLEI = "#B45F38"
+  // Grenzen kunnen elkaar niet passeren: van <= tot.
+  const opVan = (n: number) => setVanIdx(Math.min(clamp(n), totIdx))
+  const opTot = (n: number) => setTotIdx(Math.max(clamp(n), vanIdx))
+
+  const dagen = totIdx - vanIdx + 1
+  const vanPct = (vanIdx / totaal) * 100
+  const totPct = (totIdx / totaal) * 100
+
+  const CARD = "#FBF8F2", BORDER2 = "#E4D8C6", INK2 = "#2A2218", MUTED2 = "#6E6151"
+  const inputStijl: React.CSSProperties = {
+    padding: "6px 8px", border: `1px solid ${BORDER2}`, borderRadius: 7, fontSize: 13,
+    color: INK2, background: "#fff",
+  }
 
   return (
     <div style={{ background: CARD, border: `1px solid ${BORDER2}`, borderRadius: 14, padding: "16px 18px", marginBottom: 16 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, flexWrap: "wrap", marginBottom: 10 }}>
+      <style>{`
+        .fc-dual { position: relative; height: 34px; }
+        .fc-dual .track { position:absolute; top:15px; left:0; right:0; height:4px; background:#E4D8C6; border-radius:2px; }
+        .fc-dual .fill { position:absolute; top:15px; height:4px; background:#B45F38; border-radius:2px; }
+        .fc-dual input[type=range] { position:absolute; top:0; left:0; width:100%; height:34px; margin:0; background:none; -webkit-appearance:none; appearance:none; pointer-events:none; }
+        .fc-dual input[type=range]::-webkit-slider-runnable-track { background:none; border:none; }
+        .fc-dual input[type=range]::-moz-range-track { background:none; border:none; }
+        .fc-dual input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; pointer-events:auto; height:18px; width:18px; margin-top:8px; border-radius:50%; background:#B45F38; border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,.28); cursor:pointer; }
+        .fc-dual input[type=range]::-moz-range-thumb { pointer-events:auto; height:18px; width:18px; border-radius:50%; background:#B45F38; border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,.28); cursor:pointer; }
+        .fc-dual input.van { z-index:4; }
+        .fc-dual input.tot { z-index:5; }
+      `}</style>
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
         <div style={{ fontSize: 10.5, letterSpacing: ".08em", textTransform: "uppercase", color: MUTED2, fontWeight: 700 }}>
           Periode
         </div>
         <div style={{ fontSize: 13.5, color: INK2 }}>
-          <strong>{fmt(gekozenMs)}</strong> tot vandaag{" "}
+          <strong>{fmt(vanIdx)}</strong> tot <strong>{fmt(totIdx)}</strong>{" "}
           <span style={{ color: MUTED2 }}>· {dagen} {dagen === 1 ? "dag" : "dagen"}</span>
         </div>
       </div>
-      <input
-        type="range"
-        min={0}
-        max={totaal}
-        value={idx}
-        onChange={(e) => setIdx(Number(e.target.value))}
-        onMouseUp={(e) => commit(Number((e.target as HTMLInputElement).value))}
-        onTouchEnd={(e) => commit(Number((e.target as HTMLInputElement).value))}
-        onKeyUp={(e) => commit(Number((e.target as HTMLInputElement).value))}
-        style={{ width: "100%", accentColor: KLEI, cursor: "pointer" }}
-      />
+
+      <div className="fc-dual">
+        <div className="track" />
+        <div className="fill" style={{ left: `${vanPct}%`, right: `${100 - totPct}%` }} />
+        <input
+          className="van" type="range" min={0} max={totaal} value={vanIdx}
+          onChange={(e) => opVan(Number(e.target.value))}
+          onMouseUp={() => commit(vanIdx, totIdx)}
+          onTouchEnd={() => commit(vanIdx, totIdx)}
+          onKeyUp={() => commit(vanIdx, totIdx)}
+        />
+        <input
+          className="tot" type="range" min={0} max={totaal} value={totIdx}
+          onChange={(e) => opTot(Number(e.target.value))}
+          onMouseUp={() => commit(vanIdx, totIdx)}
+          onTouchEnd={() => commit(vanIdx, totIdx)}
+          onKeyUp={() => commit(vanIdx, totIdx)}
+        />
+      </div>
+
       <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: MUTED2, marginTop: 4 }}>
-        <span>{fmt(minMs)}</span>
+        <span>{fmt(0)}</span>
         <span>vandaag</span>
+      </div>
+
+      <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", marginTop: 12 }}>
+        <label style={{ fontSize: 12, color: MUTED2, display: "flex", alignItems: "center", gap: 6 }}>
+          Van
+          <input
+            type="date" value={isoVan(vanIdx)} min={minIso} max={isoVan(totIdx)}
+            onChange={(e) => {
+              if (!e.target.value) return
+              const nv = Math.min(clamp(Math.round((parse(e.target.value) - minMs) / DAG)), totIdx)
+              setVanIdx(nv)
+              commit(nv, totIdx)
+            }}
+            style={inputStijl}
+          />
+        </label>
+        <label style={{ fontSize: 12, color: MUTED2, display: "flex", alignItems: "center", gap: 6 }}>
+          tot
+          <input
+            type="date" value={isoVan(totIdx)} min={isoVan(vanIdx)} max={maxIso}
+            onChange={(e) => {
+              if (!e.target.value) return
+              const nt = Math.max(clamp(Math.round((parse(e.target.value) - minMs) / DAG)), vanIdx)
+              setTotIdx(nt)
+              commit(vanIdx, nt)
+            }}
+            style={inputStijl}
+          />
+        </label>
       </div>
     </div>
   )

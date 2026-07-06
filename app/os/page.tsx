@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
+import type { Prisma } from "@prisma/client"
 import { mailsNaarLeadsAan } from "@/lib/scan/settings"
-import { OsLogin, VideoForm, MailSchakelaar, TestToggle, UitlogKnop, BelBlok, MailPerLead, DatumSlider } from "./ui"
+import { OsLogin, VideoForm, MailSchakelaar, TestToggle, UitlogKnop, BelBlok, MailPerLead, DatumBereik } from "./ui"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -117,7 +118,7 @@ function geplandeHerinnering(
 export default async function OsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string; van?: string }>
+  searchParams: Promise<{ tab?: string; van?: string; tot?: string; detail?: string }>
 }) {
   const token = (await cookies()).get("fc_os")?.value
   const ok = process.env.ADMIN_TOKEN && token === process.env.ADMIN_TOKEN
@@ -129,22 +130,28 @@ export default async function OsPage({
 
   // ── Dashboard-tab: scan-funnel-cijfers uit Neon (read-only aggregaties) ──
   if (tab === "dashboard") {
-    // Periode: standaard 6 juli tot vandaag; sleepbaar tot uiterlijk 1 juni 2026.
-    // Het eind loopt altijd mee met vandaag.
+    // Periode: standaard 6 juli tot vandaag; beide grenzen sleepbaar, tot uiterlijk
+    // 1 juni 2026. De eind-grens staat standaard op vandaag en loopt mee met de tijd.
     const HARD_MIN = new Date("2026-06-01T00:00:00")
     const STANDAARD_VAN = new Date("2026-07-06T00:00:00")
     const now = new Date()
     const vandaagStart = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-    const tot = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999)
 
     let van = sp.van ? new Date(`${sp.van}T00:00:00`) : STANDAARD_VAN
     if (isNaN(van.getTime())) van = STANDAARD_VAN
     if (van < HARD_MIN) van = HARD_MIN
     if (van > vandaagStart) van = vandaagStart
 
+    let totDag = sp.tot ? new Date(`${sp.tot}T00:00:00`) : vandaagStart
+    if (isNaN(totDag.getTime())) totDag = vandaagStart
+    if (totDag > vandaagStart) totDag = vandaagStart
+    if (totDag < van) totDag = van
+    const tot = new Date(totDag.getFullYear(), totDag.getMonth(), totDag.getDate(), 23, 59, 59, 999)
+
     const isoDag = (d: Date) =>
       `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
-    const dagen = Math.floor((vandaagStart.getTime() - van.getTime()) / 864e5) + 1
+    const dagen = Math.floor((totDag.getTime() - van.getTime()) / 864e5) + 1
+    const detail = sp.detail
 
     const scanBereik = { startedAt: { gte: van, lte: tot } }
     const leadBereik = { createdAt: { gte: van, lte: tot } }
@@ -166,16 +173,83 @@ export default async function OsPage({
       db.lead.count({ where: { isTest: true } }),
     ])
     const pct = (a: number, b: number) => (b > 0 ? Math.round((a / b) * 100) : 0)
-    const tegels: { label: string; waarde: number; sub: string }[] = [
-      { label: "Scans gestart", waarde: scansGestart, sub: "in deze periode (echt, excl. test)" },
-      { label: "Analyse gelukt", waarde: analyseGelukt, sub: `${pct(analyseGelukt, scansGestart)}% van gestart` },
-      { label: "Scans afgerond", waarde: scansAfgerond, sub: `${pct(scansAfgerond, scansGestart)}% van gestart` },
-      { label: "Leads (contact)", waarde: actueelCount, sub: `${pct(actueelCount, scansGestart)}% van gestart` },
-      { label: "Uitgebreide scan", waarde: diepteVoltooid, sub: "diepte voltooid" },
-      { label: "Gebeld", waarde: leadsGebeld, sub: `van ${actueelCount} leads` },
-      { label: "Video's verstuurd", waarde: videosVerstuurd, sub: "persoonlijke video's" },
-      { label: "Mislukt bij scrape", waarde: scansMislukt, sub: `${pct(scansMislukt, scansGestart)}% van gestart` },
+    const tegels: { key: string; label: string; waarde: number; sub: string }[] = [
+      { key: "scans", label: "Scans gestart", waarde: scansGestart, sub: "in deze periode (echt, excl. test)" },
+      { key: "analyse", label: "Analyse gelukt", waarde: analyseGelukt, sub: `${pct(analyseGelukt, scansGestart)}% van gestart` },
+      { key: "afgerond", label: "Scans afgerond", waarde: scansAfgerond, sub: `${pct(scansAfgerond, scansGestart)}% van gestart` },
+      { key: "leads", label: "Leads (contact)", waarde: actueelCount, sub: `${pct(actueelCount, scansGestart)}% van gestart` },
+      { key: "diepte", label: "Uitgebreide scan", waarde: diepteVoltooid, sub: "diepte voltooid" },
+      { key: "gebeld", label: "Gebeld", waarde: leadsGebeld, sub: `van ${actueelCount} leads` },
+      { key: "video", label: "Video's verstuurd", waarde: videosVerstuurd, sub: "persoonlijke video's" },
+      { key: "mislukt", label: "Mislukt bij scrape", waarde: scansMislukt, sub: `${pct(scansMislukt, scansGestart)}% van gestart` },
     ]
+
+    // Detail onder de tegels: alleen de aangeklikte tegel haalt zijn rijen op.
+    let detailTitel = ""
+    let detailKolommen: string[] = []
+    let detailRijen: React.ReactNode[][] = []
+    const linkStijl: React.CSSProperties = { color: GOLD, fontWeight: 600, wordBreak: "break-all" }
+
+    if (detail === "scans" || detail === "analyse" || detail === "afgerond" || detail === "mislukt" || detail === "diepte") {
+      const statusWhere: Prisma.ScanJobWhereInput =
+        detail === "afgerond" ? { status: "completed" } :
+        detail === "mislukt" ? { status: "failed" } :
+        detail === "diepte" ? { diepteStatus: "voltooid" } :
+        detail === "analyse" ? { status: { in: ["ready", "answering", "completed"] } } : {}
+      const rows = await db.scanJob.findMany({
+        where: { isTest: false, ...scanBereik, ...statusWhere },
+        orderBy: { startedAt: "desc" },
+        take: 100,
+        include: { lead: true },
+      })
+      detailTitel = tegels.find((t) => t.key === detail)?.label ?? "Details"
+      detailKolommen = ["Website", "Gestart", "Status", "Contact"]
+      detailRijen = rows.map((r) => {
+        const a = (r.analyseJson ?? null) as Analyse
+        return [
+          <a key="w" href={r.url} target="_blank" rel="noreferrer" style={linkStijl}>{domein(r.url)} ↗</a>,
+          <span key="d">{dt(r.startedAt)}</span>,
+          <span key="s">{detail === "diepte" ? "uitgebreid voltooid" : r.status}{a?.niche ? ` · ${a.niche}` : ""}</span>,
+          <span key="c">{r.lead?.naam || r.lead?.email || "—"}</span>,
+        ]
+      })
+    } else if (detail === "leads" || detail === "gebeld") {
+      const rows = await db.lead.findMany({
+        where: { isTest: false, ...leadBereik, ...(detail === "gebeld" ? { gebeld: true } : {}) },
+        orderBy: { createdAt: "desc" },
+        take: 100,
+        include: { scans: { orderBy: { startedAt: "desc" }, take: 1 } },
+      })
+      detailTitel = tegels.find((t) => t.key === detail)?.label ?? "Details"
+      detailKolommen = ["Bedrijf / naam", "Website", "E-mail", detail === "gebeld" ? "Notitie" : "Gebeld"]
+      detailRijen = rows.map((r) => {
+        const scan = r.scans[0]
+        return [
+          <span key="b">{r.bedrijfsnaam || r.naam || "—"}</span>,
+          scan
+            ? <a key="w" href={scan.url} target="_blank" rel="noreferrer" style={linkStijl}>{domein(scan.url)} ↗</a>
+            : <span key="w">—</span>,
+          <a key="e" href={`mailto:${r.email}`} style={{ color: INK }}>{r.email}</a>,
+          <span key="g">{detail === "gebeld" ? (r.belnotitie || "—") : (r.gebeld ? "ja" : "nee")}</span>,
+        ]
+      })
+    } else if (detail === "video") {
+      const rows = await db.loomVideo.findMany({
+        where: { verstuurdOp: { gte: van, lte: tot }, lead: { isTest: false } },
+        orderBy: { verstuurdOp: "desc" },
+        take: 100,
+        include: { lead: true },
+      })
+      detailTitel = "Video's verstuurd"
+      detailKolommen = ["Contact", "Video-link", "Verstuurd"]
+      detailRijen = rows.map((r) => [
+        <span key="c">{r.lead?.naam || r.lead?.email || "—"}</span>,
+        r.loomUrl
+          ? <a key="v" href={r.loomUrl} target="_blank" rel="noreferrer" style={linkStijl}>{r.loomUrl}</a>
+          : <span key="v">—</span>,
+        <span key="d">{dt(r.verstuurdOp)}</span>,
+      ])
+    }
     const tegelLabel: React.CSSProperties = {
       fontSize: 10.5, letterSpacing: ".08em", textTransform: "uppercase",
       color: MUTED, fontWeight: 700, marginBottom: 8,
@@ -196,17 +270,70 @@ export default async function OsPage({
             <a href="/os?tab=dashboard" style={tabStijl(true)}>Dashboard</a>
           </div>
 
-          <DatumSlider minIso="2026-06-01" maxIso={isoDag(vandaagStart)} vanIso={isoDag(van)} />
+          <DatumBereik minIso="2026-06-01" maxIso={isoDag(vandaagStart)} vanIso={isoDag(van)} totIso={isoDag(totDag)} detail={detail} />
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
-            {tegels.map((t) => (
-              <div key={t.label} style={{ background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "18px" }}>
-                <div style={tegelLabel}>{t.label}</div>
-                <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1, fontFamily: "var(--font-playfair)" }}>{t.waarde}</div>
-                <div style={{ fontSize: 12.5, color: MUTED, marginTop: 6 }}>{t.sub}</div>
-              </div>
-            ))}
+            {tegels.map((t) => {
+              const actief = detail === t.key
+              const bereik = `van=${isoDag(van)}&tot=${isoDag(totDag)}`
+              const href = actief
+                ? `/os?tab=dashboard&${bereik}`
+                : `/os?tab=dashboard&${bereik}&detail=${t.key}`
+              return (
+                <a
+                  key={t.key}
+                  href={href}
+                  style={{
+                    background: actief ? "#fff" : CARD,
+                    border: `1px solid ${actief ? GOLD : BORDER}`,
+                    boxShadow: actief ? `0 0 0 1px ${GOLD}` : "none",
+                    borderRadius: 14, padding: "18px", textDecoration: "none", color: INK, display: "block",
+                  }}
+                >
+                  <div style={tegelLabel}>{t.label}</div>
+                  <div style={{ fontSize: 34, fontWeight: 800, lineHeight: 1, fontFamily: "var(--font-playfair)" }}>{t.waarde}</div>
+                  <div style={{ fontSize: 12.5, color: MUTED, marginTop: 6 }}>{t.sub}</div>
+                  <div style={{ fontSize: 11, color: actief ? GOLD : MUTED, marginTop: 8, fontWeight: 600 }}>
+                    {actief ? "▾ verberg details" : "bekijk details →"}
+                  </div>
+                </a>
+              )
+            })}
           </div>
+
+          {detail && (
+            <div style={{ marginTop: 16, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "16px 18px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 10, gap: 12, flexWrap: "wrap" }}>
+                <div style={tegelLabel}>{detailTitel} · in deze periode</div>
+                <a href={`/os?tab=dashboard&van=${isoDag(van)}&tot=${isoDag(totDag)}`} style={{ fontSize: 12, color: MUTED }}>sluiten ✕</a>
+              </div>
+              {detailRijen.length === 0 ? (
+                <p style={{ color: MUTED, fontSize: 13, margin: 0 }}>Geen resultaten in deze periode.</p>
+              ) : (
+                <div style={{ overflowX: "auto" }}>
+                  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                    <thead>
+                      <tr>
+                        {detailKolommen.map((k) => (
+                          <th key={k} style={{ textAlign: "left", padding: "6px 10px", color: MUTED, fontWeight: 700, fontSize: 11, textTransform: "uppercase", letterSpacing: ".04em", borderBottom: `1px solid ${BORDER}`, whiteSpace: "nowrap" }}>{k}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {detailRijen.map((rij, i) => (
+                        <tr key={i}>
+                          {rij.map((cel, j) => (
+                            <td key={j} style={{ padding: "7px 10px", borderBottom: `1px solid ${BORDER}`, verticalAlign: "top" }}>{cel}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              <p style={{ color: MUTED, fontSize: 11, marginTop: 10 }}>Max 100 rijen. Klik een website om te openen.</p>
+            </div>
+          )}
 
           <div style={{ marginTop: 20, background: CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "16px 18px" }}>
             <div style={tegelLabel}>De trechter</div>

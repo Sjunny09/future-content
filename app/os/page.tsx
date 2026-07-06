@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
 import { mailsNaarLeadsAan } from "@/lib/scan/settings"
-import { OsLogin, VideoForm, MailSchakelaar, TestToggle } from "./ui"
+import { OsLogin, VideoForm, MailSchakelaar, TestToggle, UitlogKnop } from "./ui"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -154,7 +154,10 @@ export default async function OsPage({
             </div>
             <h1 style={{ fontFamily: "var(--font-playfair)", fontSize: 30, marginTop: 4 }}>Leads uit de Quickscan</h1>
           </div>
-          <MailSchakelaar aan={mailsAan} />
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <MailSchakelaar aan={mailsAan} />
+            <UitlogKnop />
+          </div>
         </header>
 
         <div style={{ display: "flex", gap: 6, marginBottom: 20, borderBottom: `1px solid ${BORDER}` }}>

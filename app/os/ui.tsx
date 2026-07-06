@@ -148,6 +148,30 @@ export function MailSchakelaar({ aan }: { aan: boolean }) {
   )
 }
 
+// Uitloggen uit /os: wist het fc_os-cookie en herlaadt naar het inlogscherm.
+export function UitlogKnop() {
+  const [bezig, setBezig] = useState(false)
+
+  async function uitloggen() {
+    setBezig(true)
+    await fetch("/api/os/logout", { method: "POST" })
+    window.location.reload()
+  }
+
+  return (
+    <button
+      onClick={uitloggen}
+      disabled={bezig}
+      style={{
+        padding: "9px 12px", borderRadius: 8, fontSize: 12.5, fontWeight: 600,
+        cursor: "pointer", border: `1px solid ${BORDER}`, background: "#fff", color: "#6E6151",
+      }}
+    >
+      {bezig ? "..." : "Uitloggen"}
+    </button>
+  )
+}
+
 // Per lead: markeer als test (verhuist naar het test-tabblad) of terug naar
 // actueel. Herlaadt zodat de lead meteen naar het juiste tabblad springt.
 export function TestToggle({ leadId, isTest }: { leadId: string; isTest: boolean }) {

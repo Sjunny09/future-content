@@ -17,18 +17,48 @@ const JINA_TIMEOUT_MS = 20_000
 const CHEERIO_TIMEOUT_MS = 12_000
 
 export async function haalSiteDataOp(url: string): Promise<SiteData> {
-  // Jina eerst (beste kwaliteit). Faalt de eerste poging op een timeout, dan is
-  // de kans groot dat Jina de pagina inmiddels gecachet heeft: één snelle retry
-  // vangt de trage sites die net over de rand tikten (zoals allplayzwembaden.nl,
-  // ~12s koud). Pas als ook dat mislukt vallen we terug op Cheerio.
-  try {
-    return await scrapeMetJina(url)
-  } catch {
+  const [primair, alt] = hostVarianten(url)
+  let laatsteFout: unknown = new Error("scrape-mislukt")
+
+  // Primaire host: Jina eerst (beste kwaliteit) met één retry (trage sites
+  // cachen na de eerste hit), dan Cheerio.
+  const pogingen: Array<() => Promise<SiteData>> = [
+    () => scrapeMetJina(primair),
+    () => scrapeMetJina(primair),
+    () => scrapeMetCheerio(primair),
+  ]
+  // Andere host-variant (www eraf of erop) als vangnet: sommige sites hebben een
+  // TLS-cert of redirect dat maar één variant dekt. www.allplayzwembaden.nl
+  // heeft bijvoorbeeld een ongeldig cert op www ("fetch failed"), terwijl de
+  // kale domein prima werkt. Zonder deze fallback zou de bezoeker stranden.
+  if (alt) {
+    pogingen.push(() => scrapeMetJina(alt), () => scrapeMetCheerio(alt))
+  }
+
+  for (const poging of pogingen) {
     try {
-      return await scrapeMetJina(url)
-    } catch {
-      return await scrapeMetCheerio(url)
+      return await poging()
+    } catch (e) {
+      laatsteFout = e
     }
+  }
+  throw laatsteFout
+}
+
+// Geeft [primaire-url, alternatieve-url] terug, waarbij de alternatieve de
+// www-variant omdraait. undefined als er geen zinnige variant is.
+function hostVarianten(url: string): [string, string | undefined] {
+  try {
+    const u = new URL(url)
+    const alt = new URL(url)
+    alt.hostname = u.hostname.startsWith("www.")
+      ? u.hostname.slice(4)
+      : `www.${u.hostname}`
+    const a = u.toString()
+    const b = alt.toString()
+    return b === a ? [a, undefined] : [a, b]
+  } catch {
+    return [url, undefined]
   }
 }
 

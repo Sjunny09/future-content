@@ -44,11 +44,11 @@ Alle prompts zijn inline string-constanten.
 
 ## Datamodel (Prisma, `prisma/schema.prisma`, Neon Postgres)
 - `ScanJob`: één rij per scan. `status` (enum: queued/scraping/analysing/ready/answering/completed/failed), `url`, `ipHash`, `siteDataJson`, `scrapeBron`, `observatiesJson`, `analyseJson`, `vragenJson`, `opmerking`, dieptevelden (`diepteStatus`, `diepteVragenJson`, `diagnoseJson`), `leadId`, en timestamps `startedAt`, `scrapedAt`, `analysedAt`, `readyAt`, `completedAt`. Die timestamps zijn genoeg voor een echte determinate voortgang, geen extra kolom nodig.
-- `Lead`: `email` (uniek), naam, telefoon, `isTest` (testlead → test-tabblad + geen mail), `geanonimiseerd` (18 maanden). `Answer`: één rij per beantwoorde vraag (`vraagId`, `vraagTitel`, `waarde` Json), cascade delete op `ScanJob`. `LoomVideo`: 24u-opvolging. `Payment`: Mollie/Stripe pilot.
+- `Lead`: `email` (uniek), naam, telefoon, `isTest` (testlead → test-tabblad + geen mail), `gebeld` + `gebeldOp` + `belnotitie` (bel-workflow in /os: gebeld ja/nee + feedback), `mailUit` (per-lead mail aan/uit), `geanonimiseerd` (18 maanden). `Answer`: één rij per beantwoorde vraag (`vraagId`, `vraagTitel`, `waarde` Json), cascade delete op `ScanJob`. `LoomVideo`: 24u-opvolging. `Payment`: Mollie/Stripe pilot.
 - `ScanJob.isTest`: gezet in `start/route.ts` als de scan met de admin-cookie (`fc_os`) draait (John test zelf); propageert bij afronden naar `Lead.isTest` en onderdrukt de resultaten-mail.
 - `MailLog`: één rij per mail die de funnel verstuurt of bewust overslaat (`richting` naar_lead/naar_john, `soort` resultaten/john_notificatie/herinnering, `status` verstuurd/mislukt/overgeslagen + `detail`). Gevoed door `lib/scan/mail/mailLog.ts`; getoond per lead in `/os`.
 - `Setting`: key-value voor OS-schakelaars zonder redeploy. Nu `mails_naar_leads` (aan/uit), gelezen via `lib/scan/settings.ts`, bediend met de schakelaar in `/os`.
-- Migraties: `20260421051833_init_scan`, `20260629104500_diepte_scan`, `20260703160000_add_opmerking_scan`, `20260705130000_leads_cockpit` (isTest + MailLog + Setting).
+- Migraties: `20260421051833_init_scan`, `20260629104500_diepte_scan`, `20260703160000_add_opmerking_scan`, `20260705130000_leads_cockpit` (isTest + MailLog + Setting), `20260706100000_bel_mail_perlead` (gebeld/gebeldOp/belnotitie/mailUit op Lead).
 
 ## API-routes (`app/api/scan/`)
 `start` (job aanmaken, achtergrondanalyse starten), `[jobId]/status` (polling), `[jobId]/antwoord` (quickscan-antwoord + volgende vraag, grenzen 5/8), `[jobId]/compleet` (e-mail/Lead + completed + notificaties), `[jobId]/diepte/antwoord` (diep antwoord + volgende), `[jobId]/diepte/afronden` (voltooid + Sonnet-diagnose), `[jobId]/opmerking` (vrije opmerking). Alle routes: `runtime = "nodejs"`, `dynamic = "force-dynamic"`.
@@ -80,7 +80,7 @@ De scan is stap 1; John belt de leads na. Het dashboard waarop hij dat doet leef
 ## Waar de tijd zit (perf)
 1. De kunstmatige vloer `MIN_WACHT_MS = 30_000` domineert de gevoelde introwachttijd; ook als alles in ~20s klaar is wordt de job tot 30s vastgehouden.
 2. Sonnet `analyseerSite` (15-25s) is de traagste losse LLM-stap.
-3. Scrape is de wildcard: normaal 2-8s. Jina-timeout staat op 20s met één retry (trage sites cachen na de eerste hit), daarna Cheerio-fallback (12s). Een echt trage site kan dus tot ~50s scrape opvreten voordat de fallback grijpt; de 3-min harde stop op het wachtscherm blijft het vangnet.
+3. Scrape is de wildcard: normaal 2-8s. Jina-timeout staat op 20s met één retry (trage sites cachen na de eerste hit), daarna Cheerio-fallback (12s). Bij mislukken wordt automatisch de andere host-variant geprobeerd (www eraf/erop) voor sites met een scheef TLS-cert of redirect op maar één variant (zie `hostVarianten` in `scraper.ts`, aanleiding: www.allplayzwembaden.nl heeft een ongeldig cert op www). Een echt trage site kan tot ~50s scrape opvreten voordat de fallback grijpt; de 3-min harde stop op het wachtscherm blijft het vangnet.
 4. Haiku-stappen (observaties, B1, elk vervolg) zijn goedkoop (~1-3s). De vervolgvraag is synchroon, dus de bezoeker voelt na elk antwoord 1-3s pauze.
 5. De eind-diagnose (Sonnet, uitgebreide scan) draait in `after()` op de achtergrond, daar wacht de bezoeker nooit op.
 

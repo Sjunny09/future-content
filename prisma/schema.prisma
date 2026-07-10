@@ -7,8 +7,10 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")          // pooled (PgBouncer, poort 6543, ?pgbouncer=true)
+  directUrl = env("DIRECT_DATABASE_URL")   // direct (poort 5432) — voor migrate/introspect
+  schemas   = ["scan"]
 }
 
 // ─────────────────────────────────────────
@@ -23,6 +25,8 @@ enum ScanStatus {
   answering    // Klant beantwoordt vragen
   completed    // Volledig afgerond
   failed       // Fout — fallback naar handmatige flow
+
+  @@schema("scan")
 }
 
 // ScanJob = één sessie van begin (URL ingevoerd) tot eind (6e vraag beantwoord).
@@ -71,6 +75,7 @@ model ScanJob {
 
   @@index([status])
   @@index([startedAt])
+  @@schema("scan")
 }
 
 // Lead = de contactgegevens die pas bij vraag 6 worden opgehaald.
@@ -112,6 +117,7 @@ model Lead {
   @@index([email])
   @@index([createdAt])
   @@index([isTest])
+  @@schema("scan")
 }
 
 // Antwoorden op de 6 vragen — één row per vraag
@@ -126,6 +132,7 @@ model Answer {
   scanJob    ScanJob  @relation(fields: [scanJobId], references: [id], onDelete: Cascade)
 
   @@index([scanJobId])
+  @@schema("scan")
 }
 
 // Follow-up tracking voor de 24u Loom-belofte
@@ -144,6 +151,7 @@ model LoomVideo {
   @@index([leadId])
   @@index([deadline])
   @@index([verstuurdOp])
+  @@schema("scan")
 }
 
 // MailLog = één rij per mail die de funnel verstuurt of bewust overslaat.
@@ -164,6 +172,7 @@ model MailLog {
   @@index([leadId])
   @@index([scanJobId])
   @@index([createdAt])
+  @@schema("scan")
 }
 
 // Setting = kleine key-value voor OS-instellingen die John in /os kan omzetten
@@ -172,6 +181,8 @@ model Setting {
   key       String   @id
   waarde    String
   updatedAt DateTime @updatedAt
+
+  @@schema("scan")
 }
 
 // ─────────────────────────────────────────
@@ -183,11 +194,15 @@ enum PaymentStatus {
   paid
   failed
   refunded
+
+  @@schema("scan")
 }
 
 enum PaymentProvider {
   mollie
   stripe
+
+  @@schema("scan")
 }
 
 model Payment {
@@ -207,4 +222,5 @@ model Payment {
   @@unique([provider, providerId])
   @@index([leadId])
   @@index([status])
+  @@schema("scan")
 }

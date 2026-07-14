@@ -11,7 +11,6 @@ import {
   CalendarCheck,
   Clapperboard,
   MessageCircle,
-  Workflow,
 } from "lucide-react";
 import Wordmark from "@/components/common/Wordmark";
 import ScrollHero from "@/components/hero/ScrollHero";
@@ -81,64 +80,6 @@ export default function LandingPage() {
 
       {/* ── 1. Hero: wie ik ben, doorlopende scroll-video ── */}
       <ScrollHero />
-
-      {/* ── 1b. Keuzeblok: twee gelijkwaardige routes (AI vs Film), direct
-          onder de hero zodat makelaars, bruidsparen en events Film meteen
-          vinden. ScrollHero blijft ongemoeid, dus de scroll-video blijft
-          synchroon. ── */}
-      <section className="bg-[#2A2218] px-6 pt-12 pb-2 md:pt-16">
-        <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 md:gap-6">
-          <Link
-            href="/ai"
-            data-fc-keuze="ai"
-            className="plausible-event-name=Keuzeblok-AI group flex flex-col gap-6 rounded-2xl border border-[#F3ECE0]/10 bg-[#F3ECE0]/[0.03] p-7 transition-colors hover:border-[#B45F38]/50 hover:bg-[#F3ECE0]/[0.05] md:p-8"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#B45F38]/40 bg-[#B45F38]/10 text-[#B45F38]">
-              <Workflow size={22} />
-            </div>
-            <div>
-              <h2
-                className="text-xl font-semibold md:text-2xl"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
-                Routinewerk automatiseren
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-[#F3ECE0]/60">
-                AI en automatisering voor je bedrijf, gebouwd en beheerd.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#B45F38]">
-              Bekijk AI
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </span>
-          </Link>
-
-          <Link
-            href="/film"
-            data-fc-keuze="film"
-            className="plausible-event-name=Keuzeblok-Film group flex flex-col gap-6 rounded-2xl border border-[#F3ECE0]/10 bg-[#F3ECE0]/[0.03] p-7 transition-colors hover:border-[#B45F38]/50 hover:bg-[#F3ECE0]/[0.05] md:p-8"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#B45F38]/40 bg-[#B45F38]/10 text-[#B45F38]">
-              <Clapperboard size={22} />
-            </div>
-            <div>
-              <h2
-                className="text-xl font-semibold md:text-2xl"
-                style={{ fontFamily: "var(--font-playfair)" }}
-              >
-                Video nodig?
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-[#F3ECE0]/60">
-                Vastgoed, bruiloften, bedrijven en events.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#B45F38]">
-              Bekijk Film
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-            </span>
-          </Link>
-        </div>
-      </section>
 
       {/* ── 2. Herkenning: het probleem van de ondernemer ── */}
       <section className="border-t border-[#F3ECE0]/8">

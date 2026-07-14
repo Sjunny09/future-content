@@ -495,12 +495,15 @@ function MobileStackedHero() {
         <p className="fc-mono mb-4 text-[11px] uppercase tracking-[0.3em] text-[#B45F38]">
           AI en automatisering voor het MKB in Brabant
         </p>
-        <h1
+        {/* h2, niet h1: de desktop-hero (fase 0) is de canonieke h1 van de
+            pagina. Beide hero-varianten staan in de DOM, dus twee h1's zou
+            een dubbele h1 geven (go-live SEO-audit). */}
+        <h2
           className="text-[2rem] font-extrabold leading-[1.08] tracking-[-0.01em] text-[#F3ECE0]"
           style={{ fontFamily: "var(--font-archivo)" }}
         >
           Het saaie werk je bedrijf uit.
-        </h1>
+        </h2>
         <p className="mt-5 text-base leading-relaxed text-[#F3ECE0]/70">
           Ik bouw AI en automatisering die het routinewerk overneemt. Op maat
           gemaakt, en daarna een kant-en-klare tool die gewoon voor je werkt.

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SITE, STACK_VIDEOS, BRANCHES } from "@/lib/constants";
+import { SITE, STACK_VIDEOS, BRANCHES, AI_WEDGES } from "@/lib/constants";
 import { BLOG_POSTS } from "@/lib/blog";
 
 // Next.js auto-serves this as /sitemap.xml
@@ -39,6 +39,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
+  // AI-wedge landingspagina's (uit AI_WEDGES): inbox-cluster, elk eigen URL
+  const aiWedgeRoutes: MetadataRoute.Sitemap = AI_WEDGES.map((w) => ({
+    url: `${base}/ai/${w.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.9,
+  }));
+
   // Individual portfolio pages — each gets its own URL for SEO indexing
   const portfolioRoutes: MetadataRoute.Sitemap = STACK_VIDEOS.map((video) => ({
     url: `${base}/portfolio/${video.slug}`,
@@ -55,5 +63,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...brancheRoutes, ...portfolioRoutes, ...blogRoutes];
+  return [...staticRoutes, ...brancheRoutes, ...aiWedgeRoutes, ...portfolioRoutes, ...blogRoutes];
 }

@@ -49,7 +49,7 @@ export function PilotStartKnop({ jobId, stripeActief }: Props) {
         className="rounded-md px-6 py-3 text-base font-medium text-white transition disabled:opacity-40"
         style={{ backgroundColor: "var(--color-scan-terracotta)" }}
       >
-        {bezigMet === "ideal" ? "Even bezig…" : "Betaal €495 met iDEAL"}
+        {bezigMet === "ideal" ? "Even bezig…" : "Betaal €750 met iDEAL"}
       </button>
 
       {stripeActief && (

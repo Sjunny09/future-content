@@ -11,8 +11,8 @@ export function mollieClient(): MollieClient | null {
   return singleton
 }
 
-export const PILOT_BEDRAG_CENT = 49500
-export const PILOT_OMSCHRIJVING = "Pilotweek Future Content"
+export const PILOT_BEDRAG_CENT = 75000
+export const PILOT_OMSCHRIJVING = "Werkende proef Future Content"
 
 // Site-URL voor redirects en webhooks. Fallback op Vercel-URL (preview
 // deploys) zodat het op elke omgeving klopt.

@@ -36,17 +36,17 @@ export default async function PilotPagina({ params }: { params: Params }) {
           color: "var(--color-scan-drukinkt)",
         }}
       >
-        Een pilotweek{voornaam ? `, ${voornaam}` : ""}.
+        Een werkende proef{voornaam ? `, ${voornaam}` : ""}.
       </h1>
 
       <p
         className="mt-6 text-lg leading-relaxed"
         style={{ color: "var(--color-scan-drukinkt)" }}
       >
-        Voor €495 doe ik een volle week werk rond één concreet proces in jouw
-        bedrijf. Maandag kies ik met je uit wat het wordt, donderdag staat er
-        iets werkends, vrijdag lopen we het samen door. Geen adviesrapport,
-        maar iets dat al draait.
+        Voor €750 bouw ik een werkende proef rond één concreet proces in jouw
+        bedrijf. We kiezen samen uit wat het wordt, en aan het eind staat er
+        iets dat al draait op je eigen werk. Geen adviesrapport, maar iets dat
+        werkt. Ga je daarna door met de bouw, dan gaat dit bedrag er volledig van af.
       </p>
 
       <ul
@@ -54,9 +54,9 @@ export default async function PilotPagina({ params }: { params: Params }) {
         style={{ color: "var(--color-scan-drukinkt)" }}
       >
         <li>• Één proces, end-to-end opgelost</li>
-        <li>• Korte dagelijkse check-in (10 min per dag)</li>
+        <li>• Korte check-ins onderweg, zonder gedoe</li>
         <li>• Volle eigendom: alles wat we bouwen is van jou</li>
-        <li>• Refund als je vrijdag niet tevreden bent</li>
+        <li>• Niet tevreden? Je krijgt je geld terug</li>
       </ul>
 
       <div className="mt-12">
@@ -87,7 +87,7 @@ export default async function PilotPagina({ params }: { params: Params }) {
         className="mt-6 text-xs"
         style={{ color: "var(--color-scan-muted)" }}
       >
-        Totaal €495 inclusief btw. Je betaalt veilig via Mollie (iDEAL).
+        Totaal €750 inclusief btw. Je betaalt veilig via Mollie (iDEAL).
       </p>
     </main>
   )

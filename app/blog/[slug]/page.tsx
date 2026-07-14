@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, ArrowRight } from "lucide-react";
 import { BLOG_POSTS, getBlogPost, formatDate } from "@/lib/blog";
+import { SITE } from "@/lib/constants";
 import Infographic from "@/components/common/Infographic";
 import { use } from "react";
 
@@ -50,8 +51,27 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
   // Related posts (same category, excluding current)
   const related = BLOG_POSTS.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 2);
 
+  // BlogPosting-schema zodat AI-antwoordmachines en Google het artikel als
+  // citeerbare bron met auteur en datum herkennen (SEO-audit, ontbrak).
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image.startsWith("http") ? post.image : `${SITE.url}${post.image}`,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Person", name: SITE.ownerName, url: `${SITE.url}/over` },
+    publisher: { "@type": "Organization", name: SITE.name, url: SITE.url },
+    mainEntityOfPage: `${SITE.url}/blog/${post.slug}`,
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       {/* ─── HEADER ───────────────────────────────────────────────────── */}
       <section className="bg-[#F3ECE0] pt-32 pb-12">
         <div className="max-w-3xl mx-auto px-6">

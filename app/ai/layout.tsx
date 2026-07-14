@@ -2,9 +2,9 @@ import { Metadata } from "next";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "AI voor MKB: processen automatiseren in Brabant",
+  title: "AI voor je klantenservice-inbox en meer | MKB Brabant",
   description:
-    "Future Content bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant: offertes, klantvragen en administratie. John komt langs, kijkt waar tijd weglekt en bouwt het. Geen cursus, done-for-you.",
+    "AI-automatisering voor MKB in Brabant: je inbox, offertes en administratie. John komt langs, kijkt waar tijd weglekt en bouwt het. Geen cursus, gewoon gebouwd.",
   openGraph: {
     title: "AI voor MKB in Brabant | Future Content",
     description:

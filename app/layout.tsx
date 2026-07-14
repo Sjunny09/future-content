@@ -128,9 +128,9 @@ const jsonLd = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "AI-workshop op locatie",
+              name: "AI proof of concept",
               description:
-                "Halve dag op locatie, drie concrete AI-kansen voor jouw bedrijf op papier. 60% terug via SLIM-subsidie.",
+                "Betaalde proof of concept op je eigen werk, zodat je AI ziet werken vóór de bouw. Gaat van de bouwprijs af als je doorgaat. Mogelijk deels via de SLIM-subsidie.",
             },
             price: "750",
             priceCurrency: "EUR",
@@ -139,11 +139,11 @@ const jsonLd = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "AI-implementatie modulair platform",
+              name: "AI-bouw op maat",
               description:
-                "Eenmalige bouw plus maandelijks beheer. Modulair platform met 8 core-modules en branche-skin.",
+                "Vaste prijs, gescoped na de proof of concept. Van 2.500 tot 8.500 euro afhankelijk van omvang, plus een maandbedrag vanaf 250 euro voor beheer en doorontwikkeling.",
             },
-            price: "8500",
+            price: "2500",
             priceCurrency: "EUR",
           },
           {
@@ -195,7 +195,10 @@ const jsonLd = {
         "AI-chatbots",
         "Vastgoedvideografie",
       ],
-      sameAs: [`https://wa.me/${SITE.whatsapp}`],
+      sameAs: [
+        `https://wa.me/${SITE.whatsapp}`,
+        "https://www.instagram.com/future.cntnt",
+      ],
     },
   ],
 };

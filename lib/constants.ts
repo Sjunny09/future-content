@@ -170,6 +170,207 @@ export const COMPETITOR_COMPARE = [
   { name: "Future Content", price: "vanaf €199", turnaround: "binnen 1 week", personal: true },
 ];
 
+// Vergelijking van manieren waarop een MKB-bedrijf AI kan aanpakken (voor /ai).
+// Eerlijk en nuchter: versterkt de done-for-you + lokaal + gebouwd-en-beheerd
+// positionering zonder de andere routes af te kraken. Future Content = highlight-rij.
+export const AI_COMPARE = [
+  {
+    name: "Zelf uitzoeken of een cursus volgen",
+    effort: "Veel, weken zelf uitzoeken",
+    beheer: "Jij, in je eigen tijd",
+    fit: "Wisselend, je begint bij nul",
+    personal: false,
+  },
+  {
+    name: "Los AI-abonnement of tool",
+    effort: "Gemiddeld, zelf inrichten",
+    beheer: "Jij houdt het bij",
+    fit: "Generiek, niet op jouw proces",
+    personal: false,
+  },
+  {
+    name: "Groot AI-bureau",
+    effort: "Weinig, maar op afstand",
+    beheer: "Wisselend team",
+    fit: "Vaak duur en onpersoonlijk",
+    personal: false,
+  },
+  {
+    name: "Future Content",
+    effort: "Weinig, ik kom langs en bouw",
+    beheer: "Ik bouw het en houd het draaiend",
+    fit: "Gebouwd rond jouw eigen proces",
+    personal: true,
+  },
+];
+
+// ─── AI-inbox landingspagina (/ai) ──────────────────────────────────
+// De wedge: klantenservice-inbox overnemen met AI. Pijn-bullets in John's
+// toon, gevoed door copy-onderzoek (reactietijd, avondwerk, gemiste leads).
+export const AI_INBOX_PIJN = [
+  "Je opent 's avonds op de bank nog even je mail, want overdag kwam je er niet aan toe.",
+  "Dezelfde drie vragen, elke dag opnieuw: openingstijden, levertijd, 'hebben jullie dit op voorraad'.",
+  "Een aanvraag van vrijdagavond zie je pas maandag. Dan is de klant al ergens anders geholpen.",
+  "Je personeel loopt vast: te veel mail, te weinig tijd, en de echte klussen blijven liggen.",
+  "Klanten die je contactformulier invullen en nooit meer iets horen, omdat het onderin de stapel zakt.",
+  "Je durft niet echt op vakantie, want dan staat de inbox overvol als je terugkomt.",
+];
+
+// Wat je krijgt (de "stack"). Bewust GEEN verzonnen t.w.v.-bedragen: dat botst
+// met John's nuchtere, anti-hype huisstijl. Het anker is de echte ROI eronder
+// (AI_INBOX_ROI), gebaseerd op de eigen tijd van de ondernemer.
+export const AI_INBOX_STACK = [
+  {
+    title: "Een AI-inbox getraind op jouw toon en je vaste vragen",
+    desc: "Klantvragen krijgen meteen een concept-antwoord in jouw stijl, dag en nacht.",
+  },
+  {
+    title: "Volledige bouw en koppeling aan je bestaande mail",
+    desc: "Ik zet alles op, jij hoeft niets technisch te doen.",
+  },
+  {
+    title: "Jij houdt de regie: goedkeuren vóór het verstuurd wordt",
+    desc: "Niets gaat naar je klant zonder jouw akkoord in de startfase.",
+  },
+  {
+    title: "Inwerken plus korte video-uitleg voor je team",
+    desc: "Iedereen kan er meteen mee werken, geen cursus nodig.",
+  },
+];
+
+// Het eerlijke waarde-anker: hun eigen tijd, geen opgeklopte prijskaartjes.
+export const AI_INBOX_ROI =
+  "Inbox-beheer kost een ondernemer al snel een dag per week. Reken dat eens maal je uurtarief, maal vijftig weken. Dat is wat je nu kwijt bent aan werk dat de AI grotendeels overneemt.";
+
+// ─── Wedge-landingspagina's (/ai/[wedge]) ───────────────────────────
+// Zelfde principe als de inbox, telkens een ander stuk terugkerend handwerk.
+// Elke wedge = eigen SEO-pagina (schema + FAQ + BLUF), gebouwd uit deze data.
+// Bewijs is echt en eerlijk (uit PROOF_POINTS); waar geen directe klant-case is,
+// leunt de wedge op John's eigen bedrijf plus de proof of concept en de garantie.
+// Nieuwe wedge toevoegen = een object erbij; de pagina en de sitemap volgen vanzelf.
+export const AI_WEDGES = [
+  {
+    slug: "offertes",
+    kicker: "AI voor je offertes",
+    metaTitle: "AI voor je offertes in Brabant | Future Content",
+    oneliner: "Offertes die zichzelf voorbereiden, klaar om te versturen.",
+    h1: "Nooit meer een avond aan offertes.",
+    belofte:
+      "Ik bouw een AI die je offertes voorbereidt op basis van je eigen prijzen en teksten. Jij checkt en verstuurt, in minuten in plaats van uren.",
+    pijnKop: "Elke offerte kost je een halfuur dat je niet hebt.",
+    pijn: [
+      "Elke offerte begint weer bij nul: bedragen opzoeken, teksten kopiëren, alles nalopen.",
+      "De klant wacht dagen op je offerte en kiest ondertussen de partij die als eerste reageerde.",
+      "'s Avonds nog offertes typen omdat het overdag niet lukt.",
+    ],
+    pijnKost:
+      "Reken zelf uit: als je offerte twee dagen op zich laat wachten, hoeveel klanten kiezen dan de partij die dezelfde dag reageerde?",
+    mechanisme:
+      "De AI kent je diensten, je prijzen en je toon. Hij zet de concept-offerte klaar, jij past aan waar nodig en verstuurt. Het reken- en typewerk zijn weg. Volgens onderzoek gaat automatisch offreren 30 tot 50% sneller.",
+    bewijs:
+      "Ik bouwde dit eerst voor mijn eigen bedrijf: mijn offertes, facturen en administratie draaien op een systeem dat ik zelf maakte, het verving vier losse abonnementen. Dezelfde aanpak zet ik voor jou op.",
+    waardeZin:
+      "Een offerte die nu een halfuur kost, is straks een paar minuten checken. Reken dat maal het aantal offertes per week.",
+    faq: [
+      { q: "Werkt dit met mijn eigen prijzen en teksten?", a: "Ja. De AI wordt getraind op jouw diensten, tarieven en de manier waarop jij het opschrijft. De offerte klinkt als jij, niet als een robot." },
+      { q: "Verstuurt de AI zelf, of ik?", a: "Jij houdt de regie. De AI zet de concept-offerte klaar, jij checkt en verstuurt. Niets gaat de deur uit zonder jouw akkoord." },
+      { q: "Hoe snel staat het live?", a: "De werkende proef draait op je eigen offertes, dus je ziet het snel werken. De eerste versie staat doorgaans binnen ongeveer twee weken live." },
+      { q: "Moet ik technische kennis hebben?", a: "Nee. Ik bouw het, ik zet het aan, ik onderhoud het. Jij checkt en verstuurt, meer niet." },
+      { q: "Wat kost het?", a: "Je begint met de gratis scan. Daarna een werkende proef van €750 op je echte offertes, die van de bouwprijs af gaat als je doorgaat. De bouw is maatwerk, gescoped na de proef: tussen €2.500 en €8.500, plus een maandbedrag vanaf €250." },
+    ],
+  },
+  {
+    slug: "chatbot",
+    kicker: "AI-chatbot voor je website",
+    metaTitle: "AI-chatbot voor je website | Future Content",
+    oneliner: "Een chatbot op je site die 's nachts je leads binnenhoudt.",
+    h1: "Een AI-chatbot die je klantvragen beantwoordt, ook 's nachts.",
+    belofte:
+      "Ik bouw een AI-chatbot voor je website die bezoekers direct te woord staat, hun vragen beantwoordt en afspraken inboekt. Getraind op jouw bedrijf, dag en nacht aan het werk.",
+    pijnKop: "Je beste leads komen 's avonds, als er niemand is om te reageren.",
+    pijn: [
+      "Een bezoeker met een vraag om 22:00 wil nu antwoord, niet morgen, en klikt anders door naar de concurrent.",
+      "Je mist aanvragen en boekingen omdat er buiten kantooruren niemand achter de chat zit.",
+      "Steeds dezelfde vragen op je site beantwoorden kost jou en je team elke dag tijd.",
+    ],
+    pijnKost:
+      "Een groot deel van de aanvragen komt buiten kantooruren binnen. Wie 's ochtends terugbelt, belt vaak een klant die al ergens anders zit.",
+    mechanisme:
+      "De chatbot kent je diensten, openingstijden en veelgestelde vragen. Hij beantwoordt wat hij zeker weet en boekt afspraken direct in. Waar twijfel over is, komt bij jou.",
+    bewijs:
+      "Ik bouwde een chatbot die de gasten van een restaurant in de chat te woord staat en direct een tafel reserveert in het boekingssysteem van de zaak. Hetzelfde principe past op jouw website.",
+    waardeZin:
+      "Een chatbot die één extra aanvraag per week binnenhoudt, verdient zich in de meeste bedrijven al terug. En hij werkt 24 uur per dag door.",
+    faq: [
+      { q: "Geeft de chatbot geen botte of foute antwoorden?", a: "Hij beantwoordt alleen wat hij zeker weet, de standaardvragen. Alles waarover twijfel bestaat of wat belangrijk is, komt bij jou. Jij houdt de regie, de chatbot vangt de rest op." },
+      { q: "Verlies ik dan het persoonlijke contact?", a: "Andersom. De chatbot neemt het standaardwerk over, zodat jij tijd overhoudt voor de klant die er echt toe doet." },
+      { q: "Blijft de klantdata veilig?", a: "Ja. Ik richt het AVG-bewust in, je data blijft van jou. Ik leg je in gewone taal uit wat waar staat." },
+      { q: "Hoe snel staat de chatbot live?", a: "De werkende proef draait op je eigen site, dus je ziet het snel werken. De eerste versie staat doorgaans binnen ongeveer twee weken live." },
+      { q: "Wat kost het?", a: "Gratis scan, dan een werkende proef van €750 die van de bouwprijs af gaat als je doorgaat. De bouw is maatwerk, gescoped na de proef: tussen €2.500 en €8.500, plus een maandbedrag vanaf €250." },
+    ],
+  },
+  {
+    slug: "administratie",
+    kicker: "AI voor je administratie",
+    metaTitle: "AI voor je administratie in Brabant | Future Content",
+    oneliner: "Facturen en administratie die zichzelf klaarzetten.",
+    h1: "Haal de administratie van je bord.",
+    belofte:
+      "Ik bouw een systeem dat je administratie automatiseert: facturen, uren, btw en gegevens die zichzelf op de juiste plek zetten. Minder handwerk, minder fouten.",
+    pijnKop: "De administratie eet je avonden, en toch sluipen er fouten in.",
+    pijn: [
+      "Facturen, uren en btw bijhouden in losse bestanden en apps die niet samenwerken.",
+      "Elke maand hetzelfde overtypwerk, en toch nog fouten die je later moet rechtzetten.",
+      "Je betaalt voor vier abonnementen die eigenlijk één systeem zouden moeten zijn.",
+    ],
+    pijnKost:
+      "Elk uur dat je aan administratie zit, is een uur dat je niet aan je bedrijf of je klanten besteedt. Reken dat maal je uurtarief, maal het hele jaar.",
+    mechanisme:
+      "Ik breng je administratieve stroom in kaart en bouw er één systeem omheen dat de gegevens zelf verplaatst en klaarzet. Jij controleert, het systeem doet het werk.",
+    bewijs:
+      "Mijn eigen bedrijfssysteem automatiseert mijn uren, facturen, btw en leads. Het verving vier losse abonnementen. Dat systeem draait al maanden en is de directe blauwdruk voor wat ik voor jou bouw.",
+    waardeZin:
+      "Als de administratie je een dag per week kost, en de helft daarvan verdwijnt, heb je een halve werkdag per week terug. Elke week.",
+    faq: [
+      { q: "Werkt dit met mijn boekhoudpakket?", a: "Meestal wel. Ik kijk eerst tijdens de scan welke tools je gebruikt en of ze te koppelen zijn. Kan iets niet, dan zeg ik dat gewoon." },
+      { q: "Blijf ik eigenaar van mijn gegevens?", a: "Ja. Het draait in jouw omgeving, jij bent eigenaar, AVG-bewust ingericht. Ik bouw en beheer, jij houdt de controle." },
+      { q: "Moet ik alles opnieuw invoeren?", a: "Nee. Ik koppel waar het kan aan wat je al gebruikt, zodat je gegevens meeverhuizen in plaats van dat je opnieuw begint." },
+      { q: "Hoe snel merk ik er iets van?", a: "De werkende proef pakt één concreet stuk van je administratie, dus je ziet het snel werken. De eerste versie staat doorgaans binnen ongeveer twee weken live." },
+      { q: "Wat kost het?", a: "Gratis scan, dan een werkende proef van €750 die van de bouwprijs af gaat. De bouw is maatwerk, gescoped na de proef: tussen €2.500 en €8.500, plus een maandbedrag vanaf €250." },
+    ],
+  },
+  {
+    slug: "planning",
+    kicker: "AI voor je planning en routes",
+    metaTitle: "AI voor je planning en routes | Future Content",
+    oneliner: "Planning en routes die zichzelf optimaliseren.",
+    h1: "Slimmere planning, minder kilometers.",
+    belofte:
+      "Ik bouw een systeem dat je planning en routes optimaliseert, zodat je minder tijd en kilometers kwijt bent aan het rondkrijgen van de dag.",
+    pijnKop: "Elke ochtend opnieuw dezelfde planningspuzzel.",
+    pijn: [
+      "Elke dag opnieuw puzzelen wie waar naartoe moet en in welke volgorde.",
+      "Onnodige kilometers en verloren tijd omdat de route niet klopt.",
+      "Een wijziging in de ochtend gooit je hele planning om.",
+    ],
+    pijnKost:
+      "Elke onnodige kilometer en elk halfuur puzzelen per dag telt op tot een flinke kostenpost aan het eind van het jaar.",
+    mechanisme:
+      "Ik bouw de logica die je adressen, tijden en beschikbaarheid meeneemt en de beste route berekent. Verandert er iets, dan rekent het systeem opnieuw.",
+    bewijs:
+      "Ik bouwde een routeplanner die precies dit doet: van een lijst adressen naar een geoptimaliseerde route. De case staat op deze site. Dezelfde aanpak past op jouw planning.",
+    waardeZin:
+      "Minder kilometers en minder puzzeltijd per dag, elke werkdag opnieuw. Dat tikt aan over een jaar.",
+    faq: [
+      { q: "Werkt dit voor mijn type bedrijf?", a: "Als je mensen of spullen langs adressen stuurt, waarschijnlijk wel. Tijdens de scan kijk ik naar jouw situatie en zeg ik eerlijk of het wat oplevert." },
+      { q: "Kan ik zelf nog aanpassen?", a: "Ja. Het systeem doet een voorstel, jij houdt de regie en past aan waar je wilt." },
+      { q: "Wat als er 's ochtends iets verandert?", a: "Dan rekent het systeem opnieuw. Een uitval of een extra stop verwerkt het in de route, zonder dat je de hele dag opnieuw hoeft te puzzelen." },
+      { q: "Hoe snel staat het live?", a: "De werkende proef draait op je eigen planning, dus je ziet het snel werken. De eerste versie staat doorgaans binnen ongeveer twee weken live." },
+      { q: "Wat kost het?", a: "Gratis scan, dan een werkende proef van €750 die van de bouwprijs af gaat. De bouw is maatwerk, gescoped na de proef: tussen €2.500 en €8.500, plus een maandbedrag vanaf €250." },
+    ],
+  },
+] as const;
+
 export const REGIONS = [
   {
     name: "De Kempen",
@@ -991,7 +1192,46 @@ export const PRIJZEN = {
   trouwfilm: "800",
   zakelijkeVideo: "600",
   aftermovie: "400",
-  workshop: "750", // workshop met proof of concept
+  workshop: "750", // = de betaalde proof of concept, gaat van de bouwprijs af
   proofOfConcept: "750",
+  bouwVanaf: "2500", // gescopte vaste bouw, ondergrens klein MKB (na de PoC)
+  bouwTot: "8500", // bovengrens bedrijf met volume; enterprise ligt hoger
+  beheerMaand: "250", // maandbedrag beheer + doorontwikkeling, vanaf
   aiScanLocatie: "[PRIJS]", // AI-scan op locatie, bedrag nog te bepalen
 } as const;
+
+// ─── AI-prijstrap + garantie (één bron, gedeeld door /ai en /ai/[wedge]) ──
+// De vier-treden-trap (besloten 13 juli). Bedragen komen uit PRIJZEN hierboven,
+// zodat een prijswijziging overal tegelijk doorwerkt. PoC gaat van de bouw af.
+export const AI_PRIJS_TRAP = [
+  {
+    stap: "1",
+    naam: "Gratis AI-scan",
+    prijs: "Gratis",
+    desc: "Je vult je bedrijf en website in. Meestal binnen 24 uur krijg je een persoonlijke video terug met waar AI in jouw bedrijf tijd oplevert.",
+  },
+  {
+    stap: "2",
+    naam: "Werkende proef",
+    prijs: `€${PRIJZEN.proofOfConcept}`,
+    desc: "Een werkende proef op je eigen werk, zodat je het ziet werken vóór je de bouw betaalt. Dit bedrag gaat er volledig af als je doorgaat.",
+  },
+  {
+    stap: "3",
+    naam: "De bouw",
+    prijs: `€${PRIJZEN.bouwVanaf} tot €${PRIJZEN.bouwTot}`,
+    desc: "Vaste prijs, gescoped na de proef. Klein MKB rond de ondergrens, een bedrijf met volume hoger. Geen uren, geen verrassingen.",
+  },
+  {
+    stap: "4",
+    naam: "Beheer",
+    prijs: `Vanaf €${PRIJZEN.beheerMaand} p/m`,
+    desc: "Ik houd het draaiend: updates, onderhoud en verbeteringen. Jij gebruikt, ik beheer.",
+  },
+];
+
+// De garantie: risico-omkering met een naam en een MEETBARE voorwaarde,
+// en gegrond op wat echt al draait (John's eigen bedrijf). Wedge-pagina's
+// gebruiken deze tekst; /ai heeft een inbox-specifieke variant inline.
+export const AI_GARANTIE =
+  "Neemt mijn AI na 30 dagen niet minstens de helft van je terugkerende werk zelfstandig over, zwart-op-wit gemeten, dan werk ik gratis door tot dat wel zo is, of je krijgt je bouwbedrag terug. Ik durf dat omdat mijn eigen bedrijf al maanden op dit soort systemen draait. Het risico ligt bij mij, niet bij jou.";

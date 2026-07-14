@@ -257,7 +257,7 @@ export default function BranchePage() {
             <div className="space-y-5 text-[#2A2218] leading-relaxed">
               <p>
                 De meeste klanten beginnen met een workshop op locatie. Een halve dag, vanaf €750
-                ex BTW (60% terug via SLIM-subsidie, ik lever het scholingsplan-document mee). We
+                ex BTW (mogelijk deels via de SLIM-subsidie, ik lever het scholingsplan-document mee). We
                 staren niet naar een scherm maar gaan samen aan de slag op jullie eigen taken. Aan
                 het einde van de middag heb je drie concrete kansen op papier, ongeacht of je
                 daarna met mij verder gaat.

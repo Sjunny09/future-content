@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
+import { magOsActie } from "@/lib/scan/osAuth"
 
 export const runtime = "nodejs"
 
-// Markeert een lead als test (of zet 'm terug naar actueel). Beveiligd met
-// dezelfde fc_os-cookie als de rest van /os.
+// Markeert een lead als test (of zet 'm terug naar actueel). Toegang via de
+// fc_os-cookie (browser) of een Bearer-token (SCAN_ACTION_SECRET) vanuit de OS.
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ leadId: string }> },
 ) {
-  const token = (await cookies()).get("fc_os")?.value
-  if (!process.env.ADMIN_TOKEN || token !== process.env.ADMIN_TOKEN) {
+  if (!(await magOsActie(req))) {
     return NextResponse.json({ fout: "Geen toegang." }, { status: 401 })
   }
 

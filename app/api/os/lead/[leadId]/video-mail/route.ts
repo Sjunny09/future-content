@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { stuurVideoMail } from "@/lib/scan/mail/stuurMails"
+import { magOsActie } from "@/lib/scan/osAuth"
 
 export const runtime = "nodejs"
 
 // Stuurt de persoonlijke-video-mail naar de lead vanuit /os. De mail komt van
 // scan@ met Reply-To naar John's inbox, wordt gelogd in de MailLog en stempelt
-// het echte verzendmoment op de video-taak. Beveiligd met de fc_os-cookie.
+// het echte verzendmoment op de video-taak. Toegang via de fc_os-cookie
+// (browser) of een Bearer-token (SCAN_ACTION_SECRET) vanuit de OS.
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ leadId: string }> },
 ) {
-  const token = (await cookies()).get("fc_os")?.value
-  if (!process.env.ADMIN_TOKEN || token !== process.env.ADMIN_TOKEN) {
+  if (!(await magOsActie(req))) {
     return NextResponse.json({ fout: "Geen toegang." }, { status: 401 })
   }
 

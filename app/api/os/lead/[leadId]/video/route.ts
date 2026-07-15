@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server"
-import { cookies } from "next/headers"
 import { db } from "@/lib/scan/db"
+import { magOsActie } from "@/lib/scan/osAuth"
 
 export const runtime = "nodejs"
 
 // Slaat de persoonlijke-video-link (Loom of STACK) op bij de laatste LoomVideo
-// van een lead en markeert hem als verstuurd. Beveiligd met dezelfde fc_os-cookie.
+// van een lead en markeert hem als verstuurd. Toegang via de fc_os-cookie
+// (browser) of een Bearer-token (SCAN_ACTION_SECRET) vanuit de OS.
 export async function POST(
   req: NextRequest,
   { params }: { params: Promise<{ leadId: string }> },
 ) {
-  const token = (await cookies()).get("fc_os")?.value
-  if (!process.env.ADMIN_TOKEN || token !== process.env.ADMIN_TOKEN) {
+  if (!(await magOsActie(req))) {
     return NextResponse.json({ fout: "Geen toegang." }, { status: 401 })
   }
 

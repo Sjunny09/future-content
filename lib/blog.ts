@@ -2,6 +2,7 @@ import { AI_POSTS_1 } from "./blog/ai-posts-1";
 import { AI_POSTS_2 } from "./blog/ai-posts-2";
 import { AI_POSTS_3 } from "./blog/ai-posts-3";
 import { AI_POSTS_4 } from "./blog/ai-posts-4";
+import { AI_POSTS_5 } from "./blog/ai-posts-5";
 
 export type BlogPost = {
   slug: string;
@@ -335,6 +336,7 @@ export const BLOG_POSTS: BlogPost[] = [
   ...AI_POSTS_2,
   ...AI_POSTS_3,
   ...AI_POSTS_4,
+  ...AI_POSTS_5,
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

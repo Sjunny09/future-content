@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Clock } from "lucide-react";
 import { BLOG_POSTS, formatDate } from "@/lib/blog";
 
-const CATEGORIES = ["Alle", "Vastgoed", "Social Media", "AI & Content", "Inzichten"];
+const CATEGORIES = ["Alle", "AI & Automatisering", "AI voor MKB", "AI-tools", "Taalmodellen", "AI-nieuws"];
 
 export default function BlogPage() {
   return (
@@ -26,11 +26,11 @@ export default function BlogPage() {
               className="text-4xl md:text-6xl font-bold text-[#2A2218] mb-5"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Inzichten over video, content & AI.
+              Inzichten over AI voor het MKB.
             </h1>
             <p className="text-[#6E6151] text-lg max-w-2xl">
-              Praktische artikelen over hoe lokale bedrijven en makelaars meer klanten aantrekken
-              met video, en hoe AI dat in de toekomst verder versterkt.
+              Praktische artikelen over hoe MKB-bedrijven AI en automatisering inzetten in hun
+              dagelijkse werk. Nuchter, doorgerekend, zonder hype.
             </p>
           </motion.div>
         </div>

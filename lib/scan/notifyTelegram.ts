@@ -17,19 +17,13 @@
  */
 
 import { db } from "@/lib/scan/db"
+import { telegramPing } from "@/lib/scan/telegramPing"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 import type { Diagnose } from "@/lib/scan/diepte"
 
 type Soort = "quickscan" | "diepte"
 
 export async function notifyTelegram(jobId: string, soort: Soort): Promise<void> {
-  const token = process.env.TELEGRAM_BOT_TOKEN
-  const chatId = process.env.TELEGRAM_CHAT_ID
-  if (!token || !chatId) {
-    console.info("[telegram] TELEGRAM_BOT_TOKEN of _CHAT_ID ontbreekt; overgeslagen", { jobId })
-    return
-  }
-
   const job = await db.scanJob.findUnique({
     where: { id: jobId },
     include: { lead: true },
@@ -58,21 +52,5 @@ export async function notifyTelegram(jobId: string, soort: Soort): Promise<void>
     .filter(Boolean)
     .join("\n")
 
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: regels,
-        disable_web_page_preview: true,
-      }),
-    })
-    if (!res.ok) {
-      const tekst = await res.text().catch(() => "")
-      console.error("[telegram] niet-ok", { jobId, status: res.status, tekst })
-    }
-  } catch (err) {
-    console.error("[telegram] call faalde", { jobId, err })
-  }
+  await telegramPing(regels, { jobId })
 }

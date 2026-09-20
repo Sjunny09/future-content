@@ -17,11 +17,18 @@
  *   OS_BASE_URL        — bv. https://os.future-content.nl (geen trailing slash)
  *   OS_WEBHOOK_SECRET   — zelfde secret als de OS-route (`OS_WEBHOOK_SECRET`)
  *
- * Fail-soft: als env ontbreekt of de call faalt, loggen en doorgaan. De scan-
- * ervaring van de bezoeker mag hier NOOIT van afhangen.
+ * Fail-soft voor de BEZOEKER, luid voor John: als env ontbreekt of de call
+ * faalt, gaat de scan gewoon door, maar krijgt John een Telegram-melding. Dat
+ * is er op 20 september 2026 bij gezet nadat deze bridge 72 dagen lang stil
+ * had gefaald: hij logde alleen naar de Vercel-logs, en daar kijkt niemand.
+ * Een lead die het OS niet haalt is geld dat wegloopt, dus dit mag piepen.
+ *
+ * Test-scans (John's eigen scans met de fc_os-cookie) worden overgeslagen,
+ * anders komt er bij elke test een relatie in het echte CRM te staan.
  */
 
 import { db } from "@/lib/scan/db"
+import { telegramPing } from "@/lib/scan/telegramPing"
 import type { SiteAnalyse } from "@/lib/scan/claude"
 
 type SiteData = {
@@ -70,12 +77,16 @@ function antwoordenAlsObject(
   return out
 }
 
-export async function notifyOs(jobId: string, type: ScanType = "quickscan"): Promise<void> {
+export async function notifyOs(jobId: string, type: ScanType = "quickscan"): Promise<boolean> {
   const base = process.env.OS_BASE_URL
   const secret = process.env.OS_WEBHOOK_SECRET
   if (!base || !secret) {
-    console.info("[notifyOs] OS_BASE_URL of OS_WEBHOOK_SECRET ontbreekt; overgeslagen", { jobId })
-    return
+    console.error("[notifyOs] OS_BASE_URL of OS_WEBHOOK_SECRET ontbreekt", { jobId })
+    await telegramPing(
+      `⚠️ Lead NIET in het OS gezet\n\nScan: ${jobId}\nReden: OS_BASE_URL of OS_WEBHOOK_SECRET ontbreekt in productie.\n\nDe lead staat wel in de scan-database.`,
+      { jobId },
+    )
+    return false
   }
 
   const job = await db.scanJob.findUnique({
@@ -85,7 +96,13 @@ export async function notifyOs(jobId: string, type: ScanType = "quickscan"): Pro
       antwoorden: { select: { vraagId: true, vraagTitel: true, waarde: true } },
     },
   })
-  if (!job || !job.lead) return
+  if (!job || !job.lead) return false
+
+  // Testscan van John zelf: niet doorzetten naar het CRM.
+  if (job.isTest) {
+    console.info("[notifyOs] testscan, overgeslagen", { jobId })
+    return false
+  }
 
   const siteData = (job.siteDataJson ?? null) as SiteData | null
   const analyse = (job.analyseJson ?? null) as SiteAnalyse | null
@@ -127,11 +144,21 @@ export async function notifyOs(jobId: string, type: ScanType = "quickscan"): Pro
     if (!res.ok) {
       const tekst = await res.text().catch(() => "")
       console.error("[notifyOs] OS-response niet-ok", { jobId, status: res.status, tekst })
-      return
+      await telegramPing(
+        `⚠️ Lead NIET in het OS gezet\n\n${payload.contactpersoon || payload.bedrijf}\n${payload.email}\nScan: ${jobId}\n\nHet OS antwoordde met ${res.status}. De lead staat wel in de scan-database; vannacht volgt automatisch een nieuwe poging.`,
+        { jobId },
+      )
+      return false
     }
     const data = (await res.json().catch(() => ({}))) as { ref?: string; status?: string }
     console.info("[notifyOs] lead doorgegeven", { jobId, ref: data.ref, status: data.status })
+    return true
   } catch (err) {
     console.error("[notifyOs] call faalde", { jobId, err })
+    await telegramPing(
+      `⚠️ Lead NIET in het OS gezet\n\n${payload.contactpersoon || payload.bedrijf}\n${payload.email}\nScan: ${jobId}\n\nHet OS was niet bereikbaar. De lead staat wel in de scan-database; vannacht volgt automatisch een nieuwe poging.`,
+      { jobId },
+    )
+    return false
   }
 }

@@ -1,6 +1,11 @@
 import Link from "next/link"
 import { SITE } from "@/lib/constants"
 
+// GEGENEREERD door 00-future-content/juridisch/bouw-voorwaarden.py uit
+// 00-future-content/juridisch/algemene-voorwaarden.md. Niet met de hand
+// aanpassen: wijzig de bron en draai het script, dan blijven site, PDF en
+// OS-akkoordpagina gelijk.
+
 export const metadata = {
   title: "Algemene voorwaarden",
   description:
@@ -8,8 +13,8 @@ export const metadata = {
   alternates: { canonical: "/voorwaarden" },
 }
 
-const VERSIE = "1.0"
-const DATUM = "2 juli 2026"
+const VERSIE = "2.0"
+const DATUM = "21 september 2026"
 
 export default function VoorwaardenPagina() {
   return (
@@ -25,390 +30,128 @@ export default function VoorwaardenPagina() {
           color: "#2A2218",
         }}
       >
-        Algemene voorwaarden
+        Algemene voorwaarden Future Content
       </h1>
-      <p className="mt-6 text-base leading-relaxed text-[#2A2218]">
-        Dit zijn de algemene voorwaarden van Future Content, de eenmanszaak van
-        John Lavrijsen in Bladel. Ze gelden voor alle diensten die op deze
-        site staan: de gratis AI-quickscan, de betaalde werksessie, AI-bouwprojecten
-        op maat, doorlopend beheer, videoproductie en trainingen. Geschreven
-        in leesbaar Nederlands, maar juridisch bedoeld om stand te houden.
-      </p>
+      <p className="mt-6 text-base leading-relaxed text-[#2A2218]">Future Content is de eenmanszaak van John Lavrijsen, Prins Clausstraat 12, 5531 JH Bladel, KvK 86880675. Hieronder "Future Content". De partij die een dienst afneemt heet "opdrachtgever". Deze voorwaarden zijn geschreven in leesbaar Nederlands en bedoeld om stand te houden.</p>
 
-      {/* Go-live audit 2 juli: het interne "[INVULLEN: John]"-blok stond hier
-          zichtbaar voor bezoekers en is verwijderd. De actie zelf blijft
-          staan (zie GO-LIVE-CHECK.md): laat deze voorwaarden één keer door
-          een jurist checken. */}
-
-      <Artikel nr="1" titel="Definities">
-        <p>In deze voorwaarden wordt verstaan onder:</p>
+      <Artikel nr="1" titel="Begrippen">
         <Lijst
           items={[
-            <>
-              <strong>Future Content:</strong> de eenmanszaak van John
-              Lavrijsen, gevestigd in Bladel, KvK-nummer {SITE.kvk}.
-            </>,
-            <>
-              <strong>Opdrachtgever:</strong> de onderneming of organisatie die
-              een dienst afneemt van Future Content.
-            </>,
-            <>
-              <strong>Diensten:</strong> alle werkzaamheden die Future Content
-              voor Opdrachtgever verricht, waaronder de AI-quickscan en
-              uitgebreide scan, de werksessie/discovery, AI-bouwprojecten op
-              maat, doorlopend beheer en onderhoud, videoproductie, en
-              trainingen en workshops.
-            </>,
-            <>
-              <strong>Overeenkomst:</strong> elke afspraak tussen Future
-              Content en Opdrachtgever over het leveren van Diensten, ongeacht
-              of die schriftelijk, per e-mail of via een geaccepteerde
-              offerte tot stand komt.
-            </>,
-            <>
-              <strong>Output:</strong> alles wat met behulp van AI wordt
-              gegenereerd binnen een Dienst, waaronder scanrapporten,
-              teksten, code, workflows en analyses.
-            </>,
-            <>
-              <strong>Schriftelijk:</strong> inclusief communicatie per
-              e-mail, mits de inhoud en herkomst voldoende vaststaan.
-            </>,
+            <><strong>Diensten:</strong> alles wat Future Content voor opdrachtgever doet. Daaronder vallen de AI-quickscan en de uitgebreide scan, werksessies, AI-bouwprojecten op maat, beheer en onderhoud, trainingen en workshops, en videoproductie.</>,
+            <><strong>Overeenkomst:</strong> elke afspraak tussen Future Content en opdrachtgever over diensten, ook als die per e-mail of via de akkoord-pagina tot stand komt.</>,
+            <><strong>Output:</strong> alles wat binnen een dienst met AI wordt gemaakt, zoals scanrapporten, teksten, code, workflows en analyses.</>,
+            <><strong>Maatwerk:</strong> code, workflows en configuraties die specifiek voor opdrachtgever zijn gebouwd.</>,
+            <><strong>Schriftelijk:</strong> ook per e-mail, zolang inhoud en afzender voldoende vaststaan.</>
           ]}
         />
       </Artikel>
 
-      <Artikel nr="2" titel="Toepasselijkheid">
-        <p>
-          2.1 Deze voorwaarden zijn van toepassing op elke offerte en
-          Overeenkomst tussen Future Content en Opdrachtgever, voor zover
-          niet uitdrukkelijk en schriftelijk anders is overeengekomen.
-        </p>
-        <p className="mt-3">
-          2.2 Deze voorwaarden gelden uitsluitend voor de zakelijke markt
-          (B2B). Opdrachtgever handelt bij het aangaan van de Overeenkomst
-          in de uitoefening van een beroep of bedrijf.
-        </p>
-        <p className="mt-3">
-          2.3 Eigen inkoop-, algemene of andere voorwaarden van Opdrachtgever
-          worden uitdrukkelijk van de hand gewezen, tenzij Future Content
-          deze schriftelijk en uitdrukkelijk heeft aanvaard.
-        </p>
-        <p className="mt-3">
-          2.4 Afwijkingen van deze voorwaarden zijn alleen geldig als ze
-          schriftelijk tussen partijen zijn overeengekomen.
-        </p>
+      <Artikel nr="2" titel="Waar deze voorwaarden gelden">
+        <p>2.1 Deze voorwaarden gelden op alle offertes, overeenkomsten en werkzaamheden van Future Content.</p>
+        <p className="mt-3">2.2 Future Content werkt voor bedrijven en organisaties. Opdrachtgever handelt bij het aangaan van de overeenkomst in de uitoefening van een beroep of bedrijf. Voor particulieren gelden deze voorwaarden niet. Daarvoor maakt Future Content per opdracht aparte, schriftelijke afspraken.</p>
+        <p className="mt-3">2.3 Eigen inkoop- of andere voorwaarden van opdrachtgever gelden niet, tenzij Future Content die schriftelijk heeft aanvaard.</p>
+        <p className="mt-3">2.4 Afwijkingen van deze voorwaarden gelden alleen als ze schriftelijk zijn afgesproken.</p>
       </Artikel>
 
-      <Artikel nr="3" titel="Offertes en totstandkoming van de overeenkomst">
-        <p>
-          3.1 Alle offertes van Future Content zijn vrijblijvend en 30
-          dagen geldig, tenzij in de offerte een andere termijn staat.
-        </p>
-        <p className="mt-3">
-          3.2 Een Overeenkomst komt tot stand op het moment dat Opdrachtgever
-          een offerte schriftelijk accepteert, of zodra Future Content op
-          verzoek van Opdrachtgever met de uitvoering van de Dienst begint.
-        </p>
-        <p className="mt-3">
-          3.3 De gratis AI-quickscan valt niet onder deze bepaling: die kan
-          zonder offerte of acceptatie worden aangevraagd en gebruikt. Artikel
-          5 (AI-specifieke bepaling) is daar onverkort op van toepassing.
-        </p>
-        <p className="mt-3">
-          3.4 Wijzigingen of aanvullingen op een geaccepteerde offerte gelden
-          pas als Future Content deze schriftelijk heeft bevestigd, en
-          kunnen gevolgen hebben voor prijs en planning.
-        </p>
+      <Artikel nr="3" titel="Offerte en akkoord">
+        <p>3.1 Een offerte is 30 dagen geldig, tenzij er een andere termijn in staat.</p>
+        <p className="mt-3">3.2 De overeenkomst ontstaat zodra opdrachtgever de offerte schriftelijk accepteert, of zodra Future Content op verzoek van opdrachtgever met het werk begint. Akkoord geven kan via de online akkoord-pagina van Future Content, per e-mail of met een handtekening. Die drie zijn gelijkwaardig. Na akkoord via de akkoord-pagina ontvangt opdrachtgever een bevestiging met de offerte en deze voorwaarden als PDF.</p>
+        <p className="mt-3">3.3 De gratis AI-quickscan kan zonder offerte worden aangevraagd en gebruikt. Artikel 5 geldt daar volledig op.</p>
+        <p className="mt-3">3.4 Wijzigingen op een geaccepteerde offerte gelden zodra Future Content ze schriftelijk heeft bevestigd. Ze kunnen gevolgen hebben voor prijs en planning.</p>
       </Artikel>
 
-      <Artikel nr="4" titel="Uitvoering van de overeenkomst">
-        <p>
-          4.1 Future Content voert de Diensten uit naar beste inzicht en
-          vermogen, op basis van een inspanningsverplichting. Tenzij
-          uitdrukkelijk schriftelijk anders overeengekomen, garandeert
-          Future Content geen specifiek resultaat.
-        </p>
-        <p className="mt-3">
-          4.2 Voor werksessies, AI-bouwprojecten en trainingen geldt in het
-          bijzonder: het uiteindelijke effect (bijvoorbeeld tijdsbesparing,
-          omzetgroei of adoptie binnen het team van Opdrachtgever) hangt mede
-          af van keuzes en medewerking van Opdrachtgever, en is nadrukkelijk
-          geen resultaatsverplichting van Future Content.
-        </p>
-        <p className="mt-3">
-          4.3 Opdrachtgever levert tijdig de informatie, toegang en
-          medewerking die redelijkerwijs nodig is om de Dienst te kunnen
-          uitvoeren. Vertraging die daardoor ontstaat, komt niet voor
-          rekening van Future Content.
-        </p>
-        <p className="mt-3">
-          4.4 Genoemde levertermijnen zijn indicatief, tenzij uitdrukkelijk
-          schriftelijk een fatale termijn is afgesproken.
-        </p>
+      <Artikel nr="4" titel="Uitvoering en medewerking">
+        <p>4.1 Future Content voert het werk vakkundig en zorgvuldig uit. Dat is een inspanningsverplichting. Future Content garandeert geen bepaald resultaat, tenzij dat schriftelijk is afgesproken.</p>
+        <p className="mt-3">4.2 Het effect van een dienst, zoals tijdsbesparing, omzetgroei of adoptie binnen het team, hangt mede af van keuzes en medewerking van opdrachtgever. Besparingen of opbrengsten die in een scan, offerte of gesprek worden genoemd, zijn een inschatting en geen toezegging.</p>
+        <p className="mt-3">4.3 Opdrachtgever zorgt op tijd voor de informatie, toegang en medewerking die nodig zijn, ook van zijn eigen IT-beheerder en andere leveranciers. Komt dat later, dan schuift de planning mee. Extra kosten die daardoor ontstaan komen niet voor rekening van Future Content.</p>
+        <p className="mt-3">4.4 Levertermijnen zijn indicatief, tenzij schriftelijk een fatale termijn is afgesproken.</p>
+        <p className="mt-3">4.5 Future Content mag diensten van derden inzetten, zoals hosting, AI-modellen en betaaldiensten. Future Content kiest die zorgvuldig, maar staat niet in voor hun beschikbaarheid. Voor die diensten gelden de voorwaarden van die derden.</p>
       </Artikel>
 
-      <Artikel nr="5" titel="AI-specifieke bepaling">
-        <p>
-          5.1 Een deel van de Diensten van Future Content maakt gebruik van
-          AI (kunstmatige intelligentie), waaronder de AI-quickscan, de
-          uitgebreide scan en onderdelen van AI-bouwprojecten. Opdrachtgever
-          erkent en aanvaardt dat AI-gegenereerde Output:
-        </p>
-        <Lijst
-          items={[
-            "gebaseerd is op patronen en publiek beschikbare of aangeleverde informatie, en niet op menselijke verificatie van elk detail;",
-            "onjuistheden, verouderde informatie of onvolledigheden kan bevatten;",
-            "indicatief van aard is en niet moet worden opgevat als een garantie, professioneel advies (juridisch, financieel, fiscaal of anderszins) of eindoordeel;",
-            "altijd door Opdrachtgever zelf gecontroleerd en beoordeeld dient te worden voordat er beslissingen op worden gebaseerd of de Output extern wordt gebruikt.",
-          ]}
-        />
-        <p className="mt-3">
-          5.2 Opdrachtgever blijft te allen tijde zelf verantwoordelijk voor
-          beslissingen die worden genomen op basis van AI-gegenereerde
-          Output, en voor controle van die Output vóór gebruik richting
-          klanten, medewerkers of derden.
-        </p>
-        <p className="mt-3">
-          5.3 Deze bepaling sluit aan bij en vult de disclaimer aan die
-          binnen de scan-omgeving van Future Content wordt getoond (zie{" "}
-          <Link href="/scan" className="underline underline-offset-4">
-            de scan
-          </Link>
-          ): "Dit rapport en deze analyse zijn met AI gegenereerd op basis
-          van openbaar beschikbare informatie. De inhoud is indicatief en kan
-          onjuistheden bevatten. Aan de uitkomsten kunnen geen rechten worden
-          ontleend."
-        </p>
-        <p className="mt-3">
-          5.4 Future Content aanvaardt geen aansprakelijkheid voor schade of
-          beslissingen die voortvloeien uit het gebruik van AI-gegenereerde
-          Output, behoudens het bepaalde in artikel 11 (aansprakelijkheid).
-        </p>
+      <Artikel nr="5" titel="AI en Output">
+        <p>5.1 Een deel van de diensten maakt gebruik van AI, waaronder de AI-quickscan, de uitgebreide scan en onderdelen van bouwprojecten. Output is gebaseerd op patronen en op aangeleverde of openbare informatie, niet op menselijke controle van elk detail. Output kan onjuist, verouderd of onvolledig zijn en is geen juridisch, financieel of fiscaal advies.</p>
+        <p className="mt-3">5.2 Opdrachtgever controleert Output voordat hij er beslissingen op baseert of hem naar klanten, medewerkers of derden stuurt. Beslissingen op basis van Output blijven zijn eigen verantwoordelijkheid.</p>
+        <p className="mt-3">5.3 Future Content staat er niet voor in dat Output vrij is van rechten van derden. Wil opdrachtgever Output publiek gebruiken, dan controleert hij dat zelf of vraagt hij Future Content om een aanvullende controle.</p>
+        <p className="mt-3">5.4 De disclaimer die in de scan-omgeving wordt getoond maakt deel uit van deze voorwaarden: "Dit rapport en deze analyse zijn met AI gegenereerd op basis van openbaar beschikbare informatie. De inhoud is indicatief en kan onjuistheden bevatten. Aan de uitkomsten kunnen geen rechten worden ontleend."</p>
+        <p className="mt-3">5.5 Voor schade door het gebruik van Output geldt artikel 14. Heeft opdrachtgever Output niet gecontroleerd zoals in 5.2 staat, dan blijft die schade voor zijn rekening.</p>
       </Artikel>
 
-      <Artikel nr="6" titel="Prijzen en betaling">
-        <p>
-          6.1 Alle prijzen die Future Content noemt zijn exclusief btw,
-          tenzij uitdrukkelijk anders vermeld.
-        </p>
-        <p className="mt-3">
-          6.2 Voor werksessies geldt het tarief zoals vermeld op de
-          website of in de offerte op het moment van boeken. Voor
-          AI-bouwprojecten geldt het bedrag zoals vastgelegd in de
-          geaccepteerde offerte. Voor doorlopend beheer en onderhoud geldt
-          een vast maandbedrag zoals overeengekomen bij aanvang.
-        </p>
-        <p className="mt-3">
-          6.3 Facturen dienen binnen 14 dagen na factuurdatum te zijn
-          voldaan, tenzij schriftelijk een andere termijn is overeengekomen.
-        </p>
-        <p className="mt-3">
-          6.4 Bij overschrijding van de betaaltermijn is Opdrachtgever van
-          rechtswege in verzuim en is de wettelijke handelsrente
-          verschuldigd over het openstaande bedrag, onverminderd het recht
-          van Future Content om buitengerechtelijke incassokosten in
-          rekening te brengen conform de wettelijke staffel.
-        </p>
-        <p className="mt-3">
-          6.5 Future Content mag bij AI-bouwprojecten werken met
-          termijnfacturen (bijvoorbeeld bij start, bij oplevering van een
-          tussenversie, en bij afronding), zoals opgenomen in de offerte.
-        </p>
-        <p className="mt-3">
-          6.6 Bij een AI-bouwproject dat mede via de SLIM-subsidie of een
-          vergelijkbare regeling wordt gefinancierd, blijft Opdrachtgever
-          zelf verantwoordelijk voor de subsidieaanvraag en toekenning.
-          Future Content levert desgevraagd het benodigde
-          scholingsplan-document, maar garandeert geen toekenning van
-          subsidie.
-        </p>
+      <Artikel nr="6" titel="Oplevering en acceptatie">
+        <p>6.1 Bij een bouwproject geldt na installatie of livegang een testperiode van vijf werkdagen. Daarin gebruikt opdrachtgever het systeem in de praktijk.</p>
+        <p className="mt-3">6.2 Blokkerende fouten die binnen die periode schriftelijk worden gemeld, herstelt Future Content eerst. Daarna start de testperiode opnieuw.</p>
+        <p className="mt-3">6.3 Wordt binnen de testperiode niets gemeld, of neemt opdrachtgever het systeem in gebruik voor zijn dagelijkse werk, dan geldt het werk als opgeleverd en geaccepteerd.</p>
+        <p className="mt-3">6.4 Kleine gebreken die het gebruik niet blokkeren zijn geen reden om acceptatie te weigeren. Future Content lost ze binnen een redelijke termijn op.</p>
       </Artikel>
 
-      <Artikel nr="7" titel="Intellectueel eigendom">
-        <p>
-          7.1 <strong>Maatwerk-code en -systemen.</strong> Bij AI-bouwprojecten
-          en doorlopend beheer krijgt Opdrachtgever, na volledige betaling,
-          een gebruiksrecht op de specifiek voor Opdrachtgever gebouwde
-          code, workflows en configuraties, zodat Opdrachtgever het
-          resultaat kan gebruiken en desgewenst laten overdragen of door een
-          andere partij laten beheren.
-        </p>
-        <p className="mt-3">
-          7.2 <strong>Generieke bouwstenen.</strong> Onderliggende generieke
-          bouwstenen, modules, tools, templates en het modulaire platform
-          van Future Content (waaronder de acht core-modules en
-          branche-skins) blijven eigendom van Future Content, ook als ze
-          zijn gebruikt bij het bouwen van een oplossing voor Opdrachtgever.
-          Opdrachtgever krijgt hierop een niet-exclusief gebruiksrecht,
-          beperkt tot het gebruik binnen de eigen onderneming, zolang de
-          Overeenkomst (bij doorlopend beheer) loopt of zoals anders
-          schriftelijk overeengekomen.
-        </p>
-        <p className="mt-3">
-          7.3 <strong>Videomateriaal.</strong> Bij videoproductie (vastgoedvideo's,
-          social-content, bedrijfsvideo's, trouwvideo's, aftermovies) blijft
-          het auteursrecht op de opnamen bij Future Content, tenzij
-          schriftelijk anders overeengekomen. Opdrachtgever krijgt na
-          volledige betaling een gebruiksrecht op het opgeleverde
-          eindmateriaal voor het overeengekomen doel (bijvoorbeeld Funda,
-          eigen website, social media). Ruw materiaal en niet-opgeleverde
-          versies vallen niet onder dit gebruiksrecht.
-        </p>
-        <p className="mt-3">
-          7.4 Future Content mag opgeleverd werk (met uitzondering van
-          vertrouwelijke bedrijfsinformatie, zie artikel 8) gebruiken in het
-          eigen portfolio en op de eigen website en social kanalen, tenzij
-          Opdrachtgever schriftelijk aangeeft dit niet te willen.
-        </p>
+      <Artikel nr="7" titel="Beheer en service">
+        <p>7.1 Als beheer is afgesproken, staat in de offerte wat daaronder valt. Groter werk krijgt altijd eerst een prijs op papier. Er volgt geen naheffing achteraf.</p>
+        <p className="mt-3">7.2 Genoemde reactie- en oplostijden zijn streeftijden waar Future Content zich aan houdt. Het zijn geen garanties met een boete.</p>
+        <p className="mt-3">7.3 Bij het einde van het beheer stopt de toegang tot online omgevingen van Future Content. Software die op de eigen server van opdrachtgever draait, blijft daar gewoon draaien.</p>
       </Artikel>
 
-      <Artikel nr="8" titel="Geheimhouding">
-        <p>
-          8.1 Beide partijen houden alle vertrouwelijke informatie geheim
-          die zij van elkaar ontvangen in het kader van de Overeenkomst,
-          waaronder bedrijfsprocessen, klantgegevens, financiële informatie
-          en de inhoud van het "tweede brein" dat voor Opdrachtgever wordt
-          opgebouwd.
-        </p>
-        <p className="mt-3">
-          8.2 Deze verplichting geldt niet voor informatie die al openbaar
-          was, die Future Content al kende, of die verplicht moet worden
-          verstrekt op grond van wet- of regelgeving of een rechterlijk
-          bevel.
-        </p>
-        <p className="mt-3">
-          8.3 De geheimhoudingsplicht blijft ook na afloop of beëindiging
-          van de Overeenkomst van kracht.
-        </p>
+      <Artikel nr="8" titel="Prijzen en betaling">
+        <p>8.1 Alle prijzen zijn exclusief btw, tenzij anders vermeld.</p>
+        <p className="mt-3">8.2 Voor werksessies geldt het tarief op de website of in de offerte op het moment van boeken. Voor bouwprojecten geldt het bedrag in de geaccepteerde offerte, eventueel in termijnen (bijvoorbeeld bij start, bij een tussenversie en bij afronding). Voor beheer geldt een vast maandbedrag.</p>
+        <p className="mt-3">8.3 De betaaltermijn is 14 dagen na factuurdatum, tenzij schriftelijk anders is afgesproken.</p>
+        <p className="mt-3">8.4 Na het verstrijken van de betaaltermijn is opdrachtgever zonder aanmaning in verzuim. Dan is de wettelijke handelsrente verschuldigd en mag Future Content buitengerechtelijke incassokosten rekenen volgens de wettelijke staffel. Blijft betaling na een herinnering uit, dan mag Future Content het werk opschorten tot er betaald is.</p>
+        <p className="mt-3">8.5 De beheerprijs staat de eerste 12 maanden vast en kan daarna één keer per jaar worden aangepast, met de CBS-dienstenprijsindex als richtlijn en een aankondiging van minimaal twee maanden vooraf. Kosten van derden die Future Content één op één doorbelast, zoals hosting of AI-verbruik, kunnen bij een prijswijziging van die derde ook tussentijds veranderen, met een aankondiging van minimaal een maand vooraf.</p>
+        <p className="mt-3">8.6 Wordt een dienst mede uit een subsidie betaald, zoals de SLIM-regeling, dan blijft opdrachtgever zelf verantwoordelijk voor de aanvraag en de toekenning. Future Content levert desgevraagd het benodigde scholingsplan, maar garandeert geen toekenning.</p>
       </Artikel>
 
-      <Artikel nr="9" titel="Verwerking van persoonsgegevens">
-        <p>
-          9.1 Voor zover Future Content bij de uitvoering van de Diensten
-          persoonsgegevens verwerkt (bijvoorbeeld bij de AI-quickscan, het
-          contactformulier of een AI-bouwproject dat klantdata van
-          Opdrachtgever verwerkt), gebeurt dit conform de Algemene
-          Verordening Gegevensbescherming (AVG).
-        </p>
-        <p className="mt-3">
-          9.2 Hoe Future Content omgaat met persoonsgegevens staat beschreven
-          in de{" "}
-          <Link href="/privacy" className="underline underline-offset-4">
-            privacyverklaring
-          </Link>
-          . Die verklaring maakt onderdeel uit van deze voorwaarden.
-        </p>
-        <p className="mt-3">
-          9.3 Voor zover Future Content bij een AI-bouwproject of
-          doorlopend beheer optreedt als verwerker van persoonsgegevens
-          namens Opdrachtgever (verwerkingsverantwoordelijke), sluiten
-          partijen desgewenst een aparte verwerkersovereenkomst af.
-        </p>
+      <Artikel nr="9" titel="Duur en einde van doorlopende diensten">
+        <p>9.1 Beheer wordt aangegaan voor onbepaalde tijd en is maandelijks opzegbaar, schriftelijk, met een opzegtermijn van één maand tegen het einde van een kalendermaand. Dit geldt niet als partijen schriftelijk een minimumtermijn zijn overeengekomen.</p>
+        <p className="mt-3">9.2 Bij het einde van het beheer levert Future Content binnen een redelijke termijn de gegevens, toegang en documentatie die nodig zijn om het beheer over te dragen aan opdrachtgever of aan een derde.</p>
+        <p className="mt-3">9.3 Future Content mag de overeenkomst met onmiddellijke ingang schriftelijk opzeggen of ontbinden als opdrachtgever ondanks een schriftelijke aanmaning niet betaalt, of bij faillissement, surseance van betaling of bedrijfsbeëindiging van opdrachtgever.</p>
+        <p className="mt-3">9.4 Wat Future Content al heeft geleverd, blijft bij beëindiging verschuldigd.</p>
       </Artikel>
 
-      <Artikel nr="10" titel="Overmacht">
-        <p>
-          10.1 Geen van beide partijen is gehouden tot nakoming van een
-          verplichting als dat onmogelijk is door overmacht. Onder overmacht
-          wordt in ieder geval verstaan: ziekte of uitval van Future
-          Content zonder tijdige vervanging, storingen bij AI-providers of
-          andere onderliggende diensten (bijvoorbeeld Anthropic, hosting- of
-          betaaldienstverleners), stroom- of internetstoringen, en andere
-          omstandigheden die redelijkerwijs buiten de invloedssfeer van
-          partijen liggen.
-        </p>
-        <p className="mt-3">
-          10.2 Bij overmacht die langer dan 30 dagen duurt, mag ieder van de
-          partijen de Overeenkomst schriftelijk ontbinden voor het nog niet
-          uitgevoerde deel, zonder dat dit recht geeft op
-          schadevergoeding.
-        </p>
+      <Artikel nr="10" titel="Eigendom en gebruiksrecht">
+        <p>10.1 Op maatwerk krijgt opdrachtgever na volledige betaling een eeuwigdurend en onherroepelijk gebruiksrecht, inclusief de broncode en het recht om het door een ander te laten onderhouden of aanpassen.</p>
+        <p className="mt-3">10.2 Generieke bouwstenen, modules, templates en het platform van Future Content blijven eigendom van Future Content, ook als ze in het maatwerk zitten. Draait het maatwerk op de eigen server van opdrachtgever, dan mag hij die bouwstenen als onderdeel van dat maatwerk blijven gebruiken. Hij mag ze niet los doorleveren of aan anderen in gebruik geven. Online omgevingen en tools die Future Content zelf host, mag opdrachtgever gebruiken zolang het beheer loopt.</p>
+        <p className="mt-3">10.3 Future Content mag kennis, werkwijzen en algemene onderdelen opnieuw gebruiken voor andere klanten. De gegevens en vertrouwelijke informatie van opdrachtgever vallen daar niet onder (zie artikel 11).</p>
+        <p className="mt-3">10.4 Bij videoproductie blijft het auteursrecht op de opnamen bij Future Content, tenzij schriftelijk anders is afgesproken. Na volledige betaling krijgt opdrachtgever een gebruiksrecht op het opgeleverde eindmateriaal voor het afgesproken doel, bijvoorbeeld Funda, de eigen website of social media. Ruw materiaal en niet-opgeleverde versies vallen niet onder dat gebruiksrecht.</p>
+        <p className="mt-3">10.5 Future Content mag opgeleverd werk tonen in het eigen portfolio, op de eigen website en op eigen kanalen, zonder vertrouwelijke informatie, tenzij opdrachtgever schriftelijk aangeeft dat niet te willen.</p>
       </Artikel>
 
-      <Artikel nr="11" titel="Aansprakelijkheid">
-        <p>
-          11.1 De totale aansprakelijkheid van Future Content voor schade
-          die voortvloeit uit of verband houdt met de uitvoering van een
-          Overeenkomst is beperkt tot de factuurwaarde van de betreffende
-          opdracht (bij doorlopende diensten: de vergoeding over de laatste
-          drie maanden), met een absoluut maximum van{" "}
-          <strong>€10.000 per gebeurtenis</strong>, met een maximum van{" "}
-          <strong>€25.000 per kalenderjaar</strong>.
-        </p>
-        <p className="mt-3">
-          11.2 Future Content is nooit aansprakelijk voor indirecte schade,
-          waaronder gevolgschade, gederfde winst, gemiste besparingen,
-          reputatieschade en schade door bedrijfsstagnatie.
-        </p>
-        <p className="mt-3">
-          11.3 De beperkingen in dit artikel gelden niet voor zover schade
-          het gevolg is van opzet of bewuste roekeloosheid van Future
-          Content.
-        </p>
-        <p className="mt-3">
-          11.4 Opdrachtgever vrijwaart Future Content voor aanspraken van
-          derden die verband houden met het gebruik dat Opdrachtgever maakt
-          van geleverde Diensten of Output, tenzij dat gebruik het directe
-          gevolg is van opzet of bewuste roekeloosheid van Future Content.
-        </p>
-        <p className="mt-3">
-          11.5 Een vordering tot schadevergoeding vervalt als deze niet
-          binnen 12 maanden nadat Opdrachtgever bekend werd of redelijkerwijs
-          bekend had kunnen zijn met de schade, schriftelijk bij Future
-          Content is gemeld.
-        </p>
+      <Artikel nr="11" titel="Geheimhouding">
+        <p>11.1 Beide partijen houden vertrouwelijke informatie van de ander geheim: bedrijfsprocessen, klantgegevens, prijzen, marges, begrotingen en de inhoud van systemen die voor opdrachtgever zijn gebouwd. Die informatie wordt alleen gebruikt voor de opdracht.</p>
+        <p className="mt-3">11.2 Dit geldt niet voor informatie die al openbaar was, die de ontvanger al kende, of die op grond van de wet of een rechterlijk bevel moet worden verstrekt.</p>
+        <p className="mt-3">11.3 De geheimhouding blijft gelden na afloop of beëindiging van de overeenkomst.</p>
       </Artikel>
 
-      <Artikel nr="12" titel="Duur en beëindiging van doorlopende diensten">
-        <p>
-          12.1 Overeenkomsten voor doorlopend beheer en onderhoud worden
-          aangegaan voor onbepaalde tijd en zijn maandelijks opzegbaar,
-          tenzij partijen schriftelijk een minimumtermijn zijn
-          overeengekomen.
-        </p>
-        <p className="mt-3">
-          12.2 Opzeggen gebeurt schriftelijk, met inachtneming van een
-          opzegtermijn van één kalendermaand, tenzij anders overeengekomen.
-        </p>
-        <p className="mt-3">
-          12.3 Bij beëindiging van doorlopend beheer levert Future Content
-          binnen redelijke termijn de gegevens, toegang en documentatie op
-          die nodig zijn om het beheer over te dragen aan Opdrachtgever of
-          een derde partij, conform het uitgangspunt uit artikel 7.1 dat
-          Opdrachtgever eigenaar blijft van het eigen proces.
-        </p>
-        <p className="mt-3">
-          12.4 Future Content mag de Overeenkomst met onmiddellijke ingang
-          schriftelijk opzeggen of ontbinden als Opdrachtgever ondanks
-          schriftelijke aanmaning in verzuim blijft met betaling, of in
-          geval van faillissement, surseance van betaling of
-          bedrijfsbeëindiging van Opdrachtgever.
-        </p>
+      <Artikel nr="12" titel="Gegevens, persoonsgegevens en back-ups">
+        <p>12.1 De gegevens van opdrachtgever blijven van opdrachtgever. Hij kan op elk moment een export krijgen in een leesbaar formaat. Bij het einde van de samenwerking staat die export binnen vijf werkdagen klaar. Dertig dagen daarna verwijdert Future Content de gegevens uit zijn omgevingen en bevestigt dat, tenzij de wet bewaren verplicht.</p>
+        <p className="mt-3">12.2 Future Content beveiligt inloggegevens en persoonsgegevens passend en werkt volgens de AVG. Hoe Future Content met persoonsgegevens omgaat staat in de privacyverklaring op future-content.nl/privacy.</p>
+        <p className="mt-3">12.3 Verwerkt Future Content persoonsgegevens in opdracht van opdrachtgever, bijvoorbeeld klantdata in een bouwproject of bij beheer, dan sluiten partijen daarvoor de verwerkersovereenkomst van Future Content. Die hoort als bijlage bij de offerte.</p>
+        <p className="mt-3">12.4 Opdrachtgever blijft verantwoordelijk voor back-ups van zijn eigen systemen en gegevens. Voert een systeem van Future Content op verzoek van opdrachtgever wijzigingen, verplaatsingen of opschoningen uit in zijn gegevens, dan spreken partijen vooraf af hoe dat gecontroleerd en teruggedraaid kan worden, bijvoorbeeld met een proefronde die nog niets wijzigt.</p>
       </Artikel>
 
-      <Artikel nr="13" titel="Toepasselijk recht en bevoegde rechter">
-        <p>13.1 Op alle Overeenkomsten en deze voorwaarden is Nederlands recht van toepassing.</p>
-        <p className="mt-3">
-          13.2 Geschillen worden bij uitsluiting voorgelegd aan de bevoegde
-          rechter van de Rechtbank Oost-Brabant, tenzij dwingend recht een
-          andere rechter aanwijst.
-        </p>
+      <Artikel nr="13" titel="Overmacht en continuïteit">
+        <p>13.1 Geen van beide partijen hoeft een verplichting na te komen zolang dat door overmacht niet kan. Onder overmacht valt in ieder geval: ziekte of uitval van John Lavrijsen zonder tijdige vervanging, storingen bij AI-providers, hosting- of betaaldiensten, stroom- of internetstoringen, en andere omstandigheden die redelijkerwijs buiten de invloed van partijen liggen.</p>
+        <p className="mt-3">13.2 Bij overmacht worden de verplichtingen opgeschort. Duurt de overmacht langer dan 30 dagen, dan mag ieder van de partijen de overeenkomst schriftelijk ontbinden voor het deel dat nog niet is uitgevoerd, zonder recht op schadevergoeding. Wat al is geleverd, blijft verschuldigd.</p>
+        <p className="mt-3">13.3 Valt John Lavrijsen langer dan 20 werkdagen uit, of komt hij te overlijden, dan krijgt opdrachtgever op verzoek de broncode, de documentatie en een actuele export van zijn gegevens, zodat een derde het werk kan overnemen.</p>
       </Artikel>
 
-      <Artikel nr="14" titel="Slotbepalingen">
-        <p>
-          14.1 Mocht een bepaling uit deze voorwaarden nietig of
-          vernietigbaar blijken, dan blijven de overige bepalingen volledig
-          van kracht en vervangen partijen de betreffende bepaling door een
-          bepaling die de bedoeling van de oorspronkelijke bepaling zo dicht
-          mogelijk benadert.
-        </p>
-        <p className="mt-3">
-          14.2 Future Content mag deze voorwaarden wijzigen. De meest actuele
-          versie staat op deze pagina en geldt voor nieuwe Overeenkomsten
-          vanaf de datum onderaan.
-        </p>
+      <Artikel nr="14" titel="Aansprakelijkheid">
+        <p>14.1 Meldt opdrachtgever een tekortkoming, dan doet hij dat schriftelijk en geeft hij Future Content een redelijke termijn om te herstellen. Future Content herstelt eerst. Pas als herstel uitblijft of niet mogelijk is, kan opdrachtgever schadevergoeding vragen.</p>
+        <p className="mt-3">14.2 Future Content is alleen aansprakelijk voor directe schade. Dat zijn: de redelijke kosten om de oorzaak en omvang van de schade vast te stellen, de redelijke kosten om schade te voorkomen of te beperken, en de redelijke kosten die opdrachtgever maakt om de prestatie alsnog aan de overeenkomst te laten beantwoorden, als Future Content niet zelf binnen een redelijke termijn heeft hersteld.</p>
+        <p className="mt-3">14.3 De aansprakelijkheid is beperkt tot de factuurwaarde exclusief btw van de opdracht waaruit de schade voortkomt. Bij doorlopend beheer geldt de vergoeding over de laatste 12 maanden. In alle gevallen geldt een maximum van € 10.000 per gebeurtenis en € 25.000 per kalenderjaar. Een reeks samenhangende gebeurtenissen telt als één gebeurtenis.</p>
+        <p className="mt-3">14.4 Future Content is niet aansprakelijk voor indirecte schade. Daaronder vallen gevolgschade, gederfde winst, gemiste besparingen, reputatieschade, bedrijfsstagnatie, boetes van toezichthouders, aanspraken van derden, en schade door verlies of beschadiging van gegevens voor zover een gangbare back-up die had kunnen beperken.</p>
+        <p className="mt-3">14.5 De beperkingen in dit artikel gelden niet als de schade het gevolg is van opzet of bewuste roekeloosheid van Future Content.</p>
+        <p className="mt-3">14.6 Opdrachtgever vrijwaart Future Content voor aanspraken van derden die verband houden met zijn gebruik van diensten of Output. Opdrachtgever staat ervoor in dat de gegevens en materialen die hij aanlevert geen rechten van derden schenden.</p>
+        <p className="mt-3">14.7 Bij videoproductie geldt aanvullend: gaan opnamen verloren of zijn ze onbruikbaar, dan is Future Content verplicht tot kosteloos opnieuw opnemen waar dat redelijkerwijs kan, en anders tot terugbetaling van het bedrag dat voor die opname is gefactureerd. Andere schade rond een opname, zoals een gemiste bezichtiging, publicatie of gebeurtenis, valt onder 14.4.</p>
+        <p className="mt-3">14.8 Een vordering tot schadevergoeding vervalt als opdrachtgever die niet binnen 12 maanden nadat hij de schade kende of had kunnen kennen schriftelijk bij Future Content heeft gemeld.</p>
+        <p className="mt-3">14.9 Future Content heeft een beroeps- en bedrijfsaansprakelijkheidsverzekering.</p>
+      </Artikel>
+
+      <Artikel nr="15" titel="Recht en geschillen">
+        <p>15.1 Op alle overeenkomsten en op deze voorwaarden is Nederlands recht van toepassing.</p>
+        <p className="mt-3">15.2 Bij een geschil proberen partijen er eerst samen uit te komen. Lukt dat niet, dan is de rechtbank Oost-Brabant bevoegd, tenzij dwingend recht een andere rechter aanwijst.</p>
+      </Artikel>
+
+      <Artikel nr="16" titel="Slotbepalingen">
+        <p>16.1 Blijkt een bepaling nietig of vernietigbaar, dan blijven de overige bepalingen gelden. Partijen vervangen de bepaling door een bepaling die de bedoeling zo dicht mogelijk benadert.</p>
+        <p className="mt-3">16.2 Future Content mag deze voorwaarden wijzigen. De actuele versie staat op future-content.nl/voorwaarden en geldt voor overeenkomsten die daarna worden gesloten. Voor een lopende overeenkomst blijft de versie gelden die bij het akkoord hoorde.</p>
       </Artikel>
 
       <div className="mt-16 pt-8 border-t" style={{ borderColor: "#E4D8C6" }}>

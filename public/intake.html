@@ -1,0 +1,1355 @@
+<title>Waar sta jij met AI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------------------------------------------------------
+   Future Content huisstijl. Tokens letterlijk uit HUISSTIJL.md par. 1.
+   Niets hier is geraden: papier en wit dragen het vlak, klei is kruiderij.
+   --------------------------------------------------------------- */
+:root{
+  --ink:#2A2218; --paper:#F3ECE0; --white:#FFFFFF;
+  --klei:#B45F38; --klei-light:#D9A066; --grey:#6E6151;
+  --sand:#C9BBA6; --border:#E4D8C6; --card-dark:#221C14; --border-dark:#463C2E;
+
+  --bg:var(--paper); --vlak:var(--white); --tekst:var(--ink);
+  --zacht:var(--grey); --rand:var(--border); --accent:var(--klei);
+  --accent-zacht:rgba(180,95,56,.10);
+  --schaduw:0 1px 0 rgba(42,34,24,.04);
+  --knop-bg:var(--ink); --knop-tekst:var(--paper);
+  --trede-leeg:var(--border);
+
+  --radius:2px;
+  --sans:"Helvetica Neue",Archivo,Helvetica,Arial,sans-serif;
+  --mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#191410; --vlak:var(--card-dark); --tekst:#F3ECE0; --zacht:var(--sand);
+    --rand:var(--border-dark); --accent:#D07A4E; --accent-zacht:rgba(208,122,78,.14);
+    --schaduw:none; --knop-bg:#F3ECE0; --knop-tekst:#221C14; --trede-leeg:var(--border-dark);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#191410; --vlak:var(--card-dark); --tekst:#F3ECE0; --zacht:var(--sand);
+  --rand:var(--border-dark); --accent:#D07A4E; --accent-zacht:rgba(208,122,78,.14);
+  --schaduw:none; --knop-bg:#F3ECE0; --knop-tekst:#221C14; --trede-leeg:var(--border-dark);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--tekst);
+  font-family:var(--sans); font-weight:300; font-size:17px; line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+
+.schil{min-height:100%;display:flex;flex-direction:column;padding-inline:16px}
+.binnen{width:100%;max-width:620px;margin:0 auto;min-width:0}
+
+/* ---- voortgang: één dunne kleilijn, vaste noemer ---------------- */
+.voortgang{
+  position:sticky; top:env(safe-area-inset-top, 0px); z-index:5;
+  height:3px; background:var(--rand); margin-inline:-16px;
+}
+.voortgang i{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--accent) 0%, var(--klei-light) 100%);
+  transition:width .45s cubic-bezier(.22,.61,.36,1);
+}
+
+header{padding-block:22px 6px;display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.merk{font-weight:900;font-size:13px;letter-spacing:-.02em;line-height:1;display:flex;align-items:baseline;gap:5px}
+.merk span{font-weight:300}
+.caret{display:inline-block;width:6px;height:11px;background:var(--accent);animation:knipper 1.1s step-end infinite}
+@keyframes knipper{0%,49%{opacity:1}50%,100%{opacity:0}}
+.teller{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--zacht)}
+
+/* Licht of donker met de hand. Standaard volgt hij het apparaat, want
+   de meeste mensen vullen dit op hun eigen telefoon of laptop in. Wie
+   zelf kiest, houdt die keuze. */
+.rechts{display:flex;align-items:center;gap:14px}
+.schakel{
+  display:flex;align-items:center;gap:7px;
+  background:none;border:1px solid var(--rand);border-radius:999px;
+  padding:4px 5px 4px 10px;cursor:pointer;color:var(--zacht);
+  font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;
+  transition:border-color .16s,color .16s;
+}
+.schakel:hover{border-color:var(--accent);color:var(--tekst)}
+.schakel:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.schakel .bol{width:22px;height:13px;border-radius:999px;background:var(--rand);position:relative;flex:0 0 auto}
+.schakel .bol i{position:absolute;top:2px;left:2px;width:9px;height:9px;border-radius:50%;
+                background:var(--accent);transition:transform .2s cubic-bezier(.22,.61,.36,1)}
+:root[data-theme="dark"] .schakel .bol i{transform:translateX(9px)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .schakel .bol i{transform:translateX(9px)}
+}
+@media (prefers-reduced-motion: reduce){ .schakel .bol i{transition:none} }
+
+main{flex:1;padding-block:10px 40px;min-width:0}
+.scherm{width:100%;min-width:0}
+.scherm[hidden]{display:none !important}
+.in{animation:schuifIn .28s cubic-bezier(.22,.61,.36,1) both}
+.uit{animation:schuifUit .14s ease-in both}
+@keyframes schuifIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:none}}
+@keyframes schuifUit{from{opacity:1}to{opacity:0;transform:translateX(-16px)}}
+
+/* ---- de klim: acht treden, zichtbaar tijdens het klimmen -------- */
+.klim{display:flex;gap:4px;margin:0 0 18px;align-items:flex-end;height:26px}
+.klim b{
+  flex:1;display:block;border-radius:var(--radius);
+  background:var(--trede-leeg);
+  transition:background .3s ease, height .3s cubic-bezier(.22,.61,.36,1);
+}
+.klim b.gehaald{background:var(--accent)}
+.klim b.half{background:var(--klei-light)}
+.klim b.nu{outline:2px solid var(--accent);outline-offset:2px}
+
+.label{
+  font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px;
+}
+.label em{font-style:normal;color:var(--zacht)}
+
+h1{font-weight:900;font-size:clamp(27px,6.6vw,40px);line-height:1.05;letter-spacing:-.025em;margin:0 0 14px;text-wrap:balance}
+h1 .dun{font-weight:300}
+h2{font-weight:700;font-size:clamp(19px,4.4vw,25px);line-height:1.24;letter-spacing:-.015em;margin:0 0 6px;text-wrap:balance}
+h2 .voor{display:block;font-family:var(--mono);font-weight:400;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--zacht);margin-bottom:10px}
+p{margin:0 0 16px;max-width:54ch}
+p.hint{color:var(--zacht);font-size:15px}
+
+.keuzes{display:flex;flex-direction:column;gap:8px;margin:20px 0 0}
+.keuze{
+  display:flex;align-items:center;gap:13px;width:100%;text-align:left;padding:14px 16px;
+  background:var(--vlak);border:1px solid var(--rand);border-radius:var(--radius);
+  box-shadow:var(--schaduw);color:var(--tekst);
+  font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.35;
+  cursor:pointer;transition:border-color .14s, transform .14s, background .14s;
+}
+.keuze:hover{border-color:var(--accent);transform:translateX(2px)}
+.keuze:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.keuze[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-zacht)}
+.keuze .bol{flex:0 0 auto;width:15px;height:15px;border:1px solid var(--rand);border-radius:var(--radius);background:var(--bg);transition:background .14s,border-color .14s}
+.keuze[aria-pressed="true"] .bol{background:var(--accent);border-color:var(--accent)}
+.keuze i{font-style:normal;display:block;color:var(--zacht);font-size:13.5px;margin-top:3px}
+
+/* Twee manieren naast elkaar. De invuller kiest er een en krijgt geen
+   goed of fout te zien: dat komt terug in de sessie. Dat is het punt van
+   deze vragen, ze maken een gat dat het dagdeel vult. */
+.keuzes.naast{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
+@media (max-width:620px){ .keuzes.naast{grid-template-columns:1fr} }
+.keuzes.naast .keuze{flex-direction:column;align-items:flex-start;gap:9px}
+.keuzes.naast .keuze:hover{transform:none;border-color:var(--accent)}
+.keuze .merk2{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--zacht)}
+.keuze[aria-pressed="true"] .merk2{color:var(--accent)}
+.keuze .fragment{
+  display:block;width:100%;font-family:var(--mono);font-size:12.5px;line-height:1.6;
+  white-space:pre-wrap;background:var(--bg);border:1px solid var(--rand);
+  border-radius:var(--radius);padding:9px 10px;color:var(--tekst);text-align:left;
+}
+
+.veld{margin:0 0 18px}
+.veld label{display:block;font-weight:700;font-size:15px;margin-bottom:6px}
+.veld input,.veld textarea{
+  width:100%;padding:13px 14px;background:var(--vlak);border:1px solid var(--rand);
+  border-radius:var(--radius);color:var(--tekst);font-family:var(--sans);font-weight:400;font-size:16px;
+  transition:border-color .14s;
+}
+.veld textarea{min-height:92px;resize:vertical;line-height:1.45}
+.veld input:focus,.veld textarea:focus{outline:none;border-color:var(--accent)}
+.veld .bij{color:var(--zacht);font-size:13.5px;margin-top:6px}
+.doorvraag{margin:10px 0 0 28px;max-width:420px}
+.doorvraag[hidden]{display:none}
+
+.balk{display:flex;align-items:center;gap:14px;margin-top:24px;flex-wrap:wrap}
+.knop{
+  appearance:none;border:none;border-radius:var(--radius);padding:14px 26px;
+  background:var(--knop-bg);color:var(--knop-tekst);
+  font-family:var(--sans);font-weight:700;font-size:16px;letter-spacing:-.01em;
+  cursor:pointer;transition:opacity .14s, transform .14s;
+}
+.knop:hover{opacity:.88;transform:translateY(-1px)}
+.knop:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.knop[disabled]{opacity:.32;cursor:not-allowed;transform:none}
+.knop.klei{background:var(--accent);color:#fff}
+.terug{appearance:none;background:none;border:none;color:var(--zacht);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:8px 0}
+.terug:hover{color:var(--accent)}
+.terug[hidden]{display:none}
+
+.nota{border-left:2px solid var(--accent);padding:2px 0 2px 16px;margin:24px 0 0}
+.nota .kop{font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:7px}
+.nota p{font-size:14.5px;color:var(--zacht);margin:0 0 8px}
+.nota p:last-child{margin:0}
+.nota a{color:var(--accent)}
+
+/* ---- reactie onderweg ------------------------------------------ */
+.reactie{
+  margin:18px 0 0;padding:14px 16px;background:var(--accent-zacht);
+  border-left:2px solid var(--accent);border-radius:var(--radius);
+  font-size:15.5px;color:var(--tekst);
+}
+.reactie b{font-weight:700}
+
+/* ---- uitslag: band groot, getal klein -------------------------- */
+.bandnaam{font-weight:900;font-size:clamp(34px,9vw,58px);line-height:1;letter-spacing:-.03em;margin:6px 0 10px}
+.score{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--zacht);font-variant-numeric:tabular-nums}
+.score b{color:var(--accent);font-size:19px;font-weight:700}
+
+.ladder{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column-reverse}
+.ladder li{
+  display:flex;align-items:center;gap:14px;padding:11px 14px;
+  border:1px solid var(--rand);border-bottom:none;background:var(--vlak);
+  font-size:14.5px;color:var(--zacht);opacity:0;animation:tree .3s ease-out forwards;
+}
+.ladder li:first-child{border-bottom:1px solid var(--rand)}
+.ladder li .nr{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--zacht);flex:0 0 auto;width:22px}
+.ladder li.bereikt{color:var(--tekst)}
+.ladder li.bereikt .nr{color:var(--accent)}
+.ladder li.hier{border-color:var(--accent);border-bottom:1px solid var(--accent);background:var(--accent-zacht);font-weight:700;color:var(--tekst)}
+.ladder li.grens .nr{color:var(--klei-light)}
+@keyframes tree{to{opacity:1}}
+
+.vouw{margin-top:14px}
+.vouw summary{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--zacht);cursor:pointer;padding:6px 0}
+.vouw summary:hover{color:var(--accent)}
+
+.stap{margin-top:24px;padding:18px;background:var(--vlak);border:1px solid var(--rand);border-radius:var(--radius)}
+.stap .kop{font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px}
+.stap p{margin:0;font-size:16px}
+
+footer{padding-block:20px 28px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--zacht)}
+
+.kopieer{margin-top:14px}
+.kopieer textarea{width:100%;min-height:120px;font-family:var(--mono);font-size:12px;padding:12px;background:var(--vlak);border:1px solid var(--rand);border-radius:var(--radius);color:var(--tekst)}
+
+@media (prefers-reduced-motion: reduce){
+  .in,.uit,.ladder li{animation:none}
+  .ladder li{opacity:1}
+  .voortgang i,.klim b{transition:none}
+  .caret{animation:none}
+}
+</style>
+
+<div class="schil">
+  <div class="voortgang" aria-hidden="true"><i id="balk"></i></div>
+
+  <header class="binnen">
+    <div class="merk"><b>FUTURE</b><span>CONTENT</span><i class="caret"></i></div>
+    <div class="rechts">
+      <span class="teller" id="teller" hidden></span>
+      <button class="schakel" id="schakel" type="button" aria-label="Wissel tussen licht en donker">
+        <span id="schakelTekst">Donker</span>
+        <span class="bol" aria-hidden="true"><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="binnen">
+
+    <section class="scherm in" id="s-welkom">
+      <span class="label">Acht minuten <em>· geen goede of foute antwoorden</em></span>
+      <h1>Waar sta jij <span class="dun">met AI?</span></h1>
+      <p>Straks komt er iemand een dagdeel bij jullie langs. Deze vragenlijst bepaalt
+      waar dat over gaat, zodat je niet zit te luisteren naar iets wat je al weet, of
+      naar iets waar je niets van volgt.</p>
+      <p class="hint">Het loopt van makkelijk naar moeilijk. Zodra je niet meer weet waar
+      een vraag over gaat, stop je. Dat is geen falen, dat is precies de meting.</p>
+
+      <div class="nota">
+        <span class="kop">Wat er met je antwoorden gebeurt</span>
+        <p>Je uitslag krijg jij zelf, meteen op het scherm. Jij bepaalt of je die
+        deelt.</p>
+        <p>Je werkgever krijgt geen scores en geen namen. Hij krijgt één overzicht van
+        wat er in de groep speelt, en de verdeling over de niveaus alleen als er acht of
+        meer mensen invullen.</p>
+        <p>Je antwoorden staan op de beveiligde opslag van deze pagina, bij Anthropic.
+        John Lavrijsen van Future Content is de enige die ze leest. Hij gebruikt ze om
+        het dagdeel voor te bereiden, en verwijdert ze uiterlijk zes maanden na de
+        sessie, of eerder als je daarom vraagt.</p>
+        <p>Vragen hierover? Mail <a href="mailto:john@future-content.nl">john@future-content.nl</a>.
+        Stop je halverwege, dan wordt er niets verstuurd.</p>
+      </div>
+
+      <div class="balk"><button class="knop klei" id="start">Beginnen</button></div>
+    </section>
+
+    <div id="vragen"></div>
+
+    <section class="scherm" id="s-klaar" hidden>
+      <span class="label">Jouw uitslag</span>
+      <div class="bandnaam" id="bandUit"></div>
+      <div class="score">Je staat op <b><span id="puntenUit">0</span></b> van 100</div>
+      <p class="hint" id="bandOmschrijving"></p>
+
+      <div class="stap">
+        <span class="kop">Jouw volgende stap</span>
+        <p id="stapUit"></p>
+      </div>
+
+      <div id="tipsUit"></div>
+      <div id="grensUit"></div>
+
+      <details class="vouw" id="vouwLadder">
+        <summary>Waar je stond, en wat er daarna komt</summary>
+        <ul class="ladder" id="ladderUit"></ul>
+      </details>
+
+      <div class="nota">
+        <span class="kop">Hierna</span>
+        <p id="bevestiging">Bezig met opslaan.</p>
+        <div class="kopieer" id="kopieerBlok" hidden>
+          <p>Kopieer deze tekst en stuur hem naar john@future-content.nl, dan komt hij
+          alsnog aan.</p>
+          <textarea id="kopieerVeld" readonly></textarea>
+          <div class="balk"><button class="knop" id="kopieerKnop">Kopieer</button></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="binnen">Future Content · Think now, build tomorrow</footer>
+</div>
+
+<script>
+/* =================================================================
+   Bron: intake/spec.md. Punten en banden: intake/weging.md, versie 2.
+   Verandert daar iets, dan hier ook, en dan het versienummer mee.
+
+   Tijdens het invullen staat er geen score op het scherm: een zichtbare
+   teller nodigt uit tot mooier antwoorden. Wat er wel staat is de klim,
+   want weten waar je bent is geen score.
+   ================================================================= */
+const WEGING_VERSIE = 2;
+const BEWAARSLEUTEL = "fc-intake-v2";
+
+/* De vijf antwoorden op een trede. "Bewust niet" en "nog niet" geven allebei
+   nul, maar het verschil is voor John het waardevolste signaal in de lijst:
+   wie een grens kent hoeft in de zaal iets anders te horen dan wie niet weet
+   dat het bestaat. */
+const TREDE_ANTWOORDEN = [
+  {tekst:"Ja, wekelijks of vaker",                  deel:1,  stopt:false},
+  {tekst:"Een paar keer, minder dan wekelijks",      deel:.5, stopt:false},
+  {tekst:"Nee, bewust niet",  bij:"mag niet bij ons, of ik vertrouw het hier niet", deel:0, stopt:false, grens:true},
+  {tekst:"Nee, nog niet",                            deel:0,  stopt:false},
+  {tekst:"Ik weet niet wat dit is",                  deel:0,  stopt:true},
+];
+
+/* De ladder stopt pas na twee keer achter elkaar "ik weet niet wat dit is".
+   Eén keer is te streng: wie het woord uit trede 4 niet herkent kan prima iets
+   hebben draaien dat onder trede 7 valt, en die verloor in één klik vier treden.
+   Afbreekregels in serieuze testen stoppen na drie tot vijf fouten, niet na één
+   (Chen, Brinchmann en Braeken 2025). Twee is de afweging tussen niet te lang
+   doorvragen en niemand onnodig laag inschalen. */
+const STOP_NA = 2;
+
+const TREDEN = [
+  {id:"T1", max:15, kop:"Ik stelde AI een vraag en gebruikte het antwoord voor mijn werk.", kort:"Een vraag stellen"},
+  {id:"T2", max:9,  kop:"Ik liet AI een werktekst schrijven of verbeteren.",
+   hint:"Een mail, een appje naar een klant, een stuk offertetekst.", kort:"Tekst laten maken"},
+  {id:"T3", max:9,  kop:"Ik gebruikte een AI-knop in een programma dat ik toch al heb.",
+   hint:"De samenvat-knop in je mail, Copilot in Word of Excel, de slimme tekstknop in Canva of Instagram, de AI in je eigen pakket.",
+   kort:"De knop in je eigen programma"},
+
+  /* Twee treden hebben eigen antwoorden gekregen in plaats van de vaste vijf.
+     Reden: ze meten precies hetzelfde als twee van de zeven coachvragen, en een
+     vraag met concrete antwoorden meet aantoonbaar beter dan eens of oneens
+     (Saris e.a. 2010). Zo scoren ze én wijzen ze een tip aan, zonder dat er een
+     scherm bij komt. */
+  {id:"T4", max:9, kort:"Context meegeven", coach:"C2",
+   kop:"Als je AI iets laat maken, hoe vraag je het dan meestal?", zonder_maand:true,
+   antwoorden:[
+     {tekst:"Ik zet erbij voor wie het is, wat het doel is, en geef een voorbeeld", deel:1, tip:null},
+     {tekst:"Ik vertel er in een paar zinnen bij wat ik nodig heb", deel:1, tip:null},
+     {tekst:"Meestal één zin, kort", deel:.5, tip:"C2"},
+     {tekst:"Ik typ gewoon waar het over gaat", deel:0, tip:"C2"},
+     {tekst:"Ik laat AI nog niets maken", deel:0, stopt:true},
+   ]},
+
+  {id:"T5", max:8,  kop:"Ik gaf een document, foto of tabel mee en liet AI daarmee werken.", kort:"Document meegeven"},
+
+  {id:"T6", max:10, kort:"Opdracht bewaren", coach:"C6",
+   kop:"Je moet iets doen wat je vaker doet. Waar begin je?", zonder_maand:true,
+   antwoorden:[
+     {tekst:"Ik heb er iets vasts voor ingericht dat ik erbij pak", deel:1, tip:null},
+     {tekst:"Ik pak een opdracht die ik ergens bewaard heb", deel:1, tip:null},
+     {tekst:"Ik zoek terug in mijn oude gesprekken", deel:.5, tip:"C6"},
+     {tekst:"Ik begin elke keer met een lege vraag", deel:0, tip:"C6"},
+     {tekst:"Dit doe ik niet met AI", deel:0, stopt:true},
+   ]},
+
+  {id:"T7", max:10, kop:"AI deed werk in mijn eigen programma's zonder dat ik het elke keer zelf startte.",
+   hint:"Een koppeling, een automatische samenvatting, een chatbot die antwoord geeft.", kort:"Draait in je programma"},
+  {id:"T8", max:20, kop:"Ik heb iets gebouwd of ingericht dat blijft draaien zonder dat ik er elke keer bij ben.",
+   hint:"Bijvoorbeeld een koppeling tussen twee systemen, of een bot die zelf reageert.", kort:"Draait zonder jou"},
+];
+
+/* De vier coachvragen die niet al in een trede zitten. Geen punten: ze meten
+   geen niveau, ze wijzen aan wat iemand in de zaal moet horen. Item-specifiek,
+   niet eens of oneens. Het laatste antwoord is steeds het gedrag dat we willen
+   zien, het eerste is waar de meeste winst zit. */
+const COACHVRAGEN = [
+  {id:"S1", coach:"C1", voor:"Nog vier korte vragen",
+   kop:"Je krijgt een antwoord dat er goed uitziet. Wat doe je ermee?",
+   opties:[
+     {tekst:"Ik gebruik het zo", tip:"C1"},
+     {tekst:"Ik lees het door op taalfouten", tip:"C1"},
+     {tekst:"Ik controleer één ding dat ik zelf weet", tip:null},
+     {tekst:"Ik zoek na waar het vandaan komt", tip:null},
+     {tekst:"Ik gebruik AI nog niet", tip:"C1"},
+   ]},
+  {id:"S2", coach:"C3", voor:"Vraag 2 van 4",
+   kop:"Het eerste antwoord is niet goed. Wat doe je dan?",
+   opties:[
+     {tekst:"Ik laat het erbij, blijkbaar kan het niet", tip:"C3"},
+     {tekst:"Ik probeer het nog een keer met andere woorden", tip:null},
+     {tekst:"Ik zeg wat er niet klopt en vraag het opnieuw", tip:null},
+     {tekst:"Dat doe ik net zolang tot het klopt", tip:null},
+     {tekst:"Dit heb ik nog niet meegemaakt", tip:"C3"},
+   ]},
+  {id:"S3", coach:"C5", voor:"Vraag 3 van 4",
+   kop:"Waar is AI volgens jou goed voor in jouw werk?",
+   hint:"Er is geen goed antwoord. Dit bepaalt waar we in de sessie de nadruk op leggen.",
+   opties:[
+     {tekst:"Eigenlijk nergens voor, mijn werk is er niet geschikt voor", tip:"C5"},
+     {tekst:"Alleen voor tekst schrijven", tip:"C5"},
+     {tekst:"Voor alles wat elke keer hetzelfde gaat", tip:null},
+     {tekst:"Voor bijna alles, ik zou niet weten waarvoor niet", tip:"C5"},
+     {tekst:"Ik weet het niet", tip:"C5"},
+   ]},
+  {id:"S4", coach:"C7", voor:"Laatste van de vier",
+   kop:"Weten je collega's wat jij met AI doet?",
+   opties:[
+     {tekst:"Nee", tip:"C7"},
+     {tekst:"Eén of twee mensen", tip:"C7"},
+     {tekst:"Ja, ik laat het wel eens zien", tip:null},
+     {tekst:"Ja, we gebruiken elkaars opdrachten", tip:null},
+   ]},
+];
+
+/* De tips die bij de coachpunten horen. Bron: modules/coachplan.md par. 3. */
+const TIPS = {
+  C1:"Controleer altijd één ding dat je zelf weet. Een antwoord dat er goed uitziet kan gewoon verzonnen zijn, en dat merk je pas bij de klant.",
+  C2:"Zet erbij voor wie het is, wat het doel is en hoe lang het moet worden. Dat scheelt meer dan een betere tool.",
+  C3:"Zeg wat er niet klopt en vraag het opnieuw. Doorvragen is geen falen, het is hoe het werkt.",
+  C4:"Vervang namen door een letter voordat je iets plakt, en zet in de instellingen het deel-schuifje uit.",
+  C5:"AI is goed in wat steeds hetzelfde gaat en op tekst lijkt. Jouw vakwerk blijft van jou, en daarbuiten kost het je eerder tijd dan dat het oplevert.",
+  C6:"Bewaar de opdracht die je het vaakst gebruikt, al is het in een notitie, en plak hem de volgende keer.",
+  C7:"Deel één opdracht die werkt met een collega. Dat verdubbelt de opbrengst zonder dat het jou iets kost.",
+};
+
+const VRAGEN = [
+  /* Bedrijf staat er als vrij tekstveld en niet als keuzelijst. Een lijst
+     zou betekenen dat de ene klant de namen van de andere ziet staan, en
+     dat is precies wat niet mag. De omzetter groepeert hoofdletter- en
+     spatie-ongevoelig, en meldt het als er twee schrijfwijzen binnenkomen.
+
+     E-mail is verplicht sinds 28 september (John). Het was optioneel
+     omdat twee van twintig testpersonen erop vastliepen, maar zonder
+     adres kan er na afloop niets naar iemand toe. De drempel blijft laag
+     doordat er "je e-mailadres" staat en niet "je werk-e-mail": wie geen
+     zakelijk adres heeft vult zijn eigen adres in. */
+  {id:"naam", type:"velden", voor:"Om te beginnen", kop:"Wie ben je?",
+   velden:[
+     {id:"naam",  label:"Je naam", verplicht:true,
+      bij:"Zodat John weet wie er donderdag in de zaal zit."},
+     {id:"bedrijf", label:"Bij welk bedrijf werk je", verplicht:true,
+      bij:"De naam zoals jullie hem zelf gebruiken is prima."},
+     {id:"email", label:"Je e-mailadres", type:"email", verplicht:true,
+      bij:"Hier stuurt John je na de sessie naartoe wat er voor jou uit komt. Heb je geen werkmail, vul dan je eigen adres in."},
+   ]},
+
+  {id:"C1", type:"keuze", voor:"Vraag 1", kop:"Wat voor werk doe je?",
+   opties:["Eigenaar of directie","Leidinggevend of teamleider","Kantoor of administratie",
+           "Planning of werkvoorbereiding","Buitendienst, werkplaats of onderweg",
+           "Verkoop of klantcontact","HR, advies of kwaliteit","Techniek of ICT","Anders"],
+   doorvraag:{bij:"Anders", label:"Wat doe je dan?", plaats:"bijvoorbeeld chauffeur, kapper, monteur"}},
+
+  {id:"C2", type:"keuze", voor:"Vraag 2", kop:"Er komt een nieuw programma op het werk. Wat doe je?",
+   opties:["Ik probeer het meteen uit","Ik wacht tot iemand het uitlegt",
+           "Ik kijk eerst of het wel mag en of het veilig is","Ik vermijd het zolang het kan"]},
+
+  {id:"C3", type:"meerkeuze", voor:"Vraag 3", kop:"Welke van deze heb je wel eens gebruikt?",
+   hint:"Meerdere antwoorden mogen. Hier bepalen we in welke tool jij tijdens de sessie werkt.",
+   opties:["ChatGPT","Microsoft Copilot","Claude","Google Gemini","Meta AI in WhatsApp",
+           "Een AI-knop in een programma dat ik al gebruik","Iets anders","Geen van deze"],
+   uitsluitend:"Geen van deze",
+   doorvraag:{bij:"Iets anders", label:"Welk programma is dat?", plaats:"de naam van het programma"}},
+
+  {id:"G1", type:"keuze", voor:"De poort", kop:"Hoe vaak gebruik je AI voor je werk?",
+   opties:[
+     {tekst:"Nog nooit, ook niet privé",                                    punten:0,  vang:true},
+     {tekst:"Wel eens privé geprobeerd, niet voor mijn werk",               punten:2,  vang:true},
+     {tekst:"Een paar keer voor mijn werk, ook al is het langer geleden",   punten:3},
+     {tekst:"Ongeveer wekelijks voor mijn werk",                            punten:6},
+     {tekst:"Bijna elke dag voor mijn werk",                                punten:10},
+   ]},
+
+  /* De vangvraag. Drie van de twintig testpersonen gebruikten wekelijks AI en
+     zeiden toch "nooit", omdat ze de knop in hun eigen programma geen AI noemen.
+     Deze vraag haalt precies die groep binnen. */
+  {id:"K1", type:"meerkeuze", voor:"Even checken", kop:"Misschien heb je het toch al gebruikt.",
+   hint:"Veel mensen noemen dit geen AI. Herken je hier iets van?",
+   opties:["Een samenvat-knop of slimme knop in mijn mail of Word",
+           "Slimme tekst of beeld in Canva, Instagram of Facebook",
+           "Meta AI in WhatsApp",
+           "Een chatbot op een website of van ons eigen bedrijf",
+           "De zoekbalk die zelf al antwoord geeft",
+           "Nee, niets hiervan"],
+   uitsluitend:"Nee, niets hiervan"},
+
+  {id:"K2", type:"keuze", voor:"Laatste vraag hierover", kop:"Wat houdt je tegen?",
+   hint:"Geen goed of fout. Dit bepaalt waar de sessie voor jou over moet gaan.",
+   opties:["Ik weet niet waar ik moet beginnen","Ik heb er geen tijd voor",
+           "Het mag niet of ik weet niet of het mag","Ik heb geen account of geen apparaat",
+           "Ik heb het geprobeerd en het viel tegen","Het lijkt me niets voor mijn werk"]},
+
+  ...TREDEN.map(t => ({...t, type:"trede"})),
+
+  /* Het objectieve anker. Eén vraag met een goed antwoord, want zelfrapportage
+     over AI-vaardigheid correleert nauwelijks met wat iemand werkelijk kan
+     (r = .055 over 2.765 deelnemers, Verí 2026). Telt niet mee voor de band,
+     maar zegt meer over iemands grip dan de rest bij elkaar. En het weten dat
+     er iets nagekeken wordt, maakt de zelfrapportage eromheen ook eerlijker. */
+  /* W1 meet iets anders dan de ladder. De ladder meet wat iemand dóet,
+     dit meet welke woorden hij kent. Dat bepaalt of John een woord mag
+     gebruiken of eerst moet uitleggen, en hoe diep een blok mag gaan.
+
+     De grens is bewust "kunnen uitleggen" en niet "wel eens gehoord".
+     Gehoord hebben zegt niets: iedereen heeft "agent" wel eens langs
+     zien komen. Kunnen uitleggen scheidt de zaal echt, en het is nog
+     steeds een lage drempel omdat er "in grote lijnen" bij staat.
+
+     Elk woord hier stuurt een blok in het deck aan. Staat er een woord
+     dat nergens iets mee doet, haal het dan weg: een vraag stellen die
+     je niet gebruikt kost de invuller tijd en levert niets op. */
+  /* Drie keer twee manieren naast elkaar. Hier zit bewust geen terugkoppeling
+     op: de invuller kiest en hoort niets. Wat de betere manier is en waarom,
+     komt in de sessie terug, met erbij hoeveel procent van de groep die koos.
+
+     Waarom dit iets anders meet dan de vier korte vragen S1 tot S4: die
+     vragen wat iemand dóet, dit vraagt of hij het verschil zíét. Iemand kan
+     naar eer en geweten zeggen dat hij context meegeeft en hier toch de kale
+     versie aanwijzen. Dat verschil is precies wat een dagdeel moet aanpakken.
+
+     Elk paar hoort bij een blok dat er sowieso in zit: context, grenzen,
+     doorvragen. Verzin er geen vierde bij zonder het blok erachter. */
+  {id:"AB1", type:"keuze", naast:true, ab:true, coach:"C2", voor:"Twee manieren",
+   kop:"Je wil een mail laten schrijven. Welke van de twee zou jij typen?",
+   hint:"Je krijgt hier geen goed of fout te zien. In de sessie kijken we wat er uit allebei komt.",
+   opties:[
+     {tekst:"Manier A", goed:false,
+      fragment:"Schrijf een mail over de offerte."},
+     {tekst:"Manier B", goed:true,
+      fragment:"Schrijf een mail over de offerte.\n\nVoor wie: een klant die al twee weken wacht.\nDoel: zeggen dat het deze week komt.\nVorm: vier zinnen, gewoon Nederlands."},
+   ]},
+
+  {id:"AB2", type:"keuze", naast:true, ab:true, coach:"C4", voor:"Twee manieren",
+   kop:"Een klant klaagt. Welke van de twee plak je erin?",
+   hint:"Allebei leveren een bruikbaar antwoord op. Het verschil zit ergens anders.",
+   opties:[
+     {tekst:"Manier A", goed:false,
+      fragment:"Mark de Vries uit Reusel klaagt dat de levering te laat is. Help me een antwoord schrijven."},
+     {tekst:"Manier B", goed:true,
+      fragment:"Een klant klaagt dat de levering te laat is. Help me een antwoord schrijven."},
+   ]},
+
+  {id:"AB3", type:"keuze", naast:true, ab:true, coach:"C3", voor:"Twee manieren",
+   kop:"Het antwoord klopt bijna. Wat typ je terug?",
+   hint:"Laatste van deze drie.",
+   opties:[
+     {tekst:"Manier A", goed:false,
+      fragment:"Kun je het nog een keer proberen?"},
+     {tekst:"Manier B", goed:true,
+      fragment:"De derde alinea klopt niet, wij leveren niet op zaterdag.\nPas alleen die aan en laat de rest staan."},
+   ]},
+
+  {id:"W1", type:"meerkeuze", voor:"Bijna klaar", kop:"Welke van deze woorden zou je aan een collega kunnen uitleggen?",
+   hint:"Niet perfect, gewoon in grote lijnen. Eerlijk antwoorden helpt jezelf: dan gebruikt John in de sessie geen woorden die niemand kent.",
+   opties:["Prompt","Hallucineren","Token","Skill","Agent","Workflow",
+           "MCP","De AI-verordening (AI Act)","Geen van deze"],
+   uitsluitend:"Geen van deze"},
+
+  {id:"V1", type:"keuze", voor:"Eén vraag met een goed antwoord", kennisvraag:true,
+   kop:"Eén van deze vier mag je zonder problemen in een gewone AI-chat plakken. Welke?",
+   hint:"Deze telt niet mee voor je score. Hij bepaalt hoe uitgebreid we het in de sessie over veilig werken hebben.",
+   opties:[
+     {tekst:"Het cv van iemand die bij jullie solliciteert"},
+     {tekst:"Een folder van je eigen bedrijf die al openbaar is", goed:true},
+     {tekst:"De ziekmelding van een collega"},
+     {tekst:"Een klantenlijst met adressen"},
+     {tekst:"Ik weet het niet"},
+   ]},
+
+  ...COACHVRAGEN.map(v => ({...v, type:"keuze", coachvraag:true})),
+
+  {id:"E1", type:"tekst", voor:"Jij bent verder dan de meesten", kop:"Wat heb je draaien, en waarin?",
+   hint:"Je zit in de bovenste twee niveaus. Dat zijn er maar weinig in een zaal, dus vertel kort wat je gebouwd of ingericht hebt. Dan kan John daarop aansluiten in plaats van je iets uit te leggen wat je al weet.",
+   verplicht:false, alleenBoven:61},
+
+  {id:"B3", type:"keuze", voor:"Bijna klaar", kop:"Mag John jouw voorbeeld tijdens de sessie gebruiken?",
+   hint:"Alleen in de zaal, bij jullie zelf. Buiten de sessie gebruiken we het niet zonder het apart te vragen. Zeg je nee, dan vragen we het volgende nog steeds, maar dan blijft het tussen jou en John.",
+   opties:["Ja","Liever niet"]},
+
+  {id:"B1", type:"tekst", voor:"Bijna klaar", kop:"Welke taak kost jou elke week het meeste tijd en is eigenlijk elke keer hetzelfde?",
+   /* Voorbeelden uit twee verschillende werelden naast elkaar, want deze
+      lijst gaat naar een schoonmaakbedrijf én naar een HR-dienstverlener.
+      Ze staan er niet om het antwoord te sturen maar om de vraag concreet
+      te maken: bij een open vraag zonder voorbeeld haakt ongeveer een op
+      de vijf mensen af, en dan sta je met lege handen in de zaal. */
+   hint:"Denk aan werkbriefjes uittypen, een offerte opstellen, het rooster rondsturen, een vacaturetekst schrijven of een verslag van een gesprek maken. Hier gaan we in de sessie echt mee aan de slag, dus hoe concreter hoe beter. Weet je het even niet, dan mag je het overslaan.",
+   verplicht:false},
+
+  /* Outlook en Gmail stonden hier eerst als één optie. Dat leek netjes
+     korter, maar het is een meetfout: het zijn twee verschillende
+     pakketten, en juist dit antwoord bepaalt welk advies er op de laatste
+     slide staat. Wie "Outlook of Gmail" aanklikte leverde dus precies
+     niets op voor de vraag waarvoor hij bedoeld was. */
+  /* Meerkeuze sinds 28 september. John vulde bij de taak "offerte via
+     WhatsApp" in en moest hier toch één programma kiezen; hij koos Outlook.
+     Dan spreekt zijn eigen antwoord zichzelf tegen en weet je nog niets. */
+  {id:"B2", type:"meerkeuze", voor:"Bijna klaar", kop:"In welke programma's doe je die taak nu?",
+   hint:"Meerdere antwoorden mogen. Loopt het door twee programma's heen, vink ze allebei aan.",
+   opties:["Outlook","Gmail","Word of Excel","Google Documenten","WhatsApp",
+           "Het boekhoudpakket","Het planningssysteem",
+           "Een vakprogramma van onze branche","Op papier","Anders"],
+   doorvraag:{bij:"Anders", label:"Welk programma is dat?", plaats:"de naam van het pakket"},
+   doorvraagOok:"Een vakprogramma van onze branche"},
+
+  /* B4: wat wil je kunnen. Bewust niet "wat verwacht je van de training".
+     Een verwachting vraagt om abstracte reflectie en levert daardoor vaker
+     een leeg of vaag antwoord op; een handeling die je je kunt voorstellen
+     niet. Keuzes met één open uitloop, want een volledig open vraag laat
+     ongeveer 18 procent van de invullers afhaken tegen 1 tot 2 procent bij
+     keuzes (Pew Research Center 2021, over 92 open vragen).
+
+     Let op bij het gebruik: deze vraag stellen en er niets mee doen is
+     schadelijker dan hem niet stellen. Hoe groter het gat tussen wat
+     iemand verwachtte en wat hij kreeg, hoe sterker de motivatie zakt
+     (Sander, Rieder & Spinath 2025, N=898). Het antwoord hoort dus in de
+     opening van het dagdeel, en wat er niet in zit wordt daar ook gezegd. */
+  {id:"B4", type:"keuze", voor:"Laatste vraag", kop:"Wat wil je na dat dagdeel kunnen wat je nu nog niet kunt?",
+   hint:"Geen goed of fout antwoord. John opent de sessie met wat hier het vaakst genoemd wordt.",
+   opties:["Gewoon zien wat dit voor mijn werk kan betekenen",
+           "Sneller klaar zijn met werk dat ik nu al doe",
+           "Een heel proces vanzelf laten lopen, zonder dat ik het start",
+           "Zekerder worden in de tool die ik al gebruik",
+           "Weten wat wel en niet mag met bedrijfsgegevens",
+           "Anders"],
+   doorvraag:{bij:"Anders", label:"Wat dan precies?", plaats:"één zin is genoeg"}},
+];
+
+const BANDEN = [
+  {tot:20,  naam:"Kijker",
+   omschrijving:"Je bent nog niet begonnen, of je gebruikt het zonder het zo te noemen. Dat is een prima startpunt, en je bent niet de enige.",
+   spoor:"Starten"},
+  {tot:40,  naam:"Vrager",
+   omschrijving:"Je stelt vragen als je eraan denkt. Wat eruit komt gebruik je nog weinig in je werk.",
+   spoor:"Starten"},
+  {tot:60,  naam:"Gebruiker",
+   omschrijving:"Je gebruikt het met enige regelmaat voor tekst en uitzoekwerk. Je begint alleen elke keer weer met een leeg scherm.",
+   spoor:"Vastmaken"},
+  {tot:80,  naam:"Inrichter",
+   omschrijving:"Je hebt het ingericht: bewaarde opdrachten, eigen bestanden, of AI binnen de programma's die je toch al gebruikt.",
+   spoor:"Vastmaken"},
+  {tot:100, naam:"Bouwer",
+   omschrijving:"Je hebt iets draaien dat werkt zonder dat jij erbij bent, en je kunt het anderen uitleggen.",
+   spoor:"Bouwen"},
+];
+
+/* De volgende stap komt uit de laagste trede die iemand nog niet haalde, niet
+   uit de bandtekst. Anders krijgt iemand te lezen dat hij iets doet wat hij net
+   heeft ontkend. */
+const STAPPEN = {
+  T1:"Open één keer een AI-tool en stel er een vraag over je eigen werk. Meer niet.",
+  T2:"Laat één mail of bericht van deze week schrijven of verbeteren, en kijk wat je ervan vindt.",
+  T3:"Kijk in een programma dat je al gebruikt of er een AI-knop in zit. Die zit er vaker in dan je denkt.",
+  T4:"Zet er de volgende keer bij voor wie het is en wat het moet doen. Dat scheelt meer dan een betere tool.",
+  T5:"Geef een keer een document of een foto mee in plaats van het over te typen.",
+  T6:"Bewaar de opdracht die je het vaakst gebruikt, al is het in een notitie, en plak hem de volgende keer.",
+  T7:"Zoek één stap in je eigen pakket die vanzelf zou kunnen gaan, en zet die aan.",
+  T8:"Bouw één ding dat blijft draaien als jij er niet bent, en laat het twee weken lopen.",
+  klaar:"Meet hoe betrouwbaar het is wat je hebt draaien. Negentig procent per stap is na vijf stappen nog negenenvijftig procent.",
+};
+
+/* ---------- toestand ---------- */
+const antwoorden = {};
+let index = -1;
+let ladderGestopt = null;
+let ladderOvergeslagen = false;
+
+const elVragen = document.getElementById("vragen");
+const elBalk = document.getElementById("balk");
+const elTeller = document.getElementById("teller");
+const elWelkom = document.getElementById("s-welkom");
+const elKlaar = document.getElementById("s-klaar");
+
+const vraagVan = id => VRAGEN.find(v => v.id === id);
+
+/* De opties van een vraag kunnen afhangen van wat er eerder is gekozen.
+   Nu geldt dat alleen voor de poort: wie bij vraag 3 een tool heeft aangevinkt,
+   heeft AI wel eens gebruikt, en dan is "nog nooit, ook niet privé" geen
+   mogelijk antwoord meer. Die tegenspraak stond er in versie 2 nog in. */
+/* Welke antwoorden horen bij deze vraag: de vaste vijf van een trede, de eigen
+   antwoorden van een trede die er zelf heeft, of de opties van een gewone vraag. */
+function antwoordenVoor(v){
+  if (isTrede(v)) return v.antwoorden || TREDE_ANTWOORDEN;
+  return optiesVoor(v);
+}
+
+function optiesVoor(v){
+  if (v.id !== "G1") return v.opties;
+  const c3 = antwoorden.C3;
+  const heeftIetsGebruikt = c3 && c3.keuzes && c3.keuzes.length &&
+        !c3.keuzes.every(k => k.startsWith("Geen van deze"));
+  if (!heeftIetsGebruikt) return v.opties;
+  return v.opties.filter(o => !o.tekst.startsWith("Nog nooit"));
+}
+const isTrede = v => v.type === "trede";
+const tredeIndex = id => TREDEN.findIndex(t => t.id === id);
+
+/* Welke vragen krijgt deze invuller, gegeven wat hij tot nu toe koos. */
+function zichtbareVragen(){
+  const g = antwoorden.G1;
+  const vangt = g && g.vang;                      // nooit of alleen privé
+  const k1 = antwoorden.K1;
+  const herkentIets = k1 && k1.keuzes && !k1.keuzes.includes("Nee, niets hiervan");
+  const ladderUit = vangt && k1 && !herkentIets;  // pas na K1 weten we het
+
+  return VRAGEN.filter(v => {
+    if (v.id === "K1") return !!vangt;
+    if (v.id === "K2") return !!ladderUit;
+    if (isTrede(v)){
+      if (ladderUit) return false;
+      if (vangt && !k1) return false;             // K1 eerst beantwoorden
+      // Trede 3 is precies de vraag die de vangvraag net heeft beantwoord.
+      // Hem alsnog stellen is dezelfde vraag in moeilijker woorden, en dan
+      // zegt iemand die net de knop in Word herkende "ik weet niet wat dit
+      // is". Dat kost hem de punten die hij zojuist verdiende én telt mee
+      // voor de stopregel. Gemeten op 24 september 2026 in een doorloop.
+      if (v.id === "T3" && antwoorden.T3 && antwoorden.T3.viaVangvraag) return false;
+      if (ladderGestopt){
+        const iStop = tredeIndex(ladderGestopt);
+        if (tredeIndex(v.id) > iStop) return false;
+      }
+      return true;
+    }
+    if (v.alleenBoven) return telOp() >= v.alleenBoven;
+    return true;
+  });
+}
+
+/* De noemer is het aantal vragen dat deze invuller nog kán krijgen, niet het
+   aantal dat er nu zichtbaar is. Anders springt de balk vooruit zodra iemand
+   stopt, en dan ziet afhaken eruit als winnen. */
+function zetVoortgang(){
+  const lijst = zichtbareVragen();
+  const gedaan = lijst.filter(v => antwoorden[v.id] !== undefined).length;
+  const noemer = Math.max(lijst.length, gedaan + (index < lijst.length - 1 ? 1 : 0));
+  elBalk.style.width = Math.round((gedaan / noemer) * 100) + "%";
+}
+
+/* ---------- schermen ---------- */
+function maakScherm(v){
+  const s = document.createElement("section");
+  s.className = "scherm";
+  s.id = "s-" + v.id;
+  s.hidden = true;   // pas tonen bij de wissel, anders staat hij tijdens de
+                     // overgang al onder het scherm dat nog wegdraait
+
+  let html = "";
+
+  if (isTrede(v)){
+    const i = tredeIndex(v.id);
+    html += `<div class="klim" aria-hidden="true">` +
+      TREDEN.map((t, j) => `<b data-t="${t.id}" style="height:${10 + j * 2}px"></b>`).join("") + `</div>`;
+    html += `<h2><span class="voor">Trede ${i + 1} van ${TREDEN.length} · ${v.kort}</span>In de afgelopen maand: ${v.kop}</h2>`;
+  } else {
+    html += v.voor ? `<h2><span class="voor">${v.voor}</span>${v.kop}</h2>` : `<h2>${v.kop}</h2>`;
+  }
+  if (v.hint) html += `<p class="hint">${v.hint}</p>`;
+
+  if (v.type === "velden"){
+    html += v.velden.map(f => `
+      <div class="veld">
+        <label for="f-${f.id}">${f.label}${f.verplicht ? "" : " <span style='font-weight:300;color:var(--zacht)'>(mag leeg)</span>"}</label>
+        <input id="f-${f.id}" name="${f.id}" type="${f.type || "text"}" autocomplete="${f.type === "email" ? "email" : "name"}">
+        ${f.bij ? `<div class="bij">${f.bij}</div>` : ""}
+      </div>`).join("");
+  } else if (v.type === "tekst"){
+    html += `<div class="veld"><textarea id="f-${v.id}" name="${v.id}"></textarea></div>`;
+  } else {
+    const opties = antwoordenVoor(v);
+    html += `<div class="keuzes${v.naast ? " naast" : ""}" role="group">` + opties.map((o, i) => {
+      const tekst = typeof o === "string" ? o : o.tekst;
+      const bij = (typeof o === "object" && o.bij) ? `<i>${o.bij}</i>` : "";
+      const frag = (typeof o === "object" && o.fragment)
+        ? `<span class="fragment">${o.fragment}</span>` : "";
+      if (v.naast){
+        return `<button type="button" class="keuze" data-i="${i}" aria-pressed="false">
+          <span class="merk2">${tekst}</span>${frag}${bij}</button>`;
+      }
+      return `<button type="button" class="keuze" data-i="${i}" aria-pressed="false">
+        <span class="bol" aria-hidden="true"></span><span>${tekst}${bij}</span></button>`;
+    }).join("") + `</div>`;
+    if (v.doorvraag){
+      html += `<div class="veld doorvraag" id="dv-${v.id}" hidden>
+        <label for="f-dv-${v.id}">${v.doorvraag.label}</label>
+        <input id="f-dv-${v.id}" type="text" placeholder="${v.doorvraag.plaats}">
+      </div>`;
+    }
+  }
+
+  html += `<div class="balk">
+    <button class="knop" data-verder ${autoDoor(v) ? "hidden" : ""} disabled>Verder</button>
+    <button class="terug" data-terug>Terug</button>
+  </div>`;
+
+  s.innerHTML = html;
+  return s;
+}
+
+/* Enkelvoudige keuzes schuiven zelf door: de keuze ís het antwoord. Dat scheelt
+   de helft van alle handelingen. Vragen met een tekstveld of meerdere antwoorden
+   houden hun knop. */
+const autoDoor = v => (v.type === "keuze" || isTrede(v)) && !v.doorvraag;
+
+function toon(nieuwIndex, richting){
+  const lijst = zichtbareVragen();
+  if (nieuwIndex >= lijst.length){ klaar(); return; }
+  if (nieuwIndex < 0){ naarWelkom(); return; }
+
+  const v = lijst[nieuwIndex];
+  let s = document.getElementById("s-" + v.id);
+  if (!s){ s = maakScherm(v); elVragen.appendChild(s); bindScherm(s, v); }
+
+  const huidig = document.querySelector(".scherm:not([hidden])");
+  const wissel = () => {
+    document.querySelectorAll(".scherm").forEach(x => { x.hidden = true; x.classList.remove("in", "uit"); });
+    s.hidden = false;
+    s.classList.add("in");
+    index = nieuwIndex;
+    herstel(s, v);
+    if (isTrede(v)) tekenKlim(s, v);
+    zetVoortgang();
+    elTeller.hidden = false;
+    elTeller.textContent = `${nieuwIndex + 1} / ${lijst.length}`;
+    if (v.type === "velden" || v.type === "tekst"){
+      const eerste = s.querySelector("input, textarea");
+      if (eerste) eerste.focus();
+    }
+    window.scrollTo({top:0, behavior: richting === "terug" ? "auto" : "smooth"});
+  };
+
+  if (huidig && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+    huidig.classList.add("uit");
+    setTimeout(wissel, 120);
+  } else wissel();
+}
+
+/* De klim boven de vraag: wat je hebt gehaald staat in klei, waar je nu staat
+   heeft een rand. Dit is het enige wat tijdens het invullen laat zien dat je
+   ergens naartoe klimt, en het is geen score. */
+function tekenKlim(s, v){
+  s.querySelectorAll(".klim b").forEach(b => {
+    const id = b.dataset.t;
+    const a = antwoorden[id];
+    b.className = "";
+    if (a && a.punten > 0) b.classList.add(a.punten === vraagVan(id).max ? "gehaald" : "half");
+    if (id === v.id) b.classList.add("nu");
+  });
+}
+
+function herstel(s, v){
+  const a = antwoorden[v.id];
+  const verder = s.querySelector("[data-verder]");
+
+  if (v.type === "velden"){
+    v.velden.forEach(f => { const el = s.querySelector("#f-" + f.id); if (el && a && a[f.id] !== undefined) el.value = a[f.id]; });
+    toetsVelden(s, v);
+  } else if (v.type === "tekst"){
+    const el = s.querySelector("textarea");
+    if (el && a) el.value = a.tekst || "";
+    verder.disabled = false;                     // open vragen mogen leeg blijven
+  } else if (v.type === "meerkeuze"){
+    s.querySelectorAll(".keuze").forEach((k, i) => {
+      const gekozen = a && a.keuzes && a.keuzes.includes(v.opties[i]);
+      k.setAttribute("aria-pressed", gekozen ? "true" : "false");
+    });
+    verder.disabled = !(a && a.keuzes && a.keuzes.length);
+    toonDoorvraag(s, v);
+  } else {
+    const opties = antwoordenVoor(v);
+    s.querySelectorAll(".keuze").forEach((k, i) => {
+      const tekst = typeof opties[i] === "string" ? opties[i] : opties[i].tekst;
+      k.setAttribute("aria-pressed", (a && a.tekst === tekst) ? "true" : "false");
+    });
+    verder.disabled = !a;
+    toonDoorvraag(s, v);
+  }
+  if (a && a.doorvraag){
+    const dv = s.querySelector("#f-dv-" + v.id);
+    if (dv) dv.value = a.doorvraag;
+  }
+  s.querySelector("[data-terug]").hidden = false;  // altijd terug kunnen, ook naar de uitleg
+}
+
+function toonDoorvraag(s, v){
+  if (!v.doorvraag) return;
+  const blok = s.querySelector("#dv-" + v.id);
+  if (!blok) return;
+  const gekozen = [...s.querySelectorAll('.keuze[aria-pressed="true"]')].map(k => k.textContent.trim());
+  const raak = gekozen.some(t => t.startsWith(v.doorvraag.bij) || (v.doorvraagOok && t.startsWith(v.doorvraagOok)));
+  blok.hidden = !raak;
+}
+
+function toetsVelden(s, v){
+  const naam = s.querySelector("#f-naam");
+  s.querySelector("[data-verder]").disabled = !(naam && naam.value.trim().length > 1);
+}
+
+function bindScherm(s, v){
+  const verder = s.querySelector("[data-verder]");
+  const terug = s.querySelector("[data-terug]");
+
+  if (v.type === "velden"){
+    s.querySelectorAll("input").forEach(el => el.addEventListener("input", () => toetsVelden(s, v)));
+  } else if (v.type === "tekst"){
+    // niets: open vragen mogen leeg blijven
+  } else {
+    const opties = antwoordenVoor(v);
+    s.querySelectorAll(".keuze").forEach(k => {
+      k.addEventListener("click", () => {
+        const i = Number(k.dataset.i);
+        if (v.type === "meerkeuze"){
+          const uit = v.uitsluitend;
+          if (v.opties[i] === uit){
+            s.querySelectorAll(".keuze").forEach(x => x.setAttribute("aria-pressed", "false"));
+            k.setAttribute("aria-pressed", "true");
+          } else {
+            k.setAttribute("aria-pressed", k.getAttribute("aria-pressed") === "true" ? "false" : "true");
+            const uitKnop = [...s.querySelectorAll(".keuze")].find(x => x.textContent.trim().startsWith(uit));
+            if (uitKnop) uitKnop.setAttribute("aria-pressed", "false");
+          }
+          verder.disabled = ![...s.querySelectorAll('.keuze[aria-pressed="true"]')].length;
+          toonDoorvraag(s, v);
+        } else {
+          s.querySelectorAll(".keuze").forEach(x => x.setAttribute("aria-pressed", "false"));
+          k.setAttribute("aria-pressed", "true");
+          verder.disabled = false;
+          toonDoorvraag(s, v);
+          if (autoDoor(v)){
+            bewaar(s, v);
+            setTimeout(() => volgende(v), 150);
+          }
+        }
+      });
+    });
+  }
+
+  verder.addEventListener("click", () => { bewaar(s, v); volgende(v); });
+  terug.addEventListener("click", () => toon(index - 1, "terug"));
+}
+
+/* Stoppen krijgt een eigen moment. In versie 1 verdwenen de resterende vragen
+   stil, en dan voelt afhaken als zakken terwijl het openingsscherm het
+   tegenovergestelde belooft. */
+function volgende(v){
+  if (isTrede(v) && ladderGestopt === v.id){
+    toonStopScherm(v);
+    return;
+  }
+  toon(index + 1, "verder");
+}
+
+function toonStopScherm(v){
+  const i = tredeIndex(v.id);
+  const gehaald = i;                       // treden vóór deze
+  let s = document.getElementById("s-stop");
+  if (!s){ s = document.createElement("section"); s.className = "scherm"; s.id = "s-stop"; elVragen.appendChild(s); }
+  s.innerHTML = `
+    <h2><span class="voor">Tot hier</span>${gehaald > 0 ? `Je staat op trede ${gehaald}.` : "Dit is je startpunt."}</h2>
+    <p>${gehaald > 0
+      ? "Dat is precies wat we wilden weten. Alles hierboven is waar de sessie voor jou over gaat, dus daar hoef je nu niets van te weten."
+      : "Ook prima. Dan beginnen we bij het begin, en dat is precies waar de sessie voor jou over gaat."}</p>
+    <p class="hint">Nog een paar korte vragen over jouw werk, dan ben je klaar.</p>
+    <div class="balk"><button class="knop klei" id="stopVerder">Verder</button>
+    <button class="terug" id="stopTerug">Terug</button></div>`;
+  document.querySelectorAll(".scherm").forEach(x => { x.hidden = true; x.classList.remove("in", "uit"); });
+  s.hidden = false; s.classList.add("in");
+  window.scrollTo({top:0, behavior:"smooth"});
+  s.querySelector("#stopVerder").addEventListener("click", () => toon(index + 1, "verder"), {once:true});
+  s.querySelector("#stopTerug").addEventListener("click", () => toon(index, "terug"), {once:true});
+}
+
+function naarWelkom(){
+  document.querySelectorAll(".scherm").forEach(x => x.hidden = true);
+  elWelkom.hidden = false; elWelkom.classList.add("in");
+  elTeller.hidden = true;
+  index = -1;
+}
+
+function bewaar(s, v){
+  if (v.type === "velden"){
+    const o = {};
+    v.velden.forEach(f => { o[f.id] = (s.querySelector("#f-" + f.id).value || "").trim(); });
+    antwoorden[v.id] = o;
+  } else if (v.type === "tekst"){
+    antwoorden[v.id] = {tekst:(s.querySelector("textarea").value || "").trim()};
+  } else if (v.type === "meerkeuze"){
+    const keuzes = [...s.querySelectorAll('.keuze[aria-pressed="true"]')].map(k => k.childNodes.length ? k.textContent.trim() : "");
+    const o = {keuzes};
+    const dv = s.querySelector("#f-dv-" + v.id);
+    if (dv && !s.querySelector("#dv-" + v.id).hidden) o.doorvraag = dv.value.trim();
+    antwoorden[v.id] = o;
+    // Vraag 3 bepaalt welke poortantwoorden nog kunnen, dus het poortscherm
+    // moet opnieuw gebouwd worden zodra iemand hier iets wijzigt.
+    if (v.id === "C3"){
+      const oud = document.getElementById("s-G1");
+      if (oud) oud.remove();
+    }
+    // K1: wie een knop herkent, krijgt de punten van trede 3 en klimt gewoon door.
+    if (v.id === "K1"){
+      const herkent = keuzes.length && !keuzes.includes("Nee, niets hiervan");
+      if (herkent) antwoorden.T3 = {tekst:"Herkend via de vangvraag", punten:vraagVan("T3").max, viaVangvraag:true};
+      else delete antwoorden.T3;
+    }
+  } else {
+    const k = s.querySelector('.keuze[aria-pressed="true"]');
+    if (!k) return;
+    const i = Number(k.dataset.i);
+    const o = {};
+    const dv = s.querySelector("#f-dv-" + v.id);
+    if (dv && !s.querySelector("#dv-" + v.id).hidden) o.doorvraag = dv.value.trim();
+
+    if (isTrede(v)){
+      const a = antwoordenVoor(v)[i];
+      antwoorden[v.id] = {...o, tekst:a.tekst, punten:Math.floor(v.max * a.deel),
+                          grens:!!a.grens, tip:a.tip || null};
+      // Stoppen pas na twee keer achter elkaar "ik weet niet wat dit is".
+      const reeks = telOpeenvolgendeStops();
+      if (reeks >= STOP_NA){ ladderGestopt = v.id; wisLadderNa(v.id); }
+      else if (ladderGestopt === v.id) ladderGestopt = null;
+    } else {
+      const opt = antwoordenVoor(v)[i];
+      const tekst = typeof opt === "string" ? opt : opt.tekst;
+      antwoorden[v.id] = {...o, tekst,
+                          punten:(typeof opt === "object" && opt.punten !== undefined) ? opt.punten : 0,
+                          vang:!!(typeof opt === "object" && opt.vang),
+                          tip:(typeof opt === "object" && opt.tip) ? opt.tip : null,
+                          goed:(typeof opt === "object" && opt.goed) ? true
+                               : ((v.kennisvraag || v.ab) ? false : undefined)};
+      if (v.id === "G1" && !antwoorden[v.id].vang){ ladderOvergeslagen = false; delete antwoorden.K1; delete antwoorden.K2; }
+    }
+  }
+  bewaarLokaal();
+}
+
+/* Hoeveel treden achter elkaar, tot en met de laatst beantwoorde, staan op
+   "ik weet niet wat dit is". Dat is de teller waar de stopregel op werkt. */
+function telOpeenvolgendeStops(){
+  let reeks = 0;
+  for (const t of TREDEN){
+    const a = antwoorden[t.id];
+    if (a === undefined) break;
+    reeks = (a.tekst === "Ik weet niet wat dit is" || a.tekst === "Ik laat AI nog niets maken" ||
+             a.tekst === "Dit doe ik niet met AI") ? reeks + 1 : 0;
+  }
+  return reeks;
+}
+
+/* Loopt iemand terug en zet hij een eerdere trede alsnog op "ik weet niet",
+   dan mogen de hoger gescoorde treden niet blijven staan: daar is hij niet
+   meer geweest. */
+function wisLadderNa(id){
+  const iStop = tredeIndex(id);
+  TREDEN.forEach((t, i) => { if (i > iStop) delete antwoorden[t.id]; });
+}
+
+/* ---------- uitslag ---------- */
+function telOp(){
+  const g = antwoorden.G1;
+  let punten = g ? g.punten : 0;
+  // Wie via de vangvraag afhaakt heeft geen ladder, dus die telt ook niet mee.
+  const k1 = antwoorden.K1;
+  const ladderUit = g && g.vang && k1 && k1.keuzes && k1.keuzes.includes("Nee, niets hiervan");
+  if (!ladderUit){
+    TREDEN.forEach(t => { const a = antwoorden[t.id]; if (a && a.punten) punten += a.punten; });
+  }
+  return Math.max(0, Math.min(100, punten));
+}
+const bandVan = p => BANDEN.find(b => p <= b.tot) || BANDEN[BANDEN.length - 1];
+
+/* De volgende stap is de laagste trede die nog niet vol gehaald is. */
+function volgendeStap(){
+  for (const t of TREDEN){
+    const a = antwoorden[t.id];
+    if (!a || a.punten < t.max) return STAPPEN[t.id];
+  }
+  return STAPPEN.klaar;
+}
+
+/* De tips die deze invuller verdiend heeft, op volgorde van de coachpunten.
+   Een tip komt uit een trede of uit een coachvraag; dubbele vallen weg. */
+/* Volgorde van belang, en die is niet willekeurig. C1 staat bovenaan omdat de
+   schade daar bij de klant terechtkomt. C4 daarna omdat het een wettelijke
+   verplichting raakt. C5 als derde omdat dat het enige punt is met een gemeten
+   schadecijfer: buiten het gebied waar AI goed in is presteerden mensen 19
+   procent slechter mét AI dan zonder (Dell'Acqua e.a. 2023). */
+const TIP_VOLGORDE = ["C1", "C4", "C5", "C2", "C3", "C6", "C7"];
+const MAX_TIPS = 3;
+
+function tipsVoor(alle){
+  const codes = new Set();
+  [...TREDEN, ...COACHVRAGEN].forEach(v => {
+    const a = antwoorden[v.id];
+    if (a && a.tip) codes.add(a.tip);
+  });
+  // Wie de kennisvraag niet goed heeft, krijgt de grenzen-tip er hoe dan ook bij.
+  const v1 = antwoorden.V1;
+  if (v1 && v1.goed !== true) codes.add("C4");
+
+  const gesorteerd = TIP_VOLGORDE.filter(c => codes.has(c));
+  // Op het scherm hooguit drie: zeven tips is een lijst die niemand uitvoert,
+  // en de rest komt in de zaal aan bod. John krijgt ze wel allemaal.
+  return alle ? gesorteerd : gesorteerd.slice(0, MAX_TIPS);
+}
+
+function hoogsteTrede(){
+  let hoogste = null;
+  TREDEN.forEach(t => { const a = antwoorden[t.id]; if (a && a.punten > 0) hoogste = t.id; });
+  return hoogste;
+}
+
+function klaar(){
+  const punten = telOp();
+  const band = bandVan(punten);
+
+  document.querySelectorAll(".scherm").forEach(x => { x.hidden = true; x.classList.remove("in", "uit"); });
+  elKlaar.hidden = false; elKlaar.classList.add("in");
+  elBalk.style.width = "100%";
+  elTeller.hidden = true;
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  document.getElementById("bandUit").textContent = band.naam;
+  document.getElementById("bandOmschrijving").textContent = band.omschrijving;
+  document.getElementById("stapUit").textContent = volgendeStap();
+
+  // De tips. Dit is waar de coachvragen voor waren: niet een cijfer, maar
+  // vier dingen die deze persoon maandag anders kan doen.
+  const codes = tipsVoor();
+  const alleCodes = tipsVoor(true);
+  const tipsBlok = document.getElementById("tipsUit");
+  tipsBlok.innerHTML = codes.length
+    ? `<div class="stap"><span class="kop">${codes.length === 1 ? "Jouw tip" : "Jouw tips"}</span>` +
+      codes.map(c => `<p style="margin-bottom:10px">${TIPS[c]}</p>`).join("") +
+      (alleCodes.length > codes.length
+        ? `<p style="margin:0;color:var(--zacht);font-size:14.5px">Er zijn er nog ${alleCodes.length - codes.length}. Die komen in de sessie aan bod, dan kun je ze meteen uitproberen.</p>`
+        : "") + `</div>`
+    : `<div class="stap"><span class="kop">Wat je al goed doet</span>
+       <p>Op alle punten waar het meestal misgaat, doe je het al zoals het hoort:
+       je controleert, je vraagt door, en je weet wat er niet in mag. In de sessie gaat
+       het voor jou dus niet over de basis.</p></div>`;
+
+  // Wie ergens bewust een grens trekt, hoort dat terug. Dat is geen tekort.
+  const grenzen = TREDEN.filter(t => antwoorden[t.id] && antwoorden[t.id].grens);
+  const grensBlok = document.getElementById("grensUit");
+  grensBlok.innerHTML = grenzen.length
+    ? `<div class="reactie">Je gaf aan dat je ${grenzen.length === 1 ? "iets" : "een aantal dingen"} <b>bewust niet</b> aan AI geeft. Dat telt hier niet als achterstand. In de sessie gaat het er juist over waar die grens hoort te liggen.</div>`
+    : "";
+
+  const ul = document.getElementById("ladderUit");
+  ul.innerHTML = "";
+  const top = hoogsteTrede();
+  TREDEN.forEach((t, i) => {
+    const a = antwoorden[t.id];
+    const li = document.createElement("li");
+    li.className = (a && a.punten > 0 ? "bereikt " : "") + (t.id === top ? "hier " : "") + (a && a.grens ? "grens" : "");
+    li.style.animationDelay = (i * 40) + "ms";
+    li.innerHTML = `<span class="nr">${String(i + 1).padStart(2, "0")}</span><span>${t.kort}</span>`;
+    ul.appendChild(li);
+  });
+  if (!top) document.getElementById("vouwLadder").hidden = true;
+
+  telNaar(punten);
+  bewaarInDb(punten, band);
+}
+
+function telNaar(doel){
+  const el = document.getElementById("puntenUit");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches){ el.textContent = doel; return; }
+  const duur = 800, start = performance.now();
+  const stap = nu => {
+    const t = Math.min(1, (nu - start) / duur);
+    el.textContent = Math.round(doel * (1 - Math.pow(1 - t, 3)));
+    if (t < 1) requestAnimationFrame(stap);
+  };
+  requestAnimationFrame(stap);
+}
+
+/* ---------- opslaan ---------- */
+function bouwRij(punten, band){
+  return {
+    weging_versie: WEGING_VERSIE,
+    ingevuld_op: new Date().toISOString(),
+    naam: antwoorden.naam ? antwoorden.naam.naam : "",
+    email: antwoorden.naam ? antwoorden.naam.email : "",
+    punten, band: band.naam, spoor: band.spoor,
+    volgende_stap: volgendeStap(),
+    kennisvraag: antwoorden.V1 ? {antwoord:antwoorden.V1.tekst, goed:antwoorden.V1.goed === true} : null,
+    tips: tipsVoor(true),
+    tips_getoond: tipsVoor(),
+    coach: Object.fromEntries(COACHVRAGEN.map(v => [v.coach, antwoorden[v.id] ? antwoorden[v.id].tekst : null])),
+    grenzen: TREDEN.filter(t => antwoorden[t.id] && antwoorden[t.id].grens).map(t => t.kort),
+    gestopt_bij: ladderGestopt,
+    hoogste_trede: hoogsteTrede(),
+    antwoorden,
+  };
+}
+
+/* Waar de antwoorden heen gaan.
+
+   Drie wegen, in deze volgorde geprobeerd:
+
+     1. Het eigen adres op de site van Future Content. Dit is de weg die
+        telt, want daar kan iedereen bij: je hebt er geen account voor
+        nodig en de antwoorden staan in John's eigen database.
+     2. De opslag van het artifact. Die werkt alleen voor wie is ingelogd
+        en toegang heeft gekregen; een bezoeker die via een gedeelde link
+        binnenkomt mag er niets in schrijven. Blijft staan zodat de
+        pagina ook als artifact bruikbaar is om zelf te testen.
+     3. Het kopieerveld. Niet mooi, maar het voorkomt dat acht minuten
+        werk verdwijnt omdat een netwerk het even niet deed.
+
+   Draait de pagina op de site, dan slaagt stap 1 en komen 2 en 3 nooit
+   aan bod. Draait hij als artifact, dan faalt stap 1 en pakt 2 het op. */
+const OPSLAGADRES = "/api/intake";
+
+async function stuurNaarSite(rij){
+  const antwoord = await fetch(OPSLAGADRES, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(rij),
+  });
+  if (!antwoord.ok) throw new Error("site gaf " + antwoord.status);
+  return antwoord.json();
+}
+
+async function stuurNaarArtifact(rij){
+  const db = await Promise.race([
+    window.claude?.use?.("db"),
+    new Promise(r => setTimeout(() => r(null), 8000)),
+  ]);
+  if (!db) throw new Error("geen opslag beschikbaar");
+  const id = "intake-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
+  await db.doc("intakes/" + id).set(rij);
+}
+
+async function bewaarInDb(punten, band){
+  const melding = document.getElementById("bevestiging");
+  const rij = bouwRij(punten, band);
+  const gelukt = () => {
+    melding.textContent = "Je antwoorden zijn opgeslagen. Tot in de sessie.";
+    wisLokaal();
+  };
+  const terugval = () => {
+    melding.textContent = "Opslaan lukte niet. Je uitslag staat hierboven en is niet verloren:";
+    const blok = document.getElementById("kopieerBlok");
+    blok.hidden = false;
+    document.getElementById("kopieerVeld").value = JSON.stringify(rij, null, 1);
+  };
+
+  try { await stuurNaarSite(rij); gelukt(); return; } catch (e) {}
+  try { await stuurNaarArtifact(rij); gelukt(); return; } catch (e) {}
+  terugval();
+}
+
+document.getElementById("kopieerKnop").addEventListener("click", async () => {
+  const veld = document.getElementById("kopieerVeld");
+  veld.select();
+  try{ await navigator.clipboard.writeText(veld.value); document.getElementById("kopieerKnop").textContent = "Gekopieerd"; }
+  catch(e){ document.getElementById("kopieerKnop").textContent = "Selecteer en kopieer zelf"; }
+});
+
+/* ---------- halverwege stoppen en terugkomen ---------- */
+function bewaarLokaal(){
+  try{
+    localStorage.setItem(BEWAARSLEUTEL, JSON.stringify({antwoorden, ladderGestopt, ladderOvergeslagen, op:Date.now()}));
+  }catch(e){ /* privémodus of geblokkeerde opslag: dan gewoon niet */ }
+}
+function wisLokaal(){ try{ localStorage.removeItem(BEWAARSLEUTEL); }catch(e){} }
+function leesLokaal(){
+  try{
+    const r = localStorage.getItem(BEWAARSLEUTEL);
+    if (!r) return null;
+    const d = JSON.parse(r);
+    if (!d || !d.antwoorden || Date.now() - (d.op || 0) > 1000 * 60 * 60 * 24 * 14) return null;
+    return d;
+  }catch(e){ return null; }
+}
+
+function hervat(d){
+  Object.assign(antwoorden, d.antwoorden);
+  ladderGestopt = d.ladderGestopt || null;
+  ladderOvergeslagen = !!d.ladderOvergeslagen;
+  const lijst = zichtbareVragen();
+  let i = lijst.findIndex(v => antwoorden[v.id] === undefined);
+  if (i < 0) i = lijst.length - 1;
+  toon(i, "verder");
+}
+
+/* ---------- licht of donker ----------
+   Zonder keuze volgt de pagina het apparaat, en dan staat er in de knop
+   waar je naartoe gaat, niet waar je bent. Zodra iemand zelf kiest, ligt
+   het vast op dit apparaat. */
+const SLEUTEL_THEMA = "fc-intake-thema";
+
+function donkerNu(){
+  const gekozen = document.documentElement.dataset.theme;
+  if (gekozen) return gekozen === "dark";
+  return matchMedia("(prefers-color-scheme: dark)").matches;
+}
+function zetKnoptekst(){
+  document.getElementById("schakelTekst").textContent = donkerNu() ? "Licht" : "Donker";
+}
+function zetThema(thema){
+  document.documentElement.dataset.theme = thema;
+  try{ localStorage.setItem(SLEUTEL_THEMA, thema); }catch(e){}
+  zetKnoptekst();
+}
+document.getElementById("schakel").addEventListener("click", () => {
+  zetThema(donkerNu() ? "light" : "dark");
+});
+try{
+  const bewaard = localStorage.getItem(SLEUTEL_THEMA);
+  if (bewaard === "dark" || bewaard === "light") document.documentElement.dataset.theme = bewaard;
+}catch(e){}
+zetKnoptekst();
+// Verandert het apparaat van stand terwijl er geen eigen keuze ligt, dan
+// loopt de knoptekst mee. Anders staat er straks "donker" op een donkere pagina.
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+  if (!document.documentElement.dataset.theme) zetKnoptekst();
+});
+
+/* ---------- start ---------- */
+document.getElementById("start").addEventListener("click", () => {
+  elWelkom.classList.add("uit");
+  setTimeout(() => toon(0, "verder"), 150);
+});
+
+const eerder = leesLokaal();
+if (eerder){
+  const naam = eerder.antwoorden.naam ? eerder.antwoorden.naam.naam : "";
+  const knop = document.getElementById("start");
+  knop.textContent = naam ? `Verdergaan waar je was, ${naam.split(" ")[0]}` : "Verdergaan waar je was";
+  knop.addEventListener("click", ev => {
+    ev.stopImmediatePropagation();
+    elWelkom.classList.add("uit");
+    setTimeout(() => hervat(eerder), 150);
+  }, true);
+}
+zetVoortgang();
+</script>

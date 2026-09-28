@@ -224,3 +224,30 @@ model Payment {
   @@index([status])
   @@schema("scan")
 }
+
+// ─────────────────────────────────────────
+// TRAINING — INTAKE "AI OP DE WERKVLOER"
+// ─────────────────────────────────────────
+
+// De vragenlijst die deelnemers vóór een trainingsdagdeel invullen.
+// De losse kolommen zijn er om op te kunnen zoeken en groeperen; het
+// volledige antwoordrecord staat in `record`, precies zoals de pagina
+// het wegschrijft. Dat is bewust: er kwamen in één week vier vragen bij,
+// en elke vraag zou anders een migratie zijn geweest.
+model IntakeAntwoord {
+  id           String   @id @default(cuid())
+  naam         String
+  email        String
+  bedrijf      String
+  punten       Int
+  band         String
+  spoor        String
+  wegingVersie Int
+  record       Json
+  ipHash       String?  // alleen tegen misbruik, nooit om iemand te herkennen
+  createdAt    DateTime @default(now())
+
+  @@index([bedrijf])
+  @@index([createdAt])
+  @@schema("scan")
+}

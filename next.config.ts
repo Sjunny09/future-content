@@ -31,6 +31,19 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // De trainingsvragenlijst is één zelfstandig HTML-bestand (bron:
+  // 02-modules/future-content-training/intake/intake.html, kopie in public/).
+  // Als statisch bestand loopt hij buiten de app-router om, dus er komt geen
+  // menu en geen footer omheen. De rewrite geeft hem alleen een net adres.
+  async rewrites() {
+    return [
+      {
+        source: "/intake",
+        destination: "/intake.html",
+      },
+    ];
+  },
+
   // SEO-behoud (2 juli): /video is de enige route van de oude site die in de
   // rebrand een andere naam kreeg (/videografie + /film). Een 301 vangt oude
   // links, bookmarks en eventuele index-vermeldingen netjes op.

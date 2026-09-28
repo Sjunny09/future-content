@@ -2,6 +2,63 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/scan/db";
 import { ipLimiet, hashIp } from "@/lib/scan/ratelimit";
+import { telegramPing } from "@/lib/scan/telegramPing";
+
+// Melden dat er iemand heeft ingevuld. Twee kanalen, en dat is bewust: ze
+// bewaken elkaar. Valt Telegram weg, dan komt de mail nog aan en andersom.
+// Allebei fail-soft, want de invuller mag nooit op een notificatie wachten.
+async function meldBinnenkomst(rij: {
+  naam: string;
+  email: string;
+  bedrijf: string;
+  punten: number;
+  band: string;
+}) {
+  const regels = [
+    "\u{1F4DD} Intake ingevuld",
+    "",
+    `Naam: ${rij.naam}`,
+    `Bedrijf: ${rij.bedrijf || "niet ingevuld"}`,
+    `E-mail: ${rij.email}`,
+    `Uitslag: ${rij.punten} punten, band ${rij.band}`,
+  ].join("\n");
+
+  const perTelegram = await telegramPing(regels, { waar: "intake" });
+
+  let perMail = false;
+  const sleutel = process.env.RESEND_API_KEY;
+  if (sleutel) {
+    try {
+      const res = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${sleutel}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: "Future Content <noreply@future-content.nl>",
+          to: process.env.SCAN_NOTIFY_EMAIL ?? "john@future-content.nl",
+          subject: `Intake ingevuld: ${rij.naam}${rij.bedrijf ? " (" + rij.bedrijf + ")" : ""}`,
+          text: regels,
+        }),
+      });
+      perMail = res.ok;
+      if (!res.ok) {
+        console.error("[intake] mail niet verstuurd", { status: res.status });
+      }
+    } catch (err) {
+      console.error("[intake] mail faalde", err);
+    }
+  } else {
+    console.info("[intake] geen RESEND_API_KEY, mail overgeslagen");
+  }
+
+  // Als beide kanalen wegvallen is er niemand die het merkt. Dat blijft een
+  // gat; de regel staat wel in de database, dus haal_antwoorden.py vindt hem.
+  if (!perTelegram && !perMail) {
+    console.error("[intake] NIEMAND GEMELD: telegram en mail allebei mislukt");
+  }
+}
 
 // Het antwoordrecord van de trainingsvragenlijst (02-modules/future-content-training/intake).
 // De pagina bepaalt de vorm, dus we eisen alleen wat we als kolom nodig hebben
@@ -51,6 +108,14 @@ export async function POST(req: NextRequest) {
         record: data as object,
         ipHash: hashIp(ip),
       },
+    });
+
+    await meldBinnenkomst({
+      naam: data.naam,
+      email: data.email,
+      bedrijf: (naamblok?.bedrijf || "").trim(),
+      punten: data.punten,
+      band: data.band,
     });
 
     return NextResponse.json({ ok: true }, { status: 201 });

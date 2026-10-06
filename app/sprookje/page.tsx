@@ -278,6 +278,32 @@ export default function SprookjeGidsPage() {
         </Stap>
       </div>
 
+      {/* ── Voor en na: het originele filmpje en het volledige eindresultaat ── */}
+      <section className="mx-auto max-w-5xl px-6 pb-16 md:pb-20">
+        <p className="fc-mono mb-3 text-[11px] uppercase tracking-[0.3em] text-[#B45F38]">Voor en na</p>
+        <h2 className="mb-8 max-w-xl text-2xl leading-[1.1] text-[#2A2218] sm:text-3xl" style={H}>
+          Het hele filmpje: origineel en eindresultaat.
+        </h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          {[
+            { src: "/videos/sprookje-origineel.mp4", poster: "/videos/sprookje-origineel-poster.jpg", label: "Origineel: het telefoonfilmpje" },
+            { src: "/videos/sprookje-eindresultaat.mp4", poster: "/videos/sprookje-eindresultaat-poster.jpg", label: "Eindresultaat: de volledige video" },
+          ].map((v) => (
+            <figure key={v.src}>
+              <video
+                className="aspect-video w-full rounded-[2px] border border-[#E4D8C6] bg-black"
+                src={v.src}
+                poster={v.poster}
+                controls
+                playsInline
+                preload="metadata"
+              />
+              <figcaption className="fc-mono mt-2 text-[10px] uppercase tracking-[0.2em] text-[#B45F38]">{v.label}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
       {/* ── CTA ── */}
       <section className="bg-[#2A2218] px-6 py-16 text-[#F3ECE0] md:py-20">
         <div className="mx-auto max-w-4xl">

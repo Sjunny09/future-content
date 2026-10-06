@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/portfolio`,     lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
     { url: `${base}/cases/routeplanner`,             lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/cases/ticketsysteem-koningsdag`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${base}/sprookje`,      lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/blog`,          lastModified: now, changeFrequency: "weekly",  priority: 0.75 },
     { url: `${base}/over`,          lastModified: now, changeFrequency: "yearly",  priority: 0.5 },
     { url: `${base}/contact`,       lastModified: now, changeFrequency: "yearly",  priority: 0.6 },

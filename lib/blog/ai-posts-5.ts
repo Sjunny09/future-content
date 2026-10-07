@@ -13,7 +13,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Offertes maken kost de meeste MKB-bedrijven meer tijd dan ze denken. Niet omdat het moeilijk is, maar omdat je telkens hetzelfde opnieuw typt. Zo pak je dat aan met AI.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-offertes.png",
+    image: "/blog/foto/ai-voor-offertes-sneller-offreren.jpg",
     content: [
       { type: "intro", text: "Vraag een ondernemer hoe lang hij over een offerte doet en hij zegt meestal: een half uurtje. Ga je het echt bijhouden, dan valt dat vaak flink hoger uit. Prijzen opzoeken, de vorige offerte erbij pakken, teksten aanpassen, controleren of je niks vergeten bent. En dat meerdere keren per week." },
       { type: "h2", text: "Waarom offertes zo veel tijd kosten" },
@@ -50,7 +50,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "De mailbox is voor veel ondernemers de grootste tijdvreter. AI kan er flink in snijden, maar niet op de manier die de meeste tools beloven.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-mailbox.png",
+    image: "/blog/foto/mailbox-automatiseren-met-ai.jpg",
     content: [
       { type: "intro", text: "Als ik ondernemers vraag waar hun dag heen gaat, komt de mailbox bijna altijd als eerste. Niet omdat mail zo moeilijk is, maar omdat het de hele dag door binnendruppelt en je telkens uit je werk haalt. De vraag is dus niet of AI je mail kan schrijven, maar of AI die onderbreking kan wegnemen." },
       { type: "h2", text: "Wat de meeste tools beloven en wat er dan gebeurt" },
@@ -81,7 +81,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Administratie is het werk dat je altijd vooruitschuift. Precies daarom is het het beste startpunt voor AI: het is repetitief, het heeft duidelijke regels, en je merkt direct of het scheelt.",
     readTime: "6 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-administratie.png",
+    image: "/blog/foto/ai-voor-je-administratie-bonnen-facturen-uren.jpg",
     content: [
       { type: "intro", text: "Bonnetjes in het handschoenenkastje. Uren die je op zondagavond uit je hoofd reconstrueert. Facturen die pas de deur uitgaan als je er tijd voor hebt, wat betekent: te laat. Bijna elke ondernemer die ik spreek herkent dit, en bijna iedereen denkt dat het aan discipline ligt. Dat is meestal niet zo." },
       { type: "h2", text: "Het probleem is niet discipline, het is de drempel" },
@@ -114,7 +114,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Steeds meer MKB-bedrijven willen hun team meenemen in AI. Maar een training over wat AI allemaal kan, levert weinig op. Dit is wat er wel in hoort.",
     readTime: "6 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-training.png",
+    image: "/blog/foto/ai-training-voor-je-team-wat-moet-erin.jpg",
     content: [
       { type: "intro", text: "Bijna elk bedrijf dat ik spreek heeft inmiddels wel iemand op een AI-cursus gehad. En bijna elk bedrijf zegt daarna hetzelfde: leuk verhaal, maar we doen er niks mee. Dat ligt zelden aan de deelnemers en meestal aan de opzet van de training." },
       { type: "h2", text: "Waarom de meeste AI-trainingen niks veranderen" },
@@ -147,7 +147,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Het gaat zelden mis op de techniek. Het gaat mis op de scope, op het eigenaarschap en op de vraag of iemand het na drie maanden nog gebruikt. Vijf patronen die ik steeds terugzie.",
     readTime: "6 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-stukloopt.png",
+    image: "/blog/foto/waarom-ai-projecten-in-het-mkb-stuklopen.jpg",
     content: [
       { type: "intro", text: "Er wordt veel geschreven over wat AI kan. Er wordt weinig geschreven over waarom het bij zoveel bedrijven na een half jaar stilligt. Dat is jammer, want dat is de kant waar je het meest van leert. Hier zijn de patronen die ik het vaakst tegenkom." },
       { type: "h2", text: "1. Te groot beginnen" },
@@ -181,7 +181,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Een goede prompt is leuk voor één keer. Het verschil met een systeem dat elke week draait, zit in drie dingen die niks met prompten te maken hebben.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-prompt-naar-systeem.png",
+    image: "/blog/foto/van-losse-prompt-naar-werkend-systeem.jpg",
     content: [
       { type: "intro", text: "Veel ondernemers komen op hetzelfde punt vast te zitten. Ze hebben een prompt gevonden die goed werkt, ze gebruiken hem een paar keer, en dan verwatert het. Volgende maand weten ze niet meer precies hoe ze hem hadden opgezet, en de collega die het ook zou gaan gebruiken doet het net anders. Dat is geen promptprobleem." },
       { type: "h2", text: "Het verschil tussen een prompt en een systeem" },
@@ -213,7 +213,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "In de bouw en installatie zit de tijdwinst niet op de bouwplaats maar op kantoor. Werkbonnen, calculaties, tekeningen en de eeuwige zoektocht naar de laatste versie.",
     readTime: "6 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-bouw.png",
+    image: "/blog/foto/ai-in-de-bouw-en-installatie.jpg",
     content: [
       { type: "intro", text: "Als je met je handen werkt, klinkt AI al snel als iets voor kantoorbanen. Dat klopt ook, en dat is precies waarom het interessant is: in de bouw en installatie zit het papierwerk vaak in de avonduren, bovenop een volle werkdag. Daar zit de winst." },
       { type: "h2", text: "Waar de tijd echt weglekt" },
@@ -244,7 +244,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Een custom GPT is niet meer dan een chatbot met vaste instructies en je eigen documenten erbij. Simpel, goedkoop, en voor sommige taken precies genoeg. Voor andere niet.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-custom-gpt.png",
+    image: "/blog/foto/wat-is-een-custom-gpt.jpg",
     content: [
       { type: "intro", text: "Custom GPT, project, assistent, agent: er zweven veel woorden rond voor min of meer hetzelfde idee. Namelijk: een AI die je niet elke keer opnieuw hoeft uit te leggen wat de bedoeling is. Het is een van de weinige stappen die je vandaag zelf kunt zetten zonder dat er iemand aan te pas komt." },
       { type: "h2", text: "Wat het precies is" },
@@ -276,7 +276,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Een chatbot die je klant het bos in stuurt kost je meer dan hij oplevert. Toch is klantenservice een van de plekken waar AI het meeste scheelt, mits je het op de juiste plek zet.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-klantenservice.png",
+    image: "/blog/foto/ai-voor-je-klantenservice.jpg",
     content: [
       { type: "intro", text: "Iedereen kent het gevoel: je hebt een vraag, je krijgt een chatvenster, en na vier keer heen en weer typen zoek je naar het telefoonnummer. Dat is de reden waarom veel ondernemers hun handen niet aan AI in de klantenservice willen branden. Terecht, als je het zo doet." },
       { type: "h2", text: "De fout die iedereen maakt" },
@@ -308,7 +308,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "AI die je eigen handleidingen, contracten en prijslijsten kent, is voor veel bedrijven de eerste toepassing die echt iets oplevert. Zo werkt het, in gewone taal.",
     readTime: "6 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-eigen-documenten.png",
+    image: "/blog/foto/je-eigen-documenten-aan-ai-koppelen.jpg",
     content: [
       { type: "intro", text: "Een taalmodel weet veel over de wereld en niets over jouw bedrijf. Het kent je prijzen niet, je voorwaarden niet en je handleidingen niet. Zodra je dat oplost, verandert het van een handige tekstschrijver in iets dat vragen over jouw werk kan beantwoorden. Dat is voor de meeste MKB-bedrijven de eerste stap die echt iets oplevert." },
       { type: "h2", text: "Hoe het werkt zonder jargon" },
@@ -341,7 +341,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Planning is het werk waar iedereen last van heeft en niemand eigenaar van is. AI lost het niet op, maar het haalt er wel het zoekwerk en het bellen uit.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-planning.png",
+    image: "/blog/foto/ai-voor-planning-en-logistiek.jpg",
     content: [
       { type: "intro", text: "Planning is bij de meeste MKB-bedrijven het werk dat tussen alles door gebeurt. Iemand belt af, een levering schuift, en dan gaat er een half uur op aan bellen en schuiven. Het is zelden iemands functie en het kost iedereen tijd." },
       { type: "h2", text: "Het echte probleem is niet plannen, het is doorgeven" },
@@ -373,7 +373,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Iedereen roept dat AI tijd bespaart, bijna niemand rekent het na. Zonder die som weet je niet of een investering slim is of gewoon leuk.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-tijdwinst.png",
+    image: "/blog/foto/wat-is-een-uur-tijdwinst-waard.jpg",
     content: [
       { type: "intro", text: "Als iemand je vertelt dat AI je twintig procent tijd bespaart, vraag dan waar dat getal vandaan komt. Vaak is het antwoord: uit een onderzoek van een partij die AI verkoopt. Dat zegt niets over jouw bedrijf. De enige som die telt is die van jouw eigen week." },
       { type: "h2", text: "De som is simpeler dan je denkt" },
@@ -405,7 +405,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Voordat je een nieuw abonnement afsluit: er zit waarschijnlijk al AI in het pakket dat je maandelijks betaalt. Wat je daarmee kunt en waar het ophoudt.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-al-betaalt.png",
+    image: "/blog/foto/ai-die-je-al-betaalt-microsoft-365-google-workspace.jpg",
     content: [
       { type: "intro", text: "Een van de eerste dingen die ik doe als ik bij een bedrijf binnenkom, is kijken wat er al in huis is. Bijna altijd betaalt men al voor Microsoft 365 of Google Workspace, en bijna altijd wordt de AI die daarin zit niet gebruikt. Dat is de goedkoopste winst die er is." },
       { type: "h2", text: "Waarom dit het startpunt is" },
@@ -435,7 +435,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "De vraag die elke ondernemer stelt en bijna niemand hardop. Het eerlijke antwoord is genuanceerder dan zowel de doemverhalen als de verkooppraatjes.",
     readTime: "6 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-personeel.png",
+    image: "/blog/foto/ai-en-je-personeel-verdwijnt-er-werk.jpg",
     content: [
       { type: "intro", text: "Als ik bij een bedrijf zit, komt deze vraag bijna altijd. Soms van de ondernemer, vaker van iemand op de werkvloer, en meestal pas als de rest van de kamer leeg is. Het verdient een eerlijk antwoord en niet het standaardzinnetje dat AI alleen maar helpt." },
       { type: "h2", text: "Wat er echt gebeurt" },
@@ -467,7 +467,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Advertenties op je site zijn de meest passieve verdienvorm die er is: aanmelden, code plakken, klaar. De vraag is alleen of het genoeg oplevert om het te doen. Ik heb het doorgerekend.",
     readTime: "6 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-adsense.png",
+    image: "/blog/foto/passief-inkomen-website-google-adsense.jpg",
     content: [
       { type: "intro", text: "Er zijn veel manieren om passief inkomen op te bouwen, maar advertenties via Google AdSense is echt de meest passieve die er is. Je meldt je aan, je plakt een stukje code op je site, en vanaf dat moment worden er automatisch advertenties getoond die bij je bezoekers passen. Je hoeft geen adverteerders te benaderen, de metingen lopen vanzelf en de uitbetaling ook. Passiever wordt het niet. En toch raad ik het de meeste ondernemers af. Hieronder waarom, en wat dan wel." },
       { type: "h2", text: "Hoe het werkt en wat je moet weten" },
@@ -551,7 +551,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Op je telefoon ziet je video er goed uit, in een AI-tool of op je laptop grijs en flets. Vaak komt dat door HDR. Hier lees je hoe je het herkent en voorkomt, en waarom je dat regelt voordat je credits uitgeeft.",
     readTime: "4 min",
     category: "AI-tools",
-    image: "/blog/ai-hdr.png",
+    image: "/blog/foto/telefoonvideo-flets-hdr.jpg",
     content: [
       { type: "intro", text: "Ziet je video er op je telefoon goed uit, maar in een AI-tool grijs en flets? Dan filmt je telefoon waarschijnlijk in HDR. Zet dat uit voordat je filmt, of laat de video eerst omzetten naar gewoon beeld. Doe dat voordat je hem uploadt, want in een AI-tool betaal je per seconde." },
       { type: "h2", text: "Wat HDR is" },
@@ -585,7 +585,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Voor een sprookje van een telefoonfilmpje gebruikte ik ongeveer 1000 credits in Runway. Omgerekend is dat 10 tot 24 dollar. Maar de credits zijn maar een deel van de rekening. Zo rekent Runway, en dit komt er nog bij.",
     readTime: "5 min",
     category: "AI-tools",
-    image: "/blog/ai-video-kosten.png",
+    image: "/blog/foto/wat-kost-een-ai-video.jpg",
     content: [
       { type: "intro", text: "Het korte antwoord: de credits voor mijn sprookje-video kostten 10 tot 24 dollar. Dat is weinig, maar het is niet wat een AI-video kost. Een flink deel van het werk zit ervoor en erna. Hieronder lees je hoe Runway rekent, wat het sprookje kostte en wanneer je beter gewoon kunt filmen." },
       { type: "h2", text: "Hoe Runway rekent" },
@@ -636,7 +636,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Mijn kilometerregistratie lag maanden stil, omdat ik er niet aan dacht. Nu zoekt mijn eigen systeem zelf uit welke ritten ontbreken, en hoef ik alleen nog ja te zeggen. Dit is hoe dat werkt en wat jij ervan kunt meenemen.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-kilometers.png",
+    image: "/blog/foto/uren-en-kilometers-die-zichzelf-registreren.jpg",
     content: [
       { type: "intro", text: "Als een registratie afhangt van de vraag of je eraan denkt, raakt hij achter. Dat merkte ik aan mijn eigen kilometeradministratie. Die lag maanden stil, terwijl ik gewoon op pad was voor opnames en bezoeken. Nu haalt mijn systeem de ritten zelf uit mijn geplande opnames en afspraken op locatie. Ik bekijk de lijst en zeg ja." },
       { type: "h2", text: "Waarom mijn registratie stillag" },
@@ -679,7 +679,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Sinds juli 2026 staan mijn offertes, facturen, uren, kilometers, uitgaven, klanten en video-opnames in één eigen webapp. Ik bedien hem ook vanaf mijn telefoon, via Claude. Dit is wat hij doet, wat nog handwerk is en wat jij eraan hebt.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-eigen-systeem.png",
+    image: "/blog/foto/eigen-bedrijfssysteem-zelf-gebouwd.jpg",
     content: [
       { type: "intro", text: "Mijn eigen administratie draait sinds juli 2026 op een webapp die ik zelf heb gebouwd. Ik noem hem het OS. Offertes, facturen, uren, kilometers, uitgaven met de bonnen erbij, klanten en de planning van video-opnames staan daar bij elkaar. Ik werk erin vanaf mijn laptop, en onderweg via Claude op mijn telefoon. Hieronder lees je wat het doet, wat nog handwerk is en wat jij eraan hebt." },
       { type: "h2", text: "Waarom alles op één plek staat" },
@@ -722,7 +722,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Ik bouw maatwerk, en toch is mijn eerste vraag of je het niet gewoon kunt kopen. Zo maak je die afweging eerlijk, met een paar toetsvragen die je vandaag al kunt stellen.",
     readTime: "5 min",
     category: "AI & Automatisering",
-    image: "/blog/ai-kopen-of-bouwen.png",
+    image: "/blog/foto/kopen-of-laten-bouwen.jpg",
     content: [
       { type: "intro", text: "Kan je huidige pakket het al, of bestaat er een kant-en-klare koppeling? Koop dat dan. Maatwerk loont pas als je proces afwijkt van wat een pakket verwacht, als je drie tools met de hand aan elkaar plakt, of als je gegevens op één plek bij elkaar moeten komen. Dat schrijf ik als iemand die zelf maatwerk bouwt en verkoopt. Juist daarom wil ik dat je eerst eerlijk kijkt naar wat er al is." },
       { type: "h2", text: "Begin bij wat je al hebt" },
@@ -768,7 +768,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Grote kans dat iemand in je bedrijf deze week een klantmail of offerte in een gratis AI-tool heeft geplakt. Verbieden lost dat niet op. Dit werkt wel: vragen, afspreken, één zakelijke tool kiezen en uitleggen.",
     readTime: "5 min",
     category: "AI voor MKB",
-    image: "/blog/ai-schaduw-ai.png",
+    image: "/blog/foto/schaduw-ai-medewerkers.jpg",
     content: [
       { type: "intro", text: "Grote kans dat iemand in jouw bedrijf deze week een klantmail, een offerte of een Excel-lijst in een gratis AI-tool heeft geplakt. Zonder het te vragen, en met de beste bedoelingen. Dat heet schaduw-AI. Verbieden lost het meestal niet op. Wat wel werkt: eerst vragen wat mensen gebruiken, een paar heldere afspraken maken, één zakelijke tool kiezen en uitleggen waarom." },
       { type: "h2", text: "Het gebeurt al, ook bij jou" },
@@ -809,7 +809,7 @@ export const AI_POSTS_5: BlogPost[] = [
       "Gebruikt je team ChatGPT of Copilot? Dan geldt artikel 4 van de AI Act ook voor jouw bedrijf. Wat staat er precies, wat is er in 2026 veranderd, wie houdt toezicht en wat kun je als MKB-bedrijf vandaag al regelen?",
     readTime: "5 min",
     category: "AI voor MKB",
-    image: "/blog/ai-geletterdheid.png",
+    image: "/blog/foto/ai-geletterdheid-verplicht-ai-act.jpg",
     content: [
       { type: "intro", text: "Gebruikt jouw team ChatGPT, Copilot of een andere AI-tool? Dan geldt artikel 4 van de AI Act ook voor jouw bedrijf. Dat artikel vraagt dat je maatregelen neemt, zodat je mensen weten wat ze met AI doen. Een certificaat of een verplichte cursus hoort daar niet bij. Je moet wel kunnen laten zien wat je hebt geregeld." },
       { type: "h2", text: "Wat staat er in artikel 4?" },

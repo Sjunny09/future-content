@@ -3,7 +3,7 @@ import type { BlogPost } from "@/lib/blog";
 export const AI_POSTS_3: BlogPost[] = [
   {
     slug: "gemini-3-1-google-workspace-kantoor",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/gemini-3-1-google-workspace-kantoor.jpg",
     title: "Gemini 3.1 en Google Workspace: wat dit voor jouw kantoor betekent",
     date: "2026-06-22",
     excerpt: "Gemini zit al in Gmail en Docs, inmiddels met Gemini 3.1 eronder. Voor MKB-kantoren die al met Workspace werken kan dat schelen, mits je weet wat het wel en niet doet.",
@@ -25,7 +25,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "5-ai-fouten-die-je-bedrijf-geld-kosten",
-    image: "/blog/inzichten.jpg",
+    image: "/blog/foto/5-ai-fouten-die-je-bedrijf-geld-kosten.jpg",
     title: "5 AI-fouten die je bedrijf geld kosten",
     date: "2026-06-22",
     excerpt: "AI inzetten is niet moeilijk. Het verkeerd inzetten ook niet. Dit zijn de vijf fouten die ik in de praktijk het vaakst zie bij MKB-bedrijven, en wat ze je kosten.",
@@ -49,7 +49,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "gpt-5-4-getest-voor-ondernemers",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/gpt-5-4-getest-voor-ondernemers.jpg",
     title: "GPT-5.4 getest: wat is er nieuw voor ondernemers?",
     date: "2026-06-22",
     excerpt: "GPT-5.4 kwam in maart uit. De vraag is niet of het indrukwekkend is, maar of jij er als ondernemer iets aan hebt. Ik heb het uitgeprobeerd op echt werk.",
@@ -71,7 +71,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "wat-kun-je-echt-bouwen-met-ai-6-voorbeelden",
-    image: "/blog/inzichten.jpg",
+    image: "/blog/foto/wat-kun-je-echt-bouwen-met-ai-6-voorbeelden.jpg",
     title: "Wat kun je echt bouwen met AI? 6 voorbeelden uit de praktijk",
     date: "2026-06-22",
     excerpt: "Geen theorie, geen demo's van grote techbedrijven. Dit zijn zes dingen die ik zelf met AI heb gebouwd, en wat ze in de praktijk doen.",
@@ -97,7 +97,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "ai-en-avg-waar-moet-mkb-op-letten",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/ai-en-avg-waar-moet-mkb-op-letten.jpg",
     title: "AI en privacy/AVG: waar moet een MKB-bedrijf op letten?",
     date: "2026-06-22",
     excerpt: "AI gebruiken is leuk, tot je per ongeluk klantgegevens in een tool stopt die je niet vertrouwt. Dit is wat je als MKB praktisch moet weten over AI en de AVG.",
@@ -120,7 +120,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "beste-ai-tools-voor-zzp-en-kleine-teams",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/beste-ai-tools-voor-zzp-en-kleine-teams.jpg",
     title: "De beste AI-tools voor ZZP'ers en kleine teams",
     date: "2026-06-22",
     excerpt: "Je hoeft geen groot budget te hebben om AI nuttig in te zetten. Dit zijn de soorten tools die voor ZZP'ers en kleine teams echt het verschil maken, zonder dat je je suf betaalt.",
@@ -143,7 +143,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "hoe-begin-je-met-ai-geen-techneut",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/hoe-begin-je-met-ai-geen-techneut.jpg",
     title: "Hoe begin je met AI als je geen techneut bent?",
     date: "2026-06-22",
     excerpt: "Je hoeft niets van techniek te weten om met AI te beginnen. Je hebt geen cursus nodig en geen dure software. Dit is het simpelste stappenplan dat ik ken.",
@@ -167,7 +167,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "ai-automatisering-een-proces-een-week",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/ai-automatisering-een-proces-een-week.jpg",
     title: "AI-automatisering: één proces, meetbaar resultaat",
     date: "2026-06-22",
     excerpt: "Vergeet grote AI-transformaties die maanden duren. Ik begin altijd met één proces en een snel, meetbaar resultaat, en pas daarna het volgende. Dit is hoe die aanpak werkt.",
@@ -191,7 +191,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "gpt-5-5-vs-claude-opus-4-7-voorjaarsvergelijking",
-    image: "/blog/inzichten.jpg",
+    image: "/blog/foto/gpt-5-5-vs-claude-opus-4-7-voorjaarsvergelijking.jpg",
     title: "GPT-5.5 en Claude Opus 4.7: de grote voorjaarsvergelijking",
     date: "2026-06-22",
     excerpt: "Twee topmodellen, vrijwel tegelijk uitgebracht. Welke past bij jou als ondernemer? Ik leg ze naast elkaar, zonder hype en zonder benchmark-obsessie.",
@@ -214,7 +214,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "toekomst-van-ai-mkb-van-tool-naar-teamlid",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/toekomst-van-ai-mkb-van-tool-naar-teamlid.jpg",
     title: "De toekomst van AI voor het MKB: van tool naar teamlid",
     date: "2026-06-22",
     excerpt: "AI verschuift van iets wat je gebruikt naar iets wat voor je werkt. Van een tool die je bedient naar een agent die taken zelf afmaakt. Wat dat betekent voor het MKB.",
@@ -237,7 +237,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "te-snelle-ai-brochure-regie-houden",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/te-snelle-ai-brochure-regie-houden.jpg",
     title: "Wat een te snelle AI-brochure mij leerde over regie houden",
     date: "2026-06-22",
     excerpt:
@@ -268,7 +268,7 @@ export const AI_POSTS_3: BlogPost[] = [
   },
   {
     slug: "vier-fouten-mkb-beginnen-met-ai",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/vier-fouten-mkb-beginnen-met-ai.jpg",
     title: "De vier fouten waarmee MKB-ers beginnen met AI",
     date: "2026-06-22",
     excerpt:

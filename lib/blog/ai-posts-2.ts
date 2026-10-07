@@ -3,7 +3,7 @@ import type { BlogPost } from "@/lib/blog";
 export const AI_POSTS_2: BlogPost[] = [
   {
     slug: "beste-ai-model-2025-eindejaarsvergelijking",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/beste-ai-model-2025-eindejaarsvergelijking.jpg",
     title: "GPT-5.2 vs Claude vs Gemini: de eindejaarsvergelijking",
     date: "2026-06-22",
     excerpt: "Drie modellen, drie verhalen. Ik gebruik ze allemaal in mijn werk en vertel je nuchter welk model waar uitblinkt, zonder de hype.",
@@ -27,7 +27,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "ai-ervaringen-ondernemer-2025",
-    image: "/blog/inzichten.jpg",
+    image: "/blog/foto/ai-ervaringen-ondernemer-2025.jpg",
     title: "Mijn eerste halfjaar met AI: wat werkte, wat flopte",
     date: "2026-06-22",
     excerpt: "Een eerlijke terugblik op mijn eerste halfjaar bouwen met AI. Wat werkte, wat flopte, en het idee waar ik bewust nee tegen zei.",
@@ -52,7 +52,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "ai-trends-2026",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/ai-trends-2026.jpg",
     title: "7 AI-voorspellingen voor 2026",
     date: "2026-06-22",
     excerpt: "Geen glazen bol, wel een nuchtere blik op waar AI heen gaat. Agents, kleinere modellen en het jaar waarin rendement belangrijker wordt dan hype.",
@@ -76,7 +76,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "ai-agents-uitgelegd",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/ai-agents-uitgelegd.jpg",
     title: "AI-agents uitgelegd: van chatbot naar digitale collega",
     date: "2026-06-22",
     excerpt: "Een chatbot beantwoordt vragen. Een agent voert taken uit. Ik leg in gewone taal uit wat agentic AI is en wat je er als ondernemer aan hebt.",
@@ -101,7 +101,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "meest-gebruikte-ai-apps-nederland",
-    image: "/blog/inzichten.jpg",
+    image: "/blog/foto/meest-gebruikte-ai-apps-nederland.jpg",
     title: "De 10 meest gebruikte AI-apps in Nederland",
     date: "2026-06-22",
     excerpt: "Welke AI-apps gebruiken Nederlanders echt, en waarvoor zijn ze goed? Een nuchtere lijst met per app het concrete nut voor een ondernemer.",
@@ -126,7 +126,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "beste-ai-tools-2026",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/beste-ai-tools-2026.jpg",
     title: "Welke AI-tools zijn in 2026 nog relevant (en welke niet)?",
     date: "2026-06-22",
     excerpt: "Na jaren hype is het tijd om op te ruimen. Welke AI-tools verdienen een vaste plek in je werk, en welke kun je rustig laten vallen?",
@@ -150,7 +150,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "ai-en-eigen-schrijfstijl",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/ai-en-eigen-schrijfstijl.jpg",
     title: "Hoe werk je samen met AI zonder je eigen stem te verliezen?",
     date: "2026-06-22",
     excerpt: "AI schrijft vlot, maar vaak generiek. Zo zet je AI in als hulp en blijf je toch herkenbaar jezelf in elke tekst.",
@@ -175,7 +175,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "ai-specialist-kempen-brabant",
-    image: "/blog/inzichten.jpg",
+    image: "/blog/foto/ai-specialist-kempen-brabant.jpg",
     title: "AI voor de Kempen: zo zetten lokale MKB-bedrijven het in",
     date: "2026-06-22",
     excerpt: "AI is geen ver-van-mijn-bed-show voor grote bedrijven. Juist het MKB in de Kempen kan er nu al concreet van profiteren. En ik kom gewoon langs.",
@@ -199,7 +199,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "claude-sonnet-5-uit",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/claude-sonnet-5-uit.jpg",
     title: "Claude Sonnet 5 is uit: wat verandert er voor jou?",
     date: "2026-06-30",
     excerpt: "Er is een nieuwe Sonnet. Slimmer, zelfstandiger, scherper. Maar wat betekent dat concreet voor jou als ondernemer? Ik leg het nuchter uit.",
@@ -223,7 +223,7 @@ export const AI_POSTS_2: BlogPost[] = [
   },
   {
     slug: "multi-llm-werken",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/multi-llm-werken.jpg",
     title: "Multi-model werken: waarom slimme teams meerdere AI's gebruiken",
     date: "2026-06-22",
     excerpt: "Niet een AI voor alles, maar de juiste AI per taak. Zo werken slimme teams met ChatGPT, Claude en Gemini naast elkaar, zonder chaos.",

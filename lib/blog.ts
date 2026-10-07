@@ -87,7 +87,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "ai-content-wie-staat-voor-de-camera",
-    image: "/blog/ai-camera.jpg",
+    image: "/blog/foto/ai-content-wie-staat-voor-de-camera.jpg",
     title: "AI gaat content maken, maar wie staat er voor de camera?",
     date: "2026-02-25",
     excerpt: "AI kan teksten schrijven, beelden genereren en video's editen. Het kan inmiddels zelfs je gezicht en stem nabootsen, maar niet jouw echte verhaal en de mensen die jou kennen. En dat is precies wat converteert.",
@@ -229,7 +229,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "2025-terugblik-wat-werkte",
-    image: "/blog/inzichten.jpg",
+    image: "/blog/foto/2025-terugblik-wat-werkte.jpg",
     title: "2025 in content: wat werkte, wat niet, en wat verandert in 2026",
     date: "2026-02-25",
     excerpt: "Een eerlijke terugblik op een jaar video content voor lokale bedrijven en makelaars in De Kempen en Eindhoven. Dit leerden we.",
@@ -249,7 +249,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "ai-content-laten-maken-dit-eerst",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/ai-content-laten-maken-dit-eerst.jpg",
     title: "Je content laten maken door AI? Dit moet je eerst doen.",
     date: "2026-02-25",
     excerpt: "AI-videotools zijn indrukwekkend. Maar de ondernemers die er het meeste uithalen, zijn degenen die eerst hun eigen materiaal hebben. Hier is waarom, en hoe je dat opbouwt.",
@@ -310,7 +310,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "slim-subsidie-aanvragen",
-    image: "/blog/ai-content.jpg",
+    image: "/blog/foto/slim-subsidie-aanvragen.jpg",
     title: "SLIM-subsidie aanvragen: zo pak je het aan",
     date: "2026-07-02",
     excerpt: "De SLIM-subsidie helpt MKB-bedrijven het leren en ontwikkelen van personeel op te zetten. Wat er wel en niet onder valt, lees je hier.",

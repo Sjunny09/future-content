@@ -6,7 +6,7 @@ export const AI_POSTS_3: BlogPost[] = [
     image: "/blog/ai-content.jpg",
     title: "Gemini 3.1 en Google Workspace: wat dit voor jouw kantoor betekent",
     date: "2026-06-22",
-    excerpt: "Google heeft Gemini 3.1 uitgebracht, en Gemini zit al in Gmail en Docs. Voor MKB-kantoren die al met Workspace werken kan dat schelen, mits je weet wat het wel en niet doet.",
+    excerpt: "Gemini zit al in Gmail en Docs, inmiddels met Gemini 3.1 eronder. Voor MKB-kantoren die al met Workspace werken kan dat schelen, mits je weet wat het wel en niet doet.",
     readTime: "5 min",
     category: "AI-nieuws",
     content: [
@@ -52,7 +52,7 @@ export const AI_POSTS_3: BlogPost[] = [
     image: "/blog/ai-camera.jpg",
     title: "GPT-5.4 getest: wat is er nieuw voor ondernemers?",
     date: "2026-06-22",
-    excerpt: "Er is weer een nieuwe versie van GPT. De vraag is niet of het indrukwekkend is, maar of jij er als ondernemer iets aan hebt. Ik heb het uitgeprobeerd op echt werk.",
+    excerpt: "GPT-5.4 kwam in maart uit. De vraag is niet of het indrukwekkend is, maar of jij er als ondernemer iets aan hebt. Ik heb het uitgeprobeerd op echt werk.",
     readTime: "5 min",
     category: "Taalmodellen",
     content: [

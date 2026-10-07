@@ -159,7 +159,7 @@ export const AI_POSTS_1: BlogPost[] = [
       { type: "quote", text: "De modellen worden sneller beter dan de meeste bedrijven ze kunnen bijhouden. Dat is geen probleem, dat is een geruststelling." },
       { type: "h2", text: "Waarom de versnelling toch goed nieuws is" },
       { type: "p", text: "Dat de grote spelers elkaar opjagen, betekent dat de tools die jij gebruikt steeds beter en vaak goedkoper worden, zonder dat jij iets hoeft te doen. Je hoeft niet vooraan te staan in de race. Je hoeft alleen de winst op te pikken die vanzelf naar beneden zakt." },
-      { type: "p", text: "Mijn advies blijft hetzelfde als een jaar geleden: kies een model dat werkt, gebruik het serieus, en kijk een paar keer per jaar of er iets fundamenteel beters is. De rest is ruis." },
+      { type: "p", text: "Mijn advies is simpel: kies een model dat werkt, gebruik het serieus, en kijk een paar keer per jaar of er iets fundamenteel beters is. De rest is ruis." },
       { type: "cta", text: "Wil je weten welk model nu het beste bij jouw bedrijf past, los van de hype? Neem contact op." },
     ],
   },

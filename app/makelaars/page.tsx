@@ -118,12 +118,12 @@ export default function MakelaarsPage() {
               {
                 icon: <Star size={24} />,
                 title: "Meer vertrouwen in jou",
-                desc: "Makelaars met video worden als professioneler ervaren. Dat trekt betere verkopers aan en versterkt jouw merk.",
+                desc: "Een makelaar die bij elke woning video laat zien, valt op. Dat trekt betere verkopers aan en versterkt jouw merk.",
               },
               {
                 icon: <Video size={24} />,
                 title: "Sneller verkopen",
-                desc: "Woningen gefilmd door Future Content staan gemiddeld binnen 2 maanden verkocht. Minder doorlooptijd, minder kosten.",
+                desc: "Een video geeft kopers een compleet beeld van de woning, nog voor ze een bezichtiging plannen.",
               },
             ].map((item, i) => (
               <motion.div

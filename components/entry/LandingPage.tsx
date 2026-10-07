@@ -150,7 +150,7 @@ export default function LandingPage() {
                   De AI-Quickscan
                 </h3>
                 <p className="mt-4 max-w-lg leading-relaxed text-[#F3ECE0]/70">
-                  Vul je bedrijf en website in, beantwoord zes vragen, en je
+                  Vul je bedrijf en website in, beantwoord een paar korte vragen, en je
                   krijgt een helder overzicht: hier kan AI in jouw bedrijf tijd of
                   omzet opleveren. Geen verplichtingen.
                 </p>

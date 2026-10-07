@@ -395,7 +395,7 @@ export default function SocialMediaPage() {
               },
               {
                 q: "Hoeveel kost een video per stuk?",
-                a: "In het Start pakket betaal je €275 voor 1 Reel per maand. Instagram Reels pakket: €225 per Reel (2 per maand). Premium: €162,50 per Reel (4 per maand). Ter vergelijking: een freelance video-editor vraagt al snel €100 tot 150 per video voor editing alleen. Mijn pakket omvat shoot, edit, captions, posten en analyse.",
+                a: "In het Start pakket betaal je €275 voor 1 Reel per maand. Instagram Reels pakket: €225 per Reel (2 per maand). Premium: €162,50 per Reel (4 per maand). Mijn pakket omvat shoot, edit, captions, posten en analyse.",
               },
             ].map((faq, i) => (
               <details

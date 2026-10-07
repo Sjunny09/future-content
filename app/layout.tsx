@@ -133,7 +133,7 @@ const jsonLd = {
               "@type": "Service",
               name: "AI proof of concept",
               description:
-                "Betaalde proof of concept op je eigen werk, zodat je AI ziet werken vóór de bouw. Gaat van de bouwprijs af als je doorgaat. Mogelijk deels via de SLIM-subsidie.",
+                "Betaalde proof of concept op je eigen werk, zodat je AI ziet werken vóór de bouw. Gaat van de bouwprijs af als je doorgaat.",
             },
             price: "750",
             priceCurrency: "EUR",

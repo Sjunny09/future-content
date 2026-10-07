@@ -240,7 +240,7 @@ export const AI_INBOX_STACK = [
 
 // Het eerlijke waarde-anker: hun eigen tijd, geen opgeklopte prijskaartjes.
 export const AI_INBOX_ROI =
-  "Inbox-beheer kost een ondernemer al snel een dag per week. Reken dat eens maal je uurtarief, maal vijftig weken. Dat is wat je nu kwijt bent aan werk dat de AI grotendeels overneemt.";
+  "Tel eens hoeveel uur per week jij in je inbox zit. Reken dat maal je uurtarief, maal vijftig weken. Dat is wat je nu kwijt bent aan werk dat de AI grotendeels overneemt.";
 
 // ─── Wedge-landingspagina's (/ai/[wedge]) ───────────────────────────
 // Zelfde principe als de inbox, telkens een ander stuk terugkerend handwerk.
@@ -266,7 +266,7 @@ export const AI_WEDGES = [
     pijnKost:
       "Reken zelf uit: als je offerte twee dagen op zich laat wachten, hoeveel klanten kiezen dan de partij die dezelfde dag reageerde?",
     mechanisme:
-      "De AI kent je diensten, je prijzen en je toon. Hij zet de concept-offerte klaar, jij past aan waar nodig en verstuurt. Het reken- en typewerk zijn weg. Volgens onderzoek gaat automatisch offreren 30 tot 50% sneller.",
+      "De AI kent je diensten, je prijzen en je toon. Hij zet de concept-offerte klaar, jij past aan waar nodig en verstuurt. Het reken- en typewerk zijn weg.",
     bewijs:
       "Ik bouwde dit eerst voor mijn eigen bedrijf: mijn offertes, facturen en administratie draaien op een systeem dat ik zelf maakte, het verving vier losse abonnementen. Dezelfde aanpak zet ik voor jou op.",
     waardeZin:
@@ -294,13 +294,13 @@ export const AI_WEDGES = [
       "Steeds dezelfde vragen op je site beantwoorden kost jou en je team elke dag tijd.",
     ],
     pijnKost:
-      "Een groot deel van de aanvragen komt buiten kantooruren binnen. Wie 's ochtends terugbelt, belt vaak een klant die al ergens anders zit.",
+      "Aanvragen komen ook 's avonds en in het weekend binnen. Wie 's ochtends terugbelt, belt soms een klant die al ergens anders zit.",
     mechanisme:
       "De chatbot kent je diensten, openingstijden en veelgestelde vragen. Hij beantwoordt wat hij zeker weet en boekt afspraken direct in. Waar twijfel over is, komt bij jou.",
     bewijs:
       "Ik bouwde een chatbot die de gasten van een restaurant in de chat te woord staat en direct een tafel reserveert in het boekingssysteem van de zaak. Hetzelfde principe past op jouw website.",
     waardeZin:
-      "Een chatbot die één extra aanvraag per week binnenhoudt, verdient zich in de meeste bedrijven al terug. En hij werkt 24 uur per dag door.",
+      "Houdt de chatbot één extra aanvraag per week binnen, reken dan zelf uit wat dat je per jaar oplevert. En hij werkt 24 uur per dag door.",
     faq: [
       { q: "Geeft de chatbot geen botte of foute antwoorden?", a: "Hij beantwoordt alleen wat hij zeker weet, de standaardvragen. Alles waarover twijfel bestaat of wat belangrijk is, komt bij jou. Jij houdt de regie, de chatbot vangt de rest op." },
       { q: "Verlies ik dan het persoonlijke contact?", a: "Andersom. De chatbot neemt het standaardwerk over, zodat jij tijd overhoudt voor de klant die er echt toe doet." },
@@ -767,7 +767,7 @@ export const TRAINING = {
     "Hands-on met jullie eigen taken en tools",
     "Heldere AI-richtlijnen, veilig en AVG-bewust",
     "Afsluiting met een werkend proof of concept op jullie eigen data, ook als je daarna niks met mij doet",
-    "Mogelijk (deels) te financieren via de SLIM-subsidie voor scholing, zie /blog/slim-subsidie-aanvragen",
+    "Mogelijk (deels) te financieren via de SLIM-subsidie voor scholing",
   ],
 };
 
@@ -872,8 +872,8 @@ export const BRANCHES: Branche[] = [
     observatieH2: "Wat ik zie bij MKB-transporteurs in Brabant",
     observatieBody: [
       "Plan&Go of Transplan staat bij de meeste MKB-transporteurs al ergens te draaien. Wat die systemen prima doen: ritplanning, factuuradministratie, boordcomputer-koppeling. Wat ze niet doen: ongestructureerde mail-orders openen, vrije-tekst-opmerkingen interpreteren ('graag pas na 14u, achteringang'), klant-vragen ('waar is mijn zending?') beantwoorden.",
-      "Daar valt dagelijks tijd weg bij de planner op kantoor en op de telefoon. Voor een MKB-bedrijf van 25 chauffeurs gemiddeld 8-12 uur per week alleen al aan order-intake en klantmail.",
-      "Ik bouw geen TMS. Dat doen Plan&Go en Transplan al 20 jaar en goed. Ik bouw de AI-laag eromheen waar de tijd nu weglekt.",
+      "Daar valt dagelijks tijd weg bij de planner op kantoor en op de telefoon. Bij veel transporteurs gaat daar elke week uren planner-tijd in zitten, alleen al aan order-intake en klantmail.",
+      "Ik bouw geen TMS. Dat doen Plan&Go en Transplan al jaren en goed. Ik bouw de AI-laag eromheen waar de tijd nu weglekt.",
     ],
     aiDoetWel: [
       "Inkomende mail-orders herkennen en in je TMS-staging zetten ter goedkeuring",
@@ -968,11 +968,11 @@ export const BRANCHES: Branche[] = [
     heroEyebrow: "AI voor evenementen en festivals",
     heroH1: "Een ticketshop die je organisator beter past dan Weezevent.",
     heroLead:
-      "WeezTicket rekent €0,99 per ticket plus 2,75% processing. Mollie kost €0,32 per transactie. Op een paar honderd tickets scheelt dat snel een paar honderd euro. Plus je krijgt een betaalmuur die past bij jouw evenement, niet een generieke template.",
+      "Weezevent rekent 2,5% per online verkocht ticket, minimaal €0,99, transactiekosten inbegrepen. Mollie kost €0,32 per betaling, ook als iemand vijf tickets tegelijk koopt. Bij tweehonderd tickets van €25 ben je bij Weezevent zo'n €200 kwijt, bij Mollie nog geen €80. Plus je krijgt een betaalmuur die past bij jouw evenement, niet een generieke template.",
     observatieH2: "Wat ik zie bij dorps en buurt-events",
     observatieBody: [
       "Voor lokale evenementen tot ~3.000 bezoekers is Weezevent vaak te duur en te generiek. Eventbrite is ondoorgrondelijk. Veel organisaties knutselen met Google Forms + handmatige mails.",
-      "Wat ik bouwde voor onze eigen Köningsdag in Reusel: landingpage met groepsnaam + namen + allergieën + broodjeskeuze + iDeal via Mollie. Na sluiting trekt het systeem zelf een Excel-lijst die direct naar de broodjes-leverancier kan.",
+      "Wat ik bouwde voor onze eigen Köningsdag in Reusel: landingpage met groepsnaam + namen + allergieën + broodjeskeuze + iDeal via Mollie. Na sluiting haalt de organisatie met één klik een lijst met alle broodjeskeuzes op voor de leverancier.",
       "Die architectuur is direct herbruikbaar voor 5-10 vergelijkbare evenementen per jaar. Kort projectmatig werk, maar met dezelfde modules als de rest van het platform.",
     ],
     aiDoetWel: [
@@ -991,11 +991,11 @@ export const BRANCHES: Branche[] = [
     skinModules: [
       {
         name: "Custom ticketshop met Mollie",
-        desc: "Eigen landingpage, eigen flow (groep / namen / allergieën / dieetwensen), iDeal-betaalmuur. €0,32 per transactie vast, geen 2,75% processing. Schaal naar 5-10 events per jaar mogelijk.",
+        desc: "Eigen landingpage, eigen flow (groep / namen / allergieën / dieetwensen), iDeal-betaalmuur. €0,32 per betaling vast, geen percentage per ticket. Schaal naar 5-10 events per jaar mogelijk.",
       },
       {
         name: "AI-FAQ-bot per evenement",
-        desc: "Gevoed door site, line-up en plattegrond. Beantwoordt bezoekersvragen via website-widget en Instagram-DM. Vermindert 60-80% van de DM-load voor je organisatieteam.",
+        desc: "Gevoed door site, line-up en plattegrond. Beantwoordt bezoekersvragen via website-widget en Instagram-DM. Vangt de standaardvragen op, zodat je team alleen de lastige DM's beantwoordt.",
       },
       {
         name: "Catering-forecast-dashboard",
@@ -1005,7 +1005,7 @@ export const BRANCHES: Branche[] = [
     skinSummary: "Ticketshop op Mollie + AI-FAQ-bot + catering-forecast. Bewezen op Köningsdag Reusel.",
     casusStand: "Bewezen op Köningsdag Reusel. Schaalbaar naar 5-10 vergelijkbare evenementen per jaar.",
     casusBewijs:
-      "Voor onze eigen Köningsdag Reusel gebouwd: landingpage met groep + namen + allergieën + broodjeskeuze + Mollie iDeal + automatische Excel-lijst naar broodjes-leverancier. Live gedraaid tijdens het evenement, werkt zoals het hoort.",
+      "Voor onze eigen Köningsdag Reusel gebouwd: landingpage met groep + namen + allergieën + broodjeskeuze + Mollie iDeal + met één klik een broodjeslijst voor de leverancier. Live gedraaid tijdens de ticketverkoop, werkte zoals het hoort.",
     casusAanbod:
       "Voor jouw evenement gebouwd in 2-3 weken. Eenmalige bouw + per-ticket-fee die altijd onder Weezevent zit. Volg-evenementen worden goedkoper omdat de architectuur al staat.",
     featuredOnHomepage: false,
@@ -1049,7 +1049,7 @@ export const BRANCHES: Branche[] = [
       },
       {
         name: "Debiteuren-AI",
-        desc: "Vriendelijke herinnering via WhatsApp met directe betaallink. 90% van MKB-schoonmaak heeft last van late betalers, hier zit terugverdientijd.",
+        desc: "Vriendelijke herinnering via WhatsApp met directe betaallink. Late betalers zijn in de schoonmaak een bekend probleem, en daar zit terugverdientijd.",
       },
     ],
     skinSummary: "Klant-WhatsApp-assistent die ook je planning aanpast. Plus rooster-AI bij ziekte en debiteuren-bot.",
@@ -1068,7 +1068,7 @@ export const BRANCHES: Branche[] = [
     heroEyebrow: "AI voor bouw, installatie en afbouw",
     heroH1: "Je vakmensen typen niet. Dat hoeft ook niet meer.",
     heroLead:
-      "Bouw7, KYP en Brincr verwachten dat je monteurs een app openen. 60-70% doet dat niet. Wat WEL werkt: WhatsApp, voicememo, foto's. Daar zet ik AI op, om die input om te zetten naar uren, offertes en werkbonnen.",
+      "Bouw7, KYP en Brincr verwachten dat je monteurs een app openen. In de praktijk gebeurt dat lang niet altijd. Wat WEL werkt: WhatsApp, voicememo, foto's. Daar zet ik AI op, om die input om te zetten naar uren, offertes en werkbonnen.",
     observatieH2: "Wat ik zie bij MKB-bouw en installatie",
     observatieBody: [
       "De bouw-software (Bouw7, KYP Project, Brincr, Ibis-Trad) is sterk maar vraagt invullen. Vakmensen openen die apps niet tijdens werk: vieze handen, handschoenen, geen tijd.",
@@ -1118,11 +1118,11 @@ export const BRANCHES: Branche[] = [
     heroEyebrow: "AI voor universele garages",
     heroH1: "Niet weer een APK-mail. Wel de gemiste calls die nu omzet kosten.",
     heroLead:
-      "Autoflex en CarSys doen APK-reminders en werkplaatsplanning al. Wat ze niet oplossen: 40% van inkomende calls buiten kantooruren mist. Daar bouw ik een AI-receptionist op die afspraken inboekt en occasionleads kwalificeert.",
+      "Autoflex en CarSys doen APK-reminders en werkplaatsplanning al. Wat ze niet oplossen: telefoontjes buiten kantooruren die niemand opneemt. Daar bouw ik een AI-receptionist op die afspraken inboekt en occasionleads kwalificeert.",
     observatieH2: "Wat ik zie bij universele garages",
     observatieBody: [
       "Goed nieuws: APK-reminders, werkplaatsplanning en parts-mailing zitten al in Autoflex, WinCar en CarSys. Eerlijk: daar hoef ik geen module bovenop te bouwen.",
-      "Het échte gat: 40% van inkomende calls wordt buiten kantooruren niet opgenomen. Plus occasion-leads vanaf Marktplaats en AutoScout krijgen niet binnen 60 seconden reactie, en dan is de koper al verder gegaan.",
+      "Het échte gat: telefoontjes buiten kantooruren worden vaak niet opgenomen, en die klant belt dan de volgende garage. Plus occasion-leads vanaf Marktplaats en AutoScout krijgen vaak pas laat reactie, terwijl wie snel reageert meer kans maakt.",
       "Mijn opleiding is Bedrijfsmanagement MKB richting Automotive Management bij Fontys. Ik snap dealers en universelen vanuit die basis, plus ik werk vanuit Brabant waar veel zelfstandige garages zitten.",
     ],
     aiDoetWel: [
@@ -1141,7 +1141,7 @@ export const BRANCHES: Branche[] = [
     skinModules: [
       {
         name: "AI-receptionist met DMS-koppeling",
-        desc: "Neemt 24/7 op, kwalificeert, plant afspraak in jouw Autoflex- of CarSys-agenda. NL-spraak, jouw begroeting, jouw FAQ. Vermindert 40% gemiste calls naar 0.",
+        desc: "Neemt 24/7 op, kwalificeert, plant afspraak in jouw Autoflex- of CarSys-agenda. NL-spraak, jouw begroeting, jouw FAQ.",
       },
       {
         name: "Occasion-leadopvolging binnen 60s",
@@ -1168,11 +1168,11 @@ export const BRANCHES: Branche[] = [
     heroEyebrow: "AI voor cafe-restaurants",
     heroH1: "Reserveringen via 6 kanalen, één wachtrij.",
     heroLead:
-      "Formitable en Resengo doen je tafels. Bonnie doet je telefoon. Maar Instagram-DM, WhatsApp, mail en het formulier op je site komen nergens samen. Daar bouw ik een AI-laag die alles samenvoegt en in jouw reserveringssysteem boekt.",
+      "Formitable en Resengo doen je tafels. Bonnie neemt de telefoon en WhatsApp op. Maar Instagram-DM, mail en het formulier op je site landen nog vaak los van elkaar. Daar bouw ik een AI-laag die alles samenvoegt en in jouw reserveringssysteem boekt.",
     observatieH2: "Wat ik zie bij MKB-horeca in Brabant",
     observatieBody: [
-      "Formitable en Resengo doen reserveringen prima. Bonnie.tech neemt de telefoon op met AI. Maar reserveringen komen ook binnen via Instagram-DM, WhatsApp, mail en je website-formulier. Niemand combineert die kanalen.",
-      "Gevolg: 's avonds om elf uur staat de eigenaar nog door drie inboxes te scrollen om uit te zoeken wie wel en wie niet is bevestigd. Dat is precies waar AI zinvol is, en niemand bouwt het voor de horeca van 10-25 medewerkers.",
+      "Formitable en Resengo doen reserveringen prima. Bonnie.tech neemt de telefoon en WhatsApp op met AI. Maar reserveringen komen ook binnen via Instagram-DM, mail en je website-formulier, en die landen nog vaak los van elkaar.",
+      "Gevolg: 's avonds om elf uur staat de eigenaar nog door drie inboxes te scrollen om uit te zoeken wie wel en wie niet is bevestigd. Dat is precies waar AI zinvol is.",
       "Eerlijk: horeca-marges zijn dun. Dit is geen sweet spot in mijn marktrapport. Maar voor de zaak die 10+ medewerkers heeft en een eigen website draait, valt hier echt tijd te winnen.",
     ],
     aiDoetWel: [
@@ -1199,13 +1199,13 @@ export const BRANCHES: Branche[] = [
       },
       {
         name: "No-show-reductie",
-        desc: "T-24u en T-3u persoonlijke WhatsApp-bevestiging. Scoort no-show-risico per gast op basis van historie. Verlaagt 8-15% no-show naar 3-5%.",
+        desc: "T-24u en T-3u persoonlijke WhatsApp-bevestiging. Scoort no-show-risico per gast op basis van historie. Helpt no-shows omlaag te brengen.",
       },
     ],
     skinSummary: "Instagram-DM, WhatsApp en mail samen in één wachtrij die in je reserveringssysteem boekt.",
     casusStand: "Nog geen klant-case in deze branche.",
     casusBewijs:
-      "Caferadar (eigen Android-app voor het vinden van kroegen) toont dat ik kanaal-merging en horeca-context begrijp. De restaurant-chatbot in mijn bewijs-blok demonstreert booking-flow-AI.",
+      "Caferadar (eigen Android-app voor het vinden van kroegen) toont dat ik kanaal-merging en horeca-context begrijp. De restaurant-chatbot op mijn pagina over AI-chatbots laat zien hoe zo'n boekingsflow werkt.",
     casusAanbod:
       "Mijn eerste paying klant in horeca krijgt de workshop terug als korting op de bouwfase. Doelgroep: zaken met 10+ medewerkers en eigen website, Brabant.",
     featuredOnHomepage: false,

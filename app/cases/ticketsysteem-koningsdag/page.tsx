@@ -8,8 +8,8 @@ import { ArrowLeft, ArrowRight, Ticket, ScanLine, CalendarCheck, FileText, Credi
  * publiek evenement). Feitelijke werking hergebruikt uit
  * components/sections/Cases.tsx en oppervlakkig uit
  * 03-klanten/koningsdag-reusel/README.md (ticketpagina/-onderdeel): betaling
- * via Mollie, live gedraaid tijdens het Vorstelijk Verwenfestijn op
- * Köningsdag (27 april), hosting inbegrepen. Geen technische/interne details
+ * via Mollie, online verkoop tot 23 april 2026 15:00 voor het Vorstelijk
+ * Verwenfestijn op Köningsdag (27 april), hosting inbegrepen. Geen technische/interne details
  * (géén betaalstatus-codes, géén adminpaneel-informatie) op de publieke site,
  * alleen wat een bezoeker aan werking ziet.
  * Server component (geen "use client"): geen interactiviteit nodig buiten
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   title: "Case: Ticketsysteem Köningsdag Reusel",
   alternates: { canonical: "/cases/ticketsysteem-koningsdag" },
   description:
-    "Hoe het ticketsysteem voor Köningsdag Reusel werkte: online tickets kopen, direct betalen via Mollie, en de verkoop op de dag zelf verwerkt. Van ticketverkoop tot betaling.",
+    "Hoe het ticketsysteem voor Köningsdag Reusel werkte: online tickets kopen, direct betalen via Mollie, en na sluiting één complete lijst met namen en broodjeskeuzes. Van ticketverkoop tot betaling.",
 };
 
 const STAPPEN = [
@@ -44,8 +44,8 @@ const STAPPEN = [
   {
     n: "04",
     icon: <Mail size={18} />,
-    t: "Verwerkt op de dag zelf",
-    d: "Het systeem verwerkte de verkoop op de dag van het evenement zelf: de organisatie kon live volgen hoeveel tickets er verkocht waren, zonder handmatig bij te houden.",
+    t: "Eén lijst na sluiting",
+    d: "Tijdens de verkoop kon de organisatie volgen hoeveel tickets er verkocht waren, zonder handmatig bij te houden. Na sluiting van de online verkoop, een paar dagen voor het evenement, kon de organisatie één complete lijst met namen en broodjeskeuzes ophalen.",
   },
 ];
 
@@ -82,8 +82,8 @@ export default function TicketsysteemKoningsdagCasePage() {
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#F3ECE0]/70">
             Voor het Vorstelijk Verwenfestijn in Reusel bouwde ik een online ticketsysteem op
             maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun
-            tickets rechtstreeks online, betaalden meteen, en het systeem verwerkte de verkoop op
-            de dag zelf.
+            tickets rechtstreeks online en betaalden meteen. Na sluiting van de verkoop had de
+            organisatie één complete lijst met namen en broodjeskeuzes.
           </p>
         </div>
       </section>
@@ -121,7 +121,7 @@ export default function TicketsysteemKoningsdagCasePage() {
           </p>
           <p className="mt-2 text-sm leading-relaxed text-[#6E6151]">
             Gebouwd voor Köningsdag in Reusel, met een harde deadline en een concrete
-            bezoekersgroep. Geen proefopstelling, gewoon in gebruik op de dag zelf.
+            bezoekersgroep. Geen proefopstelling, gewoon in gebruik voor de echte ticketverkoop.
           </p>
         </div>
       </section>

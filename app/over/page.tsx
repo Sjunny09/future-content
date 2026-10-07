@@ -100,7 +100,7 @@ export default function OverPage() {
               In januari 2026 ben ik gestopt bij het transportbedrijf waar ik als business engineer
               werkte en ben ik fulltime gaan bouwen. Een eigen Android-app om kroegen te vinden in
               onbekende steden. Een ticketsysteem voor onze eigen Köningsdag met Mollie en
-              automatische broodjes-bestelling. Een AI-Quickscan die een bedrijfswebsite analyseert
+              een complete broodjeslijst voor de catering. Een AI-Quickscan die een bedrijfswebsite analyseert
               en concrete kansen benoemt. Een compleet bedrijfssysteem dat mijn uren, facturen, BTW
               en leads automatiseert.
             </p>

@@ -245,10 +245,6 @@ export default function PortfolioPage() {
               <VideoHoverCard key={video.id} video={video} index={i} />
             ))}
           </div>
-
-          <p className="text-center text-sm text-[#6E6151] mt-10">
-            Gemiddelde verkooptijd woningen met Future Content video: binnen 2 maanden na publicatie.
-          </p>
         </div>
       </section>
 

@@ -17,7 +17,8 @@ voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB
 ### Hoofdaanbod (AI en automatisering)
 
 1. **Workshop op locatie**: halve dag (4 uur), vanaf €750 ex BTW.
-   60% terug via SLIM-subsidie (Future Content levert het scholingsplan-document mee).
+   Mogelijk deels te financieren via de SLIM-subsidie (bij te veel aanvragen wordt er geloot,
+   toekenning is dus niet zeker). Future Content levert het scholingsplan-document mee.
    Doel: drie concrete AI-kansen op papier, ook als de klant niet verder gaat.
 
 2. **Implementatietrajecten**: eenmalige bouw €5.000-€15.000 + maandelijks beheer €300-€750.
@@ -60,7 +61,7 @@ Proof of Concept op de eigen casus -> bouw en doorlopend beheer.
    met kilometers, tijd en besparing direct op de kaart, zie
    https://future-content.nl/cases/routeplanner
 2. **Ticketsysteem Koningsdag Reusel**: eigen ticketshop met iDEAL via Mollie,
-   automatische bestellijsten naar leveranciers, zie
+   een exporteerbare broodjeslijst voor de catering, zie
    https://future-content.nl/cases/ticketsysteem-koningsdag
 
 ### Secundair aanbod (videografie)

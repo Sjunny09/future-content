@@ -44,7 +44,7 @@ const AI_FAQ = [
   },
   {
     q: "Is dit niet gewoon Copilot of Gemini in mijn mail?",
-    a: "Die helpen jóu sneller typen: jij zit nog steeds in elke mail en vraagt de AI om een concept. Handig, maar het werk blijft bij jou. Wat ik bouw is een stap verder: een systeem dat getraind is op jouw bedrijf en gekoppeld aan je eigen processen, dat de standaardvragen zelf afhandelt en alleen escaleert wat aandacht nodig heeft. Geen assistent die je bedient, maar werk dat uit handen gaat. En ik bouw en beheer het, jij hoeft niks te leren.",
+    a: "Copilot en Gemini sorteren je inbox en zetten concepten klaar, maar jij keurt nog goed wat de deur uitgaat en ze kennen jouw prijzen en processen niet. Handig, maar het werk blijft bij jou. Wat ik bouw is een stap verder: een systeem dat getraind is op jouw bedrijf en gekoppeld aan je eigen processen, dat de standaardvragen zelf afhandelt en alleen escaleert wat aandacht nodig heeft. Geen assistent die je bedient, maar werk dat uit handen gaat. En ik bouw en beheer het, jij hoeft niks te leren.",
   },
   {
     q: "Moet ik er zelf iets voor leren of technisch aanleggen?",
@@ -178,8 +178,8 @@ export default function AiPage() {
             De inbox is geen mailtje. Het is omzet die ligt te wachten.
           </h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-[#F3ECE0]/60">
-            Wie als eerste reageert, wint vaak de klant. Toch komt een groot deel van
-            de aanvragen binnen als jij aan het eten zit of de zaak dicht is. Een
+            Wie snel reageert, maakt meer kans op de klant. En aanvragen komen ook
+            binnen als jij aan het eten zit of de zaak dicht is. Een
             aanvraag die een dag blijft liggen, is vaak een offerte minder.
           </p>
 
@@ -212,8 +212,8 @@ export default function AiPage() {
             Geen slimme hulp die jóu sneller laat typen. Werk dat uit handen gaat.
           </h2>
           <p className="mt-4 max-w-2xl leading-relaxed text-[#F3ECE0]/70">
-            De assistenten in Outlook en Gmail helpen je met een concept, maar jij zit
-            nog steeds in elke mail. Handig, alleen blijft het werk bij jou. Wat ik bouw
+            De assistenten in Outlook en Gmail sorteren je inbox en zetten concepten
+            klaar, maar jij keurt nog goed wat de deur uitgaat. Handig, alleen blijft het werk bij jou. Wat ik bouw
             gaat een stap verder: een AI-inbox die is getraind op jouw eigen prijzen,
             diensten en veelgestelde vragen, en die de standaardvragen zelf afhandelt.
           </p>

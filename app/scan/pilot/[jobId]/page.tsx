@@ -70,7 +70,7 @@ export default async function PilotPagina({ params }: { params: Params }) {
               color: "var(--color-scan-muted)",
             }}
           >
-            iDEAL-checkout wordt deze week opengezet. Mail John rechtstreeks op{" "}
+            iDEAL-checkout staat op dit moment niet open. Mail John rechtstreeks op{" "}
             <a
               href="mailto:john@future-content.nl"
               className="underline underline-offset-4"

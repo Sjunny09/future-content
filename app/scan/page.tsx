@@ -54,9 +54,9 @@ export default function ScanLandingPagina() {
             className="mt-5 max-w-xl text-base leading-relaxed md:text-lg"
             style={{ color: "var(--color-scan-muted)" }}
           >
-            Vul alleen je websiteadres in. Ik kijk er rustig doorheen en stuur je
-            binnen 24 uur een persoonlijke video terug met wat ik zie en wat ik
-            zou aanpakken. Meer hoef je nu niet te doen.
+            Begin met je websiteadres, daarna volgen een paar korte vragen. Ik kijk
+            er rustig doorheen en stuur je binnen 24 uur een persoonlijke video
+            terug met wat ik zie en wat ik zou aanpakken.
           </p>
 
           <div className="mt-8">
@@ -101,7 +101,7 @@ export default function ScanLandingPagina() {
             />
             <TrustPunt
               titel="AVG, geen cookies"
-              tekst="Alleen je publieke site en je antwoorden."
+              tekst="Je publieke site, je antwoorden en je contactgegevens."
             />
           </div>
           <footer

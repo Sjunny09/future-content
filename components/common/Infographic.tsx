@@ -50,13 +50,13 @@ function ModelVergelijking() {
 
 function Tijdwinst() {
   const rows = [
-    { label: "E-mail en communicatie", v: 40 },
+    { label: "E-mail en communicatie", v: 35 },
     { label: "Offertes en documenten", v: 30 },
     { label: "Planning en administratie", v: 25 },
-    { label: "Rapportage en analyse", v: 50 },
+    { label: "Rapportage en analyse", v: 35 },
   ];
   return (
-    <Frame title="Waar AI tijd bespaart" caption="Illustratieve indicatie van tijdwinst op repeterend werk. Echte cijfers verschillen per bedrijf.">
+    <Frame title="Waar AI tijd bespaart" caption="Illustratief voorbeeld, geen meting. Op repeterend werk win je in mijn ervaring vaak een kwart tot een derde. Echte cijfers verschillen per bedrijf.">
       <div className="space-y-4">
         {rows.map((r) => (
           <div key={r.label}>
@@ -82,7 +82,7 @@ function AiVolwassenheid() {
     { label: "Resultaten en optimalisatie", v: 4 },
   ];
   return (
-    <Frame title="De vier assen van de AI-Quickscan" caption="De quickscan scoort je bedrijf op deze vier assen en laat zien waar de meeste winst zit.">
+    <Frame title="Waar staat jouw bedrijf met AI?" caption="Voorbeeld van vier aandachtspunten. De quickscan kijkt naar je website en je antwoorden en geeft je drie concrete kansen.">
       <div className="grid sm:grid-cols-2 gap-5">
         {dims.map((d) => (
           <div key={d.label} className="flex items-center gap-3">

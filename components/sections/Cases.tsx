@@ -61,7 +61,7 @@ const CASES: CaseItem[] = [
   {
     icon: <Ticket size={20} />,
     title: "Ticketsysteem Koningsdag Reusel",
-    body: "Voor het Vorstelijk Verwenfestijn in Reusel bouwde ik een online ticketsysteem op maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun tickets rechtstreeks online, betaalden meteen, en het systeem verwerkte de verkoop op de dag zelf.",
+    body: "Voor het Vorstelijk Verwenfestijn in Reusel bouwde ik een online ticketsysteem op maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun tickets rechtstreeks online en betaalden meteen. Na sluiting van de verkoop had de organisatie één complete lijst met namen en broodjeskeuzes.",
     result: "Live gedraaid voor een echt evenement, van ticketverkoop tot betaling.",
     tags: ["TICKETSYSTEEM OP MAAT", "ONLINE BETALEN", "VOOR EEN ECHT EVENEMENT"],
     href: "/cases/ticketsysteem-koningsdag",

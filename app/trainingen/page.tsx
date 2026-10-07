@@ -152,7 +152,7 @@ export default function TrainingenPage() {
           </div>
           <div>
             <span className="text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
-              SLIM-subsidie 2026
+              SLIM-subsidie
             </span>
             <h2
               className="text-2xl md:text-3xl font-bold text-[#2A2218] mt-3 mb-4 leading-tight"
@@ -161,14 +161,14 @@ export default function TrainingenPage() {
               Het scholingsdeel kan mogelijk via SLIM.
             </h2>
             <p className="text-[#2A2218] leading-relaxed mb-3">
-              SLIM is de subsidieregeling voor scholing in het MKB, uitgekeerd in twee
-              aanvraagrondes per jaar. Het scholings- en workshopdeel van een traject kan hieronder
+              SLIM is de subsidieregeling voor scholing in het MKB, met aanvraagrondes die elk
+              jaar opnieuw worden opengesteld. Het scholings- en workshopdeel van een traject kan hieronder
               vallen, mits ingebed in een leerinterventie. Bouw en beheer vallen daar buiten.
             </p>
             <p className="text-[#2A2218] leading-relaxed mb-3">
               Praktisch: ik lever het scholingsplan-document SLIM-ready mee bij de workshop. Jouw
-              boekhouder of HR-medewerker dient het in tijdens de eerstvolgende aanvraagronde
-              (10 augustus-7 september 2026). Hoe je die aanvraag doet, lees je in{" "}
+              boekhouder of HR-medewerker dient het in tijdens de eerstvolgende aanvraagronde. De data
+              staan op uitvoeringvanbeleidszw.nl. Hoe je die aanvraag doet, lees je in{" "}
               <Link href="/blog/slim-subsidie-aanvragen" className="underline underline-offset-4">
                 deze uitleg
               </Link>
@@ -176,7 +176,7 @@ export default function TrainingenPage() {
             </p>
             <p className="text-[#6E6151] text-sm leading-relaxed">
               SLIM-subsidie wordt door de overheid uitgekeerd, niet door Future Content. Toekenning
-              is niet gegarandeerd. Aanvraag en uitbetaling lopen via jullie eigen accountant. Ik kan
+              is niet gegarandeerd: zijn er meer aanvragen dan budget, dan wordt er geloot. Aanvraag en uitbetaling lopen via jullie eigen accountant. Ik kan
               helpen met de inhoudelijke onderbouwing.
             </p>
           </div>

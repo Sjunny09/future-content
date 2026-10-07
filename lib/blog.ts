@@ -348,8 +348,13 @@ export function vandaagNL(): string {
   return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Amsterdam" }).format(new Date());
 }
 
+// Op een Vercel-preview zijn ingeplande posts wél zichtbaar, zodat John een
+// klaargezette weekblog kan nalezen vóór hij live gaat. Productie (ook na een
+// promote, die opnieuw bouwt met de productie-env) filtert gewoon op datum.
+const IS_PREVIEW = (process.env.VERCEL_ENV ?? process.env.NEXT_PUBLIC_VERCEL_ENV) === "preview";
+
 export function isGepubliceerd(post: Pick<BlogPost, "date">, vandaag = vandaagNL()): boolean {
-  return post.date <= vandaag;
+  return IS_PREVIEW || post.date <= vandaag;
 }
 
 export function gepubliceerdePosts(vandaag = vandaagNL()): BlogPost[] {

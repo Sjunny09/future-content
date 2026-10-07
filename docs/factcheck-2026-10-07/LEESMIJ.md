@@ -43,3 +43,11 @@ Een eigen hertelling uit de tabelrijen kwam lager uit (19 onjuist in de blogs), 
 2. **Welke aanbodtrap geldt.** Daarna één trap en één garantie in `lib/constants.ts`, en `public/llms.txt` gelijktrekken.
 3. **De concurrentietabel** met Van Heertum Media en VideoFunda bij naam en prijzen uit een niet terug te vinden "marktonderzoek februari 2026" (/makelaars). Advies: schrappen of de bron erbij zetten.
 4. **Eigen claims** die alleen hij kan bevestigen, onder meer de lopende pilot bij een transportbedrijf, de restaurant-chatbot (demo of klant), "zes jaar videograaf", Hasselt 5 of 9.
+
+## Besluiten van John (7 oktober 2026)
+
+- Datums: gelijk aan de echte publicatie (doorgevoerd), nieuwe blogs vooruit inplannen.
+- Aanbod: proef €750 incl. btw, bouw €2.500-€8.500, grote bouw €8.500-€15.000 (doorgevoerd).
+- Concurrentietabel /makelaars: weg (doorgevoerd).
+- Köningsdag = eigen festival, restaurant-chatbot = demo, geen abonnementen opgezegd, Hasselt zonder huisnummer (doorgevoerd).
+- Overige EIGEN CLAIM-punten (o.a. "zes jaar videograaf", pilot bij een transportbedrijf, "ik bouwde te vaak voordat een klant ja zei"): door John bevestigd als juist, blijven staan.

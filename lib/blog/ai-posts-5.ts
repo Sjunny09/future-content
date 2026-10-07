@@ -8,7 +8,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-voor-offertes-sneller-offreren",
     title: "AI voor je offertes: van een uur naar tien minuten",
-    date: "2026-07-07",
+    date: "2026-09-02",
     excerpt:
       "Offertes maken kost de meeste MKB-bedrijven meer tijd dan ze denken. Niet omdat het moeilijk is, maar omdat je telkens hetzelfde opnieuw typt. Zo pak je dat aan met AI.",
     readTime: "5 min",
@@ -45,7 +45,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "mailbox-automatiseren-met-ai",
     title: "Je mailbox automatiseren met AI: wat werkt en wat niet",
-    date: "2026-07-11",
+    date: "2026-09-02",
     excerpt:
       "De mailbox is voor veel ondernemers de grootste tijdvreter. AI kan er flink in snijden, maar niet op de manier die de meeste tools beloven.",
     readTime: "5 min",
@@ -76,7 +76,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-voor-je-administratie-bonnen-facturen-uren",
     title: "AI en je administratie: bonnen, facturen en uren",
-    date: "2026-07-15",
+    date: "2026-09-02",
     excerpt:
       "Administratie is het werk dat je altijd vooruitschuift. Precies daarom is het het beste startpunt voor AI: het is repetitief, het heeft duidelijke regels, en je merkt direct of het scheelt.",
     readTime: "6 min",
@@ -109,7 +109,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-training-voor-je-team-wat-moet-erin",
     title: "Een AI-training voor je team: wat moet erin zitten?",
-    date: "2026-07-19",
+    date: "2026-09-02",
     excerpt:
       "Steeds meer MKB-bedrijven willen hun team meenemen in AI. Maar een training over wat AI allemaal kan, levert weinig op. Dit is wat er wel in hoort.",
     readTime: "6 min",
@@ -142,7 +142,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "waarom-ai-projecten-in-het-mkb-stuklopen",
     title: "Waarom AI-projecten in het MKB stuklopen",
-    date: "2026-07-23",
+    date: "2026-09-02",
     excerpt:
       "Het gaat zelden mis op de techniek. Het gaat mis op de scope, op het eigenaarschap en op de vraag of iemand het na drie maanden nog gebruikt. Vijf patronen die ik steeds terugzie.",
     readTime: "6 min",
@@ -176,7 +176,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "van-losse-prompt-naar-werkend-systeem",
     title: "Van een losse prompt naar iets dat echt draait",
-    date: "2026-07-27",
+    date: "2026-09-02",
     excerpt:
       "Een goede prompt is leuk voor één keer. Het verschil met een systeem dat elke week draait, zit in drie dingen die niks met prompten te maken hebben.",
     readTime: "5 min",
@@ -208,7 +208,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-in-de-bouw-en-installatie",
     title: "AI in de bouw en installatie: waar het echt tijd bespaart",
-    date: "2026-07-31",
+    date: "2026-09-02",
     excerpt:
       "In de bouw en installatie zit de tijdwinst niet op de bouwplaats maar op kantoor. Werkbonnen, calculaties, tekeningen en de eeuwige zoektocht naar de laatste versie.",
     readTime: "6 min",
@@ -239,7 +239,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "wat-is-een-custom-gpt",
     title: "Wat is een custom GPT en heb je er iets aan?",
-    date: "2026-08-04",
+    date: "2026-09-02",
     excerpt:
       "Een custom GPT is niet meer dan een chatbot met vaste instructies en je eigen documenten erbij. Simpel, goedkoop, en voor sommige taken precies genoeg. Voor andere niet.",
     readTime: "5 min",
@@ -271,7 +271,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-voor-je-klantenservice",
     title: "AI in je klantenservice zonder dat het onpersoonlijk wordt",
-    date: "2026-08-08",
+    date: "2026-09-02",
     excerpt:
       "Een chatbot die je klant het bos in stuurt kost je meer dan hij oplevert. Toch is klantenservice een van de plekken waar AI het meeste scheelt, mits je het op de juiste plek zet.",
     readTime: "5 min",
@@ -303,7 +303,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "je-eigen-documenten-aan-ai-koppelen",
     title: "Je eigen documenten aan AI koppelen: zo werkt dat",
-    date: "2026-08-12",
+    date: "2026-09-02",
     excerpt:
       "AI die je eigen handleidingen, contracten en prijslijsten kent, is voor veel bedrijven de eerste toepassing die echt iets oplevert. Zo werkt het, in gewone taal.",
     readTime: "6 min",
@@ -336,7 +336,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-voor-planning-en-logistiek",
     title: "AI voor planning en logistiek in het MKB",
-    date: "2026-08-16",
+    date: "2026-09-02",
     excerpt:
       "Planning is het werk waar iedereen last van heeft en niemand eigenaar van is. AI lost het niet op, maar het haalt er wel het zoekwerk en het bellen uit.",
     readTime: "5 min",
@@ -368,7 +368,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "wat-is-een-uur-tijdwinst-waard",
     title: "Wat is een uur tijdwinst waard? AI doorrekenen voor je bedrijf",
-    date: "2026-08-20",
+    date: "2026-09-02",
     excerpt:
       "Iedereen roept dat AI tijd bespaart, bijna niemand rekent het na. Zonder die som weet je niet of een investering slim is of gewoon leuk.",
     readTime: "5 min",
@@ -400,7 +400,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-die-je-al-betaalt-microsoft-365-google-workspace",
     title: "De AI die je al betaalt: Microsoft 365 en Google Workspace",
-    date: "2026-08-24",
+    date: "2026-09-02",
     excerpt:
       "Voordat je een nieuw abonnement afsluit: er zit waarschijnlijk al AI in het pakket dat je maandelijks betaalt. Wat je daarmee kunt en waar het ophoudt.",
     readTime: "5 min",
@@ -430,7 +430,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-en-je-personeel-verdwijnt-er-werk",
     title: "AI en je personeel: verdwijnt er werk of verandert het?",
-    date: "2026-08-28",
+    date: "2026-09-02",
     excerpt:
       "De vraag die elke ondernemer stelt en bijna niemand hardop. Het eerlijke antwoord is genuanceerder dan zowel de doemverhalen als de verkooppraatjes.",
     readTime: "6 min",
@@ -462,7 +462,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "passief-inkomen-website-google-adsense",
     title: "Passief inkomen met je website: wat Google AdSense echt oplevert",
-    date: "2026-09-01",
+    date: "2026-09-02",
     excerpt:
       "Advertenties op je site zijn de meest passieve verdienvorm die er is: aanmelden, code plakken, klaar. De vraag is alleen of het genoeg oplevert om het te doen. Ik heb het doorgerekend.",
     readTime: "6 min",
@@ -756,7 +756,7 @@ export const AI_POSTS_5: BlogPost[] = [
       { type: "p", text: "Blijkt uit de eerste twee vragen dat je pakket het kan, of dat er een koppeling voor bestaat, dan ben je klaar en hoef je niets te laten bouwen. Zit de pijn vooral in de laatste drie, dan is maatwerk het overwegen waard." },
       { type: "quote", text: "Kun je het kopen, koop het dan. Laat alleen bouwen wat geen pakket voor je kan doen." },
       { type: "h2", text: "Hoe ik het zelf aanpak" },
-      { type: "p", text: "In [mijn werkwijze](/werkwijze) begint alles met een vrijblijvende kennismaking. In een voorstel zet ik er ook bij wat je kant-en-klaar kunt kopen, wat dat kost en wat het niet doet. Die vergelijking maak je toch, en ik doe dat liever samen met jou." },
+      { type: "p", text: "Twijfel je over jouw situatie, begin dan met de gratis [AI-Quickscan](/scan) of een vrijblijvend gesprek. Daarna weet je of laten bouwen voor jou zin heeft." },
       { type: "cta", text: "Twijfel je of jouw probleem een pakket, een koppeling of maatwerk vraagt? Plan een gesprek, dan zoeken we het samen uit. Is het antwoord een pakket, dan hoor je dat ook van mij." },
     ],
   },

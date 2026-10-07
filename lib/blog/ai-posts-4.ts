@@ -8,7 +8,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "ai-implementeren-in-je-bedrijf-waar-begin-je",
     title: "AI implementeren in je bedrijf: waar begin je?",
-    date: "2026-06-02",
+    date: "2026-07-03",
     excerpt:
       "AI implementeren in je bedrijf, waar begin je dan echt? Niet bij een waterval van veertig tools, maar bij een taak deze week. Zo pak je dat aan.",
     readTime: "5 min",
@@ -35,7 +35,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "ben-ik-geen-it-er-is-ai-iets-voor-mij",
     title: "Ben ik geen IT'er, is AI dan iets voor mij?",
-    date: "2026-06-05",
+    date: "2026-07-03",
     excerpt:
       "Ben ik geen IT'er, is AI dan iets voor mij? Een vraag die veel zzp'ers en MKB'ers zich stellen. Het antwoord: kun je een appje typen, dan kun je ook AI aansturen.",
     readTime: "4 min",
@@ -61,7 +61,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "wat-kost-ai-voor-een-mkb-bedrijf",
     title: "Wat kost AI voor een MKB-bedrijf (en voor zzp'ers)?",
-    date: "2026-06-09",
+    date: "2026-07-03",
     excerpt:
       "Wat kost AI voor een MKB-bedrijf, of als zzp'er? Eerlijke bedragen: beginnen kan rond de 20 dollar per maand, een zwaar abonnement kost 100 tot 200. Dit is hoe je het zelf uitrekent.",
     readTime: "5 min",
@@ -90,7 +90,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "is-mijn-bedrijf-te-klein-voor-ai",
     title: "Is mijn bedrijf te klein voor AI?",
-    date: "2026-06-12",
+    date: "2026-07-03",
     excerpt:
       "Is mijn bedrijf te klein voor AI? Nee, eerder andersom. Als zzp'er of klein bedrijf heb je geen logge IT-afdeling die eerst ja moet zeggen. Dat is precies je voordeel.",
     readTime: "4 min",
@@ -114,7 +114,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "claude-of-chatgpt-welke-ai-kies-je",
     title: "Claude of ChatGPT: welke AI kies je?",
-    date: "2026-06-16",
+    date: "2026-07-03",
     excerpt:
       "Claude of ChatGPT, welke AI kies je? Je hoeft geen kamp te kiezen. Belangrijker dan de tool is dat je begrijpt waar elke tool sterk in is, en dat je gewoon begint.",
     readTime: "5 min",
@@ -138,7 +138,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "wat-is-een-ai-agent-en-wat-levert-het-op",
     title: "Wat is een AI-agent en wat levert het op?",
-    date: "2026-06-19",
+    date: "2026-07-03",
     excerpt:
       "Wat is een AI-agent en wat levert het op? Zie het als een digitale collega voor een terugkerend klusje: een opdracht, wat gereedschap en een geheugen.",
     readTime: "5 min",
@@ -163,7 +163,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "is-mijn-klantdata-veilig-bij-ai",
     title: "Is mijn klantdata veilig bij AI? Het eerlijke antwoord",
-    date: "2026-06-23",
+    date: "2026-07-03",
     excerpt:
       "Is mijn klantdata veilig bij AI? Een vraag die ik vaak hoor, en een terechte. Het antwoord zit niet in goede bedoelingen, maar in instellingen die de techniek zelf afdwingt.",
     readTime: "5 min",
@@ -191,7 +191,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "wat-ai-niet-kan-en-waarom-dat-goed-is",
     title: "Wat kan AI niet? De grenzen van AI voor je bedrijf",
-    date: "2026-06-26",
+    date: "2026-07-03",
     excerpt:
       "Wat kan AI niet? Een vraag die te weinig gesteld wordt. Wie de grenzen van AI eerlijk benoemt, gebruikt het beter en houdt het echte contact waar het hoort: bij jou.",
     readTime: "5 min",
@@ -220,7 +220,7 @@ export const AI_POSTS_4: BlogPost[] = [
   {
     slug: "ai-voor-vakmensen-werk-je-met-je-handen",
     title: "AI voor vakmensen: je handen blijven, het papierwerk niet",
-    date: "2026-06-30",
+    date: "2026-07-03",
     excerpt:
       "AI voor vakmensen klinkt al snel als een tegenstelling: je werkt met je handen, dus wat moet je met een computerprogramma? Terechte vraag. Je vak blijft van jou, maar het papierwerk eromheen mag best wat hulp krijgen.",
     readTime: "4 min",

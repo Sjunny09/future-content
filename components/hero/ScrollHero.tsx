@@ -11,7 +11,6 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { ArrowRight, MessageCircle, ScanLine } from "lucide-react";
-import Wordmark from "@/components/common/Wordmark";
 import { SITE } from "@/lib/constants";
 
 /**
@@ -243,11 +242,9 @@ function DesktopScrollHero() {
     }
   }, [reduced, duration]);
 
-  // Wordmark faadt licht in bij de start; de tekst-fases regelen zichzelf
-  // (zie PhaseText hieronder), gekoppeld aan dezelfde `smooth` progress die
-  // hierboven ook het actieve video-anker bepaalt.
-  const introOpacity = useTransform(smooth, [0, 0.06, 0.16], [0, 1, 1]);
-  const introY = useTransform(smooth, [0, 0.1], [24, 0]);
+  // De tekst-fases regelen zichzelf (zie PhaseText hieronder), gekoppeld aan
+  // dezelfde `smooth` progress die hierboven ook het actieve video-anker bepaalt.
+  // De wordmark staat sinds 7 oktober 2026 in het vaste menu (Navbar).
   // Scroll-hint verdwijnt zodra de laatste fase (CTA, at 0.92) in aantocht is.
   const hintOpacity = useTransform(smooth, [0.5, 0.7], [1, 0]);
 
@@ -301,17 +298,11 @@ function DesktopScrollHero() {
         </div>
 
         {/* ── Content: rechts van/over de video-strook, scrollt vrij ──
-            Wordmark staat los boven de fases (blijft altijd zichtbaar).
-            Daaronder de vier tekst-fases, elk gekoppeld aan een venster van
+            De vier tekst-fases, elk gekoppeld aan een venster van
             `smooth`. Fase 1 heeft ook een pure-CSS fallback (zie PhaseText)
             zodat de content zonder JS gewoon leesbaar is. */}
         <div className="relative z-10 flex flex-1 items-center overflow-y-auto px-8 py-16 lg:px-16">
           <div className="max-w-xl">
-            <motion.div style={{ opacity: introOpacity, y: introY }}>
-              <Link href="/" aria-label="Future Content" className="mb-8 inline-flex">
-                <Wordmark theme="dark" className="text-lg" />
-              </Link>
-            </motion.div>
 
             {/* ── Tekst-fases: wisselen tijdens het scrollen (scrub, geen sprongen) ── */}
             {/* Hoogte moet de CTA-fase (titel + body + knoppen) volledig
@@ -465,9 +456,8 @@ function MobileStackedHero() {
 
   return (
     <section className="relative bg-[#2A2218]">
-      <div className="relative flex items-center justify-between px-5 pt-6">
-        <Wordmark theme="dark" className="text-base" />
-      </div>
+      {/* Ruimte voor het vaste menu (Navbar, h-16) */}
+      <div className="h-16" />
 
       <div className="relative mt-6 aspect-[4/5] w-full overflow-hidden">
         <video

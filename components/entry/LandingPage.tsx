@@ -10,12 +10,9 @@ import {
   ScanLine,
   CalendarCheck,
   Clapperboard,
-  MessageCircle,
 } from "lucide-react";
-import Wordmark from "@/components/common/Wordmark";
 import ScrollHero from "@/components/hero/ScrollHero";
 import Cases from "@/components/sections/Cases";
-import { SITE } from "@/lib/constants";
 
 /**
  * De landingspagina (homepage). John's kernpunt (2 juli): "vanuit de
@@ -35,7 +32,7 @@ import { SITE } from "@/lib/constants";
  *   4. Bewijs / hoe het werkt: de AI-Quickscan als lage-drempel CTA.
  *   5. Film: duidelijke maar bewust secundaire route (geen gelijkwaardige
  *      tweede voordeur, gewoon een kaart die doorlinkt).
- *   6. Footer met CTA.
+ *   6. Footer: de gewone site-footer via SiteChrome (sinds 7 oktober 2026).
  *
  * Kleuren/klassen volgen het huisstijl-handboek: inkt #2A2218, papier #F3ECE0,
  * klei #B45F38 als enige accent. Geen em-dashes.
@@ -60,24 +57,8 @@ const WAARDE = [
 ];
 
 export default function LandingPage() {
-  const waLink = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(
-    "Hallo John, ik wil graag meer weten over AI voor mijn bedrijf."
-  )}`;
-
   return (
     <div className="bg-[#2A2218] text-[#F3ECE0]">
-      {/* ── Mini-topbar op de content-lagen na de hero (de hero heeft zijn
-          eigen wordmark, zie ScrollHero.tsx) ── */}
-      <header className="sticky top-0 z-40 flex items-center justify-end px-5 py-4 md:hidden">
-        <Link
-          href="/boek"
-          className="inline-flex items-center gap-1.5 rounded-full bg-[#B45F38] px-4 py-2 text-xs font-semibold text-[#F3ECE0] transition-colors hover:bg-[#9E3D24]"
-        >
-          <CalendarCheck size={14} />
-          Plan een gesprek
-        </Link>
-      </header>
-
       {/* ── 1. Hero: wie ik ben, doorlopende scroll-video ── */}
       <ScrollHero />
 
@@ -226,34 +207,6 @@ export default function LandingPage() {
         </Link>
       </section>
 
-      {/* ── 6. Afsluiter / CTA ── */}
-      <footer className="border-t border-[#F3ECE0]/5 px-6 py-10">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
-          <Wordmark theme="dark" className="text-base" />
-          <div className="flex flex-col items-center gap-3 sm:flex-row">
-            <Link
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs font-semibold text-[#F3ECE0]/70 hover:text-[#B45F38]"
-            >
-              <MessageCircle size={14} /> App me
-            </Link>
-            <p className="fc-mono text-xs text-[#F3ECE0]/40">
-              {SITE.email} · {SITE.phone} · KvK {SITE.kvk}
-            </p>
-            <p className="fc-mono text-xs text-[#F3ECE0]/40">
-              <Link href="/voorwaarden" className="hover:text-[#B45F38]">
-                Voorwaarden
-              </Link>
-              {" · "}
-              <Link href="/privacy" className="hover:text-[#B45F38]">
-                Privacy
-              </Link>
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

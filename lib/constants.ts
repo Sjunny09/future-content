@@ -626,10 +626,40 @@ export const STACK_VIDEOS = [
   },
 ];
 
-export const NAV_LINKS = [
-  { href: "/ai", label: "AI" },
-  { href: "/film", label: "Film" },
+// Hoofdmenu, op elke pagina behalve /scan (zie SiteChrome). Een item met
+// `children` klapt uit; elk sub-item krijgt één regel uitleg, zodat je weet
+// waar je klikt voordat je klikt. Film staat bewust los (FILM_LINK): de
+// tweede tak van het bedrijf, wel vindbaar, niet gelijkwaardig.
+export type NavLink = {
+  href?: string;
+  label: string;
+  desc?: string;
+  children?: { href: string; label: string; desc: string }[];
+};
+
+export const NAV_LINKS: NavLink[] = [
+  {
+    href: "/ai",
+    label: "AI-bouw",
+    children: [
+      { href: "/ai", label: "Wat ik bouw", desc: "AI en automatisering op jouw processen." },
+      ...AI_WEDGES.map((w) => ({ href: `/ai/${w.slug}`, label: w.kicker, desc: w.oneliner })),
+      { href: "/voor", label: "Voor jouw branche", desc: "Zeven branches, elk met eigen voorbeelden." },
+    ],
+  },
+  { href: "/trainingen", label: "Trainingen" },
+  { href: "/werkwijze", label: "Werkwijze" },
+  {
+    label: "Cases",
+    children: [
+      { href: "/cases/routeplanner", label: "Routeplanner", desc: "Ritplanning over meerdere stops, op maat." },
+      { href: "/cases/ticketsysteem-koningsdag", label: "Ticketsysteem Koningsdag", desc: "Online tickets en betalen voor een echt evenement." },
+    ],
+  },
+  { href: "/over", label: "Over" },
 ];
+
+export const FILM_LINK = { href: "/film", label: "Film" };
 
 // Videografie-sectie: de bestaande video-diensten, ondergebracht onder 1 ingang
 export const VIDEO_LINKS = [

@@ -8,7 +8,6 @@ import {
   Mail,
   Clock,
 } from "lucide-react";
-import Wordmark from "@/components/common/Wordmark";
 import {
   SITE,
   AI_WEDGES,
@@ -71,20 +70,6 @@ export default async function WedgePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
-      {/* ── Mini-topbar ── */}
-      <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-5 py-4 md:px-8">
-        <Link href="/ai" aria-label="Terug naar AI voor MKB" className="group flex items-center gap-2">
-          <ArrowRight size={15} className="rotate-180 text-[#B45F38] transition-transform group-hover:-translate-x-1" />
-          <Wordmark theme="dark" className="text-base" showCaret={false} />
-        </Link>
-        <Link
-          href="/scan"
-          className="inline-flex items-center gap-1.5 rounded-full bg-[#B45F38] px-4 py-2 text-xs font-semibold text-[#F3ECE0] transition-colors hover:bg-[#9E3D24]"
-        >
-          <ScanLine size={14} />
-          <span className="hidden sm:inline">Gratis AI-scan</span>
-        </Link>
-      </header>
 
       {/* ── Hero (BLUF) ── */}
       <section className="w-full px-6 pb-16 pt-32 md:px-12 md:pb-20 md:pt-40 lg:px-16">
@@ -320,20 +305,6 @@ export default async function WedgePage({ params }: Props) {
         </div>
       </section>
 
-      {/* ── Mini-footer ── */}
-      <footer className="border-t border-[#F3ECE0]/5 px-6 py-10">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-          <Wordmark theme="dark" className="text-base" />
-          <p className="fc-mono text-xs text-[#F3ECE0]/40">
-            {SITE.email} · {SITE.phone} · KvK {SITE.kvk}
-          </p>
-          <p className="fc-mono text-xs text-[#F3ECE0]/40">
-            <Link href="/voorwaarden" className="hover:text-[#B45F38]">Voorwaarden</Link>
-            {" · "}
-            <Link href="/privacy" className="hover:text-[#B45F38]">Privacy</Link>
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

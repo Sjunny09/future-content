@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
+import Wordmark from "@/components/common/Wordmark";
 import { Instagram } from "lucide-react";
-import { NAV_LINKS, SITE, REGIONS, SOCIALS } from "@/lib/constants";
+import { SITE, REGIONS, SOCIALS } from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -9,13 +9,11 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Brand */}
         <div className="md:col-span-1">
-          <Image
-            src="/logo/logo.png"
-            alt="Future Content"
-            width={130}
-            height={38}
-            className="h-8 w-auto object-contain brightness-0 invert mb-4"
-          />
+          {/* Wordmark i.p.v. /logo/logo.png: dat is een zwart vierkant, en
+              brightness-0 invert maakte er een wit blok van (7 oktober 2026). */}
+          <Link href="/" className="mb-4 inline-flex">
+            <Wordmark theme="dark" className="text-lg" />
+          </Link>
           <p className="text-sm text-[#6E6151] leading-relaxed">
             AI, automatisering en video voor MKB-bedrijven in heel Brabant, vanuit Bladel. Gebouwd én beheerd.
           </p>
@@ -48,9 +46,12 @@ export default function Footer() {
           </h3>
           <ul className="flex flex-col gap-3">
             {[
-              ...NAV_LINKS,
-              { href: "/portfolio", label: "Portfolio" },
+              { href: "/ai", label: "AI-bouw" },
+              { href: "/trainingen", label: "Trainingen" },
               { href: "/werkwijze", label: "Werkwijze" },
+              { href: "/voor", label: "Voor jouw branche" },
+              { href: "/film", label: "Film" },
+              { href: "/portfolio", label: "Portfolio" },
               { href: "/over", label: "Over" },
               { href: "/blog", label: "Blog" },
               { href: "/contact", label: "Contact" },

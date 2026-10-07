@@ -162,7 +162,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                     {section.items?.map((item, j) => (
                       <li key={j} className="flex items-start gap-3 text-[#6E6151]">
                         <span className="text-[#B45F38] mt-1 shrink-0">▸</span>
-                        <span className="leading-relaxed">{item}</span>
+                        <span className="leading-relaxed">{renderRichText(item)}</span>
                       </li>
                     ))}
                   </ul>
@@ -189,7 +189,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                     key={i}
                     className="bg-[#ECE2D2] border border-[#E4D8C6] rounded-2xl p-6 mt-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between"
                   >
-                    <p className="font-semibold text-[#2A2218] text-sm">{section.text}</p>
+                    <p className="font-semibold text-[#2A2218] text-sm">{renderRichText(section.text ?? "")}</p>
                     <Link
                       href="/boek"
                       className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#B45F38] text-[#2A2218] text-sm font-semibold hover:bg-[#9E3D24] transition-colors"

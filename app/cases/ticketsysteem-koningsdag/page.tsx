@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, Ticket, ScanLine, CalendarCheck, FileText, CreditCard, Mail } from "lucide-react";
 
 /**
- * Case-detailpagina: Ticketsysteem Köningsdag Reusel (echte klant, naam mag,
+ * Case-detailpagina: Ticketsysteem Köningsdag Reusel (ons eigen festival, naam mag,
  * publiek evenement). Feitelijke werking hergebruikt uit
  * components/sections/Cases.tsx en oppervlakkig uit
  * 03-klanten/koningsdag-reusel/README.md (ticketpagina/-onderdeel): betaling
@@ -80,8 +80,8 @@ export default function TicketsysteemKoningsdagCasePage() {
             Een ticketsysteem dat live een evenement draaide.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[#F3ECE0]/70">
-            Voor het Vorstelijk Verwenfestijn in Reusel bouwde ik een online ticketsysteem op
-            maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun
+            Voor ons eigen festival, het Vorstelijk Verwenfestijn in Reusel, bouwde ik een online
+            ticketsysteem op maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun
             tickets rechtstreeks online en betaalden meteen. Na sluiting van de verkoop had de
             organisatie één complete lijst met namen en broodjeskeuzes.
           </p>

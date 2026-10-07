@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowRight, Check, Clock, Home, Video, Smartphone, Airplay, Star, MessageCircle, ShieldCheck,
+  ArrowRight, Check, Clock, Home, Video, Smartphone, Airplay, Star, MessageCircle,
 } from "lucide-react";
-import { VASTGOED_PACKAGES, PHOTOS, STACK_VIDEOS, SELLER_QUOTES, COMPETITOR_COMPARE, SITE } from "@/lib/constants";
+import { VASTGOED_PACKAGES, PHOTOS, STACK_VIDEOS, SELLER_QUOTES, SITE } from "@/lib/constants";
 import VideoPlayer from "@/components/common/VideoPlayer";
 
 export default function MakelaarsPage() {
@@ -122,7 +122,7 @@ export default function MakelaarsPage() {
               },
               {
                 icon: <Video size={24} />,
-                title: "Sneller verkopen",
+                title: "Compleet beeld vooraf",
                 desc: "Een video geeft kopers een compleet beeld van de woning, nog voor ze een bezichtiging plannen.",
               },
             ].map((item, i) => (
@@ -313,76 +313,6 @@ export default function MakelaarsPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ─── CONCURRENTIEVERGELIJKING ──────────────────────────────────── */}
-      <section className="bg-[#ECE2D2] py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2
-              className="text-3xl md:text-4xl font-bold text-[#2A2218] mb-4"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              Wat kost het elders?
-            </h2>
-            <p className="text-[#6E6151]">
-              Dezelfde kwaliteit, snellere oplevering, directe lijn met de videograaf.
-            </p>
-          </motion.div>
-
-          <div className="overflow-hidden rounded-2xl border border-[#E4D8C6]">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-[#2A2218] text-[#F3ECE0]">
-                  <th className="text-left px-5 py-4 font-semibold">Aanbieder</th>
-                  <th className="text-left px-5 py-4 font-semibold">Prijs</th>
-                  <th className="text-left px-5 py-4 font-semibold hidden sm:table-cell">Oplevering</th>
-                  <th className="text-left px-5 py-4 font-semibold hidden md:table-cell">Persoonlijk</th>
-                </tr>
-              </thead>
-              <tbody>
-                {COMPETITOR_COMPARE.map((row, i) => (
-                  <tr
-                    key={i}
-                    className={`border-t border-[#E4D8C6] ${
-                      row.personal
-                        ? "bg-[#ECE2D2] font-semibold"
-                        : "bg-[#F3ECE0]"
-                    }`}
-                  >
-                    <td className="px-5 py-4 text-[#2A2218]">
-                      {row.personal && (
-                        <span className="inline-flex items-center gap-1 text-[#B45F38] mr-1">
-                          <ShieldCheck size={14} />
-                        </span>
-                      )}
-                      {row.name}
-                    </td>
-                    <td className={`px-5 py-4 ${row.personal ? "text-[#B45F38]" : "text-[#6E6151]"}`}>
-                      {row.price}
-                    </td>
-                    <td className="px-5 py-4 text-[#6E6151] hidden sm:table-cell">{row.turnaround}</td>
-                    <td className="px-5 py-4 hidden md:table-cell">
-                      {row.personal ? (
-                        <span className="text-[#25D366] font-semibold">Ja, altijd dezelfde persoon</span>
-                      ) : (
-                        <span className="text-[#6E6151]">Wisselend team</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="text-xs text-[#6E6151] mt-3 text-center">
-            Prijzen gebaseerd op marktonderzoek februari 2026. Excl. BTW.
-          </p>
         </div>
       </section>
 

@@ -20,8 +20,8 @@ const PRINCIPLES = [
   },
   {
     icon: <MapPin size={20} />,
-    t: "Lokaal, ik kom langs vanaf de intake",
-    d: "Ik zit in Bladel, midden in de Kempen. Eerste gesprek 30 minuten online. Vanaf de intake of de workshop kom ik langs in heel Brabant.",
+    t: "Lokaal, ik kom langs",
+    d: "Ik zit in Bladel, midden in de Kempen. Eerste gesprek 30 minuten online. Voor een training of de bouw kom ik langs in heel Brabant.",
   },
   {
     icon: <Eye size={20} />,

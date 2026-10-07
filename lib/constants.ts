@@ -162,14 +162,6 @@ export const VASTGOED_PACKAGES = [
   },
 ];
 
-// Concurrentievergelijking vastgoed
-export const COMPETITOR_COMPARE = [
-  { name: "Grote videobureaus", price: "€500–1.500", turnaround: "2–4 weken", personal: false },
-  { name: "Van Heertum Media", price: "€350–600", turnaround: "1–2 weken", personal: false },
-  { name: "VideoFunda", price: "vanaf €279", turnaround: "1–2 weken", personal: false },
-  { name: "Future Content", price: "vanaf €199", turnaround: "binnen 1 week", personal: true },
-];
-
 // Vergelijking van manieren waarop een MKB-bedrijf AI kan aanpakken (voor /ai).
 // Eerlijk en nuchter: versterkt de done-for-you + lokaal + gebouwd-en-beheerd
 // positionering zonder de andere routes af te kraken. Future Content = highlight-rij.
@@ -268,7 +260,7 @@ export const AI_WEDGES = [
     mechanisme:
       "De AI kent je diensten, je prijzen en je toon. Hij zet de concept-offerte klaar, jij past aan waar nodig en verstuurt. Het reken- en typewerk zijn weg.",
     bewijs:
-      "Ik bouwde dit eerst voor mijn eigen bedrijf: mijn offertes, facturen en administratie draaien op een systeem dat ik zelf maakte, het verving vier losse abonnementen. Dezelfde aanpak zet ik voor jou op.",
+      "Ik bouwde dit eerst voor mijn eigen bedrijf: mijn offertes, facturen en administratie draaien op een systeem dat ik zelf maakte. Dezelfde aanpak zet ik voor jou op.",
     waardeZin:
       "Een offerte die nu een halfuur kost, is straks een paar minuten checken. Reken dat maal het aantal offertes per week.",
     faq: [
@@ -298,7 +290,7 @@ export const AI_WEDGES = [
     mechanisme:
       "De chatbot kent je diensten, openingstijden en veelgestelde vragen. Hij beantwoordt wat hij zeker weet en boekt afspraken direct in. Waar twijfel over is, komt bij jou.",
     bewijs:
-      "Ik bouwde een chatbot die de gasten van een restaurant in de chat te woord staat en direct een tafel reserveert in het boekingssysteem van de zaak. Hetzelfde principe past op jouw website.",
+      "Ik bouwde een demo van een chatbot die gasten van een restaurant in de chat te woord staat en direct een tafel reserveert in een boekingssysteem. Hetzelfde principe past op jouw website.",
     waardeZin:
       "Houdt de chatbot één extra aanvraag per week binnen, reken dan zelf uit wat dat je per jaar oplevert. En hij werkt 24 uur per dag door.",
     faq: [
@@ -328,7 +320,7 @@ export const AI_WEDGES = [
     mechanisme:
       "Ik breng je administratieve stroom in kaart en bouw er één systeem omheen dat de gegevens zelf verplaatst en klaarzet. Jij controleert, het systeem doet het werk.",
     bewijs:
-      "Mijn eigen bedrijfssysteem automatiseert mijn uren, facturen, btw en leads. Het verving vier losse abonnementen. Dat systeem draait al maanden en is de directe blauwdruk voor wat ik voor jou bouw.",
+      "Mijn eigen bedrijfssysteem automatiseert mijn uren, facturen, btw en leads. Dat systeem draait al maanden en is de directe blauwdruk voor wat ik voor jou bouw.",
     waardeZin:
       "Als de administratie je een dag per week kost, en de helft daarvan verdwijnt, heb je een halve werkdag per week terug. Elke week.",
     faq: [
@@ -494,14 +486,14 @@ export const STACK_VIDEOS = [
   {
     id: "3",
     slug: "riethoven-hasselt-5",
-    title: "Riethoven, Hasselt 5",
+    title: "Riethoven, Hasselt",
     location: "Riethoven",
     src: "/videos/riethoven-hasselt-5.mp4",
     poster: "/photos/properties/hasselt-5-riethoven.jpg",
     description: "Premium video, Pit Makelaars",
     details: {
       propertyType: "Vrijstaande woning",
-      context: "Hasselt 5 staat in het pittoreske Riethoven, een dorp waar woningen zelden te koop staan. Juist daarom was video essentieel: kopers van buiten de regio moesten overtuigd worden dat de rit de moeite waard is, vóórdat ze op bezichtiging kwamen.",
+      context: "Deze woning staat in het pittoreske Riethoven, een dorp waar woningen zelden te koop staan. Juist daarom was video essentieel: kopers van buiten de regio moesten overtuigd worden dat de rit de moeite waard is, vóórdat ze op bezichtiging kwamen.",
       challenges: [
         "Bewolkt weer op de shootdag vroeg slimme keuzes in belichting en timing",
         "De grote tuin en het perceel volledig meenemen zonder de video te lang te maken",
@@ -677,7 +669,7 @@ export const VMS = {
   missie:
     "Ik kom binnen bij een bedrijf, kijk waar tijd weglekt en welke kleine taken steeds terugkomen. Daar bouw ik op. Branche-skin per bedrijf, op een platform dat ik ook voor anderen gebruik.",
   strategie:
-    "Aantrekken, niet jagen. Een workshop is bij de meeste bedrijven de eerste stap. Wat erna komt heb ik elke keer hetzelfde: intake, een tweede brein voor je bedrijf, dan pas plannen kiezen, dan pas bouwen.",
+    "Aantrekken, niet jagen. Een workshop is bij de meeste bedrijven de eerste stap. Wat erna komt is elke keer hetzelfde: een werkende proef op je eigen werk, dan pas bouwen en beheren.",
 };
 
 // Wat John bouwt voor bedrijven
@@ -714,12 +706,13 @@ export const AI_SERVICES = [
   },
 ];
 
-// De werkwijze in 4 stappen, op basis van John's geleefde process (uit interview 28 mei)
+// De werkwijze in 4 stappen, gelijk aan de prijstrap op /ai (AI_PRIJS_TRAP):
+// gratis AI-scan, werkende proef, bouw, beheer (besluit John 7 oktober 2026).
 export const METHOD_STEPS = [
-  { n: "01", title: "Kennismaking", desc: "Bel me, app me of nodig me uit voor een vrijblijvend gesprek. Even kijken of het klikt." },
-  { n: "02", title: "Workshop op locatie", desc: "Interactief, met jullie eigen taken erbij. We gaan samen je bedrijf in: welk werk komt elke week terug, wat kost de meeste tijd. Aan het eind lever ik een werkend proof of concept op met jullie eigen data." },
-  { n: "03", title: "Vervolg, je tweede brein", desc: "Na de workshop kiezen we samen de plannen die de meeste tijd opleveren: slimme mailbox, route-optimalisatie, order-intake. Dat wordt meteen de basis voor je tweede brein." },
-  { n: "04", title: "Offerte, bouwen en beheren", desc: "Je krijgt een heldere offerte. Zeg je ja, dan bouw ik het én houd ik het draaiend." },
+  { n: "01", title: "Gratis AI-scan", desc: "Je vult je bedrijf en website in. Meestal binnen 24 uur krijg je een persoonlijke video terug met waar AI in jouw bedrijf tijd oplevert. Liever eerst even bellen? Dat kan ook." },
+  { n: "02", title: "Werkende proef", desc: "Voor €750 inclusief btw bouw ik een werkende proef op je eigen werk, zodat je het ziet werken vóór je de bouw betaalt. Dit bedrag gaat er volledig af als je doorgaat." },
+  { n: "03", title: "De bouw", desc: "Vaste prijs, gescoped na de proef: tussen €2.500 en €8.500. Klein MKB rond de ondergrens, een bedrijf met volume hoger. Geen uren, geen verrassingen." },
+  { n: "04", title: "Beheer", desc: "Vanaf €250 per maand houd ik het draaiend: updates, onderhoud en verbeteringen. Jij gebruikt, ik beheer." },
 ];
 
 // Bewijs: Koningsdag eerst als sterkste verhaal met concrete getallen (uit interview).
@@ -731,8 +724,8 @@ export const PROOF_POINTS = [
   },
   {
     title: "Chatbot voor een restaurant",
-    tag: "Voor een klant",
-    desc: "Een gastassistent in de chat die direct een tafel reserveert in het boekingssysteem van de zaak.",
+    tag: "Demo",
+    desc: "Een demo van een gastassistent in de chat die direct een tafel reserveert in een boekingssysteem.",
   },
   {
     title: "AI-Quickscan",
@@ -742,7 +735,7 @@ export const PROOF_POINTS = [
   {
     title: "Mijn eigen bedrijfssysteem",
     tag: "Zelf gebouwd",
-    desc: "Een systeem dat mijn uren, facturen, BTW en leads automatiseert. Verving vier losse abonnementen. De directe blauwdruk voor wat ik voor andere MKB-eigenaren bouw.",
+    desc: "Een systeem dat mijn uren, facturen, BTW en leads automatiseert. De directe blauwdruk voor wat ik voor andere MKB-eigenaren bouw.",
   },
   {
     title: "Voice-orchestrator",
@@ -766,7 +759,7 @@ export const TRAINING = {
     "Halve dag (4 uur) bij jullie op kantoor",
     "Hands-on met jullie eigen taken en tools",
     "Heldere AI-richtlijnen, veilig en AVG-bewust",
-    "Afsluiting met een werkend proof of concept op jullie eigen data, ook als je daarna niks met mij doet",
+    "Afsluiting met drie concrete kansen op papier, ook als je daarna niks met mij doet",
     "Mogelijk (deels) te financieren via de SLIM-subsidie voor scholing",
   ],
 };
@@ -855,7 +848,7 @@ export type Branche = {
   skinSummary: string; // 1 zin voor homepage card
   casusStand: string; // "nog geen case bij MKB-klant in deze branche" | "in pilot bij Cotrans" | etc.
   casusBewijs: string; // wat John WEL al heeft dat relevant is
-  casusAanbod: string; // de "eerste klant krijgt workshop terug" tekst
+  casusAanbod: string; // de eerste stap: werkende proef van €750 incl. btw (plus de garantie waar die genoemd wordt)
   featuredOnHomepage: boolean;
   order: number;
 };
@@ -907,7 +900,7 @@ export const BRANCHES: Branche[] = [
     casusBewijs:
       "Vier jaar als business engineer bij BTT in de transportsector. Boordcomputers voor 150 vrachtwagenchauffeurs geïmplementeerd, Delivery Management Systeem uitgerold, warehouse in Noorwegen opgezet, interim ops-manager voor 40 collega's. Ik ken de processen niet uit een rapport, maar van de werkvloer.",
     casusAanbod:
-      "Mijn eerste paying klant in transport krijgt de workshop terug als korting op de bouwfase. Geen experiment voor jou, wel mijn investering om de eerste case in deze skin neer te zetten.",
+      "Wil je verder, dan bouw ik eerst een werkende proef van €750 inclusief btw op je eigen werk. Dat bedrag gaat van de bouwprijs af als je doorgaat.",
     featuredOnHomepage: true,
     order: 1,
   },
@@ -957,7 +950,7 @@ export const BRANCHES: Branche[] = [
     casusBewijs:
       "Jarenlang videograaf voor makelaars, met vastgoedvideo's als vaste stroom werk. Vaste partner Pit Makelaars in Veldhoven (5,0 op Google). De content-engine die ik bouw voor dude.whereismycamper is dezelfde architectuur die op een rondleiding-video gaat draaien.",
     casusAanbod:
-      "Mijn eerste paying klant voor de content-engine-skin krijgt de workshop terug als korting op de bouwfase. Ideaal als je al met mij voor video werkt en de stap naar AI wil maken.",
+      "Wil je verder, dan bouw ik eerst een werkende proef van €750 inclusief btw op je eigen werk. Dat bedrag gaat van de bouwprijs af als je doorgaat. Ideaal als je al met mij voor video werkt en de stap naar AI wil maken.",
     featuredOnHomepage: true,
     order: 2,
   },
@@ -1023,7 +1016,7 @@ export const BRANCHES: Branche[] = [
     observatieBody: [
       "Plan&Was en GlazenwasserApp doen de basis goed: routes, planning, factuur, automatische 'morgen komen we' SMS. Maar zodra de klant antwoordt 'kan het later?', stopt de automatisering en moet de eigenaar het doen. Op een ladder. Tussen twee kantoren in.",
       "Klusio biedt een AI-chatbot, maar focust op lead-kwalificatie (nieuwe klanten). Niet op bestaande-klant-afsprakenbeheer. Daar zit het gat.",
-      "Mijn eigen bedrijfssysteem voor uren, facturen en leads is letterlijk de blauwdruk voor zo'n bedrijfsvoering. Verving voor mezelf vier losse abonnementen.",
+      "Mijn eigen bedrijfssysteem voor uren, facturen en leads is letterlijk de blauwdruk voor zo'n bedrijfsvoering.",
     ],
     aiDoetWel: [
       "Persoonlijke klantassistent die afspraken kan verzetten op WhatsApp of telefoon",
@@ -1055,9 +1048,9 @@ export const BRANCHES: Branche[] = [
     skinSummary: "Klant-WhatsApp-assistent die ook je planning aanpast. Plus rooster-AI bij ziekte en debiteuren-bot.",
     casusStand: "Nog geen klant-case in deze branche. Mijn eigen bedrijfssysteem is de blauwdruk.",
     casusBewijs:
-      "Mijn eigen bedrijfssysteem voor uren, facturen en leads is letterlijk de architectuur voor zo'n bedrijfsvoering. Verving voor mezelf vier losse abonnementen.",
+      "Mijn eigen bedrijfssysteem voor uren, facturen en leads is letterlijk de architectuur voor zo'n bedrijfsvoering.",
     casusAanbod:
-      "Mijn eerste paying klant in glazenwasserij of schoonmaak krijgt de workshop terug als korting op de bouwfase. Plus 6 maanden beheer op 50% van het normale tarief.",
+      "Wil je verder, dan bouw ik eerst een werkende proef van €750 inclusief btw op je eigen werk. Dat bedrag gaat van de bouwprijs af als je doorgaat. Plus 6 maanden beheer op 50% van het normale tarief.",
     featuredOnHomepage: false,
     order: 4,
   },
@@ -1107,7 +1100,7 @@ export const BRANCHES: Branche[] = [
     casusBewijs:
       "Eigen huis volledig verbouwd zonder voorkennis: metselen, EPDM-dak op een te warme dag, fundering storten, vloerverwarming aansluiten, badkamer verhuisd. Plus camper gebouwd vanuit een kale Mercedes Sprinter. Ik herken hoe vakmensen werken.",
     casusAanbod:
-      "Mijn eerste paying klant in bouw of installatie krijgt de workshop terug als korting op de bouwfase. Plus garantie: WhatsApp-bot draait binnen 3 weken of het werk is gratis.",
+      "Wil je verder, dan bouw ik eerst een werkende proef van €750 inclusief btw op je eigen werk. Dat bedrag gaat van de bouwprijs af als je doorgaat. Plus garantie: WhatsApp-bot draait binnen 3 weken of het werk is gratis.",
     featuredOnHomepage: false,
     order: 5,
   },
@@ -1157,7 +1150,7 @@ export const BRANCHES: Branche[] = [
     casusBewijs:
       "Opleiding Bedrijfsmanagement MKB richting Automotive Management bij Fontys. Plus mijn business engineer-jaren bij BTT (transport) waar ik werkplaats-processen en planning-systemen heb geïmplementeerd. Dezelfde principes gelden voor garages.",
     casusAanbod:
-      "Mijn eerste paying klant in universele garage krijgt de workshop terug als korting op de bouwfase. Plus garantie: AI-receptionist draait binnen 4 weken of de eerste 3 maanden beheer zijn gratis.",
+      "Wil je verder, dan bouw ik eerst een werkende proef van €750 inclusief btw op je eigen werk. Dat bedrag gaat van de bouwprijs af als je doorgaat. Plus garantie: AI-receptionist draait binnen 4 weken of de eerste 3 maanden beheer zijn gratis.",
     featuredOnHomepage: false,
     order: 6,
   },
@@ -1205,9 +1198,9 @@ export const BRANCHES: Branche[] = [
     skinSummary: "Instagram-DM, WhatsApp en mail samen in één wachtrij die in je reserveringssysteem boekt.",
     casusStand: "Nog geen klant-case in deze branche.",
     casusBewijs:
-      "Caferadar (eigen Android-app voor het vinden van kroegen) toont dat ik kanaal-merging en horeca-context begrijp. De restaurant-chatbot op mijn pagina over AI-chatbots laat zien hoe zo'n boekingsflow werkt.",
+      "Caferadar (eigen Android-app voor het vinden van kroegen) toont dat ik kanaal-merging en horeca-context begrijp. De demo van een restaurant-chatbot op mijn pagina over AI-chatbots laat zien hoe zo'n boekingsflow werkt.",
     casusAanbod:
-      "Mijn eerste paying klant in horeca krijgt de workshop terug als korting op de bouwfase. Doelgroep: zaken met 10+ medewerkers en eigen website, Brabant.",
+      "Wil je verder, dan bouw ik eerst een werkende proef van €750 inclusief btw op je eigen werk. Dat bedrag gaat van de bouwprijs af als je doorgaat. Doelgroep: zaken met 10+ medewerkers en eigen website, Brabant.",
     featuredOnHomepage: false,
     order: 7,
   },

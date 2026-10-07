@@ -16,23 +16,28 @@ voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB
 
 ### Hoofdaanbod (AI en automatisering)
 
-1. **Workshop op locatie**: halve dag (4 uur), vanaf €750 ex BTW.
+1. **Gratis AI-scan**: gratis online scan op website. Bedrijf vult URL in, AI analyseert
+   branche en benoemt drie concrete AI-kansen. Wie meer diepgang wil doet daarna de
+   uitgebreide scan (10-15 minuten, gratis) en plant direct een gesprek van 30 minuten.
+
+2. **Werkende proef**: €750 inclusief btw. Een werkende proef op het eigen werk van de klant,
+   zodat die AI ziet werken vóór de bouw. Het bedrag gaat volledig van de bouwprijs af als de
+   klant doorgaat.
+
+3. **Bouw en beheer**: vaste prijs, gescoped na de proef, van €2.500 tot €8.500. Een heel grote
+   bouw ligt tussen €8.500 en €15.000. Beheer vanaf €250 per maand.
+   Modulair platform met 8 core-modules en 7 branche-skins.
+   John bouwt het en beheert het ook: updates, onderhoud en verbeteringen horen erbij.
+
+4. **AI-training op locatie**: halve dag (4 uur), prijs op aanvraag. Los product naast de bouw.
    Mogelijk deels te financieren via de SLIM-subsidie (bij te veel aanvragen wordt er geloot,
    toekenning is dus niet zeker). Future Content levert het scholingsplan-document mee.
    Doel: drie concrete AI-kansen op papier, ook als de klant niet verder gaat.
 
-2. **Implementatietrajecten**: eenmalige bouw €5.000-€15.000 + maandelijks beheer €300-€750.
-   Modulair platform met 8 core-modules en 7 branche-skins.
-   John bouwt het en beheert het ook: updates, onderhoud en verbeteringen horen erbij.
-
-3. **AI-Quickscan**: gratis online scan op website. Bedrijf vult URL in, AI analyseert
-   branche en benoemt drie concrete AI-kansen. Wie meer diepgang wil doet daarna de
-   uitgebreide scan (10-15 minuten, gratis) en plant direct een gesprek van 30 minuten.
-
 ### De werkwijze (vaste trap)
 
-Gratis quickscan -> gesprek van 30 minuten -> werksessie op locatie (€750 ex BTW) ->
-Proof of Concept op de eigen casus -> bouw en doorlopend beheer.
+Gratis AI-scan -> werkende proef op de eigen casus (€750 inclusief btw, gaat van de bouwprijs af) ->
+bouw (€2.500 tot €8.500) -> beheer (vanaf €250 per maand).
 
 ### Modulair platform: 8 cross-branche core-modules
 

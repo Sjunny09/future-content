@@ -10,8 +10,8 @@ import { Route, Ticket, ArrowRight, PlayCircle } from "lucide-react";
  * drie waardepunten (WAARDE) op de landingspagina en de Aanpak-stappen op
  * /ai. Dit maakt het concreet: geen abstracte belofte maar twee echte
  * projecten. Kaart 1 (Routeplanner) is een eigen product, geen klantnaam.
- * Kaart 2 (Ticketsysteem Köningsdag Reusel) is een naam-bare klant omdat het
- * een publiek evenement betreft.
+ * Kaart 2 (Ticketsysteem Köningsdag Reusel) is ons eigen festival, het
+ * Vorstelijk Verwenfestijn (publiek evenement, naam mag).
  *
  * `compact` (gebruikt op /ai) toont een kleinere versie: geen sectie-intro-
  * paragraaf, kleinere padding, geen slot-quote-blok. Zelfde kaarten,
@@ -61,7 +61,7 @@ const CASES: CaseItem[] = [
   {
     icon: <Ticket size={20} />,
     title: "Ticketsysteem Koningsdag Reusel",
-    body: "Voor het Vorstelijk Verwenfestijn in Reusel bouwde ik een online ticketsysteem op maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun tickets rechtstreeks online en betaalden meteen. Na sluiting van de verkoop had de organisatie één complete lijst met namen en broodjeskeuzes.",
+    body: "Voor ons eigen festival, het Vorstelijk Verwenfestijn in Reusel, bouwde ik een online ticketsysteem op maat, inclusief betaallink via Mollie en volledige hosting. Bezoekers kochten hun tickets rechtstreeks online en betaalden meteen. Na sluiting van de verkoop had de organisatie één complete lijst met namen en broodjeskeuzes.",
     result: "Live gedraaid voor een echt evenement, van ticketverkoop tot betaling.",
     tags: ["TICKETSYSTEEM OP MAAT", "ONLINE BETALEN", "VOOR EEN ECHT EVENEMENT"],
     href: "/cases/ticketsysteem-koningsdag",
@@ -225,7 +225,7 @@ export default function Cases({ compact = false }: { compact?: boolean }) {
           <p className="mt-5 text-lg leading-relaxed text-[#6E6151]">
             Geen twee klussen zijn hetzelfde. Hieronder twee losse voorbeelden
             van wat er zoal uit zo&apos;n traject komt: een eigen tool en een
-            systeem gebouwd voor een klant.
+            ticketsysteem voor ons eigen festival.
           </p>
         </motion.div>
 

@@ -5,7 +5,7 @@ import { METHOD_STEPS } from "@/lib/constants";
 
 /**
  * Editorial SVG-illustratie van de stappen-werkwijze van Future Content.
- * Verticale trechter: kennismaking bovenaan (breed instappen) tot bouwen+beheren
+ * Verticale trechter: gratis AI-scan bovenaan (breed instappen) tot beheer
  * onderaan (concreet leveren). Conform DESIGN.md: één accent (gold), warm
  * off-white, near-black, geen gradients of glassmorphism. Aantal stappen en
  * de trechterbreedtes volgen automatisch METHOD_STEPS uit lib/constants.ts.
@@ -30,7 +30,7 @@ export const WerkwijzeFunnel: React.FC = () => {
         height="auto"
         className="block"
         role="img"
-        aria-label={`Future Content werkwijze in ${METHOD_STEPS.length} stappen, van kennismaking bovenaan naar bouwen en beheren onderaan.`}
+        aria-label={`Future Content werkwijze in ${METHOD_STEPS.length} stappen, van de gratis AI-scan bovenaan naar beheer onderaan.`}
       >
         {/* Achtergrond */}
         <rect width={totalWidth} height={totalHeight} fill="#F3ECE0" />

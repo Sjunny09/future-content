@@ -35,7 +35,7 @@ const AGENDA = [
   {
     t: "Drie kansen + vervolgpad",
     duur: "60 min",
-    d: "We brainstormen drie concrete kansen voor jullie bedrijf, met geschatte financial impact. Plus vervolgpad: of jullie het zelf kunnen, of een intake + bouw past.",
+    d: "We brainstormen drie concrete kansen voor jullie bedrijf, met geschatte financial impact. Plus vervolgpad: of jullie het zelf kunnen, of een werkende proef en bouw past.",
   },
 ];
 

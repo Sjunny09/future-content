@@ -57,6 +57,7 @@ export default async function PilotPagina({ params }: { params: Params }) {
         <li>• Korte check-ins onderweg, zonder gedoe</li>
         <li>• Volle eigendom: alles wat we bouwen is van jou</li>
         <li>• Niet tevreden? Je krijgt je geld terug</li>
+        <li>• Tijd-terug-garantie op de bouw: neemt de AI na 30 dagen niet minstens de helft van je terugkerende werk zelfstandig over, zwart-op-wit gemeten, dan werk ik gratis door tot dat wel zo is, of je krijgt je bouwbedrag terug</li>
       </ul>
 
       <div className="mt-12">

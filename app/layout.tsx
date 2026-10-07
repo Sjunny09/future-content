@@ -131,12 +131,18 @@ const jsonLd = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "AI proof of concept",
+              name: "Werkende AI-proef",
               description:
-                "Betaalde proof of concept op je eigen werk, zodat je AI ziet werken vóór de bouw. Gaat van de bouwprijs af als je doorgaat.",
+                "Betaalde werkende proef op je eigen werk, zodat je AI ziet werken vóór de bouw. 750 euro inclusief btw, gaat van de bouwprijs af als je doorgaat.",
             },
             price: "750",
             priceCurrency: "EUR",
+            priceSpecification: {
+              "@type": "PriceSpecification",
+              price: "750",
+              priceCurrency: "EUR",
+              valueAddedTaxIncluded: true,
+            },
           },
           {
             "@type": "Offer",
@@ -144,7 +150,7 @@ const jsonLd = {
               "@type": "Service",
               name: "AI-bouw op maat",
               description:
-                "Vaste prijs, gescoped na de proof of concept. Van 2.500 tot 8.500 euro afhankelijk van omvang, plus een maandbedrag vanaf 250 euro voor beheer en doorontwikkeling.",
+                "Vaste prijs, gescoped na de werkende proef. Van 2.500 tot 8.500 euro afhankelijk van omvang, plus een maandbedrag vanaf 250 euro voor beheer en doorontwikkeling.",
             },
             price: "2500",
             priceCurrency: "EUR",

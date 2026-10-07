@@ -252,22 +252,20 @@ export default function BranchePage() {
               className="text-3xl md:text-[2.4rem] font-bold text-[#2A2218] mt-4 mb-6 leading-[1.1]"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Een halve dag op locatie, vanaf €750 ex BTW.
+              Een werkende proef op je eigen werk, €750 inclusief btw.
             </h2>
             <div className="space-y-5 text-[#2A2218] leading-relaxed">
               <p>
-                De meeste klanten beginnen met een workshop op locatie. Een halve dag, vanaf €750
-                ex BTW (mogelijk deels via de SLIM-subsidie, ik lever het scholingsplan-document mee). We
-                staren niet naar een scherm maar gaan samen aan de slag op jullie eigen taken. Aan
-                het einde van de middag heb je drie concrete kansen op papier, ongeacht of je
-                daarna met mij verder gaat.
+                Je begint met de gratis AI-scan. Daarna bouw ik voor €750 inclusief btw een werkende
+                proef op je eigen werk, zodat je het ziet werken vóór je de bouw betaalt. Dat bedrag
+                gaat er volledig af als je doorgaat.
               </p>
               <p>
-                Wil je daarna bouwen, dan begint dat met een intake-sessie waarin we je proces in
-                kaart brengen en een tweede brein voor je bedrijf opzetten. Daarna kiezen we welke
-                modules uit het platform passen, met de {branche.shortName.toLowerCase()}-skin als basis.
-                Eenmalige bouw plus maandelijks beheer en credits. Het maandbedrag zie je vooraf op
-                een dashboard, inclusief wat het je oplevert.
+                Wil je daarna bouwen, dan kiezen we welke modules uit het platform passen, met de{" "}
+                {branche.shortName.toLowerCase()}-skin als basis. De bouw is maatwerk, gescoped na de
+                proef: tussen €2.500 en €8.500, plus een maandbedrag vanaf €250 voor beheer en
+                doorontwikkeling. Het maandbedrag zie je vooraf op een dashboard, inclusief wat het
+                je oplevert.
               </p>
             </div>
           </motion.div>

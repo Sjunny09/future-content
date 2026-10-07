@@ -172,7 +172,7 @@ export default async function KlaarPagina({ params }: { params: Params }) {
             </div>
           )}
 
-          {/* Eerlijk over de trede na het gesprek: het proof of concept. */}
+          {/* Eerlijk over de trede na het gesprek: de werkende proef. */}
           <div
             className="rounded-2xl border p-5"
             style={{ borderColor: "var(--color-scan-border)" }}
@@ -181,12 +181,11 @@ export default async function KlaarPagina({ params }: { params: Params }) {
               En daarna?
             </p>
             <p className="mt-2 text-sm leading-relaxed" style={{ color: "var(--color-scan-muted)" }}>
-              De stap na het gesprek is een proof of concept:{" "}
-              <PriceIndicator item="proofOfConcept" prefix="" />. Ik draai een
-              halve dag mee op locatie, interview je mensen en verzamel data
-              uit je bedrijf. Daarna ga ik thuis aan de slag en binnen een week
-              ligt er een proof of concept met wat het jouw bedrijf oplevert in
-              tijd of geld.
+              De stap na het gesprek is een werkende proef:{" "}
+              <PriceIndicator item="proofOfConcept" prefix="" /> inclusief btw.
+              Ik bouw de proef op je eigen werk, zodat je het ziet werken vóór
+              je de bouw betaalt. Dat bedrag gaat er volledig af als je
+              doorgaat.
             </p>
           </div>
 

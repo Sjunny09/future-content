@@ -33,7 +33,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Vastgoed",
     content: [
       { type: "intro", text: "Je hebt een mooie woning. Nette foto's. Een goede beschrijving. Maar het aantal bezichtigingen valt tegen. Waarom? Omdat je concurrent naast zijn foto ook een video heeft staan, maar jij niet." },
-      { type: "h2", text: "De realiteit van Funda in 2025" },
+      { type: "h2", text: "De realiteit van Funda" },
       { type: "p", text: "Een koper bekijkt in één avond al snel heel wat woningen. De beslissing om te klikken of niet neemt hij in een paar seconden. Foto's vertellen wat er is. Video toont hoe het voelt om er te staan." },
       { type: "p", text: "Sfeer, ruimte, licht: een video legt dat vast op een manier die een foto letterlijk niet kan. En voor makelaars betekent dat: meer kliks, meer aanvragen, meer bezichtigingen." },
       { type: "h2", text: "Wat video oplevert" },
@@ -236,7 +236,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min",
     category: "Inzichten",
     content: [
-      { type: "intro", text: "2025 was het jaar dat video echt mainstream werd voor lokale MKB'ers. Niet meer 'nice to have', maar een verwachting. Hier is wat ik dit jaar leerde uit tientallen shoots en honderden video's." },
+      { type: "intro", text: "2025 was het jaar dat video echt mainstream werd voor lokale MKB'ers. Niet meer 'nice to have', maar een verwachting. Hier is wat ik in 2025 leerde uit tientallen shoots en honderden video's." },
       { type: "h2", text: "Wat wél werkte" },
       { type: "ul", items: ["Behind-the-scenes content: altijd het beste bereik en de meeste reacties", "Persoonlijke video's (de ondernemer in beeld): hoogste engagement", "Korte how-to video's (30–45 sec): meest gedeeld", "Vastgoedvideo's met drone: significant meer bezichtigingsaanvragen", "Consistente posters: accounts die wekelijks posten groeiden sneller dan accounts die sporadisch postten"] },
       { type: "h2", text: "Wat minder goed werkte" },

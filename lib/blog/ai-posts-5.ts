@@ -201,7 +201,7 @@ export const AI_POSTS_5: BlogPost[] = [
       { type: "quote", text: "Bouw het pas op als het voor jou werkt. Niet andersom." },
       { type: "h2", text: "Wanneer je wel echt iets moet laten bouwen" },
       { type: "p", text: "Er is een grens. Zodra meerdere mensen het moeten gebruiken, of zodra het aan je administratie of je klantgegevens hangt, is een gedeeld document niet meer genoeg. Dan wil je dat de regels op één plek staan en dat je kunt terugzien wat er gebeurd is. Dat is het moment om er iets omheen te zetten." },
-      { type: "p", text: "Het goede nieuws is dat dat tegenwoordig veel sneller gaat dan mensen denken. Waar iets bouwen vroeger weken developertijd kostte, is een werkend eerste systeem nu vaak een kwestie van dagen. Meer over hoe zo'n traject loopt lees je in [AI-automatisering: een proces, een week, meetbaar resultaat](/blog/ai-automatisering-een-proces-een-week)." },
+      { type: "p", text: "Het goede nieuws is dat dat tegenwoordig veel sneller gaat dan mensen denken. Waar iets bouwen vroeger weken developertijd kostte, is een werkend eerste systeem nu vaak een kwestie van dagen. Meer over hoe zo'n traject loopt lees je in [AI-automatisering: één proces, meetbaar resultaat](/blog/ai-automatisering-een-proces-een-week)." },
       { type: "cta", text: "Heb je een prompt die werkt maar niet blijft hangen? Neem contact op, dan kijken we wat er nodig is om er iets van te maken dat draait." },
     ],
   },

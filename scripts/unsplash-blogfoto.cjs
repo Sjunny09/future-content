@@ -1,7 +1,7 @@
 // Unsplash-hulp voor blogfoto's. Draait via headless Chrome omdat unsplash.com
+// een botcheck heeft. Alleen gratis foto's (geen premium/Unsplash+).
 // Vereist playwright-core (npx-cache, pad hieronder) en Google Chrome. Doel voor blogs: public/blog/foto/<slug>.jpg,
 // credits in docs/blogfoto-unsplash-verantwoording.json. Zie de blogregel in de portfolio-CLAUDE.md.
-// een botcheck heeft. Alleen gratis foto's (geen premium/Unsplash+).
 //
 //   node scripts/unsplash-blogfoto.cjs zoek <werkmap> "<zoekterm>" ["<zoekterm>" ...]
 //     -> per zoekterm <werkmap>/<n>.json (kandidaten) en <werkmap>/<n>.png (fotovel, genummerd)

@@ -1,0 +1,33 @@
+# Bronnen: Wat kost een AI-video echt?
+
+Webbronnen opgehaald op 7 oktober 2026. Bestandspaden relatief aan `/Users/johnlavrijsen/Documents/AI - Cursor/`.
+
+| Zin in de blog | Bron | Wat de bron zegt |
+|---|---|---|
+| Standard: 15 dollar per maand voor 625 credits. Pro: 35 dollar voor 2250. Max: 95 dollar voor 9500. | https://runway.com/pricing (runwayml.com/pricing stuurt hierheen door) | Maandelijks: Standard $15, Pro $35, Max $95. Credits: "625 credits/mo", "2250 credits/mo", "9500 credits/mo". |
+| Betaal je per jaar, dan is het 12, 28 of 76 dollar per maand. | https://runway.com/pricing | "$12/month", "$28/month", "$76/month" billed annually. |
+| Bij Standard en Pro vervallen ongebruikte credits op je factuurdatum. Extra credits koop je per minimaal 1000 stuk, en die vervallen niet. | https://help.runwayml.com/hc/en-us/articles/15124877443219 ("How do credits work?", bijgewerkt 15-09-2026, gelezen via de Zendesk-API omdat de pagina zelf achter een Cloudflare-check zit) | "Standard, Pro and Unlimited: Monthly credits expire on your billing date." "The minimum amount of credits users may purchase is 1000." "Purchased credits: Do not expire." Pricing-pagina: "The minimum purchase is 1,000 credits", extra credits "never expire". |
+| Wat zo'n extra pakket in de app kost, vond ik niet op een openbare pagina van Runway. | runway.com/pricing + help-artikel hierboven | Beide noemen het minimum van 1000, geen van beide noemt een prijs per credit voor bijkopen in de app. |
+| Via de API kost een credit 1 dollarcent. | https://docs.dev.runwayml.com/guides/pricing/ | "Credits can be purchased for $0.01 per credit in the developer portal for a project." Het help-artikel zegt dat app-credits en API-credits gescheiden zijn. |
+| 1 tot 2,4 dollarcent per credit. | Eigen berekening uit runway.com/pricing | 95/9500 = $0,010 (Max), 35/2250 = $0,0156 (Pro), 15/625 = $0,024 (Standard), allemaal maandelijks betaald. |
+| Aleph 2.0: 28 credits per seconde. | https://academy.runwayml.com/models-pricing (de tabel die in het help-artikel is ingebed); ook runway.com/pricing ("140 credits/5s"), docs.dev.runwayml.com ("28 credits per second (56 credit minimum per generation)") en CLAUDE.md:50 ("Aleph 28 credits/s volgens Runway's prijspagina van 30-9") | "Aleph 2.0 ... Video to Video edits ... 28 /sec". |
+| Gen-4.5: 12 credits per seconde. | academy.runwayml.com/models-pricing + help-artikel | "Gen-4.5 uses 12 credits per second of generated video." |
+| Seedance 2.5 in 1080p: 68 credits per seconde, plus 34 per seconde als je er een video aan meegeeft. | academy.runwayml.com/models-pricing + docs.dev.runwayml.com/guides/pricing/ | "1080p: 68 credits/sec output + 34 credits/sec input/reference video", "(80 credit minimum per generation)". |
+| Veo 3.1: 20 credits per seconde, of 40 met geluid. | academy.runwayml.com/models-pricing | "Veo 3.1 ... 20/sec" zonder audio, "40/sec" met audio. |
+| Je betaalt per gemaakte seconde, ook voor een poging die je weggooit. | help-artikel 15124877443219 | "Gen-4.5 uses 12 credits per second ... your total cost per generation would be either 60 or 120 credits." Kosten gelden per generatie. Een regel over terugbetaling bij afkeuren staat er niet. Afgeleid, niet letterlijk. |
+| Voor het sprookje had ik ongeveer 1000 credits nodig. Dat getal is mijn eigen schatting. | 00-future-content/content/reels/2026-10-06_sprookje-met-ai/promptsheet.md:3; 00-future-content/website/fc-rebrand/app/sprookje/page.tsx:138 en :197 | "Credits: ongeveer 1000 volgens John." / "Runway, ongeveer 1000 credits" / "Voor deze video had ik er ongeveer 1000 nodig." |
+| Runway zette 18 seconden om met Aleph 2.0 en maakte met Seedance twee nieuwe shots: een bospad en een kabouter. | promptsheet.md:7, :13, :19, :25, :50 | Restyle segment A (0-9 s) en B (21-30 s) met Aleph 2.0 = 18 s. Bospad (4 s) en kabouter (8 s) met Seedance 2.5. Runway-taak d12ddd29 (opgevraagd via de Runway-koppeling): Seedance 2.5, 1920x1080, 8 seconden. |
+| Muziek, bosgeluid en een glinstergeluid kwamen er los bij. | promptsheet.md:31-46; page.tsx:202-204 | Muziek (30 s), bossfeer (30 s), glinster-effect (3 s) als losse taken. |
+| Alleen die 18 seconden Aleph kosten volgens de prijslijst al 504 credits. | Eigen berekening | 18 x 28 = 504. |
+| 10 tot 24 dollar, met Pro per maand ongeveer 16 dollar. | Eigen berekening | 1000 x $0,010 = $10; 1000 x $0,024 = $24; 1000 x $0,0156 = $15,56. |
+| ChatGPT voor het sfeerbeeld, Claude voor de prompt. | promptsheet.md:5; page.tsx:174, :183-185 | Sfeerbeeld uit ChatGPT, prompt met Claude (Opus 5.5) uitgeschreven en naar het Engels gezet. |
+| De stappen (sfeerbeeld, per seconde uitschrijven, uploaden en bijsturen, naast origineel leggen, boek per frame terugzetten, virtuele camera, titel/ondertitels/logo/geluid). | promptsheet.md:5, :53-55; page.tsx:195-209, :243-263; 98-persoonlijk/kabouter-kyrie/LEESMIJ.md:26-31 | Boek per frame teruggezet uit het origineel, virtuele camera houdt verzonnen gezicht buiten beeld, afwerking met titel, ondertitels, logo, eindkaart, geluid naar -14 LUFS. |
+| Hoeveel uur dat was, heb ik niet bijgehouden. | Geen bron | In geen van de bronnen staat een tijdsbesteding. Bewust zo geformuleerd. |
+| De fouten kwamen pas boven bij het nakijken. | Gepubliceerde sprookjesblog (scratchpad/blog-sprookje-concept.md) | "Daarna heb ik het resultaat naast het origineel gelegd en nagekeken. Daar kwamen de fouten boven." |
+| In het sprookje haalde de AI precies het boek weg dat verkocht moest worden. | page.tsx:243; blog-sprookje-concept.md | "Runway haalde het boek dat links naast haar staat gewoon weg. En dat boek is precies het product dat..." |
+| Aleph maakt stukken van maximaal 30 seconden. | page.tsx:204-205 | "Aleph werkt per stuk van maximaal 30 seconden, tot 1080p." Niet nagekeken op een Runway-pagina. |
+
+## Verify 7 oktober 2026 (onafhankelijke controle)
+
+Open punt, niet aangepast in de blog: de prijslijst komt hoger uit dan "ongeveer 1000 credits". Via de Runway-koppeling opgevraagd: Aleph-taken 4e48a4d2 (9,03 s) en f41c1235 (segment B, 21-30 s), Seedance 2.5-taken 14038eb7 (4 s, 1080p) en d12ddd29 (8 s, 1080p). Volgens academy.runwayml.com/models-pricing: Aleph 18 s x 28 = 504, Seedance 2.5 1080p 12 s x 68 = 816. Samen al ongeveer 1320 credits, zonder muziek en geluid. Omgerekend 13 tot 32 dollar in plaats van 10 tot 24. Of de Agent anders rekent, staat nergens. John moet het echte verbruik in Runway (Plans and Billing of de gebruikshistorie) nakijken.
+Aleph maximaal 30 seconden: nu wel nagekeken op een Runway-pagina, https://runway.com/en/news/introducing-aleph-2-and-edit-studio ("You can now edit clips up to 30 seconds long at 1080p").

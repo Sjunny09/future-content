@@ -1,0 +1,22 @@
+# Bronnen: Waarom je telefoonvideo flets wordt in AI-tools
+
+Webbronnen opgehaald op 7 oktober 2026. Bestandspaden relatief aan `/Users/johnlavrijsen/Documents/AI - Cursor/`.
+
+| Zin in de blog | Bron | Wat de bron zegt |
+|---|---|---|
+| Op mijn Pixel stond het aan. | CLAUDE.md:49 | "Video van John's Pixel is HDR (HLG, bt2020): eerst omzetten naar Rec.709, in élke pipeline." |
+| Volgens Apple neemt de iPhone op ondersteunde modellen video op in HDR. | https://support.apple.com/nl-nl/guide/iphone/iph2cafe2ebc/ios ("HDR-camera-instellingen aanpassen") | "Op ondersteunde modellen neemt de iPhone-camera video op in Dolby Vision HDR om de kleuren en het contrast levensecht vast te leggen." |
+| Programma's die HDR niet herkennen lezen je video als gewone video. Het beeld wordt flets en grijs. Dat zie je in de browser en in videotools. | CLAUDE.md:49 | "Zonder omzetting leest ffmpeg, HyperFrames of een browser de beelden als gewone SDR en wordt alles flets en grijs." |
+| Eind september kwam een video van mijn Pixel er flets uit. De oorzaak was HDR. | CLAUDE.md:49 | "26 september 2026: de hoofdsponsoren-video kwam flets uit, terwijl dezelfde les sinds 17 september in reel-monteur stond." |
+| Sindsdien zet ik elke video van die telefoon eerst om. | CLAUDE.md:49 | "eerst omzetten naar Rec.709, in élke pipeline". Of John dat sinds die datum echt bij elke video doet, is niet gemeten: het is de vastgelegde werkregel. |
+| iPhone: Instellingen > Camera > Neem video op > HDR-video of HDR uit. | https://support.apple.com/nl-nl/guide/iphone/iph2cafe2ebc/ios | "Om video-opnamen in HDR uit te schakelen, tik je in Instellingen op 'Camera' > 'Neem video op' en schakel je, afhankelijk van je model, 'HDR-video' of 'HDR' uit." |
+| Pixel: Camera-app > videomodus > linksonder Video-instellingen, daar zit 10-bits HDR-video, vanaf de Pixel 7. | https://support.google.com/pixelcamera/answer/7064897?hl=nl ("Een video opnemen op je Pixel-telefoon") | "Deze functie is beschikbaar op de Pixel 7, Pixel 7 Pro, Pixel 8, Pixel 8 Pro, Pixel 9 en hoger, waaronder de Pixel Fold. ... Zo zet je 10-bits HDR Video aan: Open de Camera-app. Als je de fotomodus gebruikt, schakel je over naar de videomodus. Tik linksonder op Video-instellingen." De pagina beschrijft alleen aanzetten. Uitzetten via dezelfde plek is afgeleid. |
+| Samsung: Camera-app > tandwiel > onder Video's de geavanceerde video-opties > schakelaar bij HDR10+ uit. | https://www.samsung.com/us/support/answer/ANS00086003/ ("Use the HDR10+ video feature on your Galaxy phone") | "Start by opening the Camera app. Tap the Settings icon. Tap Advanced video options under Videos. Tap the switch next to HDR10+ videos to turn it on." Ook: "HDR10+ videos will not play on devices that aren't compatible." Nederlandse menunamen niet gecontroleerd, vertaald. |
+| Op een Samsung kun je in de Galerij-app bij bewerken onder formaat de gewone variant kiezen in plaats van HDR10+. | zelfde Samsung-pagina | "Navigate to and open Gallery. Select your desired HDR10+ video, then tap the Edit icon. Tap More options ... Tap Size and format ... Tap HDR10+ and then select SDR." |
+| Op een iPhone kun je in iMovie HDR uitzetten als je je film deelt. | https://support.apple.com/nl-nl/102241 ("HDR-video bewerken die is opgenomen met een iPhone of iPad") | "Wanneer je je film deelt, tik je op 'Opties' ... Schakel 'HDR' uit om een Standard Dynamic Range (SDR)-versie van je film te delen." |
+| Gewoon beeld heet in vaktaal Rec.709. | CLAUDE.md:49 | "eerst omzetten naar Rec.709". |
+| In Runway betaal je per seconde, Aleph 2.0 is 28 credits per seconde. | https://academy.runwayml.com/models-pricing; CLAUDE.md:50 | "Aleph 2.0 ... 28 /sec"; "Aleph 28 credits/s volgens Runway's prijspagina van 30-9". |
+| Daarom upload ik nooit een HDR-video van mijn telefoon zonder hem eerst om te zetten. | CLAUDE.md:50 | "upload nooit HLG-telefoonbeelden zonder omzetting". |
+| Of een tool jouw HDR-video goed inleest, zie je pas aan de uitkomst. | Geen meting | Redenering. Niet getest wat Runway met een HDR-upload doet. |
+| Bij het sprookje speelde dit niet: dat filmpje was in gewoon beeld opgenomen. | Gemeten met ffprobe op 98-persoonlijk/kabouter-kyrie/bron/IMG_7153.mov (7-10-2026) | color_transfer=bt709, color_primaries=bt709, 1920x1080. Dus geen HDR. |
+| In de gids staat het toch als tip bij het filmen. | 00-future-content/website/fc-rebrand/app/sprookje/page.tsx:164-165 | "Filmt je telefoon in HDR, zet dat dan uit of zet de clip eerst om naar normaal beeld. Anders komt het resultaat flets terug." |

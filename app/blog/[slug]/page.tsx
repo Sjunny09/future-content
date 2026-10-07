@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, Clock, ArrowRight } from "lucide-react";
-import { BLOG_POSTS, getBlogPost, formatDate } from "@/lib/blog";
+import { BLOG_POSTS, getBlogPost, formatDate, isGepubliceerd } from "@/lib/blog";
 import { SITE } from "@/lib/constants";
 import Infographic from "@/components/common/Infographic";
 import { use } from "react";
@@ -23,7 +23,11 @@ function renderRichText(text: string) {
     const label = m[1];
     const href = m[2];
     const cls = "text-[#B45F38] underline underline-offset-2 hover:text-[#8f4a2b] transition-colors";
-    if (href.startsWith("/")) {
+    const doelPost = href.startsWith("/blog/") ? BLOG_POSTS.find((p) => `/blog/${p.slug}` === href) : undefined;
+    if (doelPost && !isGepubliceerd(doelPost)) {
+      // Nog ingepland: tekst zonder link, anders verwijst hij naar een 404.
+      parts.push(label);
+    } else if (href.startsWith("/")) {
       parts.push(
         <Link key={key++} href={href} className={cls}>
           {label}
@@ -49,7 +53,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
   if (!post) notFound();
 
   // Related posts (same category, excluding current)
-  const related = BLOG_POSTS.filter((p) => p.category === post.category && p.slug !== post.slug).slice(0, 2);
+  const related = BLOG_POSTS.filter((p) => p.category === post.category && p.slug !== post.slug && isGepubliceerd(p)).slice(0, 2);
 
   // BlogPosting-schema zodat AI-antwoordmachines en Google het artikel als
   // citeerbare bron met auteur en datum herkennen (SEO-audit, ontbrak).

@@ -4,11 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ArrowRight } from "lucide-react";
-import { BLOG_POSTS } from "@/lib/blog";
-
-const LATEST = BLOG_POSTS[BLOG_POSTS.length - 1];
+import { gepubliceerdePosts } from "@/lib/blog";
 
 export default function NewPostNotification() {
+  const LATEST = gepubliceerdePosts()[0];
   const [phase, setPhase] = useState<"hidden" | "icon" | "open">("hidden");
 
   useEffect(() => {

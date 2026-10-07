@@ -1,6 +1,9 @@
 import type { MetadataRoute } from "next";
 import { SITE, STACK_VIDEOS, BRANCHES, AI_WEDGES } from "@/lib/constants";
-import { BLOG_POSTS } from "@/lib/blog";
+import { gepubliceerdePosts } from "@/lib/blog";
+
+// Ingeplande blogs komen er op hun dag vanzelf bij.
+export const revalidate = 3600;
 
 // Next.js auto-serves this as /sitemap.xml
 // Submit to Google Search Console + Bing Webmaster Tools after deploy.
@@ -57,7 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Blog posts — elke post heeft eigen URL voor SEO
-  const blogRoutes: MetadataRoute.Sitemap = BLOG_POSTS.map((post) => ({
+  const blogRoutes: MetadataRoute.Sitemap = gepubliceerdePosts().map((post) => ({
     url: `${base}/blog/${post.slug}`,
     lastModified: post.date ? new Date(post.date) : now,
     changeFrequency: "monthly",

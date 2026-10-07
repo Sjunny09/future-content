@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { BLOG_POSTS } from "@/lib/blog";
+import { notFound } from "next/navigation";
+import { BLOG_POSTS, isGepubliceerd } from "@/lib/blog";
 import { SITE } from "@/lib/constants";
 
 // Per-post metadata voor /blog/[slug]. De pagina zelf is een client component
@@ -13,7 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
-  if (!post) {
+  if (!post || !isGepubliceerd(post)) {
     return { title: "Artikel niet gevonden" };
   }
   return {
@@ -31,6 +32,18 @@ export async function generateMetadata({
   };
 }
 
-export default function BlogPostLayout({ children }: { children: React.ReactNode }) {
+// Elk uur opnieuw beoordelen, zodat een ingeplande post op zijn dag verschijnt.
+export const revalidate = 3600;
+
+export default async function BlogPostLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  if (post && !isGepubliceerd(post)) notFound();
   return children;
 }

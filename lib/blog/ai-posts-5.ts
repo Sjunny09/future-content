@@ -546,7 +546,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "telefoonvideo-flets-hdr",
     title: "Waarom je telefoonvideo flets wordt in AI-tools",
-    date: "2026-10-07",
+    date: "2026-11-04",
     excerpt:
       "Op je telefoon ziet je video er goed uit, in een AI-tool of op je laptop grijs en flets. Vaak komt dat door HDR. Hier lees je hoe je het herkent en voorkomt, en waarom je dat regelt voordat je credits uitgeeft.",
     readTime: "4 min",
@@ -580,7 +580,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "wat-kost-een-ai-video",
     title: "Wat kost een AI-video echt?",
-    date: "2026-10-07",
+    date: "2026-10-28",
     excerpt:
       "Voor een sprookje van een telefoonfilmpje gebruikte ik ongeveer 1000 credits in Runway. Omgerekend is dat 10 tot 24 dollar. Maar de credits zijn maar een deel van de rekening. Zo rekent Runway, en dit komt er nog bij.",
     readTime: "5 min",
@@ -631,7 +631,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "uren-en-kilometers-die-zichzelf-registreren",
     title: "Uren en kilometers die zichzelf registreren",
-    date: "2026-10-07",
+    date: "2026-11-11",
     excerpt:
       "Mijn kilometerregistratie lag maanden stil, omdat ik er niet aan dacht. Nu zoekt mijn eigen systeem zelf uit welke ritten ontbreken, en hoef ik alleen nog ja te zeggen. Dit is hoe dat werkt en wat jij ervan kunt meenemen.",
     readTime: "5 min",
@@ -674,7 +674,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "eigen-bedrijfssysteem-zelf-gebouwd",
     title: "Mijn eigen bedrijf draait op een systeem dat ik zelf bouwde",
-    date: "2026-10-07",
+    date: "2026-11-18",
     excerpt:
       "Sinds juli 2026 staan mijn offertes, facturen, uren, kilometers, uitgaven, klanten en video-opnames in één eigen webapp. Ik bedien hem ook vanaf mijn telefoon, via Claude. Dit is wat hij doet, wat nog handwerk is en wat jij eraan hebt.",
     readTime: "5 min",
@@ -717,7 +717,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "kopen-of-laten-bouwen",
     title: "Kopen of laten bouwen? Zo kies je eerlijk",
-    date: "2026-10-07",
+    date: "2026-11-25",
     excerpt:
       "Ik bouw maatwerk, en toch is mijn eerste vraag of je het niet gewoon kunt kopen. Zo maak je die afweging eerlijk, met een paar toetsvragen die je vandaag al kunt stellen.",
     readTime: "5 min",
@@ -763,7 +763,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "schaduw-ai-medewerkers",
     title: "Je medewerkers gebruiken al AI. Weet jij welke?",
-    date: "2026-10-07",
+    date: "2026-10-21",
     excerpt:
       "Grote kans dat iemand in je bedrijf deze week een klantmail of offerte in een gratis AI-tool heeft geplakt. Verbieden lost dat niet op. Dit werkt wel: vragen, afspreken, één zakelijke tool kiezen en uitleggen.",
     readTime: "5 min",
@@ -804,7 +804,7 @@ export const AI_POSTS_5: BlogPost[] = [
   {
     slug: "ai-geletterdheid-verplicht-ai-act",
     title: "AI-geletterdheid is verplicht: wat de AI Act van jouw team vraagt",
-    date: "2026-10-07",
+    date: "2026-10-14",
     excerpt:
       "Gebruikt je team ChatGPT of Copilot? Dan geldt artikel 4 van de AI Act ook voor jouw bedrijf. Wat staat er precies, wat is er in 2026 veranderd, wie houdt toezicht en wat kun je als MKB-bedrijf vandaag al regelen?",
     readTime: "5 min",

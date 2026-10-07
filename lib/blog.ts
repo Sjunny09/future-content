@@ -339,6 +339,23 @@ export const BLOG_POSTS: BlogPost[] = [
   ...AI_POSTS_5,
 ];
 
+// Ingeplande publicatie: een post met een datum in de toekomst staat al in de
+// code, maar is pas zichtbaar vanaf die dag (Nederlandse tijd). Zo verschijnt er
+// elke week iets nieuws zonder nieuwe deploy: /blog, /blog/[slug] en de sitemap
+// verversen zichzelf elk uur (revalidate). Nooit een datum in het verleden
+// zetten voor een post die toen nog niet bestond.
+export function vandaagNL(): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Amsterdam" }).format(new Date());
+}
+
+export function isGepubliceerd(post: Pick<BlogPost, "date">, vandaag = vandaagNL()): boolean {
+  return post.date <= vandaag;
+}
+
+export function gepubliceerdePosts(vandaag = vandaagNL()): BlogPost[] {
+  return BLOG_POSTS.filter((p) => isGepubliceerd(p, vandaag)).sort((a, b) => b.date.localeCompare(a.date));
+}
+
 export function getBlogPost(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);
 }

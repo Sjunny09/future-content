@@ -153,7 +153,7 @@ function bouwJohnMail(ctx: {
 
 function bouwKlantMail(ctx: { naam: string | null; jobId: string }): string {
   const aanhef = ctx.naam ? `Hoi ${ctx.naam},` : `Hoi,`
-  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://future-content.nl"
+  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.future-content.nl"
   const resultatenUrl = `${site}/scan/klaar/${ctx.jobId}`
   const diepteUrl = `${site}/scan/diepte/${ctx.jobId}`
   const boekUrl = `https://${BOOKING.calHost}/${BOOKING.calUser}/${BOOKING.calEvent}`

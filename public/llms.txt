@@ -1,7 +1,7 @@
 # Future Content: llms.txt
-# AI-bouwer en videoproductiebedrijf in Bladel, Noord-Brabant, Nederland
+# AI-bouwer voor het MKB in Bladel, Noord-Brabant, Nederland
 # Eigenaar: John Lavrijsen
-# Website: https://future-content.nl
+# Website: https://www.future-content.nl
 
 ## Wat Future Content doet
 
@@ -64,10 +64,10 @@ bouw (€2.500 tot €8.500) -> beheer (vanaf €250 per maand).
 
 1. **Routeplanner**: routes optimaliseren over meerdere stops en ophaallocaties,
    met kilometers, tijd en besparing direct op de kaart, zie
-   https://future-content.nl/cases/routeplanner
+   https://www.future-content.nl/cases/routeplanner
 2. **Ticketsysteem Koningsdag Reusel**: eigen ticketshop met iDEAL via Mollie,
    een exporteerbare broodjeslijst voor de catering, zie
-   https://future-content.nl/cases/ticketsysteem-koningsdag
+   https://www.future-content.nl/cases/ticketsysteem-koningsdag
 
 ### Secundair aanbod (videografie)
 
@@ -103,48 +103,48 @@ Tertiair: heel Noord-Brabant op aanvraag.
 
 ## Pagina's
 
-- Home (voordeur, AI-first): https://future-content.nl/
-- AI en automatisering (hoofdaanbod): https://future-content.nl/ai
-- Voor wie (branche-overzicht): https://future-content.nl/voor
-- Werkwijze: https://future-content.nl/werkwijze
-- Trainingen: https://future-content.nl/trainingen
-- AI-Quickscan (gratis, voordeur): https://future-content.nl/scan
-- Boek een gesprek (Cal.com, 30 min): https://future-content.nl/boek
-- Case routeplanner: https://future-content.nl/cases/routeplanner
-- Case ticketsysteem Koningsdag: https://future-content.nl/cases/ticketsysteem-koningsdag
-- Film / video (secundaire tak): https://future-content.nl/film
-- Videografie-overzicht: https://future-content.nl/videografie
-- Makelaars (video): https://future-content.nl/makelaars
-- Social Media (video): https://future-content.nl/social-media
-- Trouwen (video): https://future-content.nl/trouwen
-- Portfolio: https://future-content.nl/portfolio
-- Blog: https://future-content.nl/blog
-- Over John Lavrijsen: https://future-content.nl/over
-- Contact: https://future-content.nl/contact
-- Algemene voorwaarden: https://future-content.nl/voorwaarden
-- Privacy: https://future-content.nl/privacy
+- Home (voordeur, AI-first): https://www.future-content.nl/
+- AI en automatisering (hoofdaanbod): https://www.future-content.nl/ai
+- Voor wie (branche-overzicht): https://www.future-content.nl/voor
+- Werkwijze: https://www.future-content.nl/werkwijze
+- Trainingen: https://www.future-content.nl/trainingen
+- AI-Quickscan (gratis, voordeur): https://www.future-content.nl/scan
+- Boek een gesprek (Cal.com, 30 min): https://www.future-content.nl/boek
+- Case routeplanner: https://www.future-content.nl/cases/routeplanner
+- Case ticketsysteem Koningsdag: https://www.future-content.nl/cases/ticketsysteem-koningsdag
+- Film / video (secundaire tak): https://www.future-content.nl/film
+- Videografie-overzicht: https://www.future-content.nl/videografie
+- Makelaars (video): https://www.future-content.nl/makelaars
+- Social Media (video): https://www.future-content.nl/social-media
+- Trouwen (video): https://www.future-content.nl/trouwen
+- Portfolio: https://www.future-content.nl/portfolio
+- Blog: https://www.future-content.nl/blog
+- Over John Lavrijsen: https://www.future-content.nl/over
+- Contact: https://www.future-content.nl/contact
+- Algemene voorwaarden: https://www.future-content.nl/voorwaarden
+- Privacy: https://www.future-content.nl/privacy
 
 ## Branchepagina's per skin
 
-- Transport en logistiek: https://future-content.nl/voor/transport-en-logistiek
-- Makelaardij: https://future-content.nl/voor/makelaardij
-- Evenementen en festivals: https://future-content.nl/voor/evenementen-en-festivals
-- Glazenwasser en schoonmaak: https://future-content.nl/voor/glazenwasser-en-schoonmaak
-- Bouw, installatie en afbouw: https://future-content.nl/voor/bouw-installatie-afbouw
-- Autobedrijf en garages: https://future-content.nl/voor/autobedrijf-en-garages
-- Horeca cafe en restaurant: https://future-content.nl/voor/horeca
+- Transport en logistiek: https://www.future-content.nl/voor/transport-en-logistiek
+- Makelaardij: https://www.future-content.nl/voor/makelaardij
+- Evenementen en festivals: https://www.future-content.nl/voor/evenementen-en-festivals
+- Glazenwasser en schoonmaak: https://www.future-content.nl/voor/glazenwasser-en-schoonmaak
+- Bouw, installatie en afbouw: https://www.future-content.nl/voor/bouw-installatie-afbouw
+- Autobedrijf en garages: https://www.future-content.nl/voor/autobedrijf-en-garages
+- Horeca cafe en restaurant: https://www.future-content.nl/voor/horeca
 
 ## Portfolio (vastgoedvideo's)
 
-- https://future-content.nl/portfolio/wintelre-koemeerskuil-20
-- https://future-content.nl/portfolio/reusel-de-rijt-3
-- https://future-content.nl/portfolio/riethoven-hasselt-5
-- https://future-content.nl/portfolio/eindhoven-welschapsedijk-103
-- https://future-content.nl/portfolio/eindhoven-vlokhovenseweg-62
-- https://future-content.nl/portfolio/reusel-vijverveld-13
-- https://future-content.nl/portfolio/eersel-hollandse-hoeve-19
-- https://future-content.nl/portfolio/veldhoven-vlasacker-3
-- https://future-content.nl/portfolio/lage-mierde-hooge-mierdseweg-15
+- https://www.future-content.nl/portfolio/wintelre-koemeerskuil-20
+- https://www.future-content.nl/portfolio/reusel-de-rijt-3
+- https://www.future-content.nl/portfolio/riethoven-hasselt-5
+- https://www.future-content.nl/portfolio/eindhoven-welschapsedijk-103
+- https://www.future-content.nl/portfolio/eindhoven-vlokhovenseweg-62
+- https://www.future-content.nl/portfolio/reusel-vijverveld-13
+- https://www.future-content.nl/portfolio/eersel-hollandse-hoeve-19
+- https://www.future-content.nl/portfolio/veldhoven-vlasacker-3
+- https://www.future-content.nl/portfolio/lage-mierde-hooge-mierdseweg-15
 
 ## Contact
 

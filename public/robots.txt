@@ -38,4 +38,4 @@ User-agent: Applebot-Extended
 Allow: /
 
 # Sitemap
-Sitemap: https://future-content.nl/sitemap.xml
+Sitemap: https://www.future-content.nl/sitemap.xml

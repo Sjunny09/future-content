@@ -3,7 +3,7 @@ export const SITE = {
   tagline: "Eerst zien welk werk repeterend is. Dan pas bouwen.",
   description:
     "Future Content bouwt en beheert AI en automatiseringen voor MKB-bedrijven in heel Brabant, vanuit Bladel. John komt langs, brengt je proces in kaart en bouwt daar AI op die jouw bedrijf snapt. Modulair platform met branche-skin. Gebouwd én beheerd.",
-  url: "https://future-content.nl",
+  url: "https://www.future-content.nl",
   address: "Bladel, Noord-Brabant",
   city: "Bladel",
   region: "Noord-Brabant",

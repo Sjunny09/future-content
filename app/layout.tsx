@@ -57,11 +57,8 @@ export const metadata: Metadata = {
     "AI training Brabant",
     "AI consultant Bladel",
     "AI implementatie Eindhoven",
-    "SLIM subsidie AI training",
     "AI voor transport en logistiek",
     "AI voor makelaars",
-    "vastgoedvideograaf",
-    "videograaf Kempen",
   ],
   authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
@@ -166,16 +163,6 @@ const jsonLd = {
             price: "0",
             priceCurrency: "EUR",
           },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "Vastgoedvideo walkthrough",
-              description: "Professionele vastgoedvideo voor Funda en social media.",
-            },
-            price: "199",
-            priceCurrency: "EUR",
-          },
         ],
       },
     },
@@ -196,13 +183,12 @@ const jsonLd = {
       url: `${SITE.url}/over`,
       image: `${SITE.url}/photos/PhotoSessions-757307-pww_6420-vy-1.jpg`,
       description:
-        "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant, gevestigd in Bladel. Voorheen business engineer in de transportsector en zes jaar vastgoedvideograaf.",
+        "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant, gevestigd in Bladel. Voorheen business engineer in de transportsector, met jaren video-ervaring voor makelaars.",
       knowsAbout: [
         "AI-automatisering voor MKB",
         "Procesoptimalisatie",
         "Workflow-automatisering",
         "AI-chatbots",
-        "Vastgoedvideografie",
       ],
       sameAs: [
         `https://wa.me/${SITE.whatsapp}`,

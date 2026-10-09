@@ -14,9 +14,9 @@ export default function SocialMediaPage() {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Social media videoproductie",
+    "serviceType": "Social media video's voor bedrijven",
     "name": "Social media video abonnement",
-    "provider": { "@type": "LocalBusiness", "name": SITE.name, "url": SITE.url },
+    "provider": { "@id": `${SITE.url}/#business` },
     "areaServed": ["De Kempen", "Eindhoven", "Tilburg"],
     "description": "Maandelijkse social media video's voor bedrijven in De Kempen en omgeving. Eén shoot dag, meerdere video's, klaar voor Instagram en TikTok.",
     "offers": [

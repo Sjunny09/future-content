@@ -6,7 +6,7 @@ import { TRAINING } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "AI-training op locatie",
   description:
-    "Een halve dag bij jullie op kantoor waarin we samen iets bouwen op jullie eigen taken. Prijs op aanvraag, mogelijk deels te financieren via de SLIM-subsidie.",
+    "Een halve dag bij jullie op kantoor waarin we samen iets bouwen op jullie eigen taken. Prijs op aanvraag.",
   alternates: { canonical: "/trainingen" },
 };
 
@@ -47,9 +47,9 @@ const PAKKETTEN = [
     inhoud: [
       "Halve dag (4 uur) bij jullie op kantoor",
       "Hands-on met jullie eigen taken en tools",
-      "Heldere AI-richtlijnen, veilig en AVG-bewust",
+      "Heldere afspraken over wat wel en niet in een AI-tool hoort",
       "Drie kansen op papier, ook als je daarna niks met mij doet",
-      "Scholingsplan-document voor SLIM-aanvraag",
+      "Scholingsplan-document voor een SLIM-aanvraag, zodra er een ronde open is",
     ],
     cta: "Plan een gesprek over deze workshop",
     highlight: false,
@@ -161,8 +161,8 @@ export default function TrainingenPage() {
               Het scholingsdeel kan mogelijk via SLIM.
             </h2>
             <p className="text-[#2A2218] leading-relaxed mb-3">
-              SLIM is de subsidieregeling voor scholing in het MKB, met aanvraagrondes die elk
-              jaar opnieuw worden opengesteld. Het scholings- en workshopdeel van een traject kan hieronder
+              SLIM is de subsidieregeling voor scholing in het MKB, met aanvraagrondes die de
+              overheid per keer openstelt. Kijk op uitvoeringvanbeleidszw.nl of er een ronde open is. Het scholings- en workshopdeel van een traject kan hieronder
               vallen, mits ingebed in een leerinterventie. Bouw en beheer vallen daar buiten.
             </p>
             <p className="text-[#2A2218] leading-relaxed mb-3">
@@ -338,7 +338,7 @@ export default function TrainingenPage() {
           </h2>
           <p className="text-[#F3ECE0]/55 text-lg mb-9 leading-relaxed">
             Plan een gesprek, dan stemmen we de training af op jullie bedrijf. Inclusief
-            scholingsplan-document voor de SLIM-aanvraag.
+            scholingsplan-document voor een SLIM-aanvraag als er een ronde open is.
           </p>
           <Link
             href="/boek"

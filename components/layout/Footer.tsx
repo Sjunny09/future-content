@@ -15,7 +15,7 @@ export default function Footer() {
             <Wordmark theme="dark" className="text-lg" />
           </Link>
           <p className="text-sm text-[#6E6151] leading-relaxed">
-            AI, automatisering en video voor MKB-bedrijven in heel Brabant, vanuit Bladel. Gebouwd én beheerd.
+            AI en automatisering voor MKB-bedrijven in heel Brabant, vanuit Bladel. Gebouwd én beheerd.
           </p>
           <div className="mt-6 flex flex-col gap-1 text-sm text-[#6E6151]">
             <span>{SITE.address}</span>
@@ -77,11 +77,10 @@ export default function Footer() {
           <ul className="flex flex-col gap-3 text-sm">
             {[
               { href: "/ai", label: "AI & automatisering" },
-              { href: "/makelaars", label: "Vastgoedvideo's" },
-              { href: "/social-media", label: "Social media abonnement" },
-              { href: "/videografie", label: "Zakelijke video's" },
-              { href: "/trouwen", label: "Bruiloftsvideo's" },
-              { href: "/film", label: "Aftermovies" },
+              { href: "/trainingen", label: "AI-trainingen" },
+              { href: "/scan", label: "AI-quickscan" },
+              { href: "/voor", label: "Voor jouw branche" },
+              { href: "/videografie", label: "Video" },
             ].map((s) => (
               <li key={s.href}>
                 <Link

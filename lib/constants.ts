@@ -296,7 +296,7 @@ export const AI_WEDGES = [
     faq: [
       { q: "Geeft de chatbot geen botte of foute antwoorden?", a: "Hij beantwoordt alleen wat hij zeker weet, de standaardvragen. Alles waarover twijfel bestaat of wat belangrijk is, komt bij jou. Jij houdt de regie, de chatbot vangt de rest op." },
       { q: "Verlies ik dan het persoonlijke contact?", a: "Andersom. De chatbot neemt het standaardwerk over, zodat jij tijd overhoudt voor de klant die er echt toe doet." },
-      { q: "Blijft de klantdata veilig?", a: "Ja. Ik richt het AVG-bewust in, je data blijft van jou. Ik leg je in gewone taal uit wat waar staat." },
+      { q: "Blijft de klantdata veilig?", a: "Vooraf spreken we af waar je data staat en welke aanbieders erbij kunnen. Waar nodig sluiten we een verwerkersovereenkomst. Je data blijft van jou, en ik leg je in gewone taal uit wat waar staat." },
       { q: "Hoe snel staat de chatbot live?", a: "De werkende proef draait op je eigen site, dus je ziet het snel werken. De eerste versie staat doorgaans binnen ongeveer twee weken live." },
       { q: "Wat kost het?", a: "Gratis scan, dan een werkende proef van €750 die van de bouwprijs af gaat als je doorgaat. De bouw is maatwerk, gescoped na de proef: tussen €2.500 en €8.500, plus een maandbedrag vanaf €250." },
     ],
@@ -325,7 +325,7 @@ export const AI_WEDGES = [
       "Als de administratie je een dag per week kost, en de helft daarvan verdwijnt, heb je een halve werkdag per week terug. Elke week.",
     faq: [
       { q: "Werkt dit met mijn boekhoudpakket?", a: "Meestal wel. Ik kijk eerst tijdens de scan welke tools je gebruikt en of ze te koppelen zijn. Kan iets niet, dan zeg ik dat gewoon." },
-      { q: "Blijf ik eigenaar van mijn gegevens?", a: "Ja. Het draait in jouw omgeving, jij bent eigenaar, AVG-bewust ingericht. Ik bouw en beheer, jij houdt de controle." },
+      { q: "Blijf ik eigenaar van mijn gegevens?", a: "Ja. Jij blijft eigenaar van je gegevens en ik leg vast waar alles draait. Ik bouw en beheer, jij houdt de controle." },
       { q: "Moet ik alles opnieuw invoeren?", a: "Nee. Ik koppel waar het kan aan wat je al gebruikt, zodat je gegevens meeverhuizen in plaats van dat je opnieuw begint." },
       { q: "Hoe snel merk ik er iets van?", a: "De werkende proef pakt één concreet stuk van je administratie, dus je ziet het snel werken. De eerste versie staat doorgaans binnen ongeveer twee weken live." },
       { q: "Wat kost het?", a: "Gratis scan, dan een werkende proef van €750 die van de bouwprijs af gaat. De bouw is maatwerk, gescoped na de proef: tussen €2.500 en €8.500, plus een maandbedrag vanaf €250." },
@@ -698,7 +698,7 @@ export const AI_SERVICES = [
   {
     icon: "ShieldCheck",
     title: "AI veilig invoeren",
-    desc: "Heldere richtlijnen, AVG-bewust, eigenaarschap bij jou. Iedereen gebruikt wel iets met AI. Ik zorg dat het veilig en goed gebeurt.",
+    desc: "Heldere afspraken over wat wel en niet in AI hoort, eigenaarschap bij jou. Iedereen gebruikt wel iets met AI. Ik help je het veilig en goed te doen.",
   },
   {
     icon: "GraduationCap",
@@ -759,9 +759,9 @@ export const TRAINING = {
   features: [
     "Halve dag (4 uur) bij jullie op kantoor",
     "Hands-on met jullie eigen taken en tools",
-    "Heldere AI-richtlijnen, veilig en AVG-bewust",
+    "Heldere afspraken over wat wel en niet in een AI-tool hoort",
     "Afsluiting met drie concrete kansen op papier, ook als je daarna niks met mij doet",
-    "Mogelijk (deels) te financieren via de SLIM-subsidie voor scholing",
+    "Scholingsplan voor een SLIM-aanvraag als er een ronde open is",
   ],
 };
 
@@ -769,7 +769,7 @@ export const TRAINING = {
 export const AI_TRUST = [
   "Werk vanuit Bladel, kom langs in heel Brabant",
   "Ik bouw het, jij blijft eigenaar van je proces",
-  "AVG-bewust ingericht",
+  "Jij blijft eigenaar van je data",
   "Ik bouw het én houd het draaiend",
 ];
 

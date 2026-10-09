@@ -10,9 +10,8 @@ Bladel, actief in de Kempen, Eindhoven, Tilburg en Breda. Eigenaar John Lavrijse
 persoonlijk langs, brengt het proces van een bedrijf in kaart en bouwt daar AI op die
 specifiek dat bedrijf snapt: offertes, klantvragen, administratie, mailafhandeling.
 
-Future Content is in 2026 omgevormd van pure videoproductie naar een lokale AI-studio
-voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB-bedrijven
-(5-50 medewerkers). Videografie blijft een dienst, maar is niet meer de hoofdmoot.
+Future Content bouwt sinds 2026 AI en automatisering voor het MKB in Brabant
+(5-50 medewerkers). Video is een bijdienst.
 
 ### Hoofdaanbod (AI en automatisering)
 
@@ -30,8 +29,8 @@ voor het MKB in Brabant. Hoofdactiviteit: AI en automatiseringen bouwen voor MKB
    John bouwt het en beheert het ook: updates, onderhoud en verbeteringen horen erbij.
 
 4. **AI-training op locatie**: halve dag (4 uur), prijs op aanvraag. Los product naast de bouw.
-   Mogelijk deels te financieren via de SLIM-subsidie (bij te veel aanvragen wordt er geloot,
-   toekenning is dus niet zeker). Future Content levert het scholingsplan-document mee.
+   Kijk op uitvoeringvanbeleidszw.nl of er een SLIM-aanvraagronde open is. Is dat zo, dan
+   levert Future Content het scholingsplan mee. Toekenning is nooit zeker.
    Doel: drie concrete AI-kansen op papier, ook als de klant niet verder gaat.
 
 ### De werkwijze (vaste trap)
@@ -92,14 +91,6 @@ Future Content blijft video maken, vooral voor klanten waar dit ooit begon.
 Primair: Kempen (Bladel, Eersel, Reusel, Bergeijk, Valkenswaard, Waalre).
 Secundair: Eindhoven, Veldhoven, Best, Son en Breugel, Nuenen, Tilburg, Breda.
 Tertiair: heel Noord-Brabant op aanvraag.
-
-## Apparatuur (videografie)
-
-- Camera: Sony A6400
-- Stabilisatie: DJI RS Mini Ronin (gimbal)
-- Drone: DJI Mini 3 Pro
-- Audio: Rode Wireless GO
-- Editing: Final Cut Pro
 
 ## Pagina's
 

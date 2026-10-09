@@ -17,7 +17,7 @@ export default function TrouwenPage() {
     "@type": "Service",
     "serviceType": "Bruiloftsvideografie",
     "name": "Bruiloftsvideo",
-    "provider": { "@type": "LocalBusiness", "name": SITE.name, "url": SITE.url },
+    "provider": { "@id": `${SITE.url}/#business` },
     "areaServed": ["De Kempen", "Eindhoven", "Tilburg"],
     "description": "Professionele bruiloftsvideo's in De Kempen en omgeving. Social edit (60–90 sec) én lange versie voor privégebruik, opgeleverd binnen 4 weken.",
     "review": {

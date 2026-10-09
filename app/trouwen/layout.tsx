@@ -5,13 +5,13 @@ import { SITE } from "@/lib/constants";
 // en kan dus zelf geen metadata exporteren; daarom deze layout (zelfde patroon
 // als /makelaars en /social-media). Toegevoegd bij de go-live audit 2 juli.
 export const metadata: Metadata = {
-  title: "Bruiloftsvideograaf in De Kempen en omgeving",
+  title: "Bruiloftsvideo in De Kempen en omgeving",
   description:
     "Bruiloftsvideo's in De Kempen, Eindhoven en Tilburg: een social edit voor jullie kanalen en een lange versie voor later. App John voor beschikbaarheid en prijs.",
   openGraph: {
     title: "Bruiloftsvideo's | Future Content",
     description:
-      "Jouw mooiste dag, voor altijd vastgelegd. Bruiloftsvideograaf in De Kempen en omgeving.",
+      "Jouw mooiste dag, voor altijd vastgelegd. Bruiloftsvideo in De Kempen en omgeving.",
   },
   alternates: {
     canonical: `${SITE.url}/trouwen`,

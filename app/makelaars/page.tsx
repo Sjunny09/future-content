@@ -17,7 +17,7 @@ export default function MakelaarsPage() {
     "@type": "Service",
     "serviceType": "Vastgoedvideografie",
     "name": "Vastgoedvideo voor makelaars",
-    "provider": { "@type": "LocalBusiness", "name": SITE.name, "url": SITE.url },
+    "provider": { "@id": `${SITE.url}/#business` },
     "areaServed": ["De Kempen", "Eindhoven", "Tilburg"],
     "description": "Professionele vastgoedvideo's voor makelaars in De Kempen, Eindhoven en omgeving. Funda-ready walkthroughs opgeleverd binnen 1 week.",
     "offers": [

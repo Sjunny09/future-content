@@ -4,11 +4,11 @@ import { SITE } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Over John Lavrijsen | AI-bouwer uit Bladel",
   description:
-    "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant. Voorheen business engineer in de transportsector, zes jaar vastgoedvideograaf. Gevestigd in Bladel, actief in heel Brabant.",
+    "John Lavrijsen bouwt AI-automatisering voor MKB-bedrijven in Noord-Brabant. Voorheen business engineer in de transportsector, met jaren video-ervaring voor makelaars. Gevestigd in Bladel, actief in heel Brabant.",
   openGraph: {
     title: "Over John Lavrijsen | Future Content",
     description:
-      "AI-bouwer uit Bladel. Vier jaar business engineer in transport, zes jaar videograaf. Sinds 2026 fulltime AI voor het MKB.",
+      "AI-bouwer uit Bladel. Vier jaar business engineer in transport, jaren video voor makelaars. Sinds 2026 fulltime AI voor het MKB.",
     images: ["/photos/PhotoSessions-757307-pww_6270-vy-1.jpg"],
   },
   alternates: {

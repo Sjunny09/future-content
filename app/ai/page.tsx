@@ -56,7 +56,7 @@ const AI_FAQ = [
   },
   {
     q: "Hoe zit het met de veiligheid van mijn klantdata?",
-    a: "Je data blijft van jou en gaat niet zomaar het internet op. Ik richt het zo in dat het binnen de AVG past, net zoals dat nu ook al moet voor je gewone mail. Ik leg je in gewone taal uit wat waar staat.",
+    a: "Je data blijft van jou en gaat niet zomaar het internet op. Vooraf spreken we af waar je data staat en welke aanbieders erbij kunnen. Waar nodig sluiten we een verwerkersovereenkomst. Dat leg ik je in gewone taal uit.",
   },
   {
     q: "Wat kost het?",

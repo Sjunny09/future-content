@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Onze klanten",
   description: "Bedrijven die ik met AI op weg heb geholpen, met wat ik voor ze deed en de blogs erover.",
   alternates: { canonical: "/klanten" },
+  openGraph: {
+    title: "Onze klanten | Future Content",
+    description: "Bedrijven die ik met AI op weg heb geholpen, met wat ik voor ze deed en de blogs erover.",
+    url: "/klanten",
+    type: "website",
+  },
 };
 
 export default function KlantenPage() {

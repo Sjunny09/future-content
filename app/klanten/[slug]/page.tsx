@@ -22,6 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${k.naam}: wat ik deed`,
     description: k.wat,
     alternates: { canonical: `/klanten/${k.slug}` },
+    openGraph: { title: `${k.naam}: wat ik deed`, description: k.wat, url: `/klanten/${k.slug}`, type: "website" },
   };
 }
 

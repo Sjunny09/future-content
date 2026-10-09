@@ -318,6 +318,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "AI & Content",
     content: [
       { type: "intro", text: "SLIM staat voor Stimuleringsregeling Leren en ontwikkelen In MKB-ondernemingen. Het is een subsidie van de overheid voor bedrijven die het leren en ontwikkelen van hun personeel structureel willen aanpakken. De training zelf wordt niet vergoed, maar bijvoorbeeld wel een doorlichting met een opleidingsplan of het invoeren van een manier van leren op de werkvloer, en daar kan AI een onderdeel van zijn." },
+      { type: "p", text: "Stand op 9 oktober 2026: er is nu geen aanvraagronde open. De laatste ronde liep van 19 augustus tot en met 7 september 2026 ([SRA](https://www.sra.nl/nieuws/000000/2026/08/slim-subsidie-mkb-vanaf-19-augustus)). Een nieuwe ronde is nog niet bekendgemaakt. Kijk voor de actuele stand bij [Uitvoering van Beleid SZW](https://www.uitvoeringvanbeleidszw.nl/)." },
       { type: "h2", text: "Wat is de SLIM-subsidie precies?" },
       { type: "p", text: "De SLIM-subsidie is bedoeld om MKB-bedrijven te stimuleren om te blijven leren. Denk aan een opleidingsplan, een loopbaanadviestraject, of een praktijkleerplaats. Een training waarin je team leert werken met AI kan daar in bepaalde gevallen bij aansluiten, maar of dat voor jouw aanvraag zo is, hangt af van hoe je de aanvraag opbouwt en aan welke voorwaarden je voldoet." },
       { type: "h2", text: "Waar je op moet letten" },

@@ -855,6 +855,7 @@ export const AI_POSTS_5: BlogPost[] = [
     readTime: "5 min",
     category: "AI voor MKB",
     image: "/blog/foto/ai-training-op-maat-bij-lavri.jpg",
+    klant: "lavri",
     content: [
       { type: "intro", text: "Acht jaar heb ik op zaterdag in een gereedschapswinkel gewerkt. Regelmatig kwam er iemand binnen voor een kettingzaag. Die wilde de beste, dus verkocht ik hem een Stihl. Een paar dagen later stond hij weer aan de balie: \"Hij start niet.\" Dan liet ik het even zien. Eén knopje, een standaardhandeling, en hij liep. Het gereedschap was prima. Hij wist alleen niet hoe het werkte. Daar moest ik aan denken na de training bij Lavri." },
       { type: "h2", text: "\"AI is niks voor mij\"" },

@@ -644,6 +644,7 @@ export const NAV_LINKS: NavLink[] = [
   {
     label: "Cases",
     children: [
+      { href: "/klanten", label: "Onze klanten", desc: "Wie ik met AI op weg hielp, en hoe." },
       { href: "/cases/routeplanner", label: "Routeplanner", desc: "Ritplanning over meerdere stops, op maat." },
       { href: "/cases/ticketsysteem-koningsdag", label: "Ticketsysteem Koningsdag", desc: "Online tickets en betalen voor een echt evenement." },
     ],

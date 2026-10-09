@@ -52,6 +52,7 @@ export default function Footer() {
               { href: "/voor", label: "Voor jouw branche" },
               { href: "/film", label: "Film" },
               { href: "/portfolio", label: "Portfolio" },
+              { href: "/klanten", label: "Klanten" },
               { href: "/over", label: "Over" },
               { href: "/blog", label: "Blog" },
               { href: "/contact", label: "Contact" },

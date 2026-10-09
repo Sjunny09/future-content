@@ -13,6 +13,8 @@ export type BlogPost = {
   category: string;
   image: string;
   content: BlogSection[];
+  // Slug uit lib/klanten.ts: de blog verschijnt dan ook op /klanten/<slug>.
+  klant?: string;
 };
 
 export type BlogSection = {
@@ -360,6 +362,10 @@ export function isGepubliceerd(post: Pick<BlogPost, "date">, vandaag = vandaagNL
 
 export function gepubliceerdePosts(vandaag = vandaagNL()): BlogPost[] {
   return BLOG_POSTS.filter((p) => isGepubliceerd(p, vandaag)).sort((a, b) => b.date.localeCompare(a.date));
+}
+
+export function blogsVanKlant(klant: string): BlogPost[] {
+  return gepubliceerdePosts().filter((p) => p.klant === klant);
 }
 
 export function getBlogPost(slug: string): BlogPost | undefined {

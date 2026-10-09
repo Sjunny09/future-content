@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE, STACK_VIDEOS, BRANCHES, AI_WEDGES } from "@/lib/constants";
 import { gepubliceerdePosts } from "@/lib/blog";
+import { zichtbareKlanten } from "@/lib/klanten";
 
 // Ingeplande blogs komen er op hun dag vanzelf bij.
 export const revalidate = 3600;
@@ -25,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/social-media`,  lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${base}/trouwen`,       lastModified: now, changeFrequency: "monthly", priority: 0.65 },
     { url: `${base}/portfolio`,     lastModified: now, changeFrequency: "weekly",  priority: 0.7 },
+    { url: `${base}/klanten`,       lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    ...zichtbareKlanten().map((k) => ({ url: `${base}/klanten/${k.slug}`, lastModified: now, changeFrequency: "monthly" as const, priority: 0.6 })),
     { url: `${base}/cases/routeplanner`,             lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/cases/ticketsysteem-koningsdag`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${base}/sprookje`,      lastModified: now, changeFrequency: "monthly", priority: 0.6 },

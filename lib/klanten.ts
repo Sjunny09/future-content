@@ -2,6 +2,15 @@
 // alleen met toestemming van de klant om naam en logo te tonen.
 // Een blog hoort bij een klant via het veld `klant` in de BlogPost (zelfde slug).
 
+// Zelfde deelbeeld als de layout (app/layout.tsx): een eigen openGraph op een
+// pagina vervangt dat van de layout in zijn geheel, dus het beeld moet mee.
+export const KLANTEN_OG = {
+  type: "website" as const,
+  locale: "nl_NL",
+  siteName: "Future Content",
+  images: [{ url: "/photos/PhotoSessions-757307-pww_6420-vy-1.jpg", width: 1200, height: 630, alt: "John Lavrijsen, AI-bouwer voor MKB in Brabant" }],
+};
+
 export type Klant = {
   slug: string;
   naam: string;

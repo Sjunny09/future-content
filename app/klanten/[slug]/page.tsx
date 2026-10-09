@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { getKlant, zichtbareKlanten } from "@/lib/klanten";
+import { getKlant, zichtbareKlanten, KLANTEN_OG } from "@/lib/klanten";
 import { blogsVanKlant, gepubliceerdePosts } from "@/lib/blog";
 import BlogKaart from "@/components/blog/BlogKaart";
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${k.naam}: wat ik deed`,
     description: k.wat,
     alternates: { canonical: `/klanten/${k.slug}` },
-    openGraph: { title: `${k.naam}: wat ik deed`, description: k.wat, url: `/klanten/${k.slug}`, type: "website" },
+    openGraph: { ...KLANTEN_OG, title: `${k.naam}: wat ik deed`, description: k.wat, url: `/klanten/${k.slug}` },
   };
 }
 

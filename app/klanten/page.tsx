@@ -2,17 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { zichtbareKlanten } from "@/lib/klanten";
+import { zichtbareKlanten, KLANTEN_OG } from "@/lib/klanten";
 
 export const metadata: Metadata = {
   title: "Onze klanten",
   description: "Bedrijven die ik met AI op weg heb geholpen, met wat ik voor ze deed en de blogs erover.",
   alternates: { canonical: "/klanten" },
   openGraph: {
+    ...KLANTEN_OG,
     title: "Onze klanten | Future Content",
     description: "Bedrijven die ik met AI op weg heb geholpen, met wat ik voor ze deed en de blogs erover.",
     url: "/klanten",
-    type: "website",
   },
 };
 

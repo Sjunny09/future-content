@@ -56,7 +56,7 @@ No linting or test commands are configured. TypeScript errors surface via `npm r
 
 **Contact form:** `/contact` POSTs to [app/api/contact/route.ts](app/api/contact/route.ts), validated with Zod, delivered via Resend. Without `RESEND_API_KEY` it logs to console.
 
-**Videos:** MP4 files are in `public/videos/` (compressed to <100MB each so they can be deployed directly to Vercel). Referenced via `STACK_VIDEOS` in `constants.ts`. The `.vercelignore` does NOT exclude them.
+**Videos:** MP4 files are in `public/videos/` (compressed to <100MB each so they can be deployed directly to Vercel). Referenced via `STACK_VIDEOS` in `constants.ts`. The `.vercelignore` does NOT exclude them. **Never call `fs` with a dynamic path (e.g. `path.join(process.cwd(), "public", src)`) in a route:** Next then traces the whole `public/` (1.2 GB) into that serverless function, per deployment, and Vercel's free Function Storage (10 GB) fills up. Happened with `/sprookje` (fixed 12 Oct 2026 via `outputFileTracingExcludes` in `next.config.ts`). Check after a build: no `.nft.json` under `.next/server` should mention `public/`.
 
 **Blog images:** Stored in `public/blog/`. Filenames follow the pattern `{category-slug}.jpg` (e.g. `vastgoed-1.jpg`, `social-filming.jpg`, `trouwen.jpg`). Each `BlogPost` object requires an `image: string` field.
 

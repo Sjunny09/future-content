@@ -20,6 +20,13 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  // /sprookje checkt met fs.existsSync of een schermafbeelding bestaat. Door dat
+  // dynamische pad trok de bundler de hele public/ (1,2 GB video) mee in de
+  // serverfunctie, per deployment, en liep Vercel's Function Storage (10 GB)
+  // vol (9 okt). De check draait bij het bouwen; de functie heeft public/ niet nodig.
+  outputFileTracingExcludes: {
+    "/sprookje": ["public/**/*"],
+  },
   experimental: {
     optimizePackageImports: ["framer-motion", "lucide-react"],
   },

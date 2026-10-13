@@ -39,7 +39,7 @@ export const KLANTEN: Klant[] = [
     slug: "de-kort-hr-support",
     naam: "De Kort HR Support",
     logo: "/klanten/de-kort-hr-support.png",
-    website: "https://www.hrsupport.nl",
+    website: "https://hrsupport.nl",
     wat: "HR-advies voor het MKB vanuit Bladel: personeelszaken, verzuim, werving en arbeidsvoorwaarden.",
     hulp: [
       "Een middag AI-training op maat voor het team, met een intake vooraf.",

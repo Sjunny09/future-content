@@ -20,7 +20,7 @@ export default function Navbar() {
   const linkKleur = scrolled
     ? "text-[#2A2218] hover:text-[#B45F38]"
     : "text-white/90 hover:text-white";
-  const linkStijl = `inline-flex items-center gap-1 fc-mono text-xs font-semibold uppercase tracking-[0.15em] transition-colors ${linkKleur}`;
+  const linkStijl = `inline-flex items-center gap-1 whitespace-nowrap fc-mono text-xs font-semibold uppercase tracking-[0.15em] transition-colors ${linkKleur}`;
 
   return (
     <header
@@ -43,7 +43,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop: uitklappen op hover én op toetsenbordfocus (focus-within) */}
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-7">
           {NAV_LINKS.map((link) =>
             link.children ? (
               <div key={link.label} className="group relative flex">

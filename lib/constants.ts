@@ -1,3 +1,4 @@
+import { zichtbareKlanten } from "./klanten";
 export const SITE = {
   name: "Future Content",
   tagline: "Eerst zien welk werk repeterend is. Dan pas bouwen.",
@@ -640,6 +641,12 @@ export const NAV_LINKS: NavLink[] = [
     ],
   },
   { href: "/trainingen", label: "Trainingen" },
+  {
+    href: "/klanten",
+    label: "Opdrachtgevers",
+    // Volgt KLANTEN in lib/klanten.ts: een klant met zichtbaar: false staat er niet in.
+    children: zichtbareKlanten().map((k) => ({ href: `/klanten/${k.slug}`, label: k.naam, desc: k.wat })),
+  },
   { href: "/werkwijze", label: "Werkwijze" },
   {
     label: "Cases",

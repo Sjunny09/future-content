@@ -760,14 +760,14 @@ export const PROOF_POINTS = [
 // Trainingsaanbod, herzien na interview + cursus-pricing onderzoek (29 mei).
 export const TRAINING = {
   title: "De training is voor de meeste bedrijven de eerste stap",
-  lead: "Een halve dag bij jullie op kantoor waarin we niet naar een scherm staren maar samen iets gaan bouwen op jullie eigen taken. Geen droge theorie. Aan het einde van de middag weten jullie of het zinvol is om er samen iets concreets van te maken, of dat jullie het zelf kunnen voortzetten.",
-  price: "op aanvraag",
-  period: "prijs per klant, op locatie",
+  lead: "Een halve dag bij jullie op kantoor waarin we niet naar een scherm staren maar samen aan de slag gaan met jullie eigen taken. Geen droge theorie. Aan het einde van de middag hebben jullie een beeld van wat AI voor jullie kan doen, en of jullie zelf verder kunnen.",
+  price: "€750",
+  period: "excl. btw, halve dag op locatie, tot 8 deelnemers",
   features: [
-    "Halve dag (4 uur) bij jullie op kantoor",
+    "Intake vooraf, zodat we met jullie eigen werk aan de slag gaan",
+    "Halve dag (4 uur) bij jullie op kantoor, met maximaal 8 deelnemers",
     "Hands-on met jullie eigen taken en tools",
     "Heldere afspraken over wat wel en niet in een AI-tool hoort",
-    "Afsluiting met drie concrete kansen op papier, ook als je daarna niks met mij doet",
     "Scholingsplan voor een SLIM-aanvraag als er een ronde open is",
   ],
 };

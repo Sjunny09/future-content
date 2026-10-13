@@ -6,7 +6,7 @@ import { TRAINING } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "AI-training op locatie",
   description:
-    "Een halve dag bij jullie op kantoor waarin we samen iets bouwen op jullie eigen taken. Prijs op aanvraag.",
+    "Een halve dag bij jullie op kantoor waarin we samen aan de slag gaan met jullie eigen taken. €750 excl. btw.",
   alternates: { canonical: "/trainingen" },
 };
 
@@ -25,7 +25,7 @@ const AGENDA = [
   {
     t: "Jullie processen op papier",
     duur: "60 min",
-    d: "We mappen jullie belangrijkste processen live. Welk werk komt elke week terug, welk werk kost het meest tijd, en wat hoort thuis bij wie.",
+    d: "We brengen samen jullie belangrijkste processen in kaart. Welk werk komt elke week terug, welk werk kost het meest tijd, en wat hoort thuis bij wie.",
   },
   {
     t: "Hands-on met eigen data",
@@ -33,54 +33,9 @@ const AGENDA = [
     d: "We gaan zelf aan de slag met jullie taken in ChatGPT, Claude of Copilot. Geen droge theorie, wel direct toepasbaar.",
   },
   {
-    t: "Drie kansen + vervolgpad",
+    t: "Kansen + vervolgpad",
     duur: "60 min",
-    d: "We brainstormen drie concrete kansen voor jullie bedrijf, met geschatte financial impact. Plus vervolgpad: of jullie het zelf kunnen, of een werkende proef en bouw past.",
-  },
-];
-
-const PAKKETTEN = [
-  {
-    naam: "Workshop alleen",
-    price: "Op aanvraag",
-    netto: "Prijs per klant",
-    inhoud: [
-      "Halve dag (4 uur) bij jullie op kantoor",
-      "Hands-on met jullie eigen taken en tools",
-      "Heldere afspraken over wat wel en niet in een AI-tool hoort",
-      "Drie kansen op papier, ook als je daarna niks met mij doet",
-      "Scholingsplan-document voor een SLIM-aanvraag, zodra er een ronde open is",
-    ],
-    cta: "Plan een gesprek over deze workshop",
-    highlight: false,
-  },
-  {
-    naam: "Workshop + Intake",
-    price: "Op aanvraag",
-    netto: "Prijs per klant",
-    inhoud: [
-      "Alles uit de workshop alleen",
-      "Plus intake-sessie van 2 uur op jullie locatie",
-      "Eerste opzet van een tweede brein voor jullie bedrijf",
-      "Concrete bouw-roadmap op papier",
-      "Geen verplichting tot vervolg",
-    ],
-    cta: "Plan een gesprek over deze workshop",
-    highlight: true,
-  },
-  {
-    naam: "Workshop + Bouw + 3 mnd beheer",
-    price: "Op aanvraag",
-    netto: "Prijs per klant",
-    inhoud: [
-      "Workshop + intake + tweede brein",
-      "Bouw van 1-2 modules uit het platform",
-      "3 maanden maandelijks beheer met dashboard",
-      "Live go-live + 1 quarterly business review",
-      "Volledig gedocumenteerd, beheer door mij",
-    ],
-    cta: "Plan een gesprek",
-    highlight: false,
+    d: "We kijken samen waar voor jullie bedrijf de kansen liggen. En wat de volgende stap is: zelf verder, of een eerste demo op jullie eigen werk.",
   },
 ];
 
@@ -166,7 +121,7 @@ export default function TrainingenPage() {
               vallen, mits ingebed in een leerinterventie. Bouw en beheer vallen daar buiten.
             </p>
             <p className="text-[#2A2218] leading-relaxed mb-3">
-              Praktisch: ik lever het scholingsplan-document SLIM-ready mee bij de workshop. Jouw
+              Praktisch: ik lever het scholingsplan-document voor een SLIM-aanvraag mee bij de workshop. Jouw
               boekhouder of HR-medewerker dient het in tijdens de eerstvolgende aanvraagronde. De data
               staan op uitvoeringvanbeleidszw.nl. Hoe je die aanvraag doet, lees je in{" "}
               <Link href="/blog/slim-subsidie-aanvragen" className="underline underline-offset-4">
@@ -215,85 +170,47 @@ export default function TrainingenPage() {
         </div>
       </section>
 
-      {/* SLIM-pakketten */}
+      {/* Prijs + daarna */}
       <section className="bg-[#F3ECE0] py-24 md:py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl mb-12">
+        <div className="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-5">
+          <div className="rounded-2xl p-8 md:p-10 flex flex-col bg-[#221C14] text-[#F3ECE0] ring-2 ring-[#B45F38]">
             <span className="text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
-              Drie startpunten
+              Wat het kost
+            </span>
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mt-5">
+              <span
+                className="text-5xl font-bold text-[#F3ECE0]"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
+                {TRAINING.price}
+              </span>
+              <span className="text-[#F3ECE0]/60 text-sm">{TRAINING.period}</span>
+            </div>
+            <p className="text-[#F3ECE0]/85 text-[15px] leading-relaxed mt-6 pt-6 border-t border-[#F3ECE0]/15 flex-1">
+              Eén vaste prijs. De intake, de halve dag hands-on en het scholingsplan zitten erin.
+              Meer nodig dan dat? Meerwerk reken ik af tegen €90 per uur excl. btw.
+            </p>
+            <Link
+              href="/boek"
+              className="mt-8 inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full font-semibold text-sm whitespace-nowrap bg-[#B45F38] text-[#2A2218] hover:bg-[#9E3D24] transition-colors"
+            >
+              Plan een gesprek <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div className="rounded-2xl p-8 md:p-10 bg-[#ECE2D2] text-[#2A2218] border border-[#E4D8C6]">
+            <span className="text-[#B45F38] text-xs font-semibold uppercase tracking-[0.2em]">
+              Daarna
             </span>
             <h2
-              className="text-3xl md:text-[2.4rem] font-bold text-[#2A2218] mt-4 leading-[1.1]"
+              className="text-2xl md:text-3xl font-bold mt-5 mb-4 leading-tight"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Kies een pakket dat past bij hoever je nu staat.
+              Zie je een kans, dan maak ik er een eerste demo van.
             </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-5">
-            {PAKKETTEN.map((p) => (
-              <div
-                key={p.naam}
-                className={`rounded-2xl p-7 flex flex-col ${
-                  p.highlight
-                    ? "bg-[#221C14] text-[#F3ECE0] ring-2 ring-[#B45F38]"
-                    : "bg-[#ECE2D2] text-[#2A2218] border border-[#E4D8C6]"
-                }`}
-              >
-                <h3
-                  className={`text-xl font-bold mb-2 ${
-                    p.highlight ? "text-[#F3ECE0]" : "text-[#2A2218]"
-                  }`}
-                  style={{ fontFamily: "var(--font-playfair)" }}
-                >
-                  {p.naam}
-                </h3>
-                <div className="mb-1">
-                  <span
-                    className={`text-3xl font-bold ${
-                      p.highlight ? "text-[#B45F38]" : "text-[#2A2218]"
-                    }`}
-                    style={{ fontFamily: "var(--font-playfair)" }}
-                  >
-                    {p.price}
-                  </span>
-                </div>
-                <p
-                  className={`text-xs mb-6 ${
-                    p.highlight ? "text-[#B45F38]" : "text-[#6E6151]"
-                  }`}
-                >
-                  {p.netto}
-                </p>
-                <ul className="flex flex-col gap-2.5 mb-7 flex-1">
-                  {p.inhoud.map((i) => (
-                    <li
-                      key={i}
-                      className={`flex items-start gap-2 text-sm leading-snug ${
-                        p.highlight ? "text-[#F3ECE0]/85" : "text-[#2A2218]"
-                      }`}
-                    >
-                      <Check
-                        size={15}
-                        className={`mt-0.5 shrink-0 ${
-                          p.highlight ? "text-[#B45F38]" : "text-[#B45F38]"
-                        }`}
-                      />
-                      <span>{i}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/boek"
-                  className={`inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold text-sm transition-colors ${
-                    p.highlight
-                      ? "bg-[#B45F38] text-[#2A2218] hover:bg-[#9E3D24]"
-                      : "border border-[#2A2218] text-[#2A2218] hover:border-[#B45F38] hover:text-[#B45F38]"
-                  }`}
-                >
-                  {p.cta} <ArrowRight size={14} />
-                </Link>
-              </div>
-            ))}
+            <p className="text-[#2A2218] text-[15px] leading-relaxed">
+              Op jullie eigen werk, met een vaste datum waarop jullie ja of nee zeggen. Zo blijft
+              niemand hangen in &quot;we kijken nog&quot;.
+            </p>
           </div>
         </div>
       </section>
@@ -309,16 +226,12 @@ export default function TrainingenPage() {
               className="text-2xl md:text-3xl font-bold text-[#2A2218] mb-4 leading-tight"
               style={{ fontFamily: "var(--font-playfair)" }}
             >
-              Wat je tijdens de workshop niet ziet en wel meeneemt.
+              Veilig werken met AI hoort erbij.
             </h2>
-            <p className="text-[#2A2218] leading-relaxed mb-3">
-              Bij elke training gaat een AI-richtlijnen-document mee. Welke tools jullie mogen
-              gebruiken, welke data wel en niet in een AI-tool mag, en wie verantwoordelijk is. Geen
-              IT-policy van 30 pagina&apos;s, wel een werkbare één-pager.
-            </p>
             <p className="text-[#2A2218] leading-relaxed">
-              Plus: alle prompts die we tijdens de workshop opbouwen, krijg je in een gedeeld
-              document mee. Volgende week kun je verder waar we gestopt zijn.
+              We spreken af welke tools jullie gebruiken, welke data wel en niet in een AI-tool mag,
+              en wie waarvoor verantwoordelijk is. Geen IT-policy van 30 pagina&apos;s, wel afspraken
+              waar jullie morgen mee verder kunnen.
             </p>
           </div>
         </div>

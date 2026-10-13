@@ -50,6 +50,7 @@ export const KLANTEN: Klant[] = [
     ],
     reviews: [
       { naam: "Mark", sterren: 5, tekst: "Was een zeer interessante en inspirerende training. Al vaak gezegd dat we met AI moeten starten maar met de hulp van John nu ook echt mee begonnen." },
+      { naam: "Hanne Verberne", sterren: 4, tekst: "John weet zaken op een laagdrempelige manier uit te leggen en laat zien hoe je AI direct kunt toepassen op de werkvloer. Zijn AI- training is praktisch, concreet en gericht op de dagelijkse praktijk. Hierdoor ga je niet alleen begrijpen wat AI kan, maar kun je er na afloop ook zelf mee aan de slag." },
     ],
     zichtbaar: true,
   },

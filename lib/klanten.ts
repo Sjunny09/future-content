@@ -49,6 +49,19 @@ export const KLANTEN: Klant[] = [
     zichtbaar: true,
   },
   {
+    // Logo: uitsnede van de kop van advertimemedia.com (13-10-2026); ze hebben geen los logobestand.
+    slug: "advertime-media",
+    naam: "Advertime Media",
+    logo: "/klanten/advertime-media.png",
+    website: "https://advertimemedia.com",
+    wat: "Bureau uit Bladel dat verkoopafspraken en leads levert aan bedrijven die aan huis verkopen, via Meta-advertenties en een Nederlands belteam.",
+    hulp: [
+      "Twee draaidagen op locatie gefilmd, in 2024.",
+      "Op hun vraag mijn werkwijze voor video's met AI uitgeschreven in tien stappen.",
+    ],
+    zichtbaar: true,
+  },
+  {
     // Verborgen tot Willem ja zegt op naam en logo (John, 9-10-2026).
     slug: "p-van-hulst",
     naam: "Aannemersbedrijf P. van Hulst",

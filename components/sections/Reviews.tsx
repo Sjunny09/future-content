@@ -22,7 +22,7 @@ export default function Reviews() {
             className="mt-3 text-3xl font-semibold text-[#2A2218] md:text-4xl"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            5,0 gemiddeld op Google
+            Echte reviews van Google
           </h2>
           <p className="mt-3 text-[#6E6151]">
             Ruim 150 video&apos;s gemaakt voor makelaars, bedrijven en bruidsparen in de Kempen.

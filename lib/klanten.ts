@@ -18,6 +18,8 @@ export type Klant = {
   website: string;
   wat: string;
   hulp: string[];
+  // Letterlijke Google-reviews van mensen bij deze klant.
+  reviews?: { naam: string; sterren: number; tekst: string }[];
   zichtbaar: boolean;
 };
 
@@ -46,6 +48,9 @@ export const KLANTEN: Klant[] = [
       "Samen geoefend met profielen, vaste werkwijzen en projecten op hun eigen soort werk.",
       "Na de training de mailbox van de eigenaar ingericht: antwoorden staan elke dag als concept klaar, hij keurt ze en verstuurt zelf.",
     ],
+    reviews: [
+      { naam: "Mark", sterren: 5, tekst: "Was een zeer interessante en inspirerende training. Al vaak gezegd dat we met AI moeten starten maar met de hulp van John nu ook echt mee begonnen." },
+    ],
     zichtbaar: true,
   },
   {
@@ -58,6 +63,9 @@ export const KLANTEN: Klant[] = [
     hulp: [
       "Twee draaidagen op locatie gefilmd, in 2024.",
       "Op hun vraag mijn werkwijze voor video's met AI uitgeschreven in tien stappen.",
+    ],
+    reviews: [
+      { naam: "Rens Couwenberg", sterren: 5, tekst: "Top om met John te werken, heeft veel kennis, ervaring en is creatief. Aanrader." },
     ],
     zichtbaar: true,
   },

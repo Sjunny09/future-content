@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Star } from "lucide-react";
 import { getKlant, zichtbareKlanten, KLANTEN_OG } from "@/lib/klanten";
 import { blogsVanKlant, gepubliceerdePosts } from "@/lib/blog";
 import BlogKaart from "@/components/blog/BlogKaart";
@@ -68,6 +68,23 @@ export default async function KlantPage({ params }: { params: Promise<{ slug: st
           >
             {host} <ExternalLink size={14} />
           </a>
+
+          {k.reviews && k.reviews.length > 0 && (
+            <div className="mt-12 space-y-4">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-[#B45F38]">Wat ze zeggen</h2>
+              {k.reviews.map((r) => (
+                <figure key={r.naam} className="bg-white border border-[#E4D8C6] rounded-[2px] p-6">
+                  <div className="flex gap-0.5 mb-3" aria-label={`${r.sterren} van 5 sterren`}>
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <Star key={i} size={14} className={i < r.sterren ? "fill-[#B45F38] text-[#B45F38]" : "text-[#E4D8C6]"} />
+                    ))}
+                  </div>
+                  <blockquote className="text-[#2A2218] leading-relaxed">&ldquo;{r.tekst}&rdquo;</blockquote>
+                  <figcaption className="mt-3 text-sm text-[#6E6151]">{r.naam}, via Google</figcaption>
+                </figure>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

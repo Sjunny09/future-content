@@ -83,6 +83,19 @@ export const KLANTEN: Klant[] = [
     ],
     zichtbaar: true,
   },
+  {
+    // Zusterbedrijf van P. van Hulst, zelfde opdracht (John, 15-10-2026).
+    slug: "industriebouw-zuid",
+    naam: "Industriebouw Zuid",
+    logo: "/klanten/industriebouw-zuid.jpg",
+    website: "https://www.industriebouwzuid.nl",
+    wat: "Bouwer van bedrijfshallen en bedrijfspanden in Duizel, zusterbedrijf van Aannemersbedrijf P. van Hulst.",
+    hulp: [
+      "Tekeningbeheer: een systeem dat elke nacht de nieuwe bouwtekeningen naloopt en de oude versies opruimt, zodat iedereen met de nieuwste tekening werkt.",
+      "Een inkoopportaal: de begroting gaat erin, per regel kiezen ze wat ze inkopen, en de posten van alle lopende werken komen samen op één bestellijst per onderdeel. Verandert een begroting nadat er al besteld is, dan zien ze dat meteen.",
+    ],
+    zichtbaar: true,
+  },
 ];
 
 export const zichtbareKlanten = () => KLANTEN.filter((k) => k.zichtbaar);

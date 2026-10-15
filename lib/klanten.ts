@@ -24,6 +24,33 @@ export type Klant = {
 };
 
 export const KLANTEN: Klant[] = [
+  // Grootste trajecten vooraan (John, 15-10-2026).
+  {
+    // Naam en logo mogen getoond worden (John, 15-10-2026).
+    slug: "p-van-hulst",
+    naam: "Aannemersbedrijf P. van Hulst",
+    logo: "/klanten/p-van-hulst.png",
+    website: "https://pvanhulstbv.nl",
+    wat: "Aannemersbedrijf in Duizel, met zusterbedrijf Industriebouw Zuid voor bedrijfshallen.",
+    hulp: [
+      "Tekeningbeheer: een systeem dat elke nacht de nieuwe bouwtekeningen naloopt en de oude versies opruimt, zodat iedereen met de nieuwste tekening werkt.",
+      "Een inkoopportaal: de begroting gaat erin, per regel kiezen ze wat ze inkopen, en de posten van alle lopende werken komen samen op één bestellijst per onderdeel. Verandert een begroting nadat er al besteld is, dan zien ze dat meteen.",
+    ],
+    zichtbaar: true,
+  },
+  {
+    // Zusterbedrijf van P. van Hulst, zelfde opdracht (John, 15-10-2026).
+    slug: "industriebouw-zuid",
+    naam: "Industriebouw Zuid",
+    logo: "/klanten/industriebouw-zuid.jpg",
+    website: "https://www.industriebouwzuid.nl",
+    wat: "Bouwer van bedrijfshallen en bedrijfspanden in Duizel, zusterbedrijf van Aannemersbedrijf P. van Hulst.",
+    hulp: [
+      "Tekeningbeheer: een systeem dat elke nacht de nieuwe bouwtekeningen naloopt en de oude versies opruimt, zodat iedereen met de nieuwste tekening werkt.",
+      "Een inkoopportaal: de begroting gaat erin, per regel kiezen ze wat ze inkopen, en de posten van alle lopende werken komen samen op één bestellijst per onderdeel. Verandert een begroting nadat er al besteld is, dan zien ze dat meteen.",
+    ],
+    zichtbaar: true,
+  },
   {
     slug: "lavri",
     naam: "Lavri",
@@ -67,32 +94,6 @@ export const KLANTEN: Klant[] = [
     ],
     reviews: [
       { naam: "Rens Couwenberg", sterren: 5, tekst: "Top om met John te werken, heeft veel kennis, ervaring en is creatief. Aanrader." },
-    ],
-    zichtbaar: true,
-  },
-  {
-    // Naam en logo mogen getoond worden (John, 15-10-2026).
-    slug: "p-van-hulst",
-    naam: "Aannemersbedrijf P. van Hulst",
-    logo: "/klanten/p-van-hulst.png",
-    website: "https://pvanhulstbv.nl",
-    wat: "Aannemersbedrijf in Duizel, met zusterbedrijf Industriebouw Zuid voor bedrijfshallen.",
-    hulp: [
-      "Tekeningbeheer: een systeem dat elke nacht de nieuwe bouwtekeningen naloopt en de oude versies opruimt, zodat iedereen met de nieuwste tekening werkt.",
-      "Een inkoopportaal: de begroting gaat erin, per regel kiezen ze wat ze inkopen, en de posten van alle lopende werken komen samen op één bestellijst per onderdeel. Verandert een begroting nadat er al besteld is, dan zien ze dat meteen.",
-    ],
-    zichtbaar: true,
-  },
-  {
-    // Zusterbedrijf van P. van Hulst, zelfde opdracht (John, 15-10-2026).
-    slug: "industriebouw-zuid",
-    naam: "Industriebouw Zuid",
-    logo: "/klanten/industriebouw-zuid.jpg",
-    website: "https://www.industriebouwzuid.nl",
-    wat: "Bouwer van bedrijfshallen en bedrijfspanden in Duizel, zusterbedrijf van Aannemersbedrijf P. van Hulst.",
-    hulp: [
-      "Tekeningbeheer: een systeem dat elke nacht de nieuwe bouwtekeningen naloopt en de oude versies opruimt, zodat iedereen met de nieuwste tekening werkt.",
-      "Een inkoopportaal: de begroting gaat erin, per regel kiezen ze wat ze inkopen, en de posten van alle lopende werken komen samen op één bestellijst per onderdeel. Verandert een begroting nadat er al besteld is, dan zien ze dat meteen.",
     ],
     zichtbaar: true,
   },

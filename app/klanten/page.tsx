@@ -55,6 +55,24 @@ export default function KlantenPage() {
               </div>
             </Link>
           ))}
+          <Link
+            href="/scan"
+            className="group flex flex-col justify-between rounded-2xl border-2 border-dashed border-[#E4D8C6] p-8 hover:border-[#B45F38] transition-all"
+          >
+            <div className="h-20 w-full mb-6 flex items-center">
+              <span className="text-2xl font-bold text-[#2A2218]" style={{ fontFamily: "var(--font-playfair)" }}>
+                Hier jouw logo?
+              </span>
+            </div>
+            <div>
+              <p className="text-sm text-[#6E6151] mb-4">
+                Laat me naar je bedrijf kijken. In de gratis scan zie je waar AI jou tijd bespaart.
+              </p>
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#B45F38] group-hover:gap-2 transition-all">
+                Wat kan ik voor jou doen <ArrowRight size={12} />
+              </span>
+            </div>
+          </Link>
         </div>
       </section>
     </>

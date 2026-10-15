@@ -71,16 +71,17 @@ export const KLANTEN: Klant[] = [
     zichtbaar: true,
   },
   {
-    // Verborgen tot Willem ja zegt op naam en logo (John, 9-10-2026).
+    // Naam en logo mogen getoond worden (John, 15-10-2026).
     slug: "p-van-hulst",
     naam: "Aannemersbedrijf P. van Hulst",
     logo: "/klanten/p-van-hulst.png",
     website: "https://pvanhulstbv.nl",
     wat: "Aannemersbedrijf in Duizel, met zusterbedrijf Industriebouw Zuid voor bedrijfshallen.",
     hulp: [
-      "Een systeem dat elke nacht de nieuwe bouwtekeningen naloopt en meldt welke versie waar hoort.",
+      "Tekeningbeheer: een systeem dat elke nacht de nieuwe bouwtekeningen naloopt en de oude versies opruimt, zodat iedereen met de nieuwste tekening werkt.",
+      "Een inkoopportaal: de begroting gaat erin, per regel kiezen ze wat ze inkopen, en de posten van alle lopende werken komen samen op één bestellijst per onderdeel. Verandert een begroting nadat er al besteld is, dan zien ze dat meteen.",
     ],
-    zichtbaar: false,
+    zichtbaar: true,
   },
 ];
 

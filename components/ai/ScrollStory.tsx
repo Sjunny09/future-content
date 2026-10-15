@@ -142,10 +142,11 @@ export default function ScrollStory({
 
         {/* John's logo als rustig watermerk. */}
         <Image
-          src="/logo/logo.png"
+          src="/logo/woordmerk.svg"
           alt="Future Content"
           width={130}
-          height={38}
+          height={43}
+          unoptimized
           className="pointer-events-none absolute bottom-7 right-6 z-10 h-5 w-auto opacity-55 brightness-0 invert drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] md:h-6"
         />
 

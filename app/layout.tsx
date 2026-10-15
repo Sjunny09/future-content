@@ -171,7 +171,7 @@ const jsonLd = {
       "@id": `${SITE.url}/#org`,
       name: SITE.name,
       url: SITE.url,
-      logo: `${SITE.url}/logo/logo.png`,
+      logo: `${SITE.url}/logo/logo-ai.png`,
       founder: { "@id": `${SITE.url}/#john` },
     },
     {
